@@ -32,6 +32,18 @@ Set `PAYLOAD_SECRET` and `DATABASE_URI` in Hostinger's Node.js app environment-v
 
 No Docker and no system-level dependencies (like LibreOffice) are required anywhere in this project — every tool runs in the browser, and Payload CMS runs inside the same Next.js process. This makes the app deployable on managed/shared Node.js hosting without root access.
 
+### Database schema / migrations
+
+`npm run build` runs `payload migrate` before `next build` (see `apps/web/package.json`). This applies the SQL migrations in `apps/web/migrations/` to create/update the database schema — required because `next build` prerenders pages that query Payload (e.g. `/contact`, `/blog`), so the tables must already exist before the build starts, not just before the server starts serving requests. On a brand-new database (first deploy) this creates every table from scratch; on subsequent deploys it applies only new migrations.
+
+**Whenever you add or change a Payload collection/global** (fields in `apps/web/payload/`), generate a new migration and commit it:
+
+```bash
+npm run migrate:create -w web   # generates apps/web/migrations/<timestamp>_<name>.ts
+```
+
+Without this, `next build` will fail on a fresh database with errors like `SQLITE_ERROR: no such table: settings` — the schema in the committed migrations must stay in sync with `payload.config.ts`. As a safety net, `getSettings()`, `findStaticPage()`, and the blog list/detail pages catch database errors and fall back to empty/dictionary content instead of crashing the build — but that's a fallback for resilience, not a substitute for keeping migrations up to date.
+
 ## Adding a new tool
 
 1. Add a `ToolDefinition` to `packages/config/src/tools.ts` (slug, category, copy, FAQ, related tools).

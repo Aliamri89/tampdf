@@ -40,15 +40,23 @@ export default async function BlogPage({
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
 
-  const payload = await getPayloadClient();
-  const { docs: posts } = await payload.find({
-    collection: "posts",
-    where: { status: { equals: "published" } },
-    sort: "-publishedDate",
-    locale,
-    depth: 1,
-    limit: 50,
-  });
+  let posts: Post[] = [];
+  try {
+    const payload = await getPayloadClient();
+    const result = await payload.find({
+      collection: "posts",
+      where: { status: { equals: "published" } },
+      sort: "-publishedDate",
+      locale,
+      depth: 1,
+      limit: 50,
+    });
+    posts = result.docs as Post[];
+  } catch (error) {
+    // Database unreachable or not yet migrated — fall back to the empty
+    // state below rather than failing the page.
+    console.error("BlogPage failed to load posts, falling back to empty list:", error);
+  }
 
   return (
     <StaticPage
@@ -60,7 +68,7 @@ export default async function BlogPage({
         <p>{dict.staticPages.blog.intro}</p>
       ) : (
         <div className="not-prose grid grid-cols-1 gap-5 sm:grid-cols-2">
-          {(posts as Post[]).map((post) => {
+          {posts.map((post) => {
             const image = post.featuredImage as Media | number | null | undefined;
             const imageUrl = image && typeof image === "object" ? image.url : null;
             return (

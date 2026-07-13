@@ -13,14 +13,21 @@ export type StaticPageKey =
   | "faq";
 
 async function findStaticPage(key: StaticPageKey, locale: Locale): Promise<StaticPageDoc | null> {
-  const payload = await getPayloadClient();
-  const { docs } = await payload.find({
-    collection: "static-pages",
-    where: { key: { equals: key } },
-    locale,
-    limit: 1,
-  });
-  return (docs[0] as StaticPageDoc | undefined) ?? null;
+  try {
+    const payload = await getPayloadClient();
+    const { docs } = await payload.find({
+      collection: "static-pages",
+      where: { key: { equals: key } },
+      locale,
+      limit: 1,
+    });
+    return (docs[0] as StaticPageDoc | undefined) ?? null;
+  } catch (error) {
+    // Database unreachable or not yet migrated. Callers already treat a
+    // null doc as "no CMS content yet" and fall back to dictionary copy.
+    console.error(`findStaticPage(${key}) failed, falling back to dictionary content:`, error);
+    return null;
+  }
 }
 
 export async function getStaticPageContent(key: StaticPageKey, locale: Locale) {

@@ -10,15 +10,22 @@ import { richTextToHtml } from "@/lib/richtext";
 import type { Media, Post } from "@/payload/payload-types";
 
 async function getPost(slug: string, locale: Locale): Promise<Post | null> {
-  const payload = await getPayloadClient();
-  const { docs } = await payload.find({
-    collection: "posts",
-    where: { slug: { equals: slug }, status: { equals: "published" } },
-    locale,
-    depth: 1,
-    limit: 1,
-  });
-  return (docs[0] as Post | undefined) ?? null;
+  try {
+    const payload = await getPayloadClient();
+    const { docs } = await payload.find({
+      collection: "posts",
+      where: { slug: { equals: slug }, status: { equals: "published" } },
+      locale,
+      depth: 1,
+      limit: 1,
+    });
+    return (docs[0] as Post | undefined) ?? null;
+  } catch (error) {
+    // Database unreachable or not yet migrated — treat as not-found rather
+    // than failing the page.
+    console.error(`getPost(${slug}) failed, treating as not found:`, error);
+    return null;
+  }
 }
 
 export async function generateMetadata({
