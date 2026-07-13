@@ -1,28 +1,24 @@
 import {
   Combine,
-  FileInput,
-  FileOutput,
+  FileImage,
   FileText,
-  FileType,
   Image,
   ImageDown,
   ImagePlus,
   Minimize2,
-  Scissors,
+  RotateCw,
   type LucideIcon,
 } from "lucide-react";
 
 const icons: Record<string, LucideIcon> = {
   FileText,
   Image,
-  FileType,
   Combine,
-  Scissors,
   Minimize2,
-  FileOutput,
-  FileInput,
   ImageDown,
   ImagePlus,
+  FileImage,
+  RotateCw,
 };
 
 export function Icon({

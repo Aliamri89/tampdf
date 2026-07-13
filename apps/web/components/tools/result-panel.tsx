@@ -2,6 +2,7 @@
 
 import { CheckCircle2, Download, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDictionary } from "@/i18n/locale-context";
 import { formatBytes } from "@/lib/utils";
 
 interface ResultPanelProps {
@@ -19,6 +20,7 @@ export function ResultPanel({
   onDownload,
   onReset,
 }: ResultPanelProps) {
+  const dict = useDictionary();
   const savedPercent =
     originalSize && originalSize > 0
       ? Math.max(0, Math.round((1 - size / originalSize) * 100))
@@ -30,22 +32,25 @@ export function ResultPanel({
         <CheckCircle2 size={28} />
       </span>
       <div>
-        <p className="font-medium text-foreground">Your file is ready</p>
-        <p className="mt-1 text-sm text-foreground/50">
+        <p className="font-medium text-foreground">{dict.result.ready}</p>
+        <p className="mt-1 text-sm text-foreground/50" dir="ltr">
           {filename} &middot; {formatBytes(size)}
           {savedPercent !== null && savedPercent > 0 && (
-            <span className="text-green-600"> &middot; {savedPercent}% smaller</span>
+            <span className="text-green-600">
+              {" "}
+              &middot; {savedPercent}% {dict.result.smaller}
+            </span>
           )}
         </p>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Button onClick={onDownload}>
           <Download size={16} />
-          Download
+          {dict.result.download}
         </Button>
         <Button variant="secondary" onClick={onReset}>
           <RotateCcw size={16} />
-          Start over
+          {dict.result.startOver}
         </Button>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@fileati/config";
+import { siteConfig } from "@tampdf/config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
+      disallow: ["/api/", "/admin"],
     },
     sitemap: `${siteConfig.url}/sitemap.xml`,
   };

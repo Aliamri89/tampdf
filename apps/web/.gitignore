@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# payload cms
+*.db
+*.db-journal
+/media-uploads
+/payload/payload-types.ts

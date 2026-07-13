@@ -50,8 +50,8 @@ export async function compressPdf(
     }
   }
 
-  pdfDoc.setProducer("Fileati");
-  pdfDoc.setCreator("Fileati");
+  pdfDoc.setProducer("TAMPDF");
+  pdfDoc.setCreator("TAMPDF");
 
   return pdfDoc.save({ useObjectStreams: true });
 }

@@ -13,10 +13,4 @@ export const categories: ToolCategory[] = [
     description: "Compress and convert images without losing quality.",
     icon: "Image",
   },
-  {
-    id: "document",
-    name: "Document Tools",
-    description: "Convert between PDF and editable document formats.",
-    icon: "FileType",
-  },
 ];

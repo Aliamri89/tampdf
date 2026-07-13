@@ -27,6 +27,9 @@ interface BaseProps {
   className?: string;
 }
 
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
 export function Button({
   variant = "primary",
   size = "md",
@@ -38,6 +41,7 @@ export function Button({
     <button
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none cursor-pointer",
+        focusRing,
         variants[variant],
         sizes[size],
         className,
@@ -62,6 +66,7 @@ export function LinkButton({
       href={href}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-colors",
+        focusRing,
         variants[variant],
         sizes[size],
         className,

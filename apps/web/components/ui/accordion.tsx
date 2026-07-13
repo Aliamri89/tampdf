@@ -14,7 +14,7 @@ export function AccordionItem({
       className="group rounded-xl border border-border bg-surface open:bg-surface-muted"
       open={defaultOpen}
     >
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-medium marker:content-none">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl px-5 py-4 font-medium marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background">
         {question}
         <ChevronDown
           size={18}

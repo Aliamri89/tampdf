@@ -1,22 +1,28 @@
 import Link from "next/link";
+import type { Locale } from "@tampdf/config";
+import { getSettings } from "@/lib/get-settings";
+import type { Media } from "@/payload/payload-types";
 
-export function Logo({ className }: { className?: string }) {
+export async function Logo({ locale, className }: { locale: Locale; className?: string }) {
+  const settings = await getSettings();
+  const logoMedia = settings.logo as Media | number | null | undefined;
+  const logoUrl = logoMedia && typeof logoMedia === "object" ? logoMedia.url : null;
+  const siteName = settings.siteName || "TAMPDF";
+
   return (
-    <Link href="/" className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-brand-500 to-accent-500 shadow-sm shadow-brand-500/30">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"
-            fill="white"
-            fillOpacity="0.95"
-          />
-          <path d="M15 2v5h5" stroke="#6C5CE7" strokeWidth="1.6" strokeLinejoin="round" />
-          <circle cx="12" cy="15" r="2.4" fill="#FF8A5B" />
-        </svg>
-      </span>
-      <span className="text-lg font-semibold tracking-tight text-foreground">
-        Fileati
-      </span>
+    <Link
+      href={`/${locale}`}
+      dir="ltr"
+      className={`inline-flex shrink-0 items-center dark:rounded-lg dark:bg-white dark:px-2 dark:py-1.5 ${className ?? ""}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element -- trusted local static SVG (or CMS-hosted override), no need for next/image optimization */}
+      <img
+        src={logoUrl || "/logo.svg"}
+        alt={siteName}
+        width={150}
+        height={37.5}
+        className="h-7 w-auto sm:h-8"
+      />
     </Link>
   );
 }

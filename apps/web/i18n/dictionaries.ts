@@ -1,0 +1,386 @@
+const en = {
+  header: {
+    switchLanguageTo: "العربية",
+  },
+  breadcrumb: {
+    home: "Home",
+  },
+  tool: {
+    processedClient: "Processed in your browser — files never uploaded",
+    faqHeading: "Frequently asked questions",
+    relatedHeading: "Related tools",
+  },
+  card: {
+    comingSoon: "Coming soon",
+  },
+  footer: {
+    rights: "All rights reserved.",
+    privacyNote: "Files are processed securely and never stored longer than necessary.",
+    moreCount: "+{count} more",
+    company: "Company",
+    legal: "Legal",
+    aboutUs: "About Us",
+    contactUs: "Contact Us",
+    blog: "Blog",
+    faq: "FAQ",
+    privacyPolicy: "Privacy Policy",
+    termsOfService: "Terms of Service",
+    cookiePolicy: "Cookie Policy",
+    disclaimer: "Disclaimer",
+  },
+  staticPages: {
+    note: "This page is a placeholder — full content is on its way.",
+    aboutUs: {
+      title: "About Us",
+      intro:
+        "TAMPDF is a free online toolkit built to make everyday file tasks — merging, splitting, compressing, and converting PDFs, images, and documents — fast, private, and effortless.",
+    },
+    contactUs: {
+      title: "Contact Us",
+      intro:
+        "Have a question, found a bug, or want to suggest a new tool? We'd love to hear from you.",
+    },
+    blog: {
+      title: "Blog",
+      intro:
+        "We're working on articles about file formats, productivity tips, and product updates.",
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      intro:
+        "General answers about TAMPDF will be published here soon. In the meantime, every tool page has its own FAQ covering how that specific tool works.",
+    },
+    privacyPolicy: {
+      title: "Privacy Policy",
+      intro:
+        "Our full privacy policy, explaining exactly how TAMPDF handles your files and data, is being finalized and will be published here shortly.",
+    },
+    termsOfService: {
+      title: "Terms of Service",
+      intro:
+        "Our terms of service, outlining the rules and guidelines for using TAMPDF, will be published here soon.",
+    },
+    cookiePolicy: {
+      title: "Cookie Policy",
+      intro:
+        "Details about the cookies and similar technologies TAMPDF uses will be published here soon.",
+    },
+    disclaimer: {
+      title: "Disclaimer",
+      intro:
+        "A full disclaimer covering the limitations of TAMPDF's tools and services will be published here soon.",
+    },
+  },
+  dropzone: {
+    browse: "or click to browse",
+    defaultLabel: "Drag & drop your file here",
+    unsupportedType: "{name} isn't a supported file type and was skipped.",
+    unsupportedTypePlural: "{count} files weren't a supported file type and were skipped.",
+    tooLarge: "{name} is too large (max {max}) and was skipped.",
+    tooLargePlural: "{count} files were too large (max {max}) and were skipped.",
+  },
+  fileList: {
+    moveUp: "Move up",
+    moveDown: "Move down",
+    remove: "Remove {name}",
+  },
+  result: {
+    ready: "Your file is ready",
+    download: "Download",
+    startOver: "Start over",
+    smaller: "smaller",
+  },
+  notFound: {
+    title: "Page not found",
+    description: "The page you're looking for doesn't exist or may have moved.",
+    cta: "Back to homepage",
+  },
+  workspace: {
+    mergePdf: {
+      dropLabel: "Drag & drop PDF files here",
+      button: "Merge {count} PDFs",
+      buttonBusy: "Merging…",
+      hint: "Add at least one more PDF to merge.",
+      error: "Something went wrong while merging your PDFs. Please try again.",
+      resultName: "merged.pdf",
+    },
+    pdfToJpg: {
+      dropLabel: "Drag & drop a PDF file here",
+      qualityLabel: "Image quality",
+      levelLow: "Low",
+      levelLowHint: "Smallest size",
+      levelMedium: "Medium",
+      levelMediumHint: "Recommended",
+      levelHigh: "High",
+      levelHighHint: "Sharpest",
+      button: "Convert to JPG",
+      buttonBusy: "Rendering page {current} of {total}…",
+      buttonBusyStart: "Starting…",
+      error: "Something went wrong while converting your PDF. Please try again.",
+      readError: "Couldn't read that PDF. It may be corrupted or password-protected.",
+      resultZipName: "pdf-pages.zip",
+    },
+    compressPdf: {
+      dropLabel: "Drag & drop a PDF file here",
+      levelLabel: "Compression level",
+      levelLow: "Low",
+      levelLowHint: "Best quality",
+      levelMedium: "Medium",
+      levelMediumHint: "Recommended",
+      levelHigh: "High",
+      levelHighHint: "Smallest size",
+      button: "Compress PDF",
+      buttonBusy: "Compressing…",
+      error: "Something went wrong while compressing your PDF. Please try again.",
+      resultSuffix: "-compressed.pdf",
+    },
+    compressImage: {
+      dropLabel: "Drag & drop images here",
+      levelLabel: "Compression level",
+      levelLow: "Low",
+      levelLowHint: "Best quality",
+      levelMedium: "Medium",
+      levelMediumHint: "Recommended",
+      levelHigh: "High",
+      levelHighHint: "Smallest size",
+      buttonSingular: "Compress 1 image",
+      buttonPlural: "Compress {count} images",
+      buttonBusy: "Compressing…",
+      error: "Something went wrong while compressing your images. Please try again.",
+      resultZipName: "compressed-images.zip",
+    },
+    imageToPdf: {
+      dropLabel: "Drag & drop images here",
+      buttonSingular: "Convert 1 image to PDF",
+      buttonPlural: "Convert {count} images to PDF",
+      buttonBusy: "Converting…",
+      error: "Something went wrong while converting your images. Please try again.",
+      resultName: "images.pdf",
+    },
+    pdfToWord: {
+      button: "Convert to Word",
+      buttonBusy: "Converting…",
+      note: "Your file is processed securely and deleted immediately after conversion.",
+      error: "Something went wrong while converting your file. Please try again.",
+    },
+    wordToPdf: {
+      button: "Convert to PDF",
+      buttonBusy: "Converting…",
+      note: "Your file is processed securely and deleted immediately after conversion.",
+      error: "Something went wrong while converting your file. Please try again.",
+    },
+    rotatePdf: {
+      dropLabel: "Drag & drop PDF files here",
+      loadingPages: "Loading pages…",
+      pageCountLabel: "{count} pages",
+      rotateAllLabel: "Rotate all pages",
+      rotatePageLabel: "Rotate page {page}",
+      removeFileLabel: "Remove {name}",
+      button: "Rotate PDF",
+      buttonBusy: "Rotating…",
+      error: "Something went wrong while rotating your PDFs. Please try again.",
+      readError: "Couldn't read that PDF. It may be corrupted or password-protected.",
+      resultZipName: "rotated-pdfs.zip",
+      resultSuffix: "-rotated.pdf",
+    },
+    pdfToPowerpoint: {
+      button: "Convert to PowerPoint",
+      buttonBusy: "Converting…",
+      note: "Your file is processed securely and deleted immediately after conversion.",
+      error: "Something went wrong while converting your file. Please try again.",
+    },
+  },
+};
+
+const ar: typeof en = {
+  header: {
+    switchLanguageTo: "English",
+  },
+  breadcrumb: {
+    home: "الرئيسية",
+  },
+  tool: {
+    processedClient: "تتم المعالجة داخل متصفحك — لا يتم رفع الملفات أبدًا",
+    faqHeading: "الأسئلة الشائعة",
+    relatedHeading: "أدوات ذات صلة",
+  },
+  card: {
+    comingSoon: "قريبًا",
+  },
+  footer: {
+    rights: "جميع الحقوق محفوظة.",
+    privacyNote: "تتم معالجة الملفات بأمان ولا يتم تخزينها لفترة أطول من اللازم.",
+    moreCount: "+{count} أخرى",
+    company: "الشركة",
+    legal: "قانوني",
+    aboutUs: "من نحن",
+    contactUs: "اتصل بنا",
+    blog: "المدونة",
+    faq: "الأسئلة الشائعة",
+    privacyPolicy: "سياسة الخصوصية",
+    termsOfService: "شروط الخدمة",
+    cookiePolicy: "سياسة ملفات تعريف الارتباط",
+    disclaimer: "إخلاء المسؤولية",
+  },
+  staticPages: {
+    note: "هذه الصفحة مؤقتة — المحتوى الكامل في الطريق قريبًا.",
+    aboutUs: {
+      title: "من نحن",
+      intro:
+        "TAMPDF مجموعة أدوات مجانية عبر الإنترنت صُممت لتسهيل مهام الملفات اليومية — دمج وتقسيم وضغط وتحويل ملفات PDF والصور والمستندات — بسرعة وخصوصية وسهولة.",
+    },
+    contactUs: {
+      title: "اتصل بنا",
+      intro: "هل لديك سؤال، أو وجدت خطأ، أو تريد اقتراح أداة جديدة؟ يسعدنا سماع رأيك.",
+    },
+    blog: {
+      title: "المدونة",
+      intro: "نعمل حاليًا على مقالات حول صيغ الملفات ونصائح الإنتاجية وتحديثات المنتج.",
+    },
+    faq: {
+      title: "الأسئلة الشائعة",
+      intro:
+        "ستُنشر هنا قريبًا إجابات عامة حول TAMPDF. في الوقت الحالي، تحتوي كل صفحة أداة على قسم أسئلة شائعة خاص بها يشرح كيفية عمل تلك الأداة.",
+    },
+    privacyPolicy: {
+      title: "سياسة الخصوصية",
+      intro:
+        "سياسة الخصوصية الكاملة، التي توضح بالتفصيل كيفية تعامل TAMPDF مع ملفاتك وبياناتك، قيد الإعداد وستُنشر هنا قريبًا.",
+    },
+    termsOfService: {
+      title: "شروط الخدمة",
+      intro: "ستُنشر شروط الخدمة الخاصة بنا، الموضحة لقواعد وإرشادات استخدام TAMPDF، هنا قريبًا.",
+    },
+    cookiePolicy: {
+      title: "سياسة ملفات تعريف الارتباط",
+      intro: "سيتم نشر تفاصيل حول ملفات تعريف الارتباط والتقنيات المشابهة التي تستخدمها TAMPDF هنا قريبًا.",
+    },
+    disclaimer: {
+      title: "إخلاء المسؤولية",
+      intro: "سيتم نشر إخلاء مسؤولية كامل يغطي حدود أدوات وخدمات TAMPDF هنا قريبًا.",
+    },
+  },
+  dropzone: {
+    browse: "أو انقر للاختيار",
+    defaultLabel: "اسحب وأفلت ملفك هنا",
+    unsupportedType: "{name} ليس نوع ملف مدعوم وتم تجاهله.",
+    unsupportedTypePlural: "{count} ملفات ليست بنوع مدعوم وتم تجاهلها.",
+    tooLarge: "{name} كبير جدًا (الحد الأقصى {max}) وتم تجاهله.",
+    tooLargePlural: "{count} ملفات كانت كبيرة جدًا (الحد الأقصى {max}) وتم تجاهلها.",
+  },
+  fileList: {
+    moveUp: "نقل لأعلى",
+    moveDown: "نقل لأسفل",
+    remove: "إزالة {name}",
+  },
+  result: {
+    ready: "ملفك جاهز",
+    download: "تنزيل",
+    startOver: "البدء من جديد",
+    smaller: "أصغر",
+  },
+  notFound: {
+    title: "الصفحة غير موجودة",
+    description: "الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.",
+    cta: "العودة إلى الصفحة الرئيسية",
+  },
+  workspace: {
+    mergePdf: {
+      dropLabel: "اسحب وأفلت ملفات PDF هنا",
+      button: "دمج {count} ملفات PDF",
+      buttonBusy: "جارٍ الدمج…",
+      hint: "أضف ملف PDF واحدًا آخر على الأقل للدمج.",
+      error: "حدث خطأ أثناء دمج ملفات PDF. حاول مرة أخرى.",
+      resultName: "merged.pdf",
+    },
+    pdfToJpg: {
+      dropLabel: "اسحب وأفلت ملف PDF هنا",
+      qualityLabel: "جودة الصورة",
+      levelLow: "منخفضة",
+      levelLowHint: "أصغر حجم",
+      levelMedium: "متوسطة",
+      levelMediumHint: "موصى به",
+      levelHigh: "عالية",
+      levelHighHint: "أوضح جودة",
+      button: "تحويل إلى JPG",
+      buttonBusy: "جارٍ عرض الصفحة {current} من {total}…",
+      buttonBusyStart: "جارٍ البدء…",
+      error: "حدث خطأ أثناء تحويل ملف PDF. حاول مرة أخرى.",
+      readError: "تعذّرت قراءة ملف PDF. قد يكون تالفًا أو محميًا بكلمة مرور.",
+      resultZipName: "pdf-pages.zip",
+    },
+    compressPdf: {
+      dropLabel: "اسحب وأفلت ملف PDF هنا",
+      levelLabel: "مستوى الضغط",
+      levelLow: "منخفض",
+      levelLowHint: "أفضل جودة",
+      levelMedium: "متوسط",
+      levelMediumHint: "موصى به",
+      levelHigh: "عالٍ",
+      levelHighHint: "أصغر حجم",
+      button: "ضغط PDF",
+      buttonBusy: "جارٍ الضغط…",
+      error: "حدث خطأ أثناء ضغط ملف PDF. حاول مرة أخرى.",
+      resultSuffix: "-compressed.pdf",
+    },
+    compressImage: {
+      dropLabel: "اسحب وأفلت الصور هنا",
+      levelLabel: "مستوى الضغط",
+      levelLow: "منخفض",
+      levelLowHint: "أفضل جودة",
+      levelMedium: "متوسط",
+      levelMediumHint: "موصى به",
+      levelHigh: "عالٍ",
+      levelHighHint: "أصغر حجم",
+      buttonSingular: "ضغط صورة واحدة",
+      buttonPlural: "ضغط {count} صور",
+      buttonBusy: "جارٍ الضغط…",
+      error: "حدث خطأ أثناء ضغط الصور. حاول مرة أخرى.",
+      resultZipName: "compressed-images.zip",
+    },
+    imageToPdf: {
+      dropLabel: "اسحب وأفلت الصور هنا",
+      buttonSingular: "تحويل صورة واحدة إلى PDF",
+      buttonPlural: "تحويل {count} صور إلى PDF",
+      buttonBusy: "جارٍ التحويل…",
+      error: "حدث خطأ أثناء تحويل الصور. حاول مرة أخرى.",
+      resultName: "images.pdf",
+    },
+    pdfToWord: {
+      button: "تحويل إلى Word",
+      buttonBusy: "جارٍ التحويل…",
+      note: "تتم معالجة ملفك بأمان ويُحذف فورًا بعد التحويل.",
+      error: "حدث خطأ أثناء تحويل الملف. حاول مرة أخرى.",
+    },
+    wordToPdf: {
+      button: "تحويل إلى PDF",
+      buttonBusy: "جارٍ التحويل…",
+      note: "تتم معالجة ملفك بأمان ويُحذف فورًا بعد التحويل.",
+      error: "حدث خطأ أثناء تحويل الملف. حاول مرة أخرى.",
+    },
+    rotatePdf: {
+      dropLabel: "اسحب وأفلت ملفات PDF هنا",
+      loadingPages: "جارٍ تحميل الصفحات…",
+      pageCountLabel: "{count} صفحة",
+      rotateAllLabel: "تدوير كل الصفحات",
+      rotatePageLabel: "تدوير الصفحة {page}",
+      removeFileLabel: "إزالة {name}",
+      button: "تدوير PDF",
+      buttonBusy: "جارٍ التدوير…",
+      error: "حدث خطأ أثناء تدوير ملفات PDF. حاول مرة أخرى.",
+      readError: "تعذّرت قراءة ملف PDF. قد يكون تالفًا أو محميًا بكلمة مرور.",
+      resultZipName: "rotated-pdfs.zip",
+      resultSuffix: "-rotated.pdf",
+    },
+    pdfToPowerpoint: {
+      button: "تحويل إلى PowerPoint",
+      buttonBusy: "جارٍ التحويل…",
+      note: "تتم معالجة ملفك بأمان ويُحذف فورًا بعد التحويل.",
+      error: "حدث خطأ أثناء تحويل الملف. حاول مرة أخرى.",
+    },
+  },
+};
+
+export const dictionaries = { en, ar };
+
+export type Dictionary = typeof en;

@@ -1,5 +1,5 @@
 {
-  "name": "fileati",
+  "name": "tampdf",
   "private": true,
   "version": "0.1.0",
   "workspaces": [
@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "dev": "npm run dev -w web",
-    "dev:worker": "npm run dev -w worker",
     "build": "npm run build -w web",
     "lint": "npm run lint -w web"
   }

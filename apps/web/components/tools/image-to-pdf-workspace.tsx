@@ -7,12 +7,16 @@ import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { t } from "@/i18n/format";
+import { useDictionary } from "@/i18n/locale-context";
+import { trackToolUsage } from "@/lib/analytics";
 import { downloadBytes } from "@/lib/download";
 import { imagesToPdf } from "@/lib/image/toPdf";
 
 type Status = "idle" | "processing" | "done" | "error";
 
 export function ImageToPdfWorkspace() {
+  const dict = useDictionary().workspace.imageToPdf;
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -42,9 +46,11 @@ export function ImageToPdfWorkspace() {
       const bytes = await imagesToPdf(files);
       setResult(bytes);
       setStatus("done");
+      trackToolUsage("image-to-pdf", true);
     } catch {
-      setError("Something went wrong while converting your images. Please try again.");
+      setError(dict.error);
       setStatus("error");
+      trackToolUsage("image-to-pdf", false);
     }
   }
 
@@ -52,9 +58,9 @@ export function ImageToPdfWorkspace() {
     return (
       <Card className="p-6 sm:p-8">
         <ResultPanel
-          filename="images.pdf"
+          filename={dict.resultName}
           size={result.byteLength}
-          onDownload={() => downloadBytes(result, "images.pdf", "application/pdf")}
+          onDownload={() => downloadBytes(result, dict.resultName, "application/pdf")}
           onReset={reset}
         />
       </Card>
@@ -66,9 +72,10 @@ export function ImageToPdfWorkspace() {
       <FileDropzone
         accept={[".jpg", ".jpeg", ".png"]}
         multiple
+        maxSizeBytes={25 * 1024 * 1024}
         disabled={status === "processing"}
         onFilesAdded={(added) => setFiles((prev) => [...prev, ...added])}
-        label="Drag & drop images here"
+        label={dict.dropLabel}
       />
 
       {files.length > 0 && (
@@ -98,7 +105,11 @@ export function ImageToPdfWorkspace() {
             ) : (
               <ImagePlus size={18} />
             )}
-            {status === "processing" ? "Converting…" : `Convert ${files.length} image${files.length > 1 ? "s" : ""} to PDF`}
+            {status === "processing"
+              ? dict.buttonBusy
+              : files.length === 1
+                ? dict.buttonSingular
+                : t(dict.buttonPlural, { count: files.length })}
           </Button>
         </>
       )}

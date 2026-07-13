@@ -30,7 +30,7 @@ export const tools: ToolDefinition[] = [
           "Yes. After adding your files, drag them into the order you want the final document to follow before merging.",
       },
       {
-        question: "Do my files get uploaded to Fileati's servers?",
+        question: "Do my files get uploaded to TAMPDF's servers?",
         answer:
           "No. Merge PDF processes files entirely in your browser using client-side technology, so your documents never leave your device.",
       },
@@ -40,50 +40,8 @@ export const tools: ToolDefinition[] = [
           "No. Pages are combined as-is with no re-compression, so text, images, and formatting stay exactly as they were in the originals.",
       },
     ],
-    relatedSlugs: ["split-pdf", "compress-pdf", "image-to-pdf"],
+    relatedSlugs: ["pdf-to-jpg", "compress-pdf", "rotate-pdf"],
     keywords: ["combine pdf", "join pdf files", "merge pdf online", "pdf merger"],
-  },
-  {
-    slug: "split-pdf",
-    name: "Split PDF",
-    actionLabel: "Split PDF",
-    shortDescription:
-      "Extract pages or split a PDF into multiple separate files by range.",
-    longDescription: [
-      "Split PDF breaks a single PDF into smaller files. Pull out individual pages, extract a page range, or split every page into its own document.",
-      "Splitting happens directly in your browser, so large or confidential files stay private while you get exactly the pages you need.",
-    ],
-    category: "pdf",
-    processing: "client",
-    icon: "Scissors",
-    acceptedExtensions: [".pdf"],
-    acceptedMimeTypes: ["application/pdf"],
-    multipleFiles: false,
-    outputExtension: ".zip",
-    faq: [
-      {
-        question: "Can I select a specific page range to extract?",
-        answer:
-          "Yes. Enter a page range such as 2-5 to extract just those pages, or split the document into individual single-page files.",
-      },
-      {
-        question: "What format do I get back after splitting?",
-        answer:
-          "If you extract more than one output file, they're bundled into a single .zip you can download. Extracting a single range downloads directly as a PDF.",
-      },
-      {
-        question: "Is my PDF uploaded anywhere when I split it?",
-        answer:
-          "No. Split PDF runs entirely client-side in your browser, so the file never leaves your device.",
-      },
-      {
-        question: "Does splitting reduce PDF quality?",
-        answer:
-          "No. Pages are extracted at their original resolution and formatting with no re-compression involved.",
-      },
-    ],
-    relatedSlugs: ["merge-pdf", "compress-pdf", "pdf-to-word"],
-    keywords: ["split pdf pages", "extract pdf pages", "pdf splitter online"],
   },
   {
     slug: "compress-pdf",
@@ -114,7 +72,7 @@ export const tools: ToolDefinition[] = [
           "At the default setting, quality loss is minimal. If you choose the strongest compression level, images are downsampled more aggressively, which can reduce sharpness on zoomed-in images.",
       },
       {
-        question: "Is compression done on Fileati's servers?",
+        question: "Is compression done on TAMPDF's servers?",
         answer:
           "No. Compress PDF runs locally in your browser, so your file is never uploaded anywhere.",
       },
@@ -124,95 +82,90 @@ export const tools: ToolDefinition[] = [
           "Not currently. Remove the password protection with another tool first, then compress the file.",
       },
     ],
-    relatedSlugs: ["merge-pdf", "split-pdf", "pdf-to-word"],
+    relatedSlugs: ["merge-pdf", "pdf-to-jpg", "rotate-pdf"],
     keywords: ["reduce pdf size", "shrink pdf", "pdf compressor online"],
   },
   {
-    slug: "pdf-to-word",
-    name: "PDF to Word",
-    actionLabel: "Convert to Word",
-    shortDescription:
-      "Convert a PDF into an editable Word (.docx) document while preserving layout.",
+    slug: "pdf-to-jpg",
+    name: "PDF to JPG",
+    actionLabel: "Convert to JPG",
+    shortDescription: "Turn every page of a PDF into a high-quality JPG image.",
     longDescription: [
-      "PDF to Word converts your PDF into a fully editable .docx file, preserving paragraphs, headings, and formatting as closely as possible so you can keep working in Microsoft Word or Google Docs.",
-      "Because high-fidelity document conversion needs a real word processing engine, this tool processes your file securely on Fileati's servers and deletes it immediately afterward.",
+      "PDF to JPG renders each page of your PDF as a separate JPG image, ready to share, edit, or drop into a slide deck. A single-page PDF downloads as one JPG; multi-page PDFs are bundled into a .zip.",
+      "Rendering happens directly in your browser using PDF.js, so your document is never uploaded to a server.",
     ],
-    category: "document",
-    processing: "server",
-    icon: "FileOutput",
+    category: "pdf",
+    processing: "client",
+    icon: "FileImage",
     acceptedExtensions: [".pdf"],
     acceptedMimeTypes: ["application/pdf"],
     multipleFiles: false,
-    outputExtension: ".docx",
+    outputExtension: ".zip",
     faq: [
       {
-        question: "Will the formatting of my PDF be preserved?",
+        question: "What if my PDF has multiple pages?",
         answer:
-          "Fileati aims to preserve text, headings, tables, and layout as closely as possible. Very complex layouts or scanned image-only PDFs may need manual touch-ups after conversion.",
+          "Each page becomes its own JPG image. If there's more than one, they're bundled into a single .zip file for download.",
       },
       {
-        question: "Can I convert a scanned PDF to Word?",
+        question: "How sharp will the images be?",
         answer:
-          "Scanned PDFs without a text layer will convert but the text won't be selectable or editable, since this tool doesn't currently run OCR. Support for scanned documents is planned.",
+          "Pages are rendered at a high resolution suitable for screens and most printing needs. Choose the quality level to balance sharpness against file size.",
       },
       {
-        question: "Is my file stored after conversion?",
+        question: "Is my PDF uploaded anywhere?",
         answer:
-          "No. Your file is processed on our server and permanently deleted immediately after conversion completes. We don't keep copies or view your content.",
+          "No. PDF to JPG renders every page locally in your browser, so your file never leaves your device.",
       },
       {
-        question: "What Word format do I get?",
+        question: "Can I convert just one page instead of the whole document?",
         answer:
-          "You'll receive a standard .docx file compatible with Microsoft Word, Google Docs, LibreOffice Writer, and Apple Pages.",
+          "Currently every page is converted. Use Merge PDF or a PDF reader to isolate a single page beforehand if you only need one image.",
       },
     ],
-    relatedSlugs: ["word-to-pdf", "compress-pdf", "split-pdf"],
-    keywords: ["pdf to docx", "convert pdf to word online", "pdf to editable word"],
+    relatedSlugs: ["merge-pdf", "compress-pdf", "rotate-pdf"],
+    keywords: ["pdf to jpg", "convert pdf to image", "pdf to jpeg online"],
   },
   {
-    slug: "word-to-pdf",
-    name: "Word to PDF",
-    actionLabel: "Convert to PDF",
+    slug: "rotate-pdf",
+    name: "Rotate PDF",
+    actionLabel: "Rotate PDF",
     shortDescription:
-      "Convert Word (.doc/.docx) documents into polished, universally readable PDFs.",
+      "Rotate individual pages or an entire PDF by 90°, 180°, or 270°, right in your browser.",
     longDescription: [
-      "Word to PDF converts your .doc or .docx file into a PDF that looks the same on every device, ready to share, print, or archive.",
-      "Conversion runs securely on Fileati's servers using a real document engine to preserve fonts, images, and layout, and your file is deleted immediately after processing.",
+      "Rotate PDF lets you fix sideways or upside-down pages in seconds. Upload one or more PDFs, see a thumbnail of every page, then rotate the whole document at once or just the pages that need it.",
+      "Everything runs locally in your browser, so your files are never uploaded to a server. Upload multiple PDFs at once and each one is rotated and returned independently.",
     ],
-    category: "document",
-    processing: "server",
-    icon: "FileInput",
-    acceptedExtensions: [".doc", ".docx"],
-    acceptedMimeTypes: [
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    ],
-    multipleFiles: false,
+    category: "pdf",
+    processing: "client",
+    icon: "RotateCw",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: true,
     outputExtension: ".pdf",
     faq: [
       {
-        question: "Will fonts and images look the same in the PDF?",
+        question: "Can I rotate just one page instead of the whole document?",
         answer:
-          "Yes. The conversion engine renders your document the same way it would print, so fonts, images, and spacing carry over accurately.",
+          "Yes. Click a page's rotate button to rotate only that page, or use the rotate-all buttons to apply the same rotation to every page at once.",
       },
       {
-        question: "Does it support both .doc and .docx?",
-        answer:
-          "Yes, both older .doc files and modern .docx files are supported.",
+        question: "What rotation angles are supported?",
+        answer: "You can rotate pages by 90°, 180°, or 270° in either direction.",
       },
       {
-        question: "Is my document kept on your servers?",
+        question: "Can I rotate more than one PDF at a time?",
         answer:
-          "No. Files are processed in memory or in a temporary directory and permanently deleted right after your PDF is generated.",
+          "Yes. Upload multiple PDFs and each is rotated independently. If you upload more than one file, the rotated PDFs are bundled into a .zip for download.",
       },
       {
-        question: "Can I convert password-protected Word documents?",
+        question: "Is my PDF uploaded anywhere?",
         answer:
-          "Not currently. Please remove the password before uploading, then convert the file.",
+          "No. Rotate PDF processes everything locally in your browser, so your files never leave your device.",
       },
     ],
-    relatedSlugs: ["pdf-to-word", "compress-pdf", "merge-pdf"],
-    keywords: ["docx to pdf", "convert word to pdf online", "doc to pdf converter"],
+    relatedSlugs: ["merge-pdf", "compress-pdf", "pdf-to-jpg"],
+    keywords: ["rotate pdf", "turn pdf pages", "fix sideways pdf online"],
   },
   {
     slug: "compress-image",
@@ -257,12 +210,11 @@ export const tools: ToolDefinition[] = [
   },
   {
     slug: "image-to-pdf",
-    name: "Image to PDF",
+    name: "JPG to PDF",
     actionLabel: "Convert to PDF",
-    shortDescription:
-      "Turn one or more JPG or PNG images into a single PDF document.",
+    shortDescription: "Turn one or more JPG images into a single PDF document.",
     longDescription: [
-      "Image to PDF combines your JPG or PNG photos into a single PDF file, one image per page, in the order you choose.",
+      "JPG to PDF combines your JPG photos into a single PDF file, one image per page, in the order you choose.",
       "Perfect for turning scanned documents, receipts, or photos into a shareable PDF. Everything is processed locally in your browser for full privacy.",
     ],
     category: "image",
@@ -289,12 +241,12 @@ export const tools: ToolDefinition[] = [
           "No. The conversion happens entirely in your browser, so your images stay on your device.",
       },
       {
-        question: "Does it support HEIC photos from an iPhone?",
+        question: "Does it support PNG images too?",
         answer:
-          "Not yet. Currently JPG and PNG are supported; convert HEIC to JPG first using your phone's share options.",
+          "Yes, PNG images are supported alongside JPG. HEIC photos from an iPhone aren't supported yet; convert them to JPG first using your phone's share options.",
       },
     ],
     relatedSlugs: ["merge-pdf", "compress-image", "compress-pdf"],
-    keywords: ["jpg to pdf", "png to pdf", "convert image to pdf online"],
+    keywords: ["jpg to pdf", "convert jpg to pdf online", "image to pdf"],
   },
 ];

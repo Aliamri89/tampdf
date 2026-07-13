@@ -7,19 +7,21 @@ import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useDictionary } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
+import { trackToolUsage } from "@/lib/analytics";
 import { downloadBytes } from "@/lib/download";
 import { compressPdf, type CompressionLevel } from "@/lib/pdf/compress";
 
 type Status = "idle" | "processing" | "done" | "error";
 
-const LEVELS: { id: CompressionLevel; label: string; hint: string }[] = [
-  { id: "low", label: "Low", hint: "Best quality" },
-  { id: "medium", label: "Medium", hint: "Recommended" },
-  { id: "high", label: "High", hint: "Smallest size" },
-];
-
 export function CompressPdfWorkspace() {
+  const dict = useDictionary().workspace.compressPdf;
+  const levels: { id: CompressionLevel; label: string; hint: string }[] = [
+    { id: "low", label: dict.levelLow, hint: dict.levelLowHint },
+    { id: "medium", label: dict.levelMedium, hint: dict.levelMediumHint },
+    { id: "high", label: dict.levelHigh, hint: dict.levelHighHint },
+  ];
   const [file, setFile] = useState<File | null>(null);
   const [level, setLevel] = useState<CompressionLevel>("medium");
   const [status, setStatus] = useState<Status>("idle");
@@ -41,26 +43,24 @@ export function CompressPdfWorkspace() {
       const bytes = await compressPdf(file, level);
       setResult(bytes);
       setStatus("done");
+      trackToolUsage("compress-pdf", true);
     } catch {
-      setError("Something went wrong while compressing your PDF. Please try again.");
+      setError(dict.error);
       setStatus("error");
+      trackToolUsage("compress-pdf", false);
     }
   }
+
+  const resultName = (name: string) => name.replace(/\.pdf$/i, dict.resultSuffix);
 
   if (status === "done" && result && file) {
     return (
       <Card className="p-6 sm:p-8">
         <ResultPanel
-          filename={file.name.replace(/\.pdf$/i, "-compressed.pdf")}
+          filename={resultName(file.name)}
           size={result.byteLength}
           originalSize={file.size}
-          onDownload={() =>
-            downloadBytes(
-              result,
-              file.name.replace(/\.pdf$/i, "-compressed.pdf"),
-              "application/pdf",
-            )
-          }
+          onDownload={() => downloadBytes(result, resultName(file.name), "application/pdf")}
           onReset={reset}
         />
       </Card>
@@ -73,16 +73,16 @@ export function CompressPdfWorkspace() {
         <FileDropzone
           accept={[".pdf"]}
           onFilesAdded={(added) => setFile(added[0])}
-          label="Drag & drop a PDF file here"
+          label={dict.dropLabel}
         />
       ) : (
         <>
           <FileListItem file={file} onRemove={reset} />
 
           <div className="mt-5">
-            <span className="text-sm font-medium text-foreground">Compression level</span>
+            <span className="text-sm font-medium text-foreground">{dict.levelLabel}</span>
             <div className="mt-2 grid grid-cols-3 gap-2">
-              {LEVELS.map((option) => (
+              {levels.map((option) => (
                 <button
                   key={option.id}
                   type="button"
@@ -116,7 +116,7 @@ export function CompressPdfWorkspace() {
             ) : (
               <Minimize2 size={18} />
             )}
-            {status === "processing" ? "Compressing…" : "Compress PDF"}
+            {status === "processing" ? dict.buttonBusy : dict.button}
           </Button>
         </>
       )}

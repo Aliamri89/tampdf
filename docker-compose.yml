@@ -1,8 +1,0 @@
-services:
-  worker:
-    build: ./apps/worker
-    ports:
-      - "8787:8787"
-    environment:
-      WORKER_API_KEY: ${WORKER_API_KEY:-dev-secret}
-      MAX_FILE_SIZE_BYTES: ${MAX_FILE_SIZE_BYTES:-26214400}

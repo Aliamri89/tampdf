@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfaff;
-  --foreground: #17152b;
+  --background: #fdfdfd;
+  --foreground: #1a1a1a;
   --surface: #ffffff;
-  --surface-muted: #f4f2fd;
-  --border: #e6e2f7;
+  --surface-muted: #f5f5f5;
+  --border: #e6e6e6;
 
-  --brand-50: #f3f1fe;
-  --brand-100: #e4defc;
-  --brand-200: #c9c0fa;
-  --brand-300: #aa9bf5;
-  --brand-400: #8c76f0;
-  --brand-500: #6c5ce7;
-  --brand-600: #5a47d6;
-  --brand-700: #4735b0;
-  --brand-800: #37298a;
-  --brand-900: #241c5c;
+  --brand-50: #fef1f1;
+  --brand-100: #fde1e1;
+  --brand-200: #fbc5c5;
+  --brand-300: #f79999;
+  --brand-400: #f2605f;
+  --brand-500: #ed0a0a;
+  --brand-600: #c70808;
+  --brand-700: #a10707;
+  --brand-800: #7c0505;
+  --brand-900: #5c0404;
 
-  --accent-400: #ff9b73;
-  --accent-500: #ff8a5b;
-  --accent-600: #f26b36;
+  --accent-400: #4d4d4d;
+  --accent-500: #262626;
+  --accent-600: #0d0d0d;
 }
 
 @theme inline {
@@ -45,17 +45,18 @@
   --color-accent-500: var(--accent-500);
   --color-accent-600: var(--accent-600);
 
-  --font-sans: var(--font-geist-sans);
+  --font-sans: Arial, Helvetica, sans-serif;
   --font-mono: var(--font-geist-mono);
+  --font-arabic: var(--font-tajawal);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0e0c1a;
-    --foreground: #f1eefc;
-    --surface: #171429;
-    --surface-muted: #1e1a35;
-    --border: #2c2650;
+    --background: #0f0f10;
+    --foreground: #f5f5f5;
+    --surface: #1a1a1c;
+    --surface-muted: #232326;
+    --border: #2e2e32;
   }
 }
 
@@ -67,4 +68,15 @@ body {
 ::selection {
   background: var(--brand-200);
   color: var(--brand-900);
+}
+
+/*
+ * Baseline visible focus indicator for every focusable element site-wide
+ * (links, buttons, inputs, custom role="button" elements, <summary>, etc.),
+ * so keyboard navigation is never left without a focus ring even on
+ * elements that don't define their own focus-visible styling.
+ */
+:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
 }

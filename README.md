@@ -1,30 +1,26 @@
-# Fileati
+# TAMPDF
 
-Free online file tools (PDF, image, and document conversion) — fileati.com.
+Free online file tools (PDF and image) — tampdf.com.
 
 ## Stack
 
-- **apps/web** — Next.js 16 (App Router, TypeScript, Tailwind v4). Homepage + SEO tool pages. Client-side tools (merge/split/compress PDF, compress image, image→PDF) run entirely in the browser via `pdf-lib` and the canvas API — no upload.
-- **apps/worker** — Fastify service that runs PDF↔Word conversions using headless LibreOffice. Dockerized. Called from `apps/web`'s `/api/convert/[type]` route, never exposed to the browser directly.
+- **apps/web** — Next.js 16 (App Router, TypeScript, Tailwind v4) with Payload CMS built in for the admin panel (articles, static pages, media, site settings, usage analytics). Homepage + SEO tool pages. Every tool (merge/compress/rotate PDF, PDF→JPG, compress image, JPG→PDF) runs entirely client-side in the browser via `pdf-lib`, `pdfjs-dist`, and the canvas API — no file is ever uploaded to a server, and no external service (Docker, LibreOffice, etc.) is required to run the app.
 - **packages/config** — Shared tool registry (`tools.ts`, `categories.ts`) that drives the homepage, every tool page's content/SEO/FAQ, the sitemap, and the footer. Add a new tool by adding one entry here plus a workspace component.
 
 ## Local development
 
 ```bash
-npm install                 # installs all workspaces from the repo root
-
-npm run dev                 # apps/web on http://localhost:3000
-docker compose up --build   # apps/worker (with LibreOffice) on http://localhost:8787
+npm install    # installs all workspaces from the repo root
+npm run dev    # apps/web on http://localhost:3000
 ```
-
-To enable PDF↔Word conversion locally, copy `apps/web/.env.example` to `apps/web/.env.local`, set `WORKER_URL=http://localhost:8787` and `WORKER_API_KEY` to match the key docker-compose is using (`dev-secret` by default, or set a `WORKER_API_KEY` env var before running `docker compose up`). Without it, those two tools show a friendly "temporarily unavailable" message — every other tool works with zero configuration.
-
-`npm run dev:worker` also works without Docker if `soffice` (LibreOffice) is on your PATH.
 
 ## Deployment
 
-- **apps/web** → Vercel (or any Next.js host).
-- **apps/worker** → any Docker host (Railway, Fly.io, Render, ECS). Build with `apps/worker/Dockerfile`. Set `WORKER_API_KEY` on the worker and mirror it in `apps/web`'s `WORKER_API_KEY` env var; set `WORKER_URL` on the web app to the deployed worker's URL.
+**apps/web** needs a host with a **persistent disk** — a VM, a Railway/Fly.io/Render service with a volume attached, or shared/managed Node.js hosting like Hostinger Business — not a serverless/edge platform like Vercel. The admin CMS (Payload) stores its SQLite database (`tampdf.db`) and uploaded media (`media-uploads/`) directly on disk; on serverless hosts that filesystem is ephemeral/read-only, so every deploy or cold start would silently wipe posts, settings, and uploaded images. Mount a persistent volume covering both paths (or point `DATABASE_URI` at that volume) before going live.
+
+Required env vars in production (see `apps/web/.env.example`): `PAYLOAD_SECRET` (long random string, unique per environment — the app refuses to start without it) and `DATABASE_URI` (SQLite path on the persistent volume).
+
+No Docker and no system-level dependencies (like LibreOffice) are required anywhere in this project — every tool runs in the browser, and Payload CMS runs inside the same Next.js process. This makes the app deployable on managed/shared Node.js hosting without root access.
 
 ## Adding a new tool
 

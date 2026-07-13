@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@fileati/config": ["../../packages/config/src/index.ts"]
+      "@tampdf/config": ["../../packages/config/src/index.ts"],
+      "@payload-config": ["./payload.config.ts"]
     }
   },
   "include": [

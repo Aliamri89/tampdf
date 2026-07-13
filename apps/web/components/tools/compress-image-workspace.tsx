@@ -7,15 +7,19 @@ import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { t } from "@/i18n/format";
+import { useDictionary } from "@/i18n/locale-context";
+import { trackToolUsage } from "@/lib/analytics";
 import { downloadBlob } from "@/lib/download";
-import { compressImage } from "@/lib/image/compress";
+import { compressImage, type CompressionLevel } from "@/lib/image/compress";
 import { zipFiles } from "@/lib/zip";
 
 type Status = "idle" | "processing" | "done" | "error";
 
 export function CompressImageWorkspace() {
+  const dict = useDictionary().workspace.compressImage;
   const [files, setFiles] = useState<File[]>([]);
-  const [quality, setQuality] = useState(0.7);
+  const [level, setLevel] = useState<CompressionLevel>("medium");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{
@@ -23,6 +27,12 @@ export function CompressImageWorkspace() {
     filename: string;
     originalSize: number;
   } | null>(null);
+
+  const levels: { id: CompressionLevel; label: string; hint: string }[] = [
+    { id: "low", label: dict.levelLow, hint: dict.levelLowHint },
+    { id: "medium", label: dict.levelMedium, hint: dict.levelMediumHint },
+    { id: "high", label: dict.levelHigh, hint: dict.levelHighHint },
+  ];
 
   function reset() {
     setFiles([]);
@@ -35,7 +45,7 @@ export function CompressImageWorkspace() {
     setStatus("processing");
     setError(null);
     try {
-      const compressed = await Promise.all(files.map((file) => compressImage(file, quality)));
+      const compressed = await Promise.all(files.map((file) => compressImage(file, level)));
       const originalSize = compressed.reduce((sum, c) => sum + c.originalSize, 0);
 
       if (compressed.length === 1) {
@@ -48,12 +58,14 @@ export function CompressImageWorkspace() {
         const zipBlob = await zipFiles(
           compressed.map((c) => ({ name: c.name, data: c.blob })),
         );
-        setResult({ blob: zipBlob, filename: "compressed-images.zip", originalSize });
+        setResult({ blob: zipBlob, filename: dict.resultZipName, originalSize });
       }
       setStatus("done");
+      trackToolUsage("compress-image", true);
     } catch {
-      setError("Something went wrong while compressing your images. Please try again.");
+      setError(dict.error);
       setStatus("error");
+      trackToolUsage("compress-image", false);
     }
   }
 
@@ -76,9 +88,10 @@ export function CompressImageWorkspace() {
       <FileDropzone
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
+        maxSizeBytes={25 * 1024 * 1024}
         disabled={status === "processing"}
         onFilesAdded={(added) => setFiles((prev) => [...prev, ...added])}
-        label="Drag & drop images here"
+        label={dict.dropLabel}
       />
 
       {files.length > 0 && (
@@ -93,21 +106,26 @@ export function CompressImageWorkspace() {
             ))}
           </ul>
 
-          <label className="mt-5 block">
-            <span className="flex items-center justify-between text-sm font-medium text-foreground">
-              <span>Quality</span>
-              <span className="text-foreground/50">{Math.round(quality * 100)}%</span>
-            </span>
-            <input
-              type="range"
-              min={0.2}
-              max={0.95}
-              step={0.05}
-              value={quality}
-              onChange={(e) => setQuality(Number(e.target.value))}
-              className="mt-2 w-full accent-brand-500"
-            />
-          </label>
+          <div className="mt-5">
+            <span className="text-sm font-medium text-foreground">{dict.levelLabel}</span>
+            <div className="mt-2 grid grid-cols-3 gap-2">
+              {levels.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => setLevel(option.id)}
+                  className={
+                    level === option.id
+                      ? "rounded-xl border border-brand-400 bg-brand-50 px-3 py-2.5 text-center transition-colors"
+                      : "rounded-xl border border-border bg-surface px-3 py-2.5 text-center transition-colors hover:border-brand-200"
+                  }
+                >
+                  <span className="block text-sm font-medium text-foreground">{option.label}</span>
+                  <span className="block text-xs text-foreground/50">{option.hint}</span>
+                </button>
+              ))}
+            </div>
+          </div>
 
           {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
 
@@ -123,8 +141,10 @@ export function CompressImageWorkspace() {
               <ImageDown size={18} />
             )}
             {status === "processing"
-              ? "Compressing…"
-              : `Compress ${files.length} image${files.length > 1 ? "s" : ""}`}
+              ? dict.buttonBusy
+              : files.length === 1
+                ? dict.buttonSingular
+                : t(dict.buttonPlural, { count: files.length })}
           </Button>
         </>
       )}

@@ -1,4 +1,4 @@
-export type ToolCategoryId = "pdf" | "image" | "document";
+export type ToolCategoryId = "pdf" | "image";
 
 export type ProcessingMode = "client" | "server";
 
