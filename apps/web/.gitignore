@@ -45,4 +45,8 @@ next-env.d.ts
 *.db
 *.db-journal
 /media-uploads
-/payload/payload-types.ts
+# payload/payload-types.ts is intentionally committed (not ignored) — it's
+# imported directly by app code, and Hostinger's build has no reliable way
+# to run `payload generate:types` before `next build`. Regenerate it with
+# `npm run generate:types -w web` and commit the result whenever a
+# collection/global in apps/web/payload/ changes.
