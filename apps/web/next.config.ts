@@ -1,5 +1,9 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -11,6 +15,16 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   transpilePackages: ["@tampdf/config"],
+  // Hostinger's deployment environment (and some other setups) can end up
+  // with a second, stale package-lock.json sitting above this monorepo's
+  // real root (e.g. a duplicated/legacy checkout in public_html alongside
+  // the actual build checkout). Turbopack's automatic workspace-root
+  // inference picks whichever lockfile it finds first walking up the tree,
+  // which can silently select the wrong root and misplace build output.
+  // Pin it explicitly: apps/web -> apps -> repo root.
+  turbopack: {
+    root: path.join(dirname, "..", ".."),
+  },
   async headers() {
     return [
       {
