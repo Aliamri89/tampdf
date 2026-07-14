@@ -46,6 +46,11 @@ const workspaceMap: Record<string, ComponentType> = {
     () => import("@/components/tools/image-to-pdf-workspace").then((m) => m.ImageToPdfWorkspace),
     { loading: WorkspaceLoading, ssr: false },
   ),
+  "rotate-images": dynamic(
+    () =>
+      import("@/components/tools/rotate-images-workspace").then((m) => m.RotateImagesWorkspace),
+    { loading: WorkspaceLoading, ssr: false },
+  ),
 };
 
 /**

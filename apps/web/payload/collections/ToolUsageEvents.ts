@@ -15,6 +15,7 @@ export const TOOL_SLUGS = [
   "rotate-pdf",
   "compress-image",
   "image-to-pdf",
+  "rotate-images",
 ] as const;
 
 /** Bilingual display names, also reused by tool-labels.ts for the Dashboard. */
@@ -25,6 +26,7 @@ export const TOOL_SLUG_LABELS: Record<(typeof TOOL_SLUGS)[number], { en: string;
   "rotate-pdf": { en: "Rotate PDF", ar: "تدوير PDF" },
   "compress-image": { en: "Compress Image", ar: "ضغط الصور" },
   "image-to-pdf": { en: "JPG to PDF", ar: "تحويل JPG إلى PDF" },
+  "rotate-images": { en: "Rotate Images", ar: "تدوير الصور" },
 };
 
 /**

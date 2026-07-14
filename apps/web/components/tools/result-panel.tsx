@@ -34,7 +34,15 @@ export function ResultPanel({
       <div>
         <p className="font-medium text-foreground">{dict.result.ready}</p>
         <p className="mt-1 text-sm text-foreground/50" dir="ltr">
-          {filename} &middot; {formatBytes(size)}
+          {filename}
+          {originalSize && originalSize > 0 ? (
+            <>
+              {" "}
+              &middot; {formatBytes(originalSize)} &rarr; {formatBytes(size)}
+            </>
+          ) : (
+            <> &middot; {formatBytes(size)}</>
+          )}
           {savedPercent !== null && savedPercent > 0 && (
             <span className="text-green-600">
               {" "}

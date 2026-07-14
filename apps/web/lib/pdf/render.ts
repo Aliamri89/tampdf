@@ -66,6 +66,18 @@ export async function loadPdfDocument(file: File): Promise<PDFDocumentProxy> {
   return pdfjsLib.getDocument({ data: buffer }).promise;
 }
 
+/**
+ * True when a PDF failed to load specifically because it's encrypted with a
+ * password. Unlike pdf-lib (used elsewhere for merge/rotate/compress, which
+ * can proceed past a nominal owner-password via `ignoreEncryption`), pdf.js
+ * has no way to render genuinely password-protected content without the
+ * password — that's a real, expected limitation, not corruption, so callers
+ * should show a distinct, accurate message instead of a generic read error.
+ */
+export function isPdfPasswordError(error: unknown): boolean {
+  return Boolean(error) && typeof error === "object" && (error as { name?: unknown }).name === "PasswordException";
+}
+
 /** Renders a single PDF page to a canvas at the given scale (1 = CSS pixel size). */
 export async function renderPageToCanvas(
   pdf: PDFDocumentProxy,

@@ -252,7 +252,8 @@ export interface StaticPage {
  */
 export interface ToolUsageEvent {
   id: number;
-  tool: 'merge-pdf' | 'compress-pdf' | 'pdf-to-jpg' | 'rotate-pdf' | 'compress-image' | 'image-to-pdf';
+  tool:
+    'merge-pdf' | 'compress-pdf' | 'pdf-to-jpg' | 'rotate-pdf' | 'compress-image' | 'image-to-pdf' | 'rotate-images';
   success: boolean;
   updatedAt: string;
   createdAt: string;

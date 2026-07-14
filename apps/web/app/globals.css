@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/*
+ * Repoint Tailwind's `dark:` variant at our manual data-theme attribute
+ * instead of its default `prefers-color-scheme` media query, so it stays
+ * consistent with the rest of the theme system (opt-in only, never derived
+ * from OS settings).
+ */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
   --background: #fdfdfd;
   --foreground: #1a1a1a;
@@ -50,14 +58,18 @@
   --font-arabic: var(--font-tajawal);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f0f10;
-    --foreground: #f5f5f5;
-    --surface: #1a1a1c;
-    --surface-muted: #232326;
-    --border: #2e2e32;
-  }
+/*
+ * Dark mode is opt-in only, toggled via the header's theme button (see
+ * ThemeToggle) and applied as a data-theme attribute on <html> by an inline
+ * script that runs before first paint — never derived from the OS/browser
+ * `prefers-color-scheme`, per product requirement.
+ */
+:root[data-theme="dark"] {
+  --background: #0f0f10;
+  --foreground: #f5f5f5;
+  --surface: #1a1a1c;
+  --surface-muted: #232326;
+  --border: #2e2e32;
 }
 
 body {

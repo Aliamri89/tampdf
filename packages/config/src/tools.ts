@@ -2,48 +2,6 @@ import type { ToolDefinition } from "./types";
 
 export const tools: ToolDefinition[] = [
   {
-    slug: "merge-pdf",
-    name: "Merge PDF",
-    actionLabel: "Merge PDFs",
-    shortDescription:
-      "Combine multiple PDF files into a single document, in the order you choose.",
-    longDescription: [
-      "Merge PDF lets you combine two or more PDF files into one document without installing anything. Drag your files in, drag to reorder them, and download a single merged PDF.",
-      "Everything runs locally in your browser, so your files are never uploaded to a server. That means it works even with sensitive contracts, reports, or personal documents.",
-    ],
-    category: "pdf",
-    processing: "client",
-    icon: "Combine",
-    acceptedExtensions: [".pdf"],
-    acceptedMimeTypes: ["application/pdf"],
-    multipleFiles: true,
-    outputExtension: ".pdf",
-    faq: [
-      {
-        question: "Is there a limit to how many PDFs I can merge?",
-        answer:
-          "No hard limit. Since merging happens in your browser, the practical limit is your device's memory rather than a server quota.",
-      },
-      {
-        question: "Can I change the order of the pages before merging?",
-        answer:
-          "Yes. After adding your files, drag them into the order you want the final document to follow before merging.",
-      },
-      {
-        question: "Do my files get uploaded to TAMPDF's servers?",
-        answer:
-          "No. Merge PDF processes files entirely in your browser using client-side technology, so your documents never leave your device.",
-      },
-      {
-        question: "Will merging affect the quality of my PDFs?",
-        answer:
-          "No. Pages are combined as-is with no re-compression, so text, images, and formatting stay exactly as they were in the originals.",
-      },
-    ],
-    relatedSlugs: ["pdf-to-jpg", "compress-pdf", "rotate-pdf"],
-    keywords: ["combine pdf", "join pdf files", "merge pdf online", "pdf merger"],
-  },
-  {
     slug: "compress-pdf",
     name: "Compress PDF",
     actionLabel: "Compress PDF",
@@ -125,6 +83,48 @@ export const tools: ToolDefinition[] = [
     ],
     relatedSlugs: ["merge-pdf", "compress-pdf", "rotate-pdf"],
     keywords: ["pdf to jpg", "convert pdf to image", "pdf to jpeg online"],
+  },
+  {
+    slug: "merge-pdf",
+    name: "Merge PDF",
+    actionLabel: "Merge PDFs",
+    shortDescription:
+      "Combine multiple PDF files into a single document, in the order you choose.",
+    longDescription: [
+      "Merge PDF lets you combine two or more PDF files into one document without installing anything. Drag your files in, drag to reorder them, and download a single merged PDF.",
+      "Everything runs locally in your browser, so your files are never uploaded to a server. That means it works even with sensitive contracts, reports, or personal documents.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Combine",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: true,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Is there a limit to how many PDFs I can merge?",
+        answer:
+          "No hard limit. Since merging happens in your browser, the practical limit is your device's memory rather than a server quota.",
+      },
+      {
+        question: "Can I change the order of the pages before merging?",
+        answer:
+          "Yes. After adding your files, drag them into the order you want the final document to follow before merging.",
+      },
+      {
+        question: "Do my files get uploaded to TAMPDF's servers?",
+        answer:
+          "No. Merge PDF processes files entirely in your browser using client-side technology, so your documents never leave your device.",
+      },
+      {
+        question: "Will merging affect the quality of my PDFs?",
+        answer:
+          "No. Pages are combined as-is with no re-compression, so text, images, and formatting stay exactly as they were in the originals.",
+      },
+    ],
+    relatedSlugs: ["pdf-to-jpg", "compress-pdf", "rotate-pdf"],
+    keywords: ["combine pdf", "join pdf files", "merge pdf online", "pdf merger"],
   },
   {
     slug: "rotate-pdf",
@@ -248,5 +248,44 @@ export const tools: ToolDefinition[] = [
     ],
     relatedSlugs: ["merge-pdf", "compress-image", "compress-pdf"],
     keywords: ["jpg to pdf", "convert jpg to pdf online", "image to pdf"],
+  },
+  {
+    slug: "rotate-images",
+    name: "Rotate Images",
+    actionLabel: "Rotate Images",
+    shortDescription: "Rotate one or more JPG, PNG, or WebP images by 90°, 180°, or 270°.",
+    longDescription: [
+      "Rotate Images fixes sideways or upside-down photos in seconds. Upload one or more images, rotate each individually or all at once, and download the results.",
+      "Everything runs locally in your browser, so your photos are never uploaded to a server. Upload multiple images at once and each is rotated and returned independently.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "RotateCw",
+    acceptedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
+    acceptedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+    multipleFiles: true,
+    outputExtension: ".zip",
+    faq: [
+      {
+        question: "Which image formats are supported?",
+        answer: "JPG, PNG, and WebP images are supported. Rotating preserves the original format.",
+      },
+      {
+        question: "Can I rotate just one image instead of all of them?",
+        answer:
+          "Yes. Click an image's rotate button to rotate only that image, or use the rotate-all buttons to apply the same rotation to every image at once.",
+      },
+      {
+        question: "What rotation angles are supported?",
+        answer: "You can rotate images by 90°, 180°, or 270°.",
+      },
+      {
+        question: "Are my photos uploaded anywhere?",
+        answer:
+          "No. Rotate Images processes everything locally in your browser, so your photos never leave your device.",
+      },
+    ],
+    relatedSlugs: ["compress-image", "image-to-pdf", "rotate-pdf"],
+    keywords: ["rotate image", "rotate photo online", "turn image 90 degrees", "rotate jpg png"],
   },
 ];

@@ -10,7 +10,7 @@ import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { downloadBlob } from "@/lib/download";
-import { renderAllPageThumbnails } from "@/lib/pdf/render";
+import { isPdfPasswordError, renderAllPageThumbnails } from "@/lib/pdf/render";
 import { rotatePdfPages } from "@/lib/pdf/rotate";
 import { formatBytes } from "@/lib/utils";
 import { zipFiles } from "@/lib/zip";
@@ -23,12 +23,14 @@ interface PageState {
   rotation: number;
 }
 
+type ReadErrorKind = "password" | "generic" | null;
+
 interface FileEntry {
   id: string;
   file: File;
   pages: PageState[];
   loading: boolean;
-  readError: boolean;
+  readError: ReadErrorKind;
 }
 
 function createId() {
@@ -57,7 +59,7 @@ export function RotatePdfWorkspace() {
       file,
       pages: [],
       loading: true,
-      readError: false,
+      readError: null,
     }));
     setEntries((prev) => [...prev, ...newEntries]);
 
@@ -80,9 +82,10 @@ export function RotatePdfWorkspace() {
             ),
           );
         })
-        .catch(() => {
+        .catch((err) => {
+          const kind: ReadErrorKind = isPdfPasswordError(err) ? "password" : "generic";
           setEntries((prev) =>
-            prev.map((e) => (e.id === entry.id ? { ...e, loading: false, readError: true } : e)),
+            prev.map((e) => (e.id === entry.id ? { ...e, loading: false, readError: kind } : e)),
           );
         });
     }
@@ -208,7 +211,11 @@ export function RotatePdfWorkspace() {
                 </div>
               )}
 
-              {entry.readError && <p className="mt-4 text-sm text-red-600">{dict.readError}</p>}
+              {entry.readError && (
+                <p className="mt-4 text-sm text-red-600">
+                  {entry.readError === "password" ? dict.passwordError : dict.readError}
+                </p>
+              )}
 
               {!entry.loading && !entry.readError && entry.pages.length > 0 && (
                 <>

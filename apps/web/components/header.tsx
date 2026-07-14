@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getLocalizedCategories, type Locale } from "@tampdf/config";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Logo } from "@/components/logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header({ locale }: { locale: Locale }) {
   const categories = getLocalizedCategories(locale);
@@ -21,7 +22,10 @@ export function Header({ locale }: { locale: Locale }) {
             </Link>
           ))}
         </nav>
-        <LanguageSwitcher locale={locale} />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <LanguageSwitcher locale={locale} />
+        </div>
       </div>
     </header>
   );

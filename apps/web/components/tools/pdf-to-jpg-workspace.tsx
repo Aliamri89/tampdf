@@ -11,7 +11,7 @@ import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { downloadBlob } from "@/lib/download";
-import { renderPdfToJpegs } from "@/lib/pdf/render";
+import { isPdfPasswordError, renderPdfToJpegs } from "@/lib/pdf/render";
 import { zipFiles } from "@/lib/zip";
 
 type Status = "idle" | "processing" | "done" | "error";
@@ -71,8 +71,8 @@ export function PdfToJpgWorkspace() {
       }
       setStatus("done");
       trackToolUsage("pdf-to-jpg", true);
-    } catch {
-      setError(dict.readError);
+    } catch (err) {
+      setError(isPdfPasswordError(err) ? dict.passwordError : dict.readError);
       setStatus("error");
       trackToolUsage("pdf-to-jpg", false);
     }

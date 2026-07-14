@@ -11,6 +11,7 @@ import {
 import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { ThemeInitScript } from "@/components/theme-init-script";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { LocaleProvider } from "@/i18n/locale-context";
 import { getSettings } from "@/lib/get-settings";
@@ -91,8 +92,10 @@ export default async function LocaleLayout({
       lang={locale}
       dir={dir}
       className={`${geistMono.variable} ${tajawal.variable} h-full antialiased ${locale === "ar" ? "font-arabic" : "font-sans"}`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        <ThemeInitScript />
         <LocaleProvider locale={locale} dict={dict}>
           <AnalyticsBeacon locale={locale} />
           <Header locale={locale} />
