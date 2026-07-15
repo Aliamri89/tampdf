@@ -92,10 +92,10 @@ export function RotateImagesWorkspace() {
       }
       setStatus("done");
       trackToolUsage("rotate-images", true);
-    } catch {
+    } catch (err) {
       setError(dict.error);
       setStatus("error");
-      trackToolUsage("rotate-images", false);
+      trackToolUsage("rotate-images", false, err);
     }
   }
 

@@ -62,10 +62,10 @@ export function CompressImageWorkspace() {
       }
       setStatus("done");
       trackToolUsage("compress-image", true);
-    } catch {
+    } catch (err) {
       setError(dict.error);
       setStatus("error");
-      trackToolUsage("compress-image", false);
+      trackToolUsage("compress-image", false, err);
     }
   }
 

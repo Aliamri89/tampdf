@@ -22,6 +22,15 @@ export function trackPageVisit(locale: Locale) {
   post("/api/page-visit-events", { locale });
 }
 
-export function trackToolUsage(tool: string, success: boolean) {
-  post("/api/tool-usage-events", { tool, success });
+/**
+ * `error` should be the raw caught value (unknown) — only its name/message
+ * are extracted, truncated, and sent, so a failure is never silently
+ * recorded as just `success: false` with no way to find out why after the
+ * fact (this is exactly what happened before: the dashboard showed failed
+ * runs but had no record of which exception caused them).
+ */
+export function trackToolUsage(tool: string, success: boolean, error?: unknown) {
+  const errorName = error instanceof Error ? error.name : undefined;
+  const errorMessage = error instanceof Error ? error.message.slice(0, 500) : undefined;
+  post("/api/tool-usage-events", { tool, success, errorName, errorMessage });
 }

@@ -255,6 +255,14 @@ export interface ToolUsageEvent {
   tool:
     'merge-pdf' | 'compress-pdf' | 'pdf-to-jpg' | 'rotate-pdf' | 'compress-image' | 'image-to-pdf' | 'rotate-images';
   success: boolean;
+  /**
+   * The JS exception's name (e.g. PasswordException), when success is false.
+   */
+  errorName?: string | null;
+  /**
+   * The raw exception message, when success is false — this is what actually caused the failure.
+   */
+  errorMessage?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -471,6 +479,8 @@ export interface MediaSelect<T extends boolean = true> {
 export interface ToolUsageEventsSelect<T extends boolean = true> {
   tool?: T;
   success?: T;
+  errorName?: T;
+  errorMessage?: T;
   updatedAt?: T;
   createdAt?: T;
 }

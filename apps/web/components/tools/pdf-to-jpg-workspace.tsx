@@ -90,7 +90,7 @@ export function PdfToJpgWorkspace() {
     } catch (err) {
       setError(isPdfPasswordError(err) ? dict.passwordError : dict.readError);
       setStatus("error");
-      trackToolUsage("pdf-to-jpg", false);
+      trackToolUsage("pdf-to-jpg", false, err);
     }
   }
 

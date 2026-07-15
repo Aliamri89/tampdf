@@ -73,10 +73,10 @@ export function CompressPdfWorkspace() {
       }
       setStatus("done");
       trackToolUsage("compress-pdf", true);
-    } catch {
+    } catch (err) {
       setError(dict.error);
       setStatus("error");
-      trackToolUsage("compress-pdf", false);
+      trackToolUsage("compress-pdf", false, err);
     }
   }
 

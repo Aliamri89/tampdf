@@ -147,10 +147,10 @@ export function RotatePdfWorkspace() {
       }
       setStatus("done");
       trackToolUsage("rotate-pdf", true);
-    } catch {
+    } catch (err) {
       setError(dict.error);
       setStatus("error");
-      trackToolUsage("rotate-pdf", false);
+      trackToolUsage("rotate-pdf", false, err);
     }
   }
 

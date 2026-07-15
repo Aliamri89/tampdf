@@ -47,10 +47,10 @@ export function ImageToPdfWorkspace() {
       setResult(bytes);
       setStatus("done");
       trackToolUsage("image-to-pdf", true);
-    } catch {
+    } catch (err) {
       setError(dict.error);
       setStatus("error");
-      trackToolUsage("image-to-pdf", false);
+      trackToolUsage("image-to-pdf", false, err);
     }
   }
 

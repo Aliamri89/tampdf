@@ -43,7 +43,7 @@ export const ToolUsageEvents: CollectionConfig = {
   },
   admin: {
     useAsTitle: "tool",
-    defaultColumns: ["tool", "success", "createdAt"],
+    defaultColumns: ["tool", "success", "errorMessage", "createdAt"],
   },
   access: {
     // The frontend reports usage anonymously as tools are used.
@@ -66,6 +66,28 @@ export const ToolUsageEvents: CollectionConfig = {
       required: true,
       defaultValue: true,
       label: { en: "Success", ar: "نجاح" },
+    },
+    {
+      name: "errorName",
+      type: "text",
+      label: { en: "Error Type", ar: "نوع الخطأ" },
+      admin: {
+        description: {
+          en: "The JS exception's name (e.g. PasswordException), when success is false.",
+          ar: "اسم الاستثناء البرمجي (مثل PasswordException)، عند فشل العملية.",
+        },
+      },
+    },
+    {
+      name: "errorMessage",
+      type: "text",
+      label: { en: "Error Message", ar: "رسالة الخطأ" },
+      admin: {
+        description: {
+          en: "The raw exception message, when success is false — this is what actually caused the failure.",
+          ar: "نص رسالة الاستثناء الفعلية عند فشل العملية — هذا هو السبب الحقيقي للفشل.",
+        },
+      },
     },
   ],
 };

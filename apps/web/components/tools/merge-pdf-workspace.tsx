@@ -123,10 +123,10 @@ export function MergePdfWorkspace() {
       setResult(bytes);
       setStatus("done");
       trackToolUsage("merge-pdf", true);
-    } catch {
+    } catch (err) {
       setError(dict.error);
       setStatus("error");
-      trackToolUsage("merge-pdf", false);
+      trackToolUsage("merge-pdf", false, err);
     }
   }
 
