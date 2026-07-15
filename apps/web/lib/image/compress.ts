@@ -1,3 +1,5 @@
+import { clampToSafeCanvasSize, releaseCanvas } from "@/lib/canvas-limits";
+
 export interface CompressedImage {
   name: string;
   blob: Blob;
@@ -8,9 +10,23 @@ export interface CompressedImage {
 export type CompressionLevel = "low" | "medium" | "high";
 
 const QUALITY_BY_LEVEL: Record<CompressionLevel, number> = {
-  low: 0.85,
-  medium: 0.65,
-  high: 0.45,
+  low: 0.88,
+  medium: 0.75,
+  high: 0.6,
+};
+
+/**
+ * JPEG quality alone gives underwhelming results on modern camera photos,
+ * which routinely ship at 4000px+ on the long edge — far beyond what's
+ * visible at any normal viewing size. Capping the long edge (only ever
+ * downscaling, never up) does most of the real size reduction while a
+ * higher quality factor than before keeps the result visually clean; only
+ * applied when the source actually exceeds the cap.
+ */
+const MAX_DIMENSION_BY_LEVEL: Record<CompressionLevel, number> = {
+  low: 3200,
+  medium: 2200,
+  high: 1600,
 };
 
 /** Samples the alpha channel to check whether an image actually uses transparency. */
@@ -40,12 +56,19 @@ export async function compressImage(
 ): Promise<CompressedImage> {
   const quality = QUALITY_BY_LEVEL[level];
   const bitmap = await createImageBitmap(file);
+  const maxDimension = MAX_DIMENSION_BY_LEVEL[level];
+  const longEdge = Math.max(bitmap.width, bitmap.height);
+  const downscale = longEdge > maxDimension ? maxDimension / longEdge : 1;
+  const { width, height } = clampToSafeCanvasSize(
+    Math.round(bitmap.width * downscale),
+    Math.round(bitmap.height * downscale),
+  );
   const canvas = document.createElement("canvas");
-  canvas.width = bitmap.width;
-  canvas.height = bitmap.height;
+  canvas.width = width;
+  canvas.height = height;
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Canvas is not supported in this browser");
-  ctx.drawImage(bitmap, 0, 0);
+  ctx.drawImage(bitmap, 0, 0, width, height);
   bitmap.close();
 
   const mightHaveAlpha = file.type === "image/png" || file.type === "image/webp";
@@ -57,6 +80,7 @@ export async function compressImage(
   const blob = await new Promise<Blob | null>((resolve) =>
     canvas.toBlob(resolve, outputType, quality),
   );
+  releaseCanvas(canvas);
   if (!blob) throw new Error("Failed to compress image");
 
   const compressedIsSmaller = blob.size < file.size;

@@ -119,6 +119,8 @@ export function RotateImagesWorkspace() {
       <FileDropzone
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
+        maxFiles={20}
+        currentCount={entries.length}
         disabled={status === "processing"}
         onFilesAdded={handleFilesAdded}
         label={dict.dropLabel}

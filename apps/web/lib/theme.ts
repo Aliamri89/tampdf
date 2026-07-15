@@ -15,6 +15,16 @@ export function getCurrentTheme(): Theme {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
+/** Reads the saved choice directly from localStorage, bypassing the DOM attribute. */
+export function getStoredTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+  try {
+    return window.localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light";
+  } catch {
+    return "light";
+  }
+}
+
 export function applyTheme(theme: Theme): void {
   document.documentElement.dataset.theme = theme;
   try {

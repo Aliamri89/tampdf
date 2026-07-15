@@ -1,4 +1,5 @@
 import type { PDFDocumentProxy } from "pdfjs-dist";
+import { MAX_CANVAS_PIXELS, releaseCanvas } from "@/lib/canvas-limits";
 
 // pdfjs-dist references browser-only globals (DOMMatrix, etc.) at module
 // scope, which breaks if it's ever evaluated during SSR. Loading it lazily
@@ -85,15 +86,24 @@ export async function renderPageToCanvas(
   scale: number,
 ): Promise<HTMLCanvasElement> {
   const page = await pdf.getPage(pageNumber);
-  const viewport = page.getViewport({ scale });
+  let viewport = page.getViewport({ scale });
+  const requestedPixels = viewport.width * viewport.height;
+  if (requestedPixels > MAX_CANVAS_PIXELS) {
+    const safeScale = scale * Math.sqrt(MAX_CANVAS_PIXELS / requestedPixels);
+    viewport = page.getViewport({ scale: safeScale });
+  }
   const canvas = document.createElement("canvas");
   canvas.width = Math.ceil(viewport.width);
   canvas.height = Math.ceil(viewport.height);
   const canvasContext = canvas.getContext("2d");
   if (!canvasContext) throw new Error("Canvas 2D context is not supported in this browser");
-  await withoutRequestAnimationFrame(
-    () => page.render({ canvasContext, viewport, canvas: null }).promise,
-  );
+  try {
+    await withoutRequestAnimationFrame(
+      () => page.render({ canvasContext, viewport, canvas: null }).promise,
+    );
+  } finally {
+    page.cleanup();
+  }
   return canvas;
 }
 
@@ -115,7 +125,9 @@ export async function renderPdfThumbnail(file: File, maxDimension = 160): Promis
     const baseViewport = page.getViewport({ scale: 1 });
     const scale = maxDimension / Math.max(baseViewport.width, baseViewport.height);
     const canvas = await renderPageToCanvas(pdf, 1, scale);
-    return canvas.toDataURL("image/jpeg", 0.8);
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
+    releaseCanvas(canvas);
+    return dataUrl;
   } finally {
     await pdf.cleanup();
   }
@@ -141,6 +153,7 @@ export async function renderAllPageThumbnails(
       const scale = maxDimension / Math.max(baseViewport.width, baseViewport.height);
       const canvas = await renderPageToCanvas(pdf, pageNumber, scale);
       thumbnails.push({ pageNumber, dataUrl: canvas.toDataURL("image/jpeg", 0.75) });
+      releaseCanvas(canvas);
     }
     return thumbnails;
   } finally {
@@ -167,6 +180,7 @@ export async function renderPdfToJpegs(
     for (let pageNumber = 1; pageNumber <= total; pageNumber++) {
       const canvas = await renderPageToCanvas(pdf, pageNumber, scale);
       const blob = await canvasToBlob(canvas, "image/jpeg", quality);
+      releaseCanvas(canvas);
       pages.push({ pageNumber, blob });
       onProgress?.(pageNumber, total);
     }

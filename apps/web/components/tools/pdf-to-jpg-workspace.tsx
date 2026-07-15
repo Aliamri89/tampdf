@@ -23,12 +23,19 @@ const LEVEL_SETTINGS: Record<Level, { scale: number; quality: number }> = {
   high: { scale: 2, quality: 0.92 },
 };
 
+const MAX_FILES = 10;
+
 export function PdfToJpgWorkspace() {
   const dict = useDictionary().workspace.pdfToJpg;
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [level, setLevel] = useState<Level>("medium");
   const [status, setStatus] = useState<Status>("idle");
-  const [progress, setProgress] = useState<{ current: number; total: number } | null>(null);
+  const [progress, setProgress] = useState<{
+    currentFile: number;
+    totalFiles: number;
+    current: number;
+    total: number;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ blob: Blob; filename: string } | null>(null);
 
@@ -39,7 +46,7 @@ export function PdfToJpgWorkspace() {
   ];
 
   function reset() {
-    setFile(null);
+    setFiles([]);
     setStatus("idle");
     setProgress(null);
     setError(null);
@@ -47,26 +54,35 @@ export function PdfToJpgWorkspace() {
   }
 
   async function handleConvert() {
-    if (!file) return;
+    if (files.length === 0) return;
     setStatus("processing");
     setProgress(null);
     setError(null);
     try {
       const { scale, quality } = LEVEL_SETTINGS[level];
-      const pages = await renderPdfToJpegs(file, scale, quality, (current, total) =>
-        setProgress({ current, total }),
-      );
-      const baseName = file.name.replace(/\.pdf$/i, "");
+      const outputs: { name: string; data: Blob }[] = [];
 
-      if (pages.length === 1) {
-        setResult({ blob: pages[0].blob, filename: `${baseName}.jpg` });
-      } else {
-        const zipBlob = await zipFiles(
-          pages.map((p) => ({
-            name: `${baseName}-page-${p.pageNumber}.jpg`,
-            data: p.blob,
-          })),
+      for (let fileIndex = 0; fileIndex < files.length; fileIndex++) {
+        const file = files[fileIndex];
+        const baseName = file.name.replace(/\.pdf$/i, "");
+        const pages = await renderPdfToJpegs(file, scale, quality, (current, total) =>
+          setProgress({ currentFile: fileIndex + 1, totalFiles: files.length, current, total }),
         );
+        for (const page of pages) {
+          outputs.push({
+            name:
+              files.length === 1
+                ? `${baseName}.jpg`
+                : `${baseName}-page-${page.pageNumber}.jpg`,
+            data: page.blob,
+          });
+        }
+      }
+
+      if (outputs.length === 1) {
+        setResult({ blob: outputs[0].data, filename: outputs[0].name });
+      } else {
+        const zipBlob = await zipFiles(outputs);
         setResult({ blob: zipBlob, filename: dict.resultZipName });
       }
       setStatus("done");
@@ -93,11 +109,27 @@ export function PdfToJpgWorkspace() {
 
   return (
     <Card className="p-6 sm:p-8">
-      {!file ? (
-        <FileDropzone accept={[".pdf"]} onFilesAdded={(added) => setFile(added[0])} label={dict.dropLabel} />
-      ) : (
+      <FileDropzone
+        accept={[".pdf"]}
+        multiple
+        maxFiles={MAX_FILES}
+        currentCount={files.length}
+        disabled={status === "processing"}
+        onFilesAdded={(added) => setFiles((prev) => [...prev, ...added])}
+        label={dict.dropLabel}
+      />
+
+      {files.length > 0 && (
         <>
-          <FileListItem file={file} onRemove={reset} />
+          <ul className="mt-5 space-y-2">
+            {files.map((file, index) => (
+              <FileListItem
+                key={`${file.name}-${index}`}
+                file={file}
+                onRemove={() => setFiles((prev) => prev.filter((_, i) => i !== index))}
+              />
+            ))}
+          </ul>
 
           <div className="mt-5">
             <span className="text-sm font-medium text-foreground">{dict.qualityLabel}</span>
@@ -135,9 +167,16 @@ export function PdfToJpgWorkspace() {
             )}
             {status === "processing"
               ? progress
-                ? t(dict.buttonBusy, { current: progress.current, total: progress.total })
+                ? t(dict.buttonBusy, {
+                    currentFile: progress.currentFile,
+                    totalFiles: progress.totalFiles,
+                    current: progress.current,
+                    total: progress.total,
+                  })
                 : dict.buttonBusyStart
-              : dict.button}
+              : files.length === 1
+                ? dict.buttonSingular
+                : t(dict.buttonPlural, { count: files.length })}
           </Button>
         </>
       )}

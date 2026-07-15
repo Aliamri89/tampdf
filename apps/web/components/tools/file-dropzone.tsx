@@ -16,6 +16,10 @@ interface FileDropzoneProps {
   label: string;
   /** Per-file size cap. Defaults to 100 MB. */
   maxSizeBytes?: number;
+  /** Max total files this tool allows at once. Omit for no limit. */
+  maxFiles?: number;
+  /** Files already added, so the cap applies cumulatively. Required when maxFiles is set. */
+  currentCount?: number;
 }
 
 export function FileDropzone({
@@ -25,6 +29,8 @@ export function FileDropzone({
   onFilesAdded,
   label,
   maxSizeBytes = DEFAULT_MAX_SIZE_BYTES,
+  maxFiles,
+  currentCount = 0,
 }: FileDropzoneProps) {
   const dict = useDictionary();
   const [isDragging, setIsDragging] = useState(false);
@@ -65,9 +71,22 @@ export function FileDropzone({
         t(dict.dropzone.tooLargePlural, { count: tooLarge.length, max: formatBytes(maxSizeBytes) }),
       );
     }
+
+    let withinLimit = accepted;
+    if (maxFiles !== undefined) {
+      const remaining = Math.max(0, maxFiles - currentCount);
+      if (remaining === 0 && accepted.length > 0) {
+        messages.push(t(dict.dropzone.maxFilesReached, { max: maxFiles }));
+        withinLimit = [];
+      } else if (accepted.length > remaining) {
+        messages.push(t(dict.dropzone.maxFilesExceeded, { max: maxFiles, added: remaining }));
+        withinLimit = accepted.slice(0, remaining);
+      }
+    }
+
     setRejectionMessage(messages.length > 0 ? messages.join(" ") : null);
 
-    if (accepted.length > 0) onFilesAdded(accepted);
+    if (withinLimit.length > 0) onFilesAdded(withinLimit);
   }
 
   return (

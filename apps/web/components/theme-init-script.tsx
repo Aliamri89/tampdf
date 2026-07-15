@@ -1,13 +1,23 @@
 import Script from "next/script";
 import { THEME_STORAGE_KEY } from "@/lib/theme";
 
-// Runs synchronously, before hydration and before first paint, so the
-// correct theme is applied immediately — no OS `prefers-color-scheme` is
+// Best-effort pre-hydration theme application, so a returning user's saved
+// choice is visible as early as possible — no OS `prefers-color-scheme` is
 // ever consulted, only a previously saved choice (default: light).
-// `beforeInteractive` (rather than a plain <script> tag) is required here:
-// Next.js's App Router only guarantees this "runs before hydration, on
-// every navigation" contract through next/script — a raw <script> rendered
-// via JSX doesn't execute during client-side rendering at all.
+//
+// `next/script`'s `beforeInteractive` (rather than a raw JSX <script>) is
+// required here: a raw <script dangerouslySetInnerHTML> tag makes React log
+// "Encountered a script tag while rendering React component" on every
+// hydration/re-render, since React treats inline scripts in JSX as an
+// anti-pattern regardless of whether the browser actually executes them.
+//
+// This is genuinely best-effort, not a guarantee: React's hydration commit
+// for the root <html> element can strip whatever attribute this script (or
+// beforeInteractive's own __next_f queue) set, before the user ever sees a
+// flash — confirmed via a MutationObserver during development. The real
+// guarantee is lib/use-theme.ts's useLayoutEffect, which re-asserts the
+// saved theme from localStorage synchronously right after mount, before the
+// browser paints.
 const script = `
 (function () {
   try {

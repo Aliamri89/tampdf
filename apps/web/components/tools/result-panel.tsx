@@ -21,10 +21,11 @@ export function ResultPanel({
   onReset,
 }: ResultPanelProps) {
   const dict = useDictionary();
-  const savedPercent =
-    originalSize && originalSize > 0
-      ? Math.max(0, Math.round((1 - size / originalSize) * 100))
-      : null;
+  const hasComparison = Boolean(originalSize && originalSize > 0);
+  const savedPercent = hasComparison
+    ? Math.max(0, Math.round((1 - size / originalSize!) * 100))
+    : null;
+  const savedBytes = hasComparison ? Math.max(0, originalSize! - size) : null;
 
   return (
     <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-surface-muted px-6 py-10 text-center">
@@ -35,22 +36,39 @@ export function ResultPanel({
         <p className="font-medium text-foreground">{dict.result.ready}</p>
         <p className="mt-1 text-sm text-foreground/50" dir="ltr">
           {filename}
-          {originalSize && originalSize > 0 ? (
-            <>
-              {" "}
-              &middot; {formatBytes(originalSize)} &rarr; {formatBytes(size)}
-            </>
-          ) : (
-            <> &middot; {formatBytes(size)}</>
-          )}
-          {savedPercent !== null && savedPercent > 0 && (
-            <span className="text-green-600">
-              {" "}
-              &middot; {savedPercent}% {dict.result.smaller}
-            </span>
-          )}
+          {!hasComparison && <> &middot; {formatBytes(size)}</>}
         </p>
       </div>
+
+      {hasComparison && (
+        <div className="grid w-full max-w-sm grid-cols-2 gap-2.5 sm:grid-cols-4">
+          <div className="rounded-xl border border-border bg-surface px-3 py-2.5">
+            <p className="text-[11px] text-foreground/50">{dict.result.originalSize}</p>
+            <p className="mt-0.5 text-sm font-semibold text-foreground" dir="ltr">
+              {formatBytes(originalSize!)}
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-surface px-3 py-2.5">
+            <p className="text-[11px] text-foreground/50">{dict.result.newSize}</p>
+            <p className="mt-0.5 text-sm font-semibold text-foreground" dir="ltr">
+              {formatBytes(size)}
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-surface px-3 py-2.5">
+            <p className="text-[11px] text-foreground/50">{dict.result.reducedBy}</p>
+            <p className="mt-0.5 text-sm font-semibold text-green-600" dir="ltr">
+              {savedPercent}%
+            </p>
+          </div>
+          <div className="rounded-xl border border-border bg-surface px-3 py-2.5">
+            <p className="text-[11px] text-foreground/50">{dict.result.spaceSaved}</p>
+            <p className="mt-0.5 text-sm font-semibold text-green-600" dir="ltr">
+              {formatBytes(savedBytes!)}
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Button onClick={onDownload}>
           <Download size={16} />

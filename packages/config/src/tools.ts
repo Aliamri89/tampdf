@@ -16,7 +16,7 @@ export const tools: ToolDefinition[] = [
     icon: "Minimize2",
     acceptedExtensions: [".pdf"],
     acceptedMimeTypes: ["application/pdf"],
-    multipleFiles: false,
+    multipleFiles: true,
     outputExtension: ".pdf",
     faq: [
       {
@@ -57,7 +57,7 @@ export const tools: ToolDefinition[] = [
     icon: "FileImage",
     acceptedExtensions: [".pdf"],
     acceptedMimeTypes: ["application/pdf"],
-    multipleFiles: false,
+    multipleFiles: true,
     outputExtension: ".zip",
     faq: [
       {

@@ -73,6 +73,8 @@ export function ImageToPdfWorkspace() {
         accept={[".jpg", ".jpeg", ".png"]}
         multiple
         maxSizeBytes={25 * 1024 * 1024}
+        maxFiles={20}
+        currentCount={files.length}
         disabled={status === "processing"}
         onFilesAdded={(added) => setFiles((prev) => [...prev, ...added])}
         label={dict.dropLabel}

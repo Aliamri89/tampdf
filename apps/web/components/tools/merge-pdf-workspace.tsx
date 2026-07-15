@@ -148,6 +148,8 @@ export function MergePdfWorkspace() {
       <FileDropzone
         accept={[".pdf"]}
         multiple
+        maxFiles={20}
+        currentCount={entries.length}
         disabled={status === "processing"}
         onFilesAdded={handleFilesAdded}
         label={dict.dropLabel}
