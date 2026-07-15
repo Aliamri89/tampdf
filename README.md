@@ -16,16 +16,18 @@ npm run dev    # apps/web on http://localhost:3000
 
 ## Deployment
 
-**apps/web** needs a host with a **persistent disk** — a VM, a Railway/Fly.io/Render service with a volume attached, or shared/managed Node.js hosting like Hostinger Business — not a serverless/edge platform like Vercel. The admin CMS (Payload) stores its SQLite database (`tampdf.db`) and uploaded media (`media-uploads/`) directly on disk; on serverless hosts that filesystem is ephemeral/read-only, so every deploy or cold start would silently wipe posts, settings, and uploaded images. Mount a persistent volume covering both paths (or point `DATABASE_URI` at that volume) before going live.
+**apps/web** needs a host with a **persistent disk** for uploaded media (`media-uploads/`) — a VM, a Railway/Fly.io/Render service with a volume attached, or shared/managed Node.js hosting like Hostinger Business — not a serverless/edge platform like Vercel. The admin CMS (Payload) stores its data in an external Postgres database (see `DATABASE_URI` below), so the database itself survives redeploys regardless of host; only uploaded media still needs a persistent volume/disk, or every deploy wipes uploaded images.
+
+Payload's SQLite adapter was tried first but dropped: shared Node.js hosts like Hostinger's Business plan cap the number of OS threads/processes a single account can spawn, and SQLite's client (`libsql`, a Rust binary) opens a new OS thread per connection — under load this hits the cap and crashes with `OS can't spawn worker thread`. An external Postgres (e.g. Supabase's free tier) connects over the network instead and doesn't have this failure mode.
 
 ### Environment variables
 
-See `apps/web/.env.example` for the canonical, commented list. This app has no traditional external database service (SQLite is a file), and no `NEXT_PUBLIC_*` variables — the site's public URL is a compile-time constant in `packages/config/src/index.ts`, not an env var.
+See `apps/web/.env.example` for the canonical, commented list. No `NEXT_PUBLIC_*` variables are used — the site's public URL is a compile-time constant in `packages/config/src/index.ts`, not an env var.
 
 | Variable | Required? | What it is |
 | --- | --- | --- |
 | `PAYLOAD_SECRET` | **Required** | Long random string used to sign Payload's auth tokens/cookies. Must be generated (not copied from anywhere) — e.g. `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`. Unique per environment; the app throws `Error: missing secret key` at startup if it's unset. |
-| `DATABASE_URI` | **Required** | libSQL client URL for the SQLite database file, e.g. `file:./tampdf.db` or an absolute path. Not a database connection string in the traditional sense — there's no database server to provision, just a file path. In production this must point to a location on **persistent** storage that survives redeploys (see below), or every deploy wipes all CMS content. |
+| `DATABASE_URI` | **Required** | Postgres connection string, e.g. `postgresql://user:pass@host:5432/dbname`. Point this at a managed Postgres instance (this project uses Supabase's free tier — use the **Session pooler** connection string, not the Direct connection one, since most shared hosts including Hostinger only support outbound IPv4 and the Direct connection is IPv6-only by default). If the password contains special characters (e.g. `@`), percent-encode them in the URI. |
 | `SERVER_URL` | Optional | The site's real public origin, e.g. `https://tampdf.com` (no trailing path). Enables Payload's CSRF origin allowlist for authenticated requests. Safe to leave unset for this single-admin app; recommended once the production domain is live. |
 
 Set `PAYLOAD_SECRET` and `DATABASE_URI` in Hostinger's Node.js app environment-variables panel (not committed to git — they're per-environment secrets/config). No other env vars are read anywhere in this codebase.
@@ -34,7 +36,9 @@ No Docker and no system-level dependencies (like LibreOffice) are required anywh
 
 ### Database schema / migrations
 
-`npm run build` runs `payload migrate` before `next build` (see `apps/web/package.json`). This applies the SQL migrations in `apps/web/migrations/` to create/update the database schema — required because `next build` prerenders pages that query Payload (e.g. `/contact`, `/blog`), so the tables must already exist before the build starts, not just before the server starts serving requests. On a brand-new database (first deploy) this creates every table from scratch; on subsequent deploys it applies only new migrations.
+`npm run build` runs `payload migrate` before `next build` (see `apps/web/package.json`). This applies the SQL migrations in `apps/web/migrations/` to create/update the Postgres schema — required because `next build` prerenders pages that query Payload (e.g. `/contact`, `/blog`), so the tables must already exist before the build starts, not just before the server starts serving requests. On a brand-new database (first deploy) this creates every table from scratch; on subsequent deploys it applies only new migrations.
+
+Migration files are generated locally against Payload's schema (they don't require a reachable database connection to generate — only to apply). If your dev machine can't reach the production database either, generate with a placeholder `DATABASE_URI` set to any syntactically-valid Postgres URL.
 
 **Whenever you add or change a Payload collection/global** (fields in `apps/web/payload/`), generate a new migration and commit it:
 
@@ -42,7 +46,7 @@ No Docker and no system-level dependencies (like LibreOffice) are required anywh
 npm run migrate:create -w web   # generates apps/web/migrations/<timestamp>_<name>.ts
 ```
 
-Without this, `next build` will fail on a fresh database with errors like `SQLITE_ERROR: no such table: settings` — the schema in the committed migrations must stay in sync with `payload.config.ts`. As a safety net, `getSettings()`, `findStaticPage()`, and the blog list/detail pages catch database errors and fall back to empty/dictionary content instead of crashing the build — but that's a fallback for resilience, not a substitute for keeping migrations up to date.
+Without this, `next build` will fail on a fresh database with errors like `relation "settings" does not exist` — the schema in the committed migrations must stay in sync with `payload.config.ts`. As a safety net, `getSettings()`, `findStaticPage()`, and the blog list/detail pages catch database errors and fall back to empty/dictionary content instead of crashing the build — but that's a fallback for resilience, not a substitute for keeping migrations up to date.
 
 ## Adding a new tool
 

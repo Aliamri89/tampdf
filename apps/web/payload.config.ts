@@ -1,6 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { sqliteAdapter } from "@payloadcms/db-sqlite";
+import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { ar } from "@payloadcms/translations/languages/ar";
 import { en } from "@payloadcms/translations/languages/en";
@@ -59,9 +59,15 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload/payload-types.ts"),
   },
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || `file:${path.resolve(dirname, "tampdf.db")}`,
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URI,
+      // Supabase (and most managed Postgres) requires TLS but presents a
+      // cert that Node's default strict verification rejects; this matches
+      // the standard pattern for connecting from serverless/managed hosts.
+      ssl: process.env.DATABASE_URI?.includes("supabase.co")
+        ? { rejectUnauthorized: false }
+        : undefined,
     },
   }),
   // Payload's SharpDependency type is a narrower structural subset of the
