@@ -1,4 +1,4 @@
-import { PDFDocument, PDFName, PDFRawStream } from "pdf-lib";
+import { PDFDict, PDFDocument, PDFName, PDFNumber, PDFRawStream } from "pdf-lib";
 import { clampToSafeCanvasSize, releaseCanvas } from "@/lib/canvas-limits";
 
 export type CompressionLevel = "low" | "medium" | "high";
@@ -52,10 +52,17 @@ export async function compressPdf(
     if (!subtype || subtype.toString() !== "/Image") continue;
 
     const filter = dict.get(PDFName.of("Filter"));
-    if (!filter || filter.toString() !== "/DCTDecode") continue;
+    const filterName = filter?.toString();
 
     try {
-      const recompressed = await recompressJpeg(obj.contents, quality, maxDimension);
+      let recompressed: { bytes: Uint8Array; width: number; height: number } | null = null;
+
+      if (filterName === "/DCTDecode") {
+        recompressed = await recompressJpeg(obj.contents, quality, maxDimension);
+      } else if (filterName === "/FlateDecode") {
+        recompressed = await recompressFlateBitmap(dict, obj.contents, quality, maxDimension);
+      }
+
       if (recompressed && recompressed.bytes.byteLength < obj.contents.byteLength) {
         const newStream = PDFRawStream.of(dict, recompressed.bytes);
         dict.set(PDFName.of("Length"), context.obj(recompressed.bytes.byteLength));
@@ -64,6 +71,14 @@ export async function compressPdf(
         // and /Height must match, or viewers may stretch or misrender it.
         dict.set(PDFName.of("Width"), context.obj(recompressed.width));
         dict.set(PDFName.of("Height"), context.obj(recompressed.height));
+        if (filterName === "/FlateDecode") {
+          // Re-encoded as JPEG, so the stream is no longer Flate-compressed
+          // raw pixel data — the filter and any Flate-specific decode
+          // parameters (e.g. a PNG predictor) must be updated to match, or
+          // viewers will try to inflate an already-decoded JPEG stream.
+          dict.set(PDFName.of("Filter"), PDFName.of("DCTDecode"));
+          dict.delete(PDFName.of("DecodeParms"));
+        }
         context.assign(ref, newStream);
       }
     } catch {
@@ -106,4 +121,102 @@ async function recompressJpeg(
   if (!outputBlob) return null;
 
   return { bytes: new Uint8Array(await outputBlob.arrayBuffer()), width, height };
+}
+
+/** Inflates a zlib (RFC 1950) stream — the format PDF's FlateDecode filter uses. */
+async function inflate(data: Uint8Array): Promise<Uint8Array> {
+  const stream = new Blob([new Uint8Array(data)])
+    .stream()
+    .pipeThrough(new DecompressionStream("deflate"));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+/**
+ * Many real-world PDFs — anything made by "save photo/scan as PDF" tools —
+ * embed a single full-page image as an uncompressed(-ish) raw bitmap under
+ * FlateDecode rather than a JPEG, which the DCTDecode path above never
+ * touches. Left alone, compressing such a PDF does nothing at all (0%,
+ * confirmed against a real user file whose entire size was one such image).
+ * This decodes the raw pixel data and re-encodes it as JPEG the same way.
+ *
+ * Deliberately conservative: only handles the plain, common case (8-bit
+ * DeviceRGB/DeviceGray, no predictor, no custom /Decode range, no alpha
+ * mask) and returns null for anything else, leaving the image untouched
+ * rather than risk misinterpreting pixel data it can't be sure about.
+ */
+async function recompressFlateBitmap(
+  dict: PDFDict,
+  flateBytes: Uint8Array,
+  quality: number,
+  maxDimension: number,
+): Promise<{ bytes: Uint8Array; width: number; height: number } | null> {
+  const bitsPerComponent = dict.get(PDFName.of("BitsPerComponent"));
+  if (!(bitsPerComponent instanceof PDFNumber) || bitsPerComponent.asNumber() !== 8) return null;
+
+  const colorSpace = dict.get(PDFName.of("ColorSpace"));
+  if (!(colorSpace instanceof PDFName)) return null;
+  const channels = colorSpace.asString() === "/DeviceRGB" ? 3 : colorSpace.asString() === "/DeviceGray" ? 1 : null;
+  if (channels === null) return null;
+
+  // A predictor reorders bytes for better compression (undoing it correctly
+  // requires per-row reconstruction), a custom /Decode range remaps sample
+  // values, and a mask means the image has transparency — JPEG has none of
+  // these, so treating the raw bytes as plain pixels would be wrong.
+  if (dict.get(PDFName.of("DecodeParms")) || dict.get(PDFName.of("Decode"))) return null;
+  if (dict.get(PDFName.of("SMask")) || dict.get(PDFName.of("Mask"))) return null;
+
+  const width = dict.get(PDFName.of("Width"));
+  const height = dict.get(PDFName.of("Height"));
+  if (!(width instanceof PDFNumber) || !(height instanceof PDFNumber)) return null;
+  const srcWidth = width.asNumber();
+  const srcHeight = height.asNumber();
+
+  const pixels = await inflate(flateBytes);
+  if (pixels.byteLength < srcWidth * srcHeight * channels) return null;
+
+  const imageData = new ImageData(srcWidth, srcHeight);
+  const dst = imageData.data;
+  if (channels === 3) {
+    for (let src = 0, out = 0; out < dst.length; src += 3, out += 4) {
+      dst[out] = pixels[src];
+      dst[out + 1] = pixels[src + 1];
+      dst[out + 2] = pixels[src + 2];
+      dst[out + 3] = 255;
+    }
+  } else {
+    for (let src = 0, out = 0; out < dst.length; src += 1, out += 4) {
+      dst[out] = dst[out + 1] = dst[out + 2] = pixels[src];
+      dst[out + 3] = 255;
+    }
+  }
+
+  const sourceCanvas = document.createElement("canvas");
+  sourceCanvas.width = srcWidth;
+  sourceCanvas.height = srcHeight;
+  const sourceCtx = sourceCanvas.getContext("2d");
+  if (!sourceCtx) return null;
+  sourceCtx.putImageData(imageData, 0, 0);
+
+  const longEdge = Math.max(srcWidth, srcHeight);
+  const downscale = longEdge > maxDimension ? maxDimension / longEdge : 1;
+  const { width: outWidth, height: outHeight } = clampToSafeCanvasSize(
+    Math.round(srcWidth * downscale),
+    Math.round(srcHeight * downscale),
+  );
+
+  const canvas = document.createElement("canvas");
+  canvas.width = outWidth;
+  canvas.height = outHeight;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+  ctx.drawImage(sourceCanvas, 0, 0, outWidth, outHeight);
+  releaseCanvas(sourceCanvas);
+
+  const outputBlob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob(resolve, "image/jpeg", quality),
+  );
+  releaseCanvas(canvas);
+  if (!outputBlob) return null;
+
+  return { bytes: new Uint8Array(await outputBlob.arrayBuffer()), width: outWidth, height: outHeight };
 }
