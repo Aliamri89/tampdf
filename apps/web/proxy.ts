@@ -18,7 +18,7 @@ function detectLocale(request: NextRequest): Locale {
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
-  if (pathname.startsWith("/admin") || pathname.startsWith("/api")) {
+  if (pathname.startsWith("/amriadmin") || pathname.startsWith("/api")) {
     const hasLanguageCookie = request.cookies.has(ADMIN_LANGUAGE_COOKIE);
     if (!hasLanguageCookie) {
       request.cookies.set(ADMIN_LANGUAGE_COOKIE, DEFAULT_ADMIN_LANGUAGE);

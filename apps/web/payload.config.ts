@@ -46,6 +46,9 @@ export default buildConfig({
     supportedLanguages: { ar, en },
     fallbackLanguage: "ar",
   },
+  routes: {
+    admin: "/amriadmin",
+  },
   secret: process.env.PAYLOAD_SECRET || "",
   // Optional: setting this to the site's real origin (e.g. https://tampdf.com)
   // makes Payload enforce a CSRF origin allowlist for authenticated requests.

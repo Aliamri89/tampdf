@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
         // Belt-and-suspenders alongside robots.txt: this actually prevents
         // indexing (robots.txt only requests crawlers not to crawl, which
         // doesn't stop a page from being indexed if linked from elsewhere).
-        source: "/admin/:path*",
+        source: "/amriadmin/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
     ];
