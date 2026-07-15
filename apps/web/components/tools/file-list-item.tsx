@@ -47,7 +47,7 @@ export function FileListItem({
       onDragEnd={onDragEnd}
       className={cn(
         "flex items-center gap-3 rounded-xl border bg-surface px-3.5 py-2.5 transition-colors",
-        isDragOver ? "border-brand-400 bg-brand-50" : "border-border",
+        isDragOver ? "border-brand-400 bg-brand-50 dark:bg-brand-500/10" : "border-border",
         draggable && "cursor-grab active:cursor-grabbing",
       )}
     >
@@ -60,7 +60,7 @@ export function FileListItem({
           className="h-9 w-9 shrink-0 rounded-lg border border-border object-cover"
         />
       ) : (
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10">
           <FileText size={16} />
         </span>
       )}

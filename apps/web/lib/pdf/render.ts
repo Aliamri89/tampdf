@@ -64,7 +64,19 @@ async function withoutRequestAnimationFrame<T>(fn: () => Promise<T>): Promise<T>
 export async function loadPdfDocument(file: File): Promise<PDFDocumentProxy> {
   const pdfjsLib = await getPdfjsLib();
   const buffer = await file.arrayBuffer();
-  return pdfjsLib.getDocument({ data: buffer }).promise;
+  return pdfjsLib.getDocument({
+    data: buffer,
+    // Real-world PDFs (scans, government/school documents, anything with
+    // non-Latin text) very often reference standard system fonts and CID
+    // character maps instead of embedding everything. Without these, pdf.js
+    // can fail to parse or render such documents entirely — a minimal
+    // Latin-text test PDF never exercises this path, which is why it went
+    // unnoticed until real user files failed in production. Assets copied
+    // from pdfjs-dist into public/pdfjs at build time (see public/pdfjs).
+    cMapUrl: "/pdfjs/cmaps/",
+    cMapPacked: true,
+    standardFontDataUrl: "/pdfjs/standard_fonts/",
+  }).promise;
 }
 
 /**

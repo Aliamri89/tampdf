@@ -141,7 +141,7 @@ export function PdfToJpgWorkspace() {
                   onClick={() => setLevel(option.id)}
                   className={
                     level === option.id
-                      ? "rounded-xl border border-brand-400 bg-brand-50 px-3 py-2.5 text-center transition-colors"
+                      ? "rounded-xl border border-brand-400 bg-brand-50 px-3 py-2.5 text-center transition-colors dark:bg-brand-500/10"
                       : "rounded-xl border border-border bg-surface px-3 py-2.5 text-center transition-colors hover:border-brand-200"
                   }
                 >

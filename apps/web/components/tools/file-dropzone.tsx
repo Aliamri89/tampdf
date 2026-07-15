@@ -115,8 +115,8 @@ export function FileDropzone({
         className={cn(
           "group flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed px-6 py-14 text-center transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           isDragging
-            ? "scale-[1.01] border-brand-400 bg-brand-50"
-            : "border-border bg-surface-muted hover:border-brand-300 hover:bg-brand-50/40",
+            ? "scale-[1.01] border-brand-400 bg-brand-50 dark:bg-brand-500/10"
+            : "border-border bg-surface-muted hover:border-brand-300 hover:bg-brand-50/40 dark:hover:bg-brand-500/10",
           disabled && "pointer-events-none opacity-50",
         )}
       >

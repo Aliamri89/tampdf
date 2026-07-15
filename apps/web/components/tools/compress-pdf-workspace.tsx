@@ -129,7 +129,7 @@ export function CompressPdfWorkspace() {
                   className={cn(
                     "rounded-xl border px-3 py-2.5 text-center transition-colors",
                     level === option.id
-                      ? "border-brand-400 bg-brand-50"
+                      ? "border-brand-400 bg-brand-50 dark:bg-brand-500/10"
                       : "border-border bg-surface hover:border-brand-200",
                   )}
                 >
