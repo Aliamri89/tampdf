@@ -55,6 +55,14 @@ export const StaticPages: CollectionConfig = {
   // public site (see lib/static-pages.ts) shows until an editor explicitly
   // publishes.
   versions: {
+    // Payload defaults to keeping 100 versions per document. Autosave
+    // updates the same in-progress draft row rather than inserting a new
+    // one, but every explicit "Publish" does create a new version row —
+    // for a 6-document collection that's edited often, 100 is far more
+    // history than anyone needs and just means more rows for every
+    // versions-table query (list view, publish, version history) to
+    // consider over time. Capping it keeps that bounded.
+    maxPerDoc: 20,
     drafts: {
       autosave: {
         interval: 2000,
