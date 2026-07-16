@@ -1,4 +1,4 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, SelectFieldSingleValidation } from "payload";
 
 export const STATIC_PAGE_KEYS = [
   "about-us",
@@ -37,10 +37,29 @@ export const StaticPages: CollectionConfig = {
     useAsTitle: "title",
   },
   access: {
-    read: () => true,
+    // `_status` (added by `versions.drafts` below) isn't filtered
+    // automatically — Payload only excludes drafts from a plain `find()`
+    // when access control says to. Admin users always see everything;
+    // anonymous frontend requests only ever see published content.
+    read: ({ req }) => {
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
     create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
+  },
+  // Autosaves in-progress edits to a separate draft version every 2s of
+  // inactivity, independent of the "Save"/"Publish" click. Combined with
+  // the `_status` filter above, autosaved drafts never touch what the
+  // public site (see lib/static-pages.ts) shows until an editor explicitly
+  // publishes.
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 2000,
+      },
+    },
   },
   fields: [
     {
@@ -56,6 +75,27 @@ export const StaticPages: CollectionConfig = {
           ar: "الصفحة على الموقع التي ينتمي إليها هذا المحتوى.",
         },
       },
+      // `key` is deliberately shared (not localized) so one document holds
+      // every language's content for a page. Editors add a second language
+      // by opening the existing document and switching the locale selector
+      // — NOT by creating a new document with the same key. Catch that
+      // mistake here with a clear message instead of letting it surface as
+      // the raw Postgres unique-constraint error ("value must be unique").
+      validate: (async (value, { operation, req }) => {
+        if (operation !== "create" || !value) return true;
+        const { totalDocs } = await req.payload.find({
+          collection: "static-pages",
+          where: { key: { equals: value } },
+          limit: 0,
+          req,
+        });
+        if (totalDocs > 0) {
+          return req.i18n?.language === "ar"
+            ? "توجد صفحة بهذا المفتاح مسبقًا. افتح الصفحة الحالية من القائمة واستخدم مبدّل اللغة (أعلى يمين الشاشة) لإضافة المحتوى بلغة أخرى، بدلاً من إنشاء صفحة جديدة."
+            : "A page with this key already exists. Open the existing page from the list and use the locale switcher (top-right of the screen) to add content in another language, instead of creating a new page.";
+        }
+        return true;
+      }) satisfies SelectFieldSingleValidation,
     },
     {
       name: "title",
