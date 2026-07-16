@@ -97,20 +97,20 @@ export default async function BlogPostPage({
           aria-label="Breadcrumb"
           className="flex items-center gap-1.5 text-sm text-foreground/50"
         >
-          <Link href={`/${locale}`} className="hover:text-foreground">
+          <Link href={`/${locale}`} className="shrink-0 hover:text-foreground">
             {dict.breadcrumb.home}
           </Link>
-          <ChevronRight size={14} className="rtl:rotate-180" />
-          <Link href={`/${locale}/blog`} className="hover:text-foreground">
+          <ChevronRight size={14} className="shrink-0 rtl:rotate-180" />
+          <Link href={`/${locale}/blog`} className="shrink-0 hover:text-foreground">
             {dict.staticPages.blog.title}
           </Link>
-          <ChevronRight size={14} className="rtl:rotate-180" />
-          <span className="text-foreground/80">{post.title}</span>
+          <ChevronRight size={14} className="shrink-0 rtl:rotate-180" />
+          <span className="min-w-0 truncate text-foreground/80">{post.title}</span>
         </nav>
       </Container>
 
-      <Container className="mx-auto max-w-2xl py-10">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{post.title}</h1>
+      <Container maxWidth="2xl" className="py-10">
+        <h1 className="break-words text-3xl font-semibold tracking-tight sm:text-4xl">{post.title}</h1>
         {publishedDate && <p className="mt-3 text-sm text-foreground/50">{publishedDate}</p>}
 
         {imageUrl && (

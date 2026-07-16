@@ -64,9 +64,7 @@ export default async function BlogPage({
       title={dict.staticPages.blog.title}
       isPlaceholder={posts.length === 0}
     >
-      {posts.length === 0 ? (
-        <p>{dict.staticPages.blog.intro}</p>
-      ) : (
+      {posts.length > 0 && (
         <div className="not-prose grid grid-cols-1 gap-5 sm:grid-cols-2">
           {posts.map((post) => {
             const image = post.featuredImage as Media | number | null | undefined;

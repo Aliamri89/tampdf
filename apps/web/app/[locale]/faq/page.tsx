@@ -50,7 +50,6 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
 
   return (
     <StaticPage locale={locale} title={dict.staticPages.faq.title} isPlaceholder={faqs.length === 0}>
-      <p>{dict.staticPages.faq.intro}</p>
       {faqs.length > 0 && <FaqAccordion items={faqs} />}
       {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
     </StaticPage>

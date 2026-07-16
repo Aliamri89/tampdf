@@ -25,16 +25,16 @@ export function StaticPage({
           aria-label="Breadcrumb"
           className="flex items-center gap-1.5 text-sm text-foreground/50"
         >
-          <Link href={`/${locale}`} className="hover:text-foreground">
+          <Link href={`/${locale}`} className="shrink-0 hover:text-foreground">
             {dict.breadcrumb.home}
           </Link>
-          <ChevronRight size={14} className="rtl:rotate-180" />
-          <span className="text-foreground/80">{title}</span>
+          <ChevronRight size={14} className="shrink-0 rtl:rotate-180" />
+          <span className="min-w-0 truncate text-foreground/80">{title}</span>
         </nav>
       </Container>
 
-      <Container className="mx-auto max-w-2xl py-10">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
+      <Container maxWidth="2xl" className="py-10">
+        <h1 className="break-words text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
         <div className="mt-6 space-y-4 leading-relaxed text-foreground/70">{children}</div>
         {isPlaceholder && (
           <p className="mt-8 rounded-xl border border-dashed border-border bg-surface-muted px-4 py-3 text-sm text-foreground/50">
