@@ -1,5 +1,6 @@
 import type { PDFDocumentProxy } from "pdfjs-dist";
 import { MAX_CANVAS_PIXELS, releaseCanvas } from "@/lib/canvas-limits";
+import { installMapUpsertPolyfill } from "@/lib/pdf/map-upsert-polyfill";
 
 // pdfjs-dist references browser-only globals (DOMMatrix, etc.) at module
 // scope, which breaks if it's ever evaluated during SSR. Loading it lazily
@@ -9,6 +10,11 @@ let pdfjsLibPromise: Promise<typeof import("pdfjs-dist")> | null = null;
 
 async function getPdfjsLib() {
   if (!pdfjsLibPromise) {
+    // Must run before pdfjs-dist evaluates — its main-thread code calls
+    // Map.prototype.getOrInsertComputed with no fallback (see
+    // map-upsert-polyfill.ts for why this is needed on iOS Safari).
+    installMapUpsertPolyfill(Map);
+    installMapUpsertPolyfill(WeakMap);
     pdfjsLibPromise = import("pdfjs-dist").then((pdfjsLib) => {
       pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
         "pdfjs-dist/build/pdf.worker.min.mjs",
