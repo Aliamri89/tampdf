@@ -11,7 +11,7 @@ const en = {
     relatedHeading: "Related tools",
   },
   article: {
-    tocHeading: "On this page",
+    tocHeading: "Table of Contents",
     readingTime: "{minutes} min read",
     readingTimeOne: "1 min read",
     readingTimeTwo: "2 min read",
@@ -21,6 +21,7 @@ const en = {
     previousArticle: "Previous",
     nextArticle: "Next",
     ctaDefaultHeading: "Ready to try {tool}?",
+    ctaCompressPdfButtonLabel: "Compress PDF for Free",
   },
   card: {
     comingSoon: "Coming soon",
@@ -225,7 +226,7 @@ const ar: typeof en = {
     relatedHeading: "أدوات ذات صلة",
   },
   article: {
-    tocHeading: "في هذه الصفحة",
+    tocHeading: "جدول المحتويات",
     // Arabic numeral-noun agreement: 1 and 2 minutes each need their own
     // grammatical form (singular / dual); "{minutes} دقائق" is only
     // correct for 3-10. 11+ technically reverts to singular "دقيقة" too,
@@ -240,6 +241,7 @@ const ar: typeof en = {
     previousArticle: "السابق",
     nextArticle: "التالي",
     ctaDefaultHeading: "هل أنت مستعد لتجربة {tool}؟",
+    ctaCompressPdfButtonLabel: "اضغط ملف PDF مجانا",
   },
   card: {
     comingSoon: "قريبًا",

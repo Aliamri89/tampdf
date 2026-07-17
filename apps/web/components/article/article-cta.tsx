@@ -10,7 +10,7 @@ export function ArticleCta({ cta, locale }: { cta: ArticleCtaData; locale: Local
   const style = categoryStyles[cta.tool.category];
 
   return (
-    <Card className="flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between">
+    <Card className="flex flex-col items-start gap-6 p-8 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-start gap-4">
         <span
           className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${style.iconBg} ${style.iconText}`}
@@ -22,9 +22,9 @@ export function ArticleCta({ cta, locale }: { cta: ArticleCtaData; locale: Local
           <p className="mt-1 text-sm text-foreground/60">{cta.body}</p>
         </div>
       </div>
-      <LinkButton href={`/${locale}/${cta.tool.slug}`} className="w-full shrink-0 sm:w-auto">
+      <LinkButton href={`/${locale}/${cta.tool.slug}`} size="lg" className="w-full shrink-0 sm:w-auto">
         {cta.buttonLabel}
-        <ArrowRight size={16} className="rtl:rotate-180" />
+        <ArrowRight size={18} className="rtl:rotate-180" />
       </LinkButton>
     </Card>
   );

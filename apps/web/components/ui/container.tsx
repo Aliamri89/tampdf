@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 
 const MAX_WIDTHS = {
   "2xl": "max-w-2xl",
+  "3xl": "max-w-3xl",
   "6xl": "max-w-6xl",
 } as const;
 

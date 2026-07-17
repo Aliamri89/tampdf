@@ -123,6 +123,10 @@ export default async function BlogPostPage({
   const { html, headings, wordCount } = richTextToArticleContent(post.content);
   const readingMinutes = calculateReadingMinutes(wordCount);
   const showToc = shouldShowToc(headings, wordCount);
+  // The TOC only lists top-level sections; shouldShowToc above still uses
+  // the full H2+H3 count to decide whether the article is long/structured
+  // enough to need one at all.
+  const tocHeadings = headings.filter((item) => item.level === 2);
   const lastUpdatedDate = getLastUpdatedDate(post);
   const cta = resolveArticleCta(post, locale, dict);
 
@@ -165,7 +169,7 @@ export default async function BlogPostPage({
         </nav>
       </Container>
 
-      <Container maxWidth="2xl" className="py-10">
+      <Container maxWidth="3xl" className="py-10">
         <article>
           <header>
             <h1 className="break-words text-3xl font-semibold tracking-tight sm:text-4xl">{post.title}</h1>
@@ -186,7 +190,15 @@ export default async function BlogPostPage({
             )}
           </header>
 
-          {showToc && <div className="mt-8"><TableOfContents headings={headings} heading={dict.article.tocHeading} /></div>}
+          {post.excerpt?.trim() && (
+            <p className="mt-6 text-lg leading-relaxed text-foreground/70">{post.excerpt}</p>
+          )}
+
+          {showToc && (
+            <div className="mt-8">
+              <TableOfContents headings={tocHeadings} heading={dict.article.tocHeading} />
+            </div>
+          )}
 
           <div
             className={`${showToc ? "" : "mt-8"} ${articleProseClassName}`}
@@ -194,7 +206,7 @@ export default async function BlogPostPage({
           />
 
           {cta && (
-            <div className="mt-10">
+            <div className="mt-14">
               <ArticleCta cta={cta} locale={locale} />
             </div>
           )}

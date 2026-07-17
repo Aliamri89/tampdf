@@ -193,11 +193,17 @@ export function resolveArticleCta(post: Post, locale: Locale, dict: Dictionary):
     return null;
   }
 
+  // compress-pdf gets a dedicated default label ("Compress PDF for Free" /
+  // "اضغط ملف PDF مجانا") rather than the generic tool.actionLabel fallback
+  // — every other tool's CTA is unaffected.
+  const defaultButtonLabel =
+    post.relatedTool === "compress-pdf" ? dict.article.ctaCompressPdfButtonLabel : tool.actionLabel;
+
   return {
     tool,
     heading: post.cta?.heading || t(dict.article.ctaDefaultHeading, { tool: tool.name }),
     body: post.cta?.body || tool.shortDescription,
-    buttonLabel: post.cta?.buttonLabel || tool.actionLabel,
+    buttonLabel: post.cta?.buttonLabel || defaultButtonLabel,
   };
 }
 
