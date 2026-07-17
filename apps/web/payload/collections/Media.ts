@@ -23,6 +23,11 @@ export const Media: CollectionConfig = {
     imageSizes: [
       { name: "thumbnail", width: 300, height: 300, position: "centre" },
       { name: "og", width: 1200, height: 630, position: "centre" },
+      // Aspect-preserving (no crop) sizes for responsive `srcset` on article
+      // featured images — `og`'s fixed 1.9:1 crop would distort most source
+      // photos if used outside social-share previews.
+      { name: "medium", width: 800 },
+      { name: "large", width: 1600 },
     ],
   },
   fields: [

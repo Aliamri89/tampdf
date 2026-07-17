@@ -1,15 +1,40 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cache } from "react";
 import { ChevronRight } from "lucide-react";
-import { isValidLocale, locales, type Locale } from "@tampdf/config";
+import { getLocalizedSiteConfig, isValidLocale, locales, type Locale } from "@tampdf/config";
 import { notFound } from "next/navigation";
+import { ArticleCta } from "@/components/article/article-cta";
+import { ArticleImage } from "@/components/article/article-image";
+import { ArticleMeta } from "@/components/article/article-meta";
+import { ArticlePagination } from "@/components/article/article-pagination";
+import { RelatedArticles } from "@/components/article/related-articles";
+import { TableOfContents } from "@/components/article/table-of-contents";
 import { Container } from "@/components/ui/container";
 import { getDictionary } from "@/i18n/get-dictionary";
+import {
+  buildArticleJsonLd,
+  buildBreadcrumbJsonLd,
+  calculateReadingMinutes,
+  getAdjacentPosts,
+  getLastUpdatedDate,
+  getOgImage,
+  getPostImage,
+  getRelatedPosts,
+  resolveArticleCta,
+  shouldShowToc,
+} from "@/lib/article";
+import { safeJsonLd } from "@/lib/json-ld";
 import { getPayloadClient } from "@/lib/payload-client";
-import { richTextToHtml } from "@/lib/richtext";
-import type { Media, Post } from "@/payload/payload-types";
+import { articleProseClassName } from "@/lib/prose";
+import { richTextToArticleContent } from "@/lib/richtext";
+import { getSettings } from "@/lib/get-settings";
+import type { Post } from "@/payload/payload-types";
 
-async function getPost(slug: string, locale: Locale): Promise<Post | null> {
+// `cache()`-wrapped so `generateMetadata` and the page body — which both
+// need the same post — share a single `find` call per request instead of
+// querying twice.
+const getPost = cache(async (slug: string, locale: Locale): Promise<Post | null> => {
   try {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
@@ -26,7 +51,7 @@ async function getPost(slug: string, locale: Locale): Promise<Post | null> {
     console.error(`getPost(${slug}) failed, treating as not found:`, error);
     return null;
   }
-}
+});
 
 export async function generateMetadata({
   params,
@@ -39,11 +64,10 @@ export async function generateMetadata({
   const post = await getPost(slug, locale);
   if (!post) return {};
 
+  const siteConfig = getLocalizedSiteConfig(locale);
   const title = post.seo?.metaTitle || post.title;
-  const description = post.seo?.metaDescription || undefined;
-  const ogImageSource = (post.seo?.ogImage ?? post.featuredImage) as Media | number | null | undefined;
-  const ogImageUrl =
-    ogImageSource && typeof ogImageSource === "object" ? ogImageSource.url : undefined;
+  const description = post.seo?.metaDescription || post.excerpt || undefined;
+  const ogImage = getOgImage(post);
   const path = `/blog/${post.slug}`;
 
   return {
@@ -57,15 +81,27 @@ export async function generateMetadata({
       },
     },
     openGraph: {
+      type: "article",
       title,
       description,
       url: `/${locale}${path}`,
-      images: ogImageUrl ? [{ url: ogImageUrl }] : undefined,
+      publishedTime: post.publishedDate ?? post.createdAt,
+      modifiedTime: post.updatedAt,
+      images: ogImage
+        ? [
+            {
+              url: new URL(ogImage.url, siteConfig.url).toString(),
+              width: ogImage.width ?? undefined,
+              height: ogImage.height ?? undefined,
+            },
+          ]
+        : undefined,
     },
     twitter: {
+      card: "summary_large_image",
       title,
       description,
-      images: ogImageUrl ? [ogImageUrl] : undefined,
+      images: ogImage ? [new URL(ogImage.url, siteConfig.url).toString()] : undefined,
     },
   };
 }
@@ -82,16 +118,36 @@ export default async function BlogPostPage({
   const post = await getPost(slug, locale);
   if (!post) notFound();
 
-  const image = post.featuredImage as Media | number | null | undefined;
-  const imageUrl = image && typeof image === "object" ? image.url : null;
-  const publishedDate = post.publishedDate
-    ? new Date(post.publishedDate).toLocaleDateString(locale === "ar" ? "ar" : "en-US", {
-        dateStyle: "medium",
-      })
-    : null;
+  const siteConfig = getLocalizedSiteConfig(locale);
+  const image = getPostImage(post);
+  const { html, headings, wordCount } = richTextToArticleContent(post.content);
+  const readingMinutes = calculateReadingMinutes(wordCount);
+  const showToc = shouldShowToc(headings, wordCount);
+  const lastUpdatedDate = getLastUpdatedDate(post);
+  const cta = resolveArticleCta(post, locale, dict);
+
+  const [{ previous, next }, relatedPosts, settings] = await Promise.all([
+    getAdjacentPosts(post, locale),
+    getRelatedPosts(post, locale),
+    getSettings(),
+  ]);
+
+  const canonicalUrl = `${siteConfig.url}/${locale}/blog/${post.slug}`;
+  const articleJsonLd = buildArticleJsonLd({
+    post,
+    locale,
+    url: canonicalUrl,
+    imageUrl: getOgImage(post)?.url ?? null,
+    description: post.seo?.metaDescription || post.excerpt || undefined,
+    settings,
+  });
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd({ locale, dict, post });
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }} />
+
       <Container className="pt-8">
         <nav
           aria-label="Breadcrumb"
@@ -110,22 +166,55 @@ export default async function BlogPostPage({
       </Container>
 
       <Container maxWidth="2xl" className="py-10">
-        <h1 className="break-words text-3xl font-semibold tracking-tight sm:text-4xl">{post.title}</h1>
-        {publishedDate && <p className="mt-3 text-sm text-foreground/50">{publishedDate}</p>}
+        <article>
+          <header>
+            <h1 className="break-words text-3xl font-semibold tracking-tight sm:text-4xl">{post.title}</h1>
+            <ArticleMeta
+              locale={locale}
+              dict={dict}
+              publishedDate={post.publishedDate ?? null}
+              updatedDate={lastUpdatedDate}
+              readingMinutes={readingMinutes}
+            />
 
-        {imageUrl && (
-          // eslint-disable-next-line @next/next/no-img-element -- CMS-hosted image, arbitrary origin
-          <img
-            src={imageUrl}
-            alt={image && typeof image === "object" ? image.alt : ""}
-            className="mt-6 w-full rounded-xl border border-border object-cover"
+            {image && (
+              <ArticleImage
+                image={image}
+                priority
+                className="mt-6 aspect-[16/9] w-full rounded-xl border border-border"
+              />
+            )}
+          </header>
+
+          {showToc && <div className="mt-8"><TableOfContents headings={headings} heading={dict.article.tocHeading} /></div>}
+
+          <div
+            className={`${showToc ? "" : "mt-8"} ${articleProseClassName}`}
+            dangerouslySetInnerHTML={{ __html: html }}
           />
-        )}
 
-        <div
-          className="prose-content mt-6 space-y-4 leading-relaxed text-foreground/80 [&_a]:text-brand-600 [&_a]:underline [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_li]:ms-5 [&_ol]:list-decimal [&_p]:leading-relaxed [&_ul]:list-disc"
-          dangerouslySetInnerHTML={{ __html: richTextToHtml(post.content) }}
-        />
+          {cta && (
+            <div className="mt-10">
+              <ArticleCta cta={cta} locale={locale} />
+            </div>
+          )}
+        </article>
+
+        <div className="mt-12">
+          <ArticlePagination
+            previous={previous}
+            next={next}
+            locale={locale}
+            previousLabel={dict.article.previousArticle}
+            nextLabel={dict.article.nextArticle}
+          />
+        </div>
+
+        {relatedPosts.length > 0 && (
+          <div className="mt-12">
+            <RelatedArticles posts={relatedPosts} locale={locale} heading={dict.article.relatedHeading} />
+          </div>
+        )}
       </Container>
     </>
   );
