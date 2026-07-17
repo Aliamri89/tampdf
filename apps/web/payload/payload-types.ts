@@ -142,6 +142,10 @@ export interface Post {
    * Used in the article's URL. Not translated.
    */
   slug: string;
+  /**
+   * Short summary shown on the blog list, related-article cards, and as the fallback meta/OG description.
+   */
+  excerpt?: string | null;
   content: {
     root: {
       type: string;
@@ -158,6 +162,24 @@ export interface Post {
     [k: string]: unknown;
   };
   featuredImage?: (number | null) | Media;
+  /**
+   * Powers the call-to-action button at the end of the article. Leave empty to hide the CTA.
+   */
+  relatedTool?:
+    | ('merge-pdf' | 'compress-pdf' | 'pdf-to-jpg' | 'rotate-pdf' | 'compress-image' | 'image-to-pdf' | 'rotate-images')
+    | null;
+  /**
+   * Optional overrides for the CTA section. Leave blank to auto-generate copy from the related tool.
+   */
+  cta?: {
+    heading?: string | null;
+    body?: string | null;
+    buttonLabel?: string | null;
+  };
+  /**
+   * Optional manual picks for the "Related articles" section. Leave empty to auto-select recent posts.
+   */
+  relatedPosts?: (number | Post)[] | null;
   status: 'draft' | 'published';
   publishedDate?: string | null;
   seo?: {
@@ -202,6 +224,22 @@ export interface Media {
       filename?: string | null;
     };
     og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -430,8 +468,18 @@ export interface PayloadMigration {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  excerpt?: T;
   content?: T;
   featuredImage?: T;
+  relatedTool?: T;
+  cta?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+        buttonLabel?: T;
+      };
+  relatedPosts?: T;
   status?: T;
   publishedDate?: T;
   seo?:
@@ -507,6 +555,26 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
           | T
           | {
               url?: T;

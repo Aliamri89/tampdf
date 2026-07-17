@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { TOOL_SLUGS, TOOL_SLUG_LABELS } from "./ToolUsageEvents";
 
 function slugify(value: string): string {
   return value
@@ -60,6 +61,18 @@ export const Posts: CollectionConfig = {
       },
     },
     {
+      name: "excerpt",
+      type: "textarea",
+      localized: true,
+      label: { en: "Excerpt", ar: "مقتطف" },
+      admin: {
+        description: {
+          en: "Short summary shown on the blog list, related-article cards, and as the fallback meta/OG description.",
+          ar: "ملخص قصير يظهر في قائمة المدونة وبطاقات المقالات ذات الصلة، ويُستخدم كوصف احتياطي لميتا ومشاركة الروابط.",
+        },
+      },
+    },
+    {
       name: "content",
       type: "richText",
       required: true,
@@ -71,6 +84,65 @@ export const Posts: CollectionConfig = {
       type: "upload",
       relationTo: "media",
       label: { en: "Featured Image", ar: "الصورة البارزة" },
+    },
+    {
+      name: "relatedTool",
+      type: "select",
+      required: false,
+      label: { en: "Related Tool", ar: "الأداة ذات الصلة" },
+      options: TOOL_SLUGS.map((slug) => ({ label: TOOL_SLUG_LABELS[slug], value: slug })),
+      admin: {
+        description: {
+          en: "Powers the call-to-action button at the end of the article. Leave empty to hide the CTA.",
+          ar: "يُستخدم لزر الدعوة لاتخاذ إجراء في نهاية المقالة. اتركه فارغاً لإخفاء هذا القسم.",
+        },
+      },
+    },
+    {
+      name: "cta",
+      type: "group",
+      label: { en: "Call to Action", ar: "الدعوة لاتخاذ إجراء" },
+      admin: {
+        condition: (_data, siblingData) => Boolean(siblingData?.relatedTool),
+        description: {
+          en: "Optional overrides for the CTA section. Leave blank to auto-generate copy from the related tool.",
+          ar: "نصوص اختيارية لتخصيص قسم الدعوة لاتخاذ إجراء. اتركها فارغة لتوليد النص تلقائياً من الأداة المرتبطة.",
+        },
+      },
+      fields: [
+        {
+          name: "heading",
+          type: "text",
+          localized: true,
+          label: { en: "Heading", ar: "العنوان" },
+        },
+        {
+          name: "body",
+          type: "textarea",
+          localized: true,
+          label: { en: "Body", ar: "النص" },
+        },
+        {
+          name: "buttonLabel",
+          type: "text",
+          localized: true,
+          label: { en: "Button Label", ar: "نص الزر" },
+        },
+      ],
+    },
+    {
+      name: "relatedPosts",
+      type: "relationship",
+      relationTo: "posts",
+      hasMany: true,
+      label: { en: "Related Articles", ar: "مقالات ذات صلة" },
+      filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
+      admin: {
+        description: {
+          en: "Optional manual picks for the \"Related articles\" section. Leave empty to auto-select recent posts.",
+          ar: "اختيار يدوي واختياري لقسم \"مقالات ذات صلة\". اتركه فارغاً للاختيار التلقائي لأحدث المقالات.",
+        },
+      },
     },
     {
       name: "status",

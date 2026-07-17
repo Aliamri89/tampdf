@@ -10,6 +10,16 @@ const en = {
     faqHeading: "Frequently asked questions",
     relatedHeading: "Related tools",
   },
+  article: {
+    tocHeading: "On this page",
+    readingTime: "{minutes} min read",
+    published: "Published {date}",
+    updated: "Updated {date}",
+    relatedHeading: "Related articles",
+    previousArticle: "Previous",
+    nextArticle: "Next",
+    ctaDefaultHeading: "Ready to try {tool}?",
+  },
   card: {
     comingSoon: "Coming soon",
   },
@@ -211,6 +221,16 @@ const ar: typeof en = {
     processedClient: "تتم المعالجة داخل متصفحك — لا يتم رفع الملفات أبدًا",
     faqHeading: "الأسئلة الشائعة",
     relatedHeading: "أدوات ذات صلة",
+  },
+  article: {
+    tocHeading: "في هذه الصفحة",
+    readingTime: "{minutes} دقائق قراءة",
+    published: "نُشر في {date}",
+    updated: "آخر تحديث {date}",
+    relatedHeading: "مقالات ذات صلة",
+    previousArticle: "السابق",
+    nextArticle: "التالي",
+    ctaDefaultHeading: "هل أنت مستعد لتجربة {tool}؟",
   },
   card: {
     comingSoon: "قريبًا",
