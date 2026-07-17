@@ -1,10 +1,21 @@
+"use client";
+
 import { ChevronDown } from "lucide-react";
 import type { ArticleHeading } from "@/lib/richtext";
+
+function handleTocClick(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  event.preventDefault();
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  history.pushState(null, "", `#${id}`);
+}
 
 export function TableOfContents({
   headings,
   heading,
 }: {
+  /** Expected to already be filtered to top-level (H2) entries by the caller. */
   headings: ArticleHeading[];
   heading: string;
 }) {
@@ -21,15 +32,19 @@ export function TableOfContents({
         />
       </summary>
       <nav aria-label={heading} className="px-5 pb-4">
-        <ol className="space-y-2 text-sm">
+        <ul className="list-disc space-y-2 text-sm">
           {headings.map((item) => (
-            <li key={item.id} className={item.level === 3 ? "ms-4" : undefined}>
-              <a href={`#${item.id}`} className="text-foreground/70 hover:text-brand-600 hover:underline">
+            <li key={item.id} className="ms-5">
+              <a
+                href={`#${item.id}`}
+                onClick={(event) => handleTocClick(event, item.id)}
+                className="text-foreground/70 hover:text-brand-600 hover:underline"
+              >
                 {item.text}
               </a>
             </li>
           ))}
-        </ol>
+        </ul>
       </nav>
     </details>
   );
