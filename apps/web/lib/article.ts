@@ -12,6 +12,20 @@ export function calculateReadingMinutes(wordCount: number): number {
   return Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
 }
 
+/** Shared by every date display on the blog (article header, post cards). */
+export function formatArticleDate(value: string, locale: Locale): string {
+  return new Date(value).toLocaleDateString(locale === "ar" ? "ar" : "en-US", {
+    dateStyle: "medium",
+  });
+}
+
+/** 1 and 2 minutes need their own template (singular/dual, most pronounced in Arabic); 3+ shares one plural template. */
+export function formatReadingTime(dict: Dictionary, minutes: number): string {
+  if (minutes === 1) return dict.article.readingTimeOne;
+  if (minutes === 2) return dict.article.readingTimeTwo;
+  return t(dict.article.readingTime, { minutes });
+}
+
 /**
  * The TOC only earns its screen space on articles that are both long
  * enough to need in-page navigation and structured enough for that
@@ -26,15 +40,28 @@ export function getPostImage(post: Post): Media | null {
   return image && typeof image === "object" ? image : null;
 }
 
-export function getPostImageUrl(post: Post): string | null {
-  return getPostImage(post)?.url ?? null;
+export interface OgImage {
+  url: string;
+  width: number | null;
+  height: number | null;
 }
 
-/** OG/Twitter image: explicit `seo.ogImage` first, else the featured image, preferring the pre-cropped 1200x630 "og" size. */
-export function getOgImageUrl(post: Post): string | null {
+/**
+ * The image used for OG/Twitter meta AND the Article JSON-LD `image` field
+ * (both call this, so they can never disagree on which image the post is
+ * "really" using). Explicit `seo.ogImage` first, else the featured image;
+ * prefers the pre-cropped 1200x630 "og" size, falling back to the original
+ * upload's own dimensions when that size hasn't been generated (e.g. a
+ * source image too small to upscale) rather than lying about its size.
+ */
+export function getOgImage(post: Post): OgImage | null {
   const source = (post.seo?.ogImage ?? post.featuredImage) as Media | number | null | undefined;
   if (!source || typeof source !== "object") return null;
-  return source.sizes?.og?.url ?? source.url ?? null;
+
+  const og = source.sizes?.og;
+  if (og?.url) return { url: og.url, width: og.width ?? 1200, height: og.height ?? 630 };
+
+  return source.url ? { url: source.url, width: source.width ?? null, height: source.height ?? null } : null;
 }
 
 /**
@@ -59,14 +86,19 @@ export async function getAdjacentPosts(
 
   try {
     const payload = await getPayloadClient();
+    // `id` is a secondary sort key so posts sharing the exact same
+    // `publishedDate` (e.g. bulk-published together) still resolve a
+    // deterministic previous/next instead of excluding each other via a
+    // strict `less_than`/`greater_than` on the tied timestamp.
     const [previousResult, nextResult] = await Promise.all([
       payload.find({
         collection: "posts",
         where: {
           status: { equals: "published" },
-          publishedDate: { less_than: post.publishedDate },
+          id: { not_equals: post.id },
+          publishedDate: { less_than_equal: post.publishedDate },
         },
-        sort: "-publishedDate",
+        sort: ["-publishedDate", "-id"],
         locale,
         depth: 0,
         limit: 1,
@@ -75,9 +107,10 @@ export async function getAdjacentPosts(
         collection: "posts",
         where: {
           status: { equals: "published" },
-          publishedDate: { greater_than: post.publishedDate },
+          id: { not_equals: post.id },
+          publishedDate: { greater_than_equal: post.publishedDate },
         },
-        sort: "publishedDate",
+        sort: ["publishedDate", "id"],
         locale,
         depth: 0,
         limit: 1,
@@ -93,15 +126,27 @@ export async function getAdjacentPosts(
   }
 }
 
+async function getAutoRelatedPosts(post: Post, locale: Locale, limit: number): Promise<Post[]> {
+  const payload = await getPayloadClient();
+  const result = await payload.find({
+    collection: "posts",
+    where: { status: { equals: "published" }, id: { not_equals: post.id } },
+    sort: "-publishedDate",
+    locale,
+    depth: 1,
+    limit,
+  });
+  return result.docs as Post[];
+}
+
 export async function getRelatedPosts(post: Post, locale: Locale, limit = 3): Promise<Post[]> {
   const manualIds = (post.relatedPosts ?? [])
     .map((related) => (typeof related === "object" ? related.id : related))
     .filter((id) => id !== post.id);
 
   try {
-    const payload = await getPayloadClient();
-
     if (manualIds.length > 0) {
+      const payload = await getPayloadClient();
       const result = await payload.find({
         collection: "posts",
         where: { id: { in: manualIds }, status: { equals: "published" } },
@@ -109,18 +154,21 @@ export async function getRelatedPosts(post: Post, locale: Locale, limit = 3): Pr
         depth: 1,
         limit,
       });
-      return result.docs as Post[];
+      const docs = result.docs as Post[];
+      if (docs.length > 0) {
+        // `where: id in [...]` doesn't preserve list order, so re-sort to
+        // match the order the editor curated in the relationship field —
+        // otherwise "Related articles" can silently ignore their picks.
+        const byId = new Map(docs.map((doc) => [doc.id, doc]));
+        return manualIds.map((id) => byId.get(id)).filter((doc): doc is Post => Boolean(doc));
+      }
+      // Every manually-picked post is gone/unpublished — fall back to
+      // auto-select rather than showing an empty section, matching what
+      // the admin UI's field description ("leave empty to auto-select")
+      // implies should happen when there's effectively nothing curated.
     }
 
-    const result = await payload.find({
-      collection: "posts",
-      where: { status: { equals: "published" }, id: { not_equals: post.id } },
-      sort: "-publishedDate",
-      locale,
-      depth: 1,
-      limit,
-    });
-    return result.docs as Post[];
+    return await getAutoRelatedPosts(post, locale, limit);
   } catch (error) {
     console.error(`getRelatedPosts(${post.slug}) failed, falling back to empty list:`, error);
     return [];
@@ -138,7 +186,12 @@ export interface ArticleCta {
 export function resolveArticleCta(post: Post, locale: Locale, dict: Dictionary): ArticleCta | null {
   if (!post.relatedTool) return null;
   const tool = getLocalizedTool(post.relatedTool, locale);
-  if (!tool) return null;
+  if (!tool) {
+    // relatedTool is stored as a slug string, decoupled from `@tampdf/config`'s
+    // actual tool list — this only fires if that slug was since renamed/removed.
+    console.error(`resolveArticleCta(${post.slug}): unresolvable relatedTool "${post.relatedTool}"`);
+    return null;
+  }
 
   return {
     tool,

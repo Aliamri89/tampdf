@@ -36,14 +36,39 @@ function slugifyHeading(text: string): string {
     .replace(/-+/g, "-");
 }
 
-const HEADING_TAG_RE = /<(h[23])>([\s\S]*?)<\/\1>/g;
+// Tolerates an attribute list (e.g. `style="text-align: center;"`, which
+// `convertLexicalToHTML` adds for non-default alignment/indent) between the
+// tag name and `>` — a bare `<h2>` match would silently drop such headings
+// from the outline entirely, id-less and unlinkable.
+const HEADING_TAG_RE = /<(h[23])((?:\s[^>]*)?)>([\s\S]*?)<\/\1>/g;
+
+const HTML_ENTITIES: Record<string, string> = {
+  "&lt;": "<",
+  "&gt;": ">",
+  "&quot;": '"',
+  "&#39;": "'",
+  "&amp;": "&", // must decode last so a literal "&amp;" typed by an editor round-trips correctly
+};
+
+function decodeHtmlEntities(text: string): string {
+  return Object.entries(HTML_ENTITIES).reduce(
+    (result, [entity, char]) => result.split(entity).join(char),
+    text,
+  );
+}
+
+/**
+ * Strips tags for plain-text extraction. Replaces with a space rather than
+ * an empty string — otherwise `<br>` between two lines of a heading (a soft
+ * line break) would concatenate the words on either side of it.
+ */
+function stripTagsToText(html: string): string {
+  return decodeHtmlEntities(html.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+}
 
 /**
  * Renders rich text to HTML and, in the same pass, extracts an H2/H3
- * outline for the table of contents. Heading tags come out of
- * `convertLexicalToHTML` as plain `<h2>`/`<h3>` with no attributes, so a
- * non-greedy regex pass is enough to both add anchor ids and collect the
- * outline without a full HTML parser.
+ * outline for the table of contents.
  */
 export function richTextToArticleContent(
   data: SerializedEditorState | null | undefined,
@@ -52,21 +77,23 @@ export function richTextToArticleContent(
   const headings: ArticleHeading[] = [];
   const seenSlugs = new Map<string, number>();
 
-  const html = rawHtml.replace(HEADING_TAG_RE, (match, tag: "h2" | "h3", inner: string) => {
-    const text = inner.replace(/<[^>]+>/g, "").trim();
-    if (!text) return match;
+  const html = rawHtml.replace(
+    HEADING_TAG_RE,
+    (match, tag: "h2" | "h3", attrs: string, inner: string) => {
+      const text = stripTagsToText(inner);
+      if (!text) return match;
 
-    const baseSlug = slugifyHeading(text) || "section";
-    const occurrence = seenSlugs.get(baseSlug) ?? 0;
-    seenSlugs.set(baseSlug, occurrence + 1);
-    const id = occurrence === 0 ? baseSlug : `${baseSlug}-${occurrence + 1}`;
+      const baseSlug = slugifyHeading(text) || "section";
+      const occurrence = seenSlugs.get(baseSlug) ?? 0;
+      seenSlugs.set(baseSlug, occurrence + 1);
+      const id = occurrence === 0 ? baseSlug : `${baseSlug}-${occurrence + 1}`;
 
-    headings.push({ id, level: tag === "h2" ? 2 : 3, text });
-    return `<${tag} id="${id}">${inner}</${tag}>`;
-  });
+      headings.push({ id, level: tag === "h2" ? 2 : 3, text });
+      return `<${tag}${attrs} id="${id}">${inner}</${tag}>`;
+    },
+  );
 
-  const plainText = rawHtml.replace(/<[^>]+>/g, " ");
-  const wordCount = plainText.trim().split(/\s+/).filter(Boolean).length;
+  const wordCount = stripTagsToText(rawHtml).split(" ").filter(Boolean).length;
 
   return { html, headings, wordCount };
 }

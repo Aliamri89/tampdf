@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cache } from "react";
 import { ChevronRight } from "lucide-react";
 import { getLocalizedSiteConfig, isValidLocale, locales, type Locale } from "@tampdf/config";
 import { notFound } from "next/navigation";
@@ -17,7 +18,7 @@ import {
   calculateReadingMinutes,
   getAdjacentPosts,
   getLastUpdatedDate,
-  getOgImageUrl,
+  getOgImage,
   getPostImage,
   getRelatedPosts,
   resolveArticleCta,
@@ -30,7 +31,10 @@ import { richTextToArticleContent } from "@/lib/richtext";
 import { getSettings } from "@/lib/get-settings";
 import type { Post } from "@/payload/payload-types";
 
-async function getPost(slug: string, locale: Locale): Promise<Post | null> {
+// `cache()`-wrapped so `generateMetadata` and the page body — which both
+// need the same post — share a single `find` call per request instead of
+// querying twice.
+const getPost = cache(async (slug: string, locale: Locale): Promise<Post | null> => {
   try {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
@@ -47,7 +51,7 @@ async function getPost(slug: string, locale: Locale): Promise<Post | null> {
     console.error(`getPost(${slug}) failed, treating as not found:`, error);
     return null;
   }
-}
+});
 
 export async function generateMetadata({
   params,
@@ -63,7 +67,7 @@ export async function generateMetadata({
   const siteConfig = getLocalizedSiteConfig(locale);
   const title = post.seo?.metaTitle || post.title;
   const description = post.seo?.metaDescription || post.excerpt || undefined;
-  const ogImageUrl = getOgImageUrl(post);
+  const ogImage = getOgImage(post);
   const path = `/blog/${post.slug}`;
 
   return {
@@ -83,13 +87,21 @@ export async function generateMetadata({
       url: `/${locale}${path}`,
       publishedTime: post.publishedDate ?? post.createdAt,
       modifiedTime: post.updatedAt,
-      images: ogImageUrl ? [{ url: new URL(ogImageUrl, siteConfig.url).toString(), width: 1200, height: 630 }] : undefined,
+      images: ogImage
+        ? [
+            {
+              url: new URL(ogImage.url, siteConfig.url).toString(),
+              width: ogImage.width ?? undefined,
+              height: ogImage.height ?? undefined,
+            },
+          ]
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ogImageUrl ? [new URL(ogImageUrl, siteConfig.url).toString()] : undefined,
+      images: ogImage ? [new URL(ogImage.url, siteConfig.url).toString()] : undefined,
     },
   };
 }
@@ -125,7 +137,7 @@ export default async function BlogPostPage({
     post,
     locale,
     url: canonicalUrl,
-    imageUrl: image?.url ?? null,
+    imageUrl: getOgImage(post)?.url ?? null,
     description: post.seo?.metaDescription || post.excerpt || undefined,
     settings,
   });

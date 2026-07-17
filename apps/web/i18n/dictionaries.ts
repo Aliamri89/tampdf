@@ -13,6 +13,8 @@ const en = {
   article: {
     tocHeading: "On this page",
     readingTime: "{minutes} min read",
+    readingTimeOne: "1 min read",
+    readingTimeTwo: "2 min read",
     published: "Published {date}",
     updated: "Updated {date}",
     relatedHeading: "Related articles",
@@ -224,7 +226,14 @@ const ar: typeof en = {
   },
   article: {
     tocHeading: "في هذه الصفحة",
+    // Arabic numeral-noun agreement: 1 and 2 minutes each need their own
+    // grammatical form (singular / dual); "{minutes} دقائق" is only
+    // correct for 3-10. 11+ technically reverts to singular "دقيقة" too,
+    // but that's a rare case for reading time and not worth the extra
+    // branch — the 3-10 plural form is used for it as a simplification.
     readingTime: "{minutes} دقائق قراءة",
+    readingTimeOne: "دقيقة واحدة للقراءة",
+    readingTimeTwo: "دقيقتان للقراءة",
     published: "نُشر في {date}",
     updated: "آخر تحديث {date}",
     relatedHeading: "مقالات ذات صلة",

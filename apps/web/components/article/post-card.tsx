@@ -1,14 +1,8 @@
 import Link from "next/link";
 import type { Locale } from "@tampdf/config";
 import { ArticleImage } from "@/components/article/article-image";
-import { getPostImage } from "@/lib/article";
+import { formatArticleDate, getPostImage } from "@/lib/article";
 import type { Post } from "@/payload/payload-types";
-
-function formatDate(value: string, locale: Locale): string {
-  return new Date(value).toLocaleDateString(locale === "ar" ? "ar" : "en-US", {
-    dateStyle: "medium",
-  });
-}
 
 /** Shared card used by the blog list, and the article page's related-articles section. */
 export function PostCard({
@@ -35,7 +29,7 @@ export function PostCard({
           <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-foreground/60">{post.excerpt}</p>
         )}
         {post.publishedDate && (
-          <p className="mt-2 text-xs text-foreground/50">{formatDate(post.publishedDate, locale)}</p>
+          <p className="mt-2 text-xs text-foreground/50">{formatArticleDate(post.publishedDate, locale)}</p>
         )}
       </div>
     </Link>

@@ -2,12 +2,7 @@ import { Clock } from "lucide-react";
 import type { Locale } from "@tampdf/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { t } from "@/i18n/format";
-
-function formatDate(value: string, locale: Locale): string {
-  return new Date(value).toLocaleDateString(locale === "ar" ? "ar" : "en-US", {
-    dateStyle: "medium",
-  });
-}
+import { formatArticleDate, formatReadingTime } from "@/lib/article";
 
 export function ArticleMeta({
   locale,
@@ -24,11 +19,11 @@ export function ArticleMeta({
 }) {
   return (
     <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-foreground/50">
-      {publishedDate && <span>{t(dict.article.published, { date: formatDate(publishedDate, locale) })}</span>}
-      {updatedDate && <span>{t(dict.article.updated, { date: formatDate(updatedDate, locale) })}</span>}
+      {publishedDate && <span>{t(dict.article.published, { date: formatArticleDate(publishedDate, locale) })}</span>}
+      {updatedDate && <span>{t(dict.article.updated, { date: formatArticleDate(updatedDate, locale) })}</span>}
       <span className="inline-flex items-center gap-1">
         <Clock size={13} />
-        {t(dict.article.readingTime, { minutes: readingMinutes })}
+        {formatReadingTime(dict, readingMinutes)}
       </span>
     </div>
   );
