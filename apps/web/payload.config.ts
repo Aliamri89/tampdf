@@ -69,6 +69,16 @@ export default buildConfig({
       ssl: process.env.DATABASE_URI?.includes("supabase.co")
         ? { rejectUnauthorized: false }
         : undefined,
+      // `pg` defaults to max: 10 per Pool instance, and this project's
+      // Supabase plan uses the Session pooler, which hard-caps the whole
+      // project at 15 concurrent connections total. Any two unbounded
+      // pools running at once (e.g. a build's parallel workers alongside
+      // live traffic, or more than one app instance) can exceed that and
+      // start failing with "EMAXCONNSESSION" — which Payload then surfaces
+      // to the browser as a 503 on /api/media, /api/posts, etc. Capping
+      // this pool well under the project-wide limit leaves headroom for
+      // migrations/scripts to also connect without tipping it over.
+      max: 5,
     },
   }),
   // Payload's SharpDependency type is a narrower structural subset of the
