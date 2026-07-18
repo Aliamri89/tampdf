@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import type { AfterErrorHook } from "payload";
 
 /**
@@ -22,10 +21,27 @@ import type { AfterErrorHook } from "payload";
  * 1. Delete this file.
  * 2. In payload/collections/Media.ts, remove the `hooks` block and its
  *    import of `logMediaUploadError`.
- * 3. Optionally delete the apps/web/logs/ directory it created.
+ * 3. Optionally delete the logs/ directory this printed and created.
  */
-const dirname = path.dirname(fileURLToPath(import.meta.url));
-const LOG_FILE = path.resolve(dirname, "../../logs/runtime-errors.log");
+
+// `import.meta.url`-relative resolution isn't reliable here — after a
+// production build, this file's compiled output gets bundled into
+// Next.js's `.next/server` chunks, which don't preserve the source tree's
+// directory layout, so a path built from *this file's own* location can
+// resolve somewhere meaningless once bundled. `process.cwd()` is the
+// directory the Node process itself was actually started from — the one
+// thing that stays true regardless of how the bundler relocates code —
+// so it's the only reliable root to resolve against at runtime. Rather
+// than assume what that resolves to on Hostinger, the path is printed
+// once at startup below so there's no need to guess.
+const LOG_FILE = path.resolve(process.cwd(), "logs/runtime-errors.log");
+
+// Printed once, when this module is first evaluated (i.e. on process
+// startup, not per-request) — the goal is to know the exact absolute path
+// without having to search for it, even if request-time logs themselves
+// aren't visible anywhere in hPanel.
+console.log(`[temp-media-error-logger] cwd=${process.cwd()}`);
+console.log(`[temp-media-error-logger] diagnostic log file (absolute): ${LOG_FILE}`);
 
 export const logMediaUploadError: AfterErrorHook = async ({ error, req }) => {
   if (req.method !== "POST") return;
