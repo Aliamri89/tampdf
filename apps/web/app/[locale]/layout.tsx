@@ -9,6 +9,7 @@ import {
   type Locale,
 } from "@tampdf/config";
 import { AnalyticsBeacon } from "@/components/analytics-beacon";
+import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ThemeInitScript } from "@/components/theme-init-script";
@@ -34,7 +35,7 @@ export function generateStaticParams() {
 
 // Pages under this layout are prerendered at build time (SSG). Without
 // this, CMS edits made after deployment (Settings, Posts, static pages)
-// would never appear on the live site until the next rebuild — this makes
+// would never appear on the live site until the next rebuild -- this makes
 // Next.js revalidate them in the background at most every 60s instead.
 export const revalidate = 60;
 
@@ -96,6 +97,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col">
         <ThemeInitScript />
+        <AnalyticsScripts />
         <LocaleProvider locale={locale} dict={dict}>
           <AnalyticsBeacon locale={locale} />
           <Header locale={locale} />
