@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "dev": "npm run dev -w web",
-    "build": "npm run build -w web",
+    "build": "npm run build -w web && cp -r apps/web/.next/static apps/web/.next/standalone/apps/web/.next/static && cp -r apps/web/public apps/web/.next/standalone/apps/web/public",
     "lint": "npm run lint -w web",
     "start": "npm run start -w web"
   }
