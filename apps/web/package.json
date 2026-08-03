@@ -7,7 +7,7 @@
     "dev": "next dev",
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
     "build": "npm run clean && payload run ./scripts/clear-dev-migration-marker.ts && payload migrate && next build",
-    "start": "next start",
+    "start": "next start -p ${PORT:-3000} -H ${HOST:-0.0.0.0}",
     "lint": "eslint",
     "payload": "payload",
     "generate:importmap": "payload generate:importmap",
