@@ -14,6 +14,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Hostinger's Node.js Web App hosting copies whatever "Output directory"
+  // is configured and runs an "Entry file" from inside it — it does not run
+  // `next start` against the full source tree. Standalone output produces a
+  // self-contained `.next/standalone/apps/web` folder (generated server.js +
+  // only the traced node_modules actually used), which is what gets pointed
+  // at as the Output directory. See root package.json's build script for the
+  // required post-build copy of `public/` and `.next/static` — standalone
+  // output intentionally omits both, per Next.js's own docs.
+  output: "standalone",
   transpilePackages: ["@tampdf/config"],
   experimental: {
     // Each static-generation worker is a separate process that opens its
@@ -34,7 +43,9 @@ const nextConfig: NextConfig = {
   // the actual build checkout). Turbopack's automatic workspace-root
   // inference picks whichever lockfile it finds first walking up the tree,
   // which can silently select the wrong root and misplace build output.
-  // Pin it explicitly: apps/web -> apps -> repo root.
+  // Pin it explicitly: apps/web -> apps -> repo root. This also determines
+  // how the standalone output above nests (.next/standalone/apps/web/...),
+  // since Next preserves the path relative to this root when tracing.
   turbopack: {
     root: path.join(dirname, "..", ".."),
   },
