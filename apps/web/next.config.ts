@@ -15,18 +15,32 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   // Hostinger's Node.js Web App hosting copies whatever "Output directory"
-  // is configured and runs an "Entry file" from inside it — it does not run
+  // is configured and runs an "Entry file" from inside it -- it does not run
   // `next start` against the full source tree. Standalone output produces a
   // self-contained `.next/standalone/apps/web` folder (generated server.js +
   // only the traced node_modules actually used), which is what gets pointed
   // at as the Output directory. See root package.json's build script for the
-  // required post-build copy of `public/` and `.next/static` — standalone
+  // required post-build copy of `public/` and `.next/static` -- standalone
   // output intentionally omits both, per Next.js's own docs.
   output: "standalone",
   transpilePackages: ["@tampdf/config"],
+  // Next's output file tracing (which decides what gets copied into
+  // .next/standalone/.../node_modules for standalone builds) statically
+  // analyzes require()/import calls to find dependencies. Native addons
+  // like sharp load their platform binary (and sharp's own dynamically
+  // linked libvips .so) in a way tracing can't always see, so it can
+  // silently omit them from the standalone output even though sharp
+  // itself gets copied. Observed directly in production: Payload (which
+  // uses sharp for image handling) failed at runtime with
+  // ERR_DLOPEN_FAILED: libvips-cpp.so.* not found, even though the build
+  // succeeded and the top-level sharp package was present. Force these in
+  // explicitly so the .so files travel with the rest of the trace.
+  outputFileTracingIncludes: {
+    "/**": ["./node_modules/@img/**/*", "./node_modules/sharp/**/*"],
+  },
   experimental: {
     // Each static-generation worker is a separate process that opens its
-    // own DB pool (capped at 5, see payload.config.ts) — left at Next's
+    // own DB pool (capped at 5, see payload.config.ts) -- left at Next's
     // default (CPU core count), a build can spin up several of these at
     // once, and none of them get an explicit close() when the worker
     // exits, so their connections linger at the pooler until it times
