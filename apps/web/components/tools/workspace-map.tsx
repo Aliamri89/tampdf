@@ -16,7 +16,7 @@ function WorkspaceLoading() {
 /**
  * Each tool's workspace is loaded on demand via `next/dynamic` instead of
  * a static import. Without this, a single shared map file that eagerly
- * imports all 9 workspaces (and the heavy libraries some of them pull in —
+ * imports every workspace (and the heavy libraries some of them pull in —
  * pdfjs-dist, pdf-lib, jszip) would ship every tool's JavaScript on every
  * tool page, regardless of which one is being viewed.
  */
@@ -49,6 +49,36 @@ const workspaceMap: Record<string, ComponentType> = {
   "rotate-images": dynamic(
     () =>
       import("@/components/tools/rotate-images-workspace").then((m) => m.RotateImagesWorkspace),
+    { loading: WorkspaceLoading, ssr: false },
+  ),
+  "split-pdf": dynamic(
+    () => import("@/components/tools/split-pdf-workspace").then((m) => m.SplitPdfWorkspace),
+    { loading: WorkspaceLoading, ssr: false },
+  ),
+  "delete-pdf-pages": dynamic(
+    () =>
+      import("@/components/tools/delete-pdf-pages-workspace").then(
+        (m) => m.DeletePdfPagesWorkspace,
+      ),
+    { loading: WorkspaceLoading, ssr: false },
+  ),
+  "reorder-pdf-pages": dynamic(
+    () =>
+      import("@/components/tools/reorder-pdf-pages-workspace").then(
+        (m) => m.ReorderPdfPagesWorkspace,
+      ),
+    { loading: WorkspaceLoading, ssr: false },
+  ),
+  "crop-pdf": dynamic(
+    () => import("@/components/tools/crop-pdf-workspace").then((m) => m.CropPdfWorkspace),
+    { loading: WorkspaceLoading, ssr: false },
+  ),
+  "resize-pdf": dynamic(
+    () => import("@/components/tools/resize-pdf-workspace").then((m) => m.ResizePdfWorkspace),
+    { loading: WorkspaceLoading, ssr: false },
+  ),
+  "png-to-pdf": dynamic(
+    () => import("@/components/tools/png-to-pdf-workspace").then((m) => m.PngToPdfWorkspace),
     { loading: WorkspaceLoading, ssr: false },
   ),
 };

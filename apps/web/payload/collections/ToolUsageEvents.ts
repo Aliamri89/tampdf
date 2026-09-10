@@ -16,6 +16,12 @@ export const TOOL_SLUGS = [
   "compress-image",
   "image-to-pdf",
   "rotate-images",
+  "split-pdf",
+  "delete-pdf-pages",
+  "reorder-pdf-pages",
+  "crop-pdf",
+  "resize-pdf",
+  "png-to-pdf",
 ] as const;
 
 /** Bilingual display names, also reused by tool-labels.ts for the Dashboard. */
@@ -27,6 +33,12 @@ export const TOOL_SLUG_LABELS: Record<(typeof TOOL_SLUGS)[number], { en: string;
   "compress-image": { en: "Compress Image", ar: "ضغط الصور" },
   "image-to-pdf": { en: "JPG to PDF", ar: "تحويل JPG إلى PDF" },
   "rotate-images": { en: "Rotate Images", ar: "تدوير الصور" },
+  "split-pdf": { en: "Split PDF", ar: "تقسيم PDF" },
+  "delete-pdf-pages": { en: "Delete PDF Pages", ar: "حذف صفحات PDF" },
+  "reorder-pdf-pages": { en: "Reorder PDF Pages", ar: "إعادة ترتيب صفحات PDF" },
+  "crop-pdf": { en: "Crop PDF", ar: "قص صفحات PDF" },
+  "resize-pdf": { en: "Resize PDF", ar: "تغيير حجم صفحات PDF" },
+  "png-to-pdf": { en: "PNG to PDF", ar: "PNG إلى PDF" },
 };
 
 /**

@@ -288,4 +288,288 @@ export const tools: ToolDefinition[] = [
     relatedSlugs: ["compress-image", "image-to-pdf", "rotate-pdf"],
     keywords: ["rotate image", "rotate photo online", "turn image 90 degrees", "rotate jpg png"],
   },
+  {
+    slug: "split-pdf",
+    name: "Split PDF",
+    actionLabel: "Split PDF",
+    shortDescription:
+      "Split one PDF into several smaller files by page ranges or in fixed-size chunks.",
+    longDescription: [
+      "Split PDF breaks a large document into separate PDF files without changing the pages themselves. Enter page ranges like 1-3, 5, 8-10 to pull out exactly the sections you need, or split the whole document into equal chunks of a fixed number of pages.",
+      "Everything runs in your browser — the PDF is never uploaded to a server. A single output downloads as one PDF; multiple parts are bundled into a .zip.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Scissors",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".zip",
+    faq: [
+      {
+        question: "How do I choose which pages go into each file?",
+        answer:
+          'Use the ranges field: something like "1-3, 5, 8-10" produces three PDFs — pages 1 to 3, page 5 on its own, and pages 8 to 10. Or switch to "every N pages" to cut the document into equal chunks.',
+      },
+      {
+        question: "Do the split files keep their original quality?",
+        answer:
+          "Yes. Pages are copied as-is with no re-compression, so text, images, fonts, and layout are identical to the source.",
+      },
+      {
+        question: "Is my PDF uploaded anywhere?",
+        answer:
+          "No. Splitting happens entirely in your browser, so your document never leaves your device.",
+      },
+      {
+        question: "What happens to form fields or digital signatures?",
+        answer:
+          "Page content and form widgets are preserved visually, but interactive form behaviour and signatures are not carried into the split files. Flatten or re-sign afterwards if you need them.",
+      },
+    ],
+    relatedSlugs: ["merge-pdf", "delete-pdf-pages", "reorder-pdf-pages"],
+    keywords: [
+      "split pdf",
+      "split pdf online",
+      "separate pdf pages",
+      "extract pdf pages",
+      "divide pdf",
+    ],
+  },
+  {
+    slug: "delete-pdf-pages",
+    name: "Delete PDF Pages",
+    actionLabel: "Delete Pages",
+    shortDescription: "Remove unwanted pages from a PDF and download the trimmed document.",
+    longDescription: [
+      "Delete PDF Pages lets you drop pages you don't need — blank scans, cover sheets, duplicate pages — and keep the rest in their original order. See a thumbnail of every page, tap the ones to remove, and download the result.",
+      "The whole process runs locally in your browser, so your PDF is never uploaded. The remaining pages are copied without re-compression, so nothing loses quality.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Trash2",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Can I delete more than one page at a time?",
+        answer:
+          "Yes. Select as many pages as you like in the thumbnail grid, then delete them all in one step.",
+      },
+      {
+        question: "Can I remove every page?",
+        answer:
+          "No — at least one page must remain, so the button is disabled if you've selected all of them.",
+      },
+      {
+        question: "Does deleting pages shrink the file size?",
+        answer:
+          "Usually a little, since the removed pages' content is dropped. Shared resources like fonts may stay, so use Compress PDF afterwards if size matters.",
+      },
+      {
+        question: "Are my files uploaded to a server?",
+        answer: "No. Everything happens in your browser and your PDF never leaves your device.",
+      },
+    ],
+    relatedSlugs: ["split-pdf", "reorder-pdf-pages", "merge-pdf"],
+    keywords: [
+      "delete pages from pdf",
+      "remove pdf pages",
+      "erase pdf page",
+      "pdf page remover",
+    ],
+  },
+  {
+    slug: "reorder-pdf-pages",
+    name: "Reorder PDF Pages",
+    actionLabel: "Reorder Pages",
+    shortDescription: "Drag PDF pages into a new order and save the rearranged document.",
+    longDescription: [
+      "Reorder PDF Pages gives you a thumbnail of every page that you can drag into the order you want — move a page to the front, swap two sections, or reverse the whole document. Move buttons are there too for precise, one-page-at-a-time changes.",
+      "Rearranging happens entirely in your browser, so your PDF is never uploaded. Pages are copied as-is, so quality and formatting are untouched.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "ArrowUpDown",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "How do I move a page?",
+        answer:
+          "Drag its thumbnail to the new position, or use the up/down buttons on each page for single steps. The new order is saved when you click the button.",
+      },
+      {
+        question: "Can I reverse the entire document?",
+        answer:
+          "Yes — drag pages into reverse order, or use the move buttons. Any number of pages can be rearranged in one pass.",
+      },
+      {
+        question: "Will reordering change the page content?",
+        answer:
+          "No. Only the page order changes — text, images, and layout on each page stay exactly the same.",
+      },
+      {
+        question: "Is the PDF uploaded anywhere?",
+        answer:
+          "No. Reordering runs locally in your browser and your file never leaves your device.",
+      },
+    ],
+    relatedSlugs: ["merge-pdf", "split-pdf", "delete-pdf-pages"],
+    keywords: [
+      "reorder pdf pages",
+      "rearrange pdf",
+      "sort pdf pages",
+      "move pdf pages",
+      "organize pdf",
+    ],
+  },
+  {
+    slug: "crop-pdf",
+    name: "Crop PDF",
+    actionLabel: "Crop PDF",
+    shortDescription:
+      "Trim the margins of every PDF page by setting top, bottom, and side amounts.",
+    longDescription: [
+      "Crop PDF removes unwanted white space or scan borders from the edges of your pages. Set how much to trim from the top, bottom, left, and right as a percentage, watch the live preview, and apply it to every page at once.",
+      "Cropping adjusts the visible page area without deleting any content — the trimmed parts are simply hidden. It all runs in your browser, so your PDF is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Crop",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Does cropping delete the content outside the crop area?",
+        answer:
+          "No. Crop PDF changes the page's crop box, which hides the outer area in viewers and when printing. The underlying content is still in the file and can be restored.",
+      },
+      {
+        question: "Is the same crop applied to all pages?",
+        answer:
+          "Yes. The margins you set are applied to every page. Pages of different sizes are each trimmed by the same percentage.",
+      },
+      {
+        question: "Can I crop a scanned document to remove the black border?",
+        answer:
+          "Yes — that's a common use. Increase the margins until the preview shows only the content you want to keep.",
+      },
+      {
+        question: "Is my file uploaded to a server?",
+        answer:
+          "No. Cropping happens entirely in your browser and your PDF stays on your device.",
+      },
+    ],
+    relatedSlugs: ["resize-pdf", "compress-pdf", "rotate-pdf"],
+    keywords: [
+      "crop pdf",
+      "trim pdf margins",
+      "cut pdf edges",
+      "remove pdf white space",
+      "crop pdf online",
+    ],
+  },
+  {
+    slug: "resize-pdf",
+    name: "Resize PDF",
+    actionLabel: "Resize PDF",
+    shortDescription:
+      "Change PDF page size to A4, Letter, or a custom scale, with content fitted and centered.",
+    longDescription: [
+      "Resize PDF changes the physical page size of your document. Pick a standard size like A4 or US Letter and every page is scaled to fit and centered, or use a percentage to shrink or enlarge the pages proportionally.",
+      "Resizing runs in your browser with no upload. Content is scaled together with the page, so nothing is cut off and the layout stays proportional.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Scaling",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "What page sizes can I choose?",
+        answer:
+          "A4 and US Letter in portrait or landscape, plus A3 and A5. You can also enter a scale percentage to resize without changing the aspect ratio.",
+      },
+      {
+        question: "Will my content get stretched?",
+        answer:
+          "No. Content is scaled uniformly to fit the new size and centered on the page, so proportions are preserved and nothing is clipped.",
+      },
+      {
+        question: "Can I make a PDF smaller in file size with this?",
+        answer:
+          "Not directly — this changes page dimensions, not file weight. Use Compress PDF to reduce the file size.",
+      },
+      {
+        question: "Are my files uploaded anywhere?",
+        answer:
+          "No. Resizing is done locally in your browser and your PDF never leaves your device.",
+      },
+    ],
+    relatedSlugs: ["crop-pdf", "compress-pdf", "pdf-to-jpg"],
+    keywords: [
+      "resize pdf",
+      "change pdf page size",
+      "pdf to a4",
+      "scale pdf",
+      "pdf page resizer",
+    ],
+  },
+  {
+    slug: "png-to-pdf",
+    name: "PNG to PDF",
+    actionLabel: "Convert to PDF",
+    shortDescription:
+      "Turn one or more PNG images into a single PDF document, one image per page.",
+    longDescription: [
+      "PNG to PDF combines your PNG images into one PDF file, with each image on its own page at its original resolution. Add multiple images, arrange their order, and download a single document.",
+      "Great for turning screenshots, diagrams, or exported graphics into a shareable PDF. Conversion happens entirely in your browser, so your images are never uploaded. Transparent areas are placed on a white background.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Images",
+    acceptedExtensions: [".png"],
+    acceptedMimeTypes: ["image/png"],
+    multipleFiles: true,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Can I combine several PNGs into one PDF?",
+        answer:
+          "Yes. Add as many PNG images as you like and each becomes a page in the resulting PDF, in the order you arrange them.",
+      },
+      {
+        question: "What page size is used?",
+        answer:
+          "Each page matches its source image's pixel dimensions, so images aren't cropped or stretched.",
+      },
+      {
+        question: "What happens to transparent parts of the image?",
+        answer:
+          "Transparency is flattened onto a white background so the page looks the same in every PDF viewer.",
+      },
+      {
+        question: "Are my images uploaded to a server?",
+        answer:
+          "No. The conversion runs entirely in your browser and your images stay on your device.",
+      },
+    ],
+    relatedSlugs: ["image-to-pdf", "compress-image", "merge-pdf"],
+    keywords: [
+      "png to pdf",
+      "convert png to pdf",
+      "png to pdf online",
+      "images to pdf",
+      "screenshot to pdf",
+    ],
+  },
 ];

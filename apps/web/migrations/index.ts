@@ -4,6 +4,7 @@ import * as migration_20260716_133706_add_static_pages_drafts_autosave from './2
 import * as migration_20260716_154713_backfill_static_pages_versions from './20260716_154713_backfill_static_pages_versions';
 import * as migration_20260716_181433_add_faqs_collection from './20260716_181433_add_faqs_collection';
 import * as migration_20260717_020651_add_posts_cta_related_fields from './20260717_020651_add_posts_cta_related_fields';
+import * as migration_20260910_061742_add_pdf_page_tool_slugs from './20260910_061742_add_pdf_page_tool_slugs';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260717_020651_add_posts_cta_related_fields.up,
     down: migration_20260717_020651_add_posts_cta_related_fields.down,
-    name: '20260717_020651_add_posts_cta_related_fields'
+    name: '20260717_020651_add_posts_cta_related_fields',
+  },
+  {
+    up: migration_20260910_061742_add_pdf_page_tool_slugs.up,
+    down: migration_20260910_061742_add_pdf_page_tool_slugs.down,
+    name: '20260910_061742_add_pdf_page_tool_slugs'
   },
 ];

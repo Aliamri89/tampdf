@@ -1,15 +1,16 @@
 import {
   getLocalizedCategories,
-  getLocalizedComingSoonByCategory,
   getLocalizedSiteConfig,
   getLocalizedToolsByCategory,
   isValidLocale,
   type Locale,
 } from "@tampdf/config";
 import { notFound } from "next/navigation";
-import { ComingSoonCard } from "@/components/tools/coming-soon-card";
-import { ToolCard } from "@/components/tools/tool-card";
+import { BackToTop } from "@/components/home/back-to-top";
+import { QuickBar, type QuickBarItem } from "@/components/home/quick-bar";
+import { ToolSection } from "@/components/home/tool-section";
 import { Container } from "@/components/ui/container";
+import { getDictionary } from "@/i18n/get-dictionary";
 
 export default async function HomePage({
   params,
@@ -21,46 +22,47 @@ export default async function HomePage({
   const locale = rawLocale as Locale;
 
   const siteConfig = getLocalizedSiteConfig(locale);
-  const categoriesData = getLocalizedCategories(locale).map((category) => ({
+  const dict = getDictionary(locale);
+  const categories = getLocalizedCategories(locale).map((category) => ({
     category,
-    realTools: getLocalizedToolsByCategory(category.id, locale),
-    comingSoon: getLocalizedComingSoonByCategory(category.id, locale),
+    tools: getLocalizedToolsByCategory(category.id, locale),
   }));
-  const maxCount = Math.max(...categoriesData.map((c) => c.realTools.length));
+
+  const quickItems: QuickBarItem[] = [
+    { key: "allTools", label: dict.home.quickBar.allTools, kind: "scroll", target: "tools" },
+    { key: "compressPdf", label: dict.home.quickBar.compressPdf, kind: "link", target: "compress-pdf" },
+    { key: "mergePdf", label: dict.home.quickBar.mergePdf, kind: "link", target: "merge-pdf" },
+    { key: "convertPdf", label: dict.home.quickBar.convertPdf, kind: "link", target: "pdf-to-jpg" },
+    { key: "imageTools", label: dict.home.quickBar.imageTools, kind: "scroll", target: "image" },
+    { key: "rotatePdf", label: dict.home.quickBar.rotatePdf, kind: "link", target: "rotate-pdf" },
+  ];
 
   return (
-    <div id="tools" className="pb-14">
-      <Container className="pt-6 pb-3 text-center sm:pt-7">
-        <h1 className="mx-auto text-xl font-semibold tracking-tight sm:text-2xl">
+    <div id="tools" className="scroll-mt-20 pb-16">
+      <Container className="pt-8 pb-4 text-center sm:pt-10">
+        <h1 className="mx-auto max-w-2xl text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
           {siteConfig.tagline}
         </h1>
-        <p className="mx-auto mt-1.5 max-w-2xl text-sm text-foreground/60">
+        <p className="mx-auto mt-2.5 max-w-2xl text-sm leading-relaxed text-foreground/60 sm:text-base">
           {siteConfig.description}
         </p>
       </Container>
 
-      {categoriesData.map(({ category, realTools, comingSoon }) => {
-        if (realTools.length === 0 && comingSoon.length === 0) return null;
-        const placeholders = comingSoon.slice(0, Math.max(0, maxCount - realTools.length));
+      <Container className="pb-9">
+        <QuickBar locale={locale} items={quickItems} />
+      </Container>
 
-        return (
-          <section key={category.id} id={category.id} className="scroll-mt-16 pt-6">
-            <Container>
-              <h2 className="text-center text-xs font-semibold tracking-wider text-foreground/40 uppercase">
-                {category.name}
-              </h2>
-              <div className="mx-auto mt-3 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {realTools.map((tool) => (
-                  <ToolCard key={tool.slug} tool={tool} locale={locale} />
-                ))}
-                {placeholders.map((tool) => (
-                  <ComingSoonCard key={tool.id} tool={tool} locale={locale} />
-                ))}
-              </div>
-            </Container>
-          </section>
-        );
-      })}
+      <Container className="space-y-6">
+        {categories.map(({ category, tools }) =>
+          tools.length === 0 ? null : (
+            <ToolSection key={category.id} category={category} tools={tools} locale={locale} />
+          ),
+        )}
+      </Container>
+
+      <div className="mt-14 flex justify-center">
+        <BackToTop label={dict.home.backToTop} />
+      </div>
     </div>
   );
 }

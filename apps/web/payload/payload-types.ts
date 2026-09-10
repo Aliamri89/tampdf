@@ -166,7 +166,21 @@ export interface Post {
    * Powers the call-to-action button at the end of the article. Leave empty to hide the CTA.
    */
   relatedTool?:
-    | ('merge-pdf' | 'compress-pdf' | 'pdf-to-jpg' | 'rotate-pdf' | 'compress-image' | 'image-to-pdf' | 'rotate-images')
+    | (
+        | 'merge-pdf'
+        | 'compress-pdf'
+        | 'pdf-to-jpg'
+        | 'rotate-pdf'
+        | 'compress-image'
+        | 'image-to-pdf'
+        | 'rotate-images'
+        | 'split-pdf'
+        | 'delete-pdf-pages'
+        | 'reorder-pdf-pages'
+        | 'crop-pdf'
+        | 'resize-pdf'
+        | 'png-to-pdf'
+      )
     | null;
   /**
    * Optional overrides for the CTA section. Leave blank to auto-generate copy from the related tool.
@@ -319,7 +333,19 @@ export interface Faq {
 export interface ToolUsageEvent {
   id: number;
   tool:
-    'merge-pdf' | 'compress-pdf' | 'pdf-to-jpg' | 'rotate-pdf' | 'compress-image' | 'image-to-pdf' | 'rotate-images';
+    | 'merge-pdf'
+    | 'compress-pdf'
+    | 'pdf-to-jpg'
+    | 'rotate-pdf'
+    | 'compress-image'
+    | 'image-to-pdf'
+    | 'rotate-images'
+    | 'split-pdf'
+    | 'delete-pdf-pages'
+    | 'reorder-pdf-pages'
+    | 'crop-pdf'
+    | 'resize-pdf'
+    | 'png-to-pdf';
   success: boolean;
   /**
    * The JS exception's name (e.g. PasswordException), when success is false.

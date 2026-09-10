@@ -2,35 +2,55 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Locale, ToolDefinition } from "@tampdf/config";
 import { Icon } from "@/components/icon";
-import { Card } from "@/components/ui/card";
-import { categoryStyles } from "@/lib/category-style";
+import { getToolAccent } from "@/lib/tool-accent";
+import { cn } from "@/lib/utils";
 
-export function ToolCard({ tool, locale }: { tool: ToolDefinition; locale: Locale }) {
-  const style = categoryStyles[tool.category];
+export function ToolCard({
+  tool,
+  locale,
+  indexInSection = 0,
+}: {
+  tool: ToolDefinition;
+  locale: Locale;
+  /** Position within its section, used to rotate the accent palette for tools without a fixed colour. */
+  indexInSection?: number;
+}) {
+  const accent = getToolAccent(tool.slug, indexInSection);
 
   return (
-    <Link href={`/${locale}/${tool.slug}`}>
-      <Card
-        className={`group h-full p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl ${style.hoverBorder} ${style.hoverShadow}`}
+    <Link
+      href={`/${locale}/${tool.slug}`}
+      className={cn(
+        "group flex h-full items-center justify-between gap-2 rounded-xl border p-3 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md",
+        accent.card,
+        accent.border,
+      )}
+    >
+      <span className="flex min-w-0 items-center gap-2.5">
+        <span
+          className={cn(
+            "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-transform duration-300 ease-out group-hover:scale-105 sm:h-10 sm:w-10",
+            accent.iconBg,
+            accent.iconText,
+          )}
+        >
+          <Icon name={tool.icon} size={19} />
+        </span>
+        <span className="min-w-0 text-[13px] font-semibold leading-tight text-foreground line-clamp-2 sm:text-sm">
+          {tool.name}
+        </span>
+      </span>
+      <span
+        className={cn(
+          "hidden h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-surface/70 text-foreground/40 transition-colors duration-300 ease-out lg:flex",
+          accent.arrowHover,
+        )}
       >
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <span
-              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 ease-out group-hover:scale-110 ${style.iconBg} ${style.iconText}`}
-            >
-              <Icon name={tool.icon} size={24} />
-            </span>
-            <h3 className="font-semibold text-foreground">{tool.name}</h3>
-          </div>
-          <ArrowRight
-            size={18}
-            className="mt-1.5 -translate-x-1 rtl:translate-x-1 rtl:rotate-180 text-foreground/30 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100 rtl:group-hover:translate-x-0"
-          />
-        </div>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-foreground/60">
-          {tool.shortDescription}
-        </p>
-      </Card>
+        <ArrowRight
+          size={14}
+          className="transition-transform duration-300 ease-out group-hover:translate-x-0.5 rtl:rotate-180"
+        />
+      </span>
     </Link>
   );
 }

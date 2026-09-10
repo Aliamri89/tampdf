@@ -1,12 +1,18 @@
 import {
+  ArrowUpDown,
   Combine,
+  Crop,
   FileImage,
   FileText,
   Image,
   ImageDown,
   ImagePlus,
+  Images,
   Minimize2,
   RotateCw,
+  Scaling,
+  Scissors,
+  Trash2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -19,6 +25,12 @@ const icons: Record<string, LucideIcon> = {
   ImagePlus,
   FileImage,
   RotateCw,
+  Scissors,
+  Trash2,
+  ArrowUpDown,
+  Crop,
+  Scaling,
+  Images,
 };
 
 export function Icon({

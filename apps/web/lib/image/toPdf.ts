@@ -1,6 +1,17 @@
-import { PDFDocument } from "pdf-lib";
+import { PDFDocument, rgb } from "pdf-lib";
 
-export async function imagesToPdf(files: File[]): Promise<Uint8Array> {
+interface ImagesToPdfOptions {
+  /**
+   * Fill each page with white before drawing the image. Transparent PNGs
+   * otherwise render as black in some PDF viewers.
+   */
+  whiteBackground?: boolean;
+}
+
+export async function imagesToPdf(
+  files: File[],
+  options: ImagesToPdfOptions = {},
+): Promise<Uint8Array> {
   const pdfDoc = await PDFDocument.create();
 
   for (const file of files) {
@@ -11,6 +22,15 @@ export async function imagesToPdf(files: File[]): Promise<Uint8Array> {
       : await pdfDoc.embedJpg(bytes);
 
     const page = pdfDoc.addPage([image.width, image.height]);
+    if (options.whiteBackground) {
+      page.drawRectangle({
+        x: 0,
+        y: 0,
+        width: image.width,
+        height: image.height,
+        color: rgb(1, 1, 1),
+      });
+    }
     page.drawImage(image, {
       x: 0,
       y: 0,
