@@ -339,6 +339,7 @@ export const tools: ToolDefinition[] = [
   {
     slug: "delete-pdf-pages",
     name: "Delete PDF Pages",
+    shortName: "Delete Pages",
     actionLabel: "Delete Pages",
     shortDescription: "Remove unwanted pages from a PDF and download the trimmed document.",
     longDescription: [
@@ -384,6 +385,7 @@ export const tools: ToolDefinition[] = [
   {
     slug: "reorder-pdf-pages",
     name: "Reorder PDF Pages",
+    shortName: "Reorder Pages",
     actionLabel: "Reorder Pages",
     shortDescription: "Drag PDF pages into a new order and save the rearranged document.",
     longDescription: [
@@ -534,7 +536,7 @@ export const tools: ToolDefinition[] = [
       "PNG to PDF combines your PNG images into one PDF file, with each image on its own page at its original resolution. Add multiple images, arrange their order, and download a single document.",
       "Great for turning screenshots, diagrams, or exported graphics into a shareable PDF. Conversion happens entirely in your browser, so your images are never uploaded. Transparent areas are placed on a white background.",
     ],
-    category: "pdf",
+    category: "image",
     processing: "client",
     icon: "Images",
     acceptedExtensions: [".png"],
@@ -570,6 +572,872 @@ export const tools: ToolDefinition[] = [
       "png to pdf online",
       "images to pdf",
       "screenshot to pdf",
+    ],
+  },
+  {
+    slug: "extract-pdf-pages",
+    name: "Extract PDF Pages",
+    shortName: "Extract Pages",
+    actionLabel: "Extract pages",
+    shortDescription:
+      "Pull selected pages out of a PDF into a new file — or save each page as its own PDF.",
+    longDescription: [
+      "Extract PDF Pages lets you pick exactly the pages you need from a document and save them as a new PDF. See a thumbnail of every page, tap the ones to keep, and download them together — or as separate one-page PDFs in a ZIP.",
+      "Your original file stays unchanged, and pages are copied as-is, so text, images, and formatting are untouched. Everything happens in your browser, so the PDF is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "FileOutput",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "What's the difference between extracting and splitting?",
+        answer:
+          "Extracting saves only the pages you select into a new PDF. Splitting divides the whole document into several parts by page ranges or fixed-size chunks.",
+      },
+      {
+        question: "Can I save each extracted page as a separate file?",
+        answer:
+          "Yes. Choose “Separate PDFs” and every selected page becomes its own PDF, bundled in a single .zip download.",
+      },
+      {
+        question: "Will the extracted pages lose quality?",
+        answer:
+          "No. Pages are copied without re-compression, so they look exactly like the original. Interactive form fields may become regular page content.",
+      },
+      {
+        question: "Is my PDF uploaded to a server?",
+        answer: "No. Pages are extracted locally in your browser and your file never leaves your device.",
+      },
+    ],
+    relatedSlugs: ["split-pdf", "delete-pdf-pages", "merge-pdf"],
+    keywords: [
+      "extract pdf pages",
+      "save pages from pdf",
+      "pdf page extractor",
+      "select pages from pdf",
+      "extract pages online",
+    ],
+  },
+  {
+    slug: "add-page-numbers",
+    name: "Add Page Numbers",
+    shortName: "Page Numbers",
+    actionLabel: "Add page numbers",
+    shortDescription:
+      "Number the pages of a PDF, with your choice of position, format, and starting number.",
+    longDescription: [
+      "Add Page Numbers stamps a number on every page of your PDF. Pick one of six positions, choose a style such as “1”, “1 / 10”, or “Page 1 of 10”, set the starting number, and optionally skip the cover page.",
+      "Numbers are drawn as real text in a standard font, so they print crisply and stay upright even on rotated pages. The whole process runs in your browser — your document is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "ListOrdered",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Can I start numbering from a number other than 1?",
+        answer:
+          "Yes. Set any starting number — handy when your PDF is a chapter or appendix of a larger document.",
+      },
+      {
+        question: "Can I leave the cover page unnumbered?",
+        answer:
+          "Yes. Turn on “Don't number the first page” and numbering begins on the second page.",
+      },
+      {
+        question: "Which digits are used?",
+        answer:
+          "Standard digits (1, 2, 3), which display correctly in every PDF reader. Labels like “Page 1 of 10” are written in English.",
+      },
+      {
+        question: "Is my file uploaded?",
+        answer: "No. Page numbers are added locally in your browser and your PDF stays on your device.",
+      },
+    ],
+    relatedSlugs: ["add-watermark", "merge-pdf", "extract-pdf-pages"],
+    keywords: [
+      "add page numbers to pdf",
+      "number pdf pages",
+      "pdf page numbering",
+      "insert page numbers pdf",
+      "paginate pdf",
+    ],
+  },
+  {
+    slug: "add-watermark",
+    name: "Add Watermark",
+    actionLabel: "Add watermark",
+    shortDescription: "Stamp text such as CONFIDENTIAL or DRAFT across every page of a PDF.",
+    longDescription: [
+      "Add Watermark places your text on every page of a PDF — once in the center or repeated across the page. Choose the color, opacity, size, and angle, and see a live preview on your first page before you apply it.",
+      "Arabic and other scripts are fully supported. The watermark is saved as a standard watermark object, and everything happens in your browser, so your document is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Stamp",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Can I write the watermark in Arabic?",
+        answer:
+          "Yes. The text is rendered with your browser's fonts, so Arabic and other scripts are shaped correctly.",
+      },
+      {
+        question: "Can the watermark be repeated across the page?",
+        answer:
+          "Yes. Pick the “Repeated” layout to tile the text across every page, or “Once, centered” for a single stamp.",
+      },
+      {
+        question: "Can the watermark be removed later?",
+        answer:
+          "It's saved as a standard watermark object, so tools that understand watermarks — including TAMPDF's Remove Watermark — can remove it. It isn't a security feature.",
+      },
+      {
+        question: "Is my PDF uploaded anywhere?",
+        answer: "No. The watermark is applied locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["remove-watermark", "add-page-numbers", "compress-pdf"],
+    keywords: [
+      "watermark pdf",
+      "add watermark to pdf",
+      "pdf watermark online",
+      "stamp pdf",
+      "confidential watermark",
+    ],
+  },
+  {
+    slug: "remove-watermark",
+    name: "Remove Watermark",
+    actionLabel: "Remove watermark",
+    shortDescription: "Remove watermarks that were added as watermark objects from a PDF.",
+    longDescription: [
+      "Remove Watermark finds and deletes watermarks that were added as watermark objects — the kind Adobe Acrobat, TAMPDF, and most PDF editors create — along with watermark annotations and layers named “Watermark”. The rest of each page stays exactly as it was.",
+      "Watermarks that are part of a scanned image or merged into ordinary page text have no marker to tell them apart from real content, so they can't be removed automatically. Please only remove watermarks from documents you have the right to edit. Processing happens in your browser, so your file is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "Eraser",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Which watermarks can be removed?",
+        answer:
+          "Watermarks added as watermark objects, watermark annotations, or layers named “Watermark” — including those created by Adobe Acrobat and TAMPDF's Add Watermark tool.",
+      },
+      {
+        question: "Why wasn't the watermark in my file removed?",
+        answer:
+          "If a watermark is part of a scanned page image or was flattened into the page's text, it can't be separated from the real content without damaging the page.",
+      },
+      {
+        question: "Does removing a watermark affect the rest of the page?",
+        answer:
+          "No. Only the marked watermark content is removed; text, images, and layout stay untouched.",
+      },
+      {
+        question: "Is my file uploaded?",
+        answer: "No. The PDF is processed locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["add-watermark", "remove-pdf-metadata", "compress-pdf"],
+    keywords: [
+      "remove watermark from pdf",
+      "delete pdf watermark",
+      "pdf watermark remover",
+      "remove draft watermark",
+      "erase watermark pdf",
+    ],
+  },
+  {
+    slug: "pdf-to-images",
+    name: "PDF to Images",
+    actionLabel: "Convert to images",
+    shortDescription:
+      "Convert every page of a PDF into PNG, JPG, or WEBP images, downloaded as a ZIP.",
+    longDescription: [
+      "PDF to Images renders each page of your PDF as a separate image in the format you choose: PNG for the sharpest text, JPG for the smallest files, or WEBP for modern, compact images. Pick a resolution and every page is exported and bundled into a single .zip.",
+      "Rendering happens directly in your browser using PDF.js, so your document is never uploaded to a server.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "GalleryHorizontalEnd",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: true,
+    outputExtension: ".zip",
+    faq: [
+      {
+        question: "Which image format should I choose?",
+        answer:
+          "PNG keeps text and line art perfectly sharp. JPG produces smaller files and suits photos. WEBP offers a good balance for use on the web.",
+      },
+      {
+        question: "What resolution are the images?",
+        answer:
+          "Standard renders at 108 dpi, High at 144 dpi, and Maximum at 216 dpi — high enough for printing most documents.",
+      },
+      {
+        question: "How do I get all the pages at once?",
+        answer:
+          "Every page is converted and packed into one .zip file. A single-page PDF downloads as a single image.",
+      },
+      {
+        question: "Is my PDF uploaded?",
+        answer: "No. Pages are rendered locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["pdf-to-jpg", "images-to-pdf", "compress-image"],
+    keywords: [
+      "pdf to png",
+      "pdf to images",
+      "convert pdf to image",
+      "pdf to webp",
+      "pdf pages to images zip",
+    ],
+  },
+  {
+    slug: "images-to-pdf",
+    name: "Images to PDF",
+    actionLabel: "Create PDF",
+    shortDescription:
+      "Combine JPG, PNG, and WEBP images into one PDF, in the order you choose.",
+    longDescription: [
+      "Images to PDF turns a set of photos, scans, or screenshots into a single PDF document. Add JPG, PNG, or WEBP images, drag the thumbnails into the order you want, and choose an A4 or Letter page (with automatic portrait or landscape) or pages that match each image.",
+      "Add a margin for a clean printed look. Transparent areas are placed on white, and the whole conversion runs in your browser, so your images are never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "FileStack",
+    acceptedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
+    acceptedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+    multipleFiles: true,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Can I change the order of the images?",
+        answer:
+          "Yes. Drag the thumbnails or use the arrow buttons to set the page order before creating the PDF.",
+      },
+      {
+        question: "Which image formats are supported?",
+        answer: "JPG, PNG, and WEBP. You can mix formats in the same PDF.",
+      },
+      {
+        question: "What page size will the PDF use?",
+        answer:
+          "Choose A4 or Letter — each image is fitted to the page and turned landscape when needed — or “Fit image” to make each page exactly the size of its image.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. The PDF is created locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["image-to-pdf", "png-to-pdf", "merge-pdf"],
+    keywords: [
+      "images to pdf",
+      "photos to pdf",
+      "combine images into pdf",
+      "webp to pdf",
+      "jpg png to pdf",
+    ],
+  },
+  {
+    slug: "flip-pdf",
+    name: "Flip PDF",
+    actionLabel: "Flip PDF",
+    shortDescription: "Mirror the pages of a PDF horizontally or vertically.",
+    longDescription: [
+      "Flip PDF mirrors every page of your document — left to right or top to bottom. It's useful for printing iron-on transfers, correcting scans made from the wrong side, or preparing mirrored artwork.",
+      "Preview the result on your first page before applying it. The flip also respects rotated pages, and everything runs in your browser, so your file is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "FlipHorizontal2",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "What's the difference between flipping and rotating?",
+        answer:
+          "Rotating turns a page in 90° steps. Flipping creates a mirror image, so text reads backwards — which is what you need for transfers and some print jobs.",
+      },
+      {
+        question: "Can I flip just one page?",
+        answer:
+          "The flip applies to every page. To flip a single page, extract it first with Extract PDF Pages.",
+      },
+      {
+        question: "Does flipping reduce quality?",
+        answer:
+          "No. Pages are transformed, not re-rendered, so text and graphics stay as sharp as the original.",
+      },
+      {
+        question: "Is my PDF uploaded?",
+        answer: "No. Flipping happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["rotate-pdf", "crop-pdf", "resize-pdf"],
+    keywords: [
+      "flip pdf",
+      "mirror pdf",
+      "flip pdf horizontally",
+      "mirror image pdf",
+      "mirror pdf for printing",
+    ],
+  },
+  {
+    slug: "edit-pdf-metadata",
+    name: "Edit PDF Metadata",
+    shortName: "Edit Metadata",
+    actionLabel: "Edit metadata",
+    shortDescription: "Change a PDF's title, author, subject, and keywords.",
+    longDescription: [
+      "Edit PDF Metadata lets you view and change the document properties stored inside a PDF — title, author, subject, keywords, creator, and producer. These are what PDF readers, search engines, and file managers show about your document.",
+      "Leave a field empty to remove it. The page content isn't touched, and the whole edit happens in your browser, so your file is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "FilePen",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "Why edit PDF metadata?",
+        answer:
+          "A clear title and author make documents easier to find and look more professional when shared, and search engines can use them when indexing PDFs.",
+      },
+      {
+        question: "Will editing metadata change the document's content?",
+        answer:
+          "No. Only the document properties change; pages, text, and images stay exactly the same.",
+      },
+      {
+        question: "How do I remove a property?",
+        answer: "Clear the field and save. Empty fields are removed from the file.",
+      },
+      {
+        question: "Is my PDF uploaded?",
+        answer: "No. The properties are edited locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["remove-pdf-metadata", "pdf-info", "compress-pdf"],
+    keywords: [
+      "edit pdf metadata",
+      "change pdf title",
+      "pdf properties editor",
+      "change pdf author",
+      "pdf metadata editor",
+    ],
+  },
+  {
+    slug: "remove-pdf-metadata",
+    name: "Remove PDF Metadata",
+    shortName: "Remove Metadata",
+    actionLabel: "Remove metadata",
+    shortDescription:
+      "Strip author, title, software, and other hidden properties from a PDF before sharing.",
+    longDescription: [
+      "Remove PDF Metadata clears the document properties and hidden data a PDF carries — author, title, subject, keywords, the software used to create it, creation dates, and embedded XMP metadata packets.",
+      "It's a quick privacy step before sharing a file publicly. Page content stays untouched, and cleaning happens in your browser, so your file is never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "ShieldOff",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: ".pdf",
+    faq: [
+      {
+        question: "What information is removed?",
+        answer:
+          "Title, author, subject, keywords, creator and producer software, creation and modification dates, embedded XMP metadata, and application-private data.",
+      },
+      {
+        question: "Does it change how the document looks?",
+        answer: "No. Only hidden properties are removed; every page looks exactly the same.",
+      },
+      {
+        question: "Does this remove personal information printed on the pages?",
+        answer:
+          "No. It only removes metadata. Names or details printed on the pages stay visible.",
+      },
+      {
+        question: "Is my PDF uploaded?",
+        answer: "No. The file is cleaned locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["edit-pdf-metadata", "pdf-info", "remove-watermark"],
+    keywords: [
+      "remove pdf metadata",
+      "clean pdf metadata",
+      "strip pdf properties",
+      "pdf privacy",
+      "delete pdf author",
+    ],
+  },
+  {
+    slug: "pdf-info",
+    name: "PDF Info",
+    actionLabel: "Check PDF",
+    shortDescription:
+      "See a PDF's page count, page sizes, version, and document properties at a glance.",
+    longDescription: [
+      "PDF Info reads a PDF and shows what's inside: the number of pages, the size of every page in millimetres with paper names like A4 or Letter, the PDF version, whether it's encrypted or contains a fillable form, and its title, author, software, and dates.",
+      "It's handy before printing, submitting, or converting a file. The document is only read — never changed — and everything happens in your browser, so it's never uploaded.",
+    ],
+    category: "pdf",
+    processing: "client",
+    icon: "FileSearch",
+    acceptedExtensions: [".pdf"],
+    acceptedMimeTypes: ["application/pdf"],
+    multipleFiles: false,
+    outputExtension: "",
+    faq: [
+      {
+        question: "What details does PDF Info show?",
+        answer:
+          "Page count, page sizes with paper names, PDF version, file size, encryption, fillable forms, fast web view, and document properties such as title, author, and creation date.",
+      },
+      {
+        question: "Does PDF Info change my file?",
+        answer: "No. The PDF is only read; nothing is modified or saved.",
+      },
+      {
+        question: "Can I check a password-protected PDF?",
+        answer:
+          "Files that need a password to open can't be read without it. Files with only editing restrictions are shown as encrypted.",
+      },
+      {
+        question: "Is my PDF uploaded?",
+        answer: "No. It's read locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["edit-pdf-metadata", "remove-pdf-metadata", "compress-pdf"],
+    keywords: [
+      "pdf info",
+      "pdf properties",
+      "check pdf page size",
+      "pdf metadata viewer",
+      "pdf page count",
+    ],
+  },
+  {
+    slug: "resize-image",
+    name: "Resize Image",
+    actionLabel: "Resize images",
+    shortDescription:
+      "Change the width and height of JPG, PNG, and WEBP images — by percentage or exact pixels.",
+    longDescription: [
+      "Resize Image changes the dimensions of your photos and graphics. Scale by percentage, or type an exact width and height with the aspect ratio locked so nothing looks stretched. Resize several images at once and download them together in a .zip.",
+      "Images keep their original format, and high-quality smoothing keeps downscaled images crisp. Everything runs in your browser, so your images are never uploaded.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "Expand",
+    acceptedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
+    acceptedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+    multipleFiles: true,
+    outputExtension: ".jpg",
+    faq: [
+      {
+        question: "Will resizing make my image blurry?",
+        answer:
+          "Making an image smaller keeps it sharp. Enlarging beyond its original size can't add detail, so large increases may look soft.",
+      },
+      {
+        question: "Can I resize several images at once?",
+        answer:
+          "Yes. Add up to 20 images; with the aspect ratio locked, each one keeps its own proportions at the width you set.",
+      },
+      {
+        question: "What format is the resized image?",
+        answer:
+          "The same as the original — JPG stays JPG, PNG stays PNG, and WEBP stays WEBP where your browser supports it.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Resizing happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["crop-image", "compress-image", "flip-image"],
+    keywords: [
+      "resize image",
+      "change image size",
+      "resize photo online",
+      "image resizer",
+      "resize png jpg",
+    ],
+  },
+  {
+    slug: "crop-image",
+    name: "Crop Image",
+    actionLabel: "Crop image",
+    shortDescription: "Cut an image down to the area you want with a draggable crop frame.",
+    longDescription: [
+      "Crop Image trims unwanted edges from a photo or screenshot. Drag the crop frame or its corners over the preview — or fine-tune each edge with a slider — and see the exact size of the result in pixels.",
+      "The cropped image keeps its original format and quality, and the whole process runs in your browser, so your image is never uploaded.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "Crop",
+    acceptedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
+    acceptedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+    multipleFiles: false,
+    outputExtension: ".jpg",
+    faq: [
+      {
+        question: "Can I crop to exact dimensions?",
+        answer:
+          "Adjust each edge with the sliders and watch the result size update in pixels as you go.",
+      },
+      {
+        question: "Does cropping reduce image quality?",
+        answer:
+          "No. The pixels you keep are copied as-is; only the parts outside the frame are removed.",
+      },
+      {
+        question: "Which formats can I crop?",
+        answer: "JPG, PNG, and WEBP. The result keeps the same format as the original.",
+      },
+      {
+        question: "Is my image uploaded?",
+        answer: "No. Cropping happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["resize-image", "flip-image", "compress-image"],
+    keywords: ["crop image", "crop photo online", "image cropper", "trim image", "cut image"],
+  },
+  {
+    slug: "flip-image",
+    name: "Flip Image",
+    actionLabel: "Flip images",
+    shortDescription: "Mirror images horizontally or vertically — one at a time or in bulk.",
+    longDescription: [
+      "Flip Image creates a mirror image of your photos: left to right, or top to bottom. It's handy for fixing selfies taken with a front camera, making reflections, or preparing designs for print transfers.",
+      "Flip several images at once, preview the result instantly, and download them in their original format. Everything runs in your browser, so your images are never uploaded.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "FlipHorizontal",
+    acceptedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
+    acceptedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+    multipleFiles: true,
+    outputExtension: ".jpg",
+    faq: [
+      {
+        question: "What's the difference between flipping and rotating?",
+        answer: "Rotating turns an image in 90° steps. Flipping mirrors it, like looking in a mirror.",
+      },
+      {
+        question: "Can I flip several images at once?",
+        answer:
+          "Yes. Add up to 20 images and they're all flipped the same way, then downloaded together as a .zip.",
+      },
+      {
+        question: "Does flipping reduce quality?",
+        answer:
+          "No noticeable loss — PNG stays lossless, and JPG and WEBP are saved at high quality.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Flipping happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["rotate-images", "crop-image", "resize-image"],
+    keywords: [
+      "flip image",
+      "mirror image",
+      "flip photo horizontally",
+      "mirror photo online",
+      "flip picture",
+    ],
+  },
+  {
+    slug: "png-to-jpg",
+    name: "PNG to JPG",
+    actionLabel: "Convert to JPG",
+    shortDescription: "Convert PNG images to JPG to make them smaller and more widely compatible.",
+    longDescription: [
+      "PNG to JPG converts your PNG images into JPG files, which are usually much smaller — ideal for photos, email attachments, and upload forms that only accept JPG. Convert several images at once and adjust the quality to balance size and sharpness.",
+      "JPG doesn't support transparency, so transparent areas are filled with white. The conversion runs entirely in your browser, so your images are never uploaded.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "RefreshCw",
+    acceptedExtensions: [".png"],
+    acceptedMimeTypes: ["image/png"],
+    multipleFiles: true,
+    outputExtension: ".jpg",
+    faq: [
+      {
+        question: "Why convert PNG to JPG?",
+        answer:
+          "JPG files are typically much smaller than PNGs for photos and are accepted almost everywhere, from email to online forms.",
+      },
+      {
+        question: "What happens to transparent backgrounds?",
+        answer: "JPG has no transparency, so transparent areas are filled with white.",
+      },
+      {
+        question: "Can I convert many PNGs at once?",
+        answer: "Yes. Add up to 30 images; they're converted together and downloaded as a .zip.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Conversion happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["jpg-to-png", "png-to-webp", "compress-image"],
+    keywords: [
+      "png to jpg",
+      "convert png to jpg",
+      "png to jpeg",
+      "png to jpg online",
+      "change png to jpg",
+    ],
+  },
+  {
+    slug: "jpg-to-png",
+    name: "JPG to PNG",
+    actionLabel: "Convert to PNG",
+    shortDescription: "Convert JPG photos to lossless PNG images.",
+    longDescription: [
+      "JPG to PNG converts your JPG or JPEG images into the PNG format. PNG is lossless, so the image won't lose more quality when you edit and save it again — useful for graphics you'll keep working on, or for tools and platforms that require PNG.",
+      "Convert several images at once and download them together. Conversion happens entirely in your browser, so your images are never uploaded.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "RefreshCw",
+    acceptedExtensions: [".jpg", ".jpeg"],
+    acceptedMimeTypes: ["image/jpeg"],
+    multipleFiles: true,
+    outputExtension: ".png",
+    faq: [
+      {
+        question: "Will converting JPG to PNG improve quality?",
+        answer:
+          "No — detail already lost in the JPG can't be restored. But PNG prevents any further loss when you edit and save again.",
+      },
+      {
+        question: "Why is the PNG larger than the JPG?",
+        answer:
+          "PNG stores every pixel without lossy compression, so photos usually get bigger. That's the trade-off for lossless quality.",
+      },
+      {
+        question: "Can I convert several JPGs at once?",
+        answer: "Yes. Add up to 30 images and download them as a .zip.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Conversion happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["png-to-jpg", "jpg-to-webp", "resize-image"],
+    keywords: [
+      "jpg to png",
+      "jpeg to png",
+      "convert jpg to png",
+      "jpg to png online",
+      "change jpg to png",
+    ],
+  },
+  {
+    slug: "webp-to-jpg",
+    name: "WEBP to JPG",
+    actionLabel: "Convert to JPG",
+    shortDescription: "Convert WEBP images to JPG so they open in any app or website.",
+    longDescription: [
+      "WEBP to JPG converts modern WEBP images — common on websites — into JPG, the format supported by virtually every app, device, and upload form. Convert one image or many at once, and adjust quality to balance file size and sharpness.",
+      "Transparent areas are filled with white, since JPG doesn't support transparency. Conversion happens entirely in your browser, so your images are never uploaded.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "RefreshCw",
+    acceptedExtensions: [".webp"],
+    acceptedMimeTypes: ["image/webp"],
+    multipleFiles: true,
+    outputExtension: ".jpg",
+    faq: [
+      {
+        question: "Why convert WEBP to JPG?",
+        answer:
+          "Some older apps, editors, and upload forms don't accept WEBP. JPG works almost everywhere.",
+      },
+      {
+        question: "Will I lose quality?",
+        answer:
+          "At the default quality the difference is hard to see. Increase the quality slider for the sharpest result.",
+      },
+      {
+        question: "Can I convert several WEBP images at once?",
+        answer: "Yes. Add up to 30 images and download them as a .zip.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Conversion happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["webp-to-png", "jpg-to-webp", "compress-image"],
+    keywords: [
+      "webp to jpg",
+      "convert webp to jpg",
+      "webp to jpeg",
+      "webp converter",
+      "open webp image",
+    ],
+  },
+  {
+    slug: "jpg-to-webp",
+    name: "JPG to WEBP",
+    actionLabel: "Convert to WEBP",
+    shortDescription:
+      "Convert JPG photos to WEBP for smaller, faster-loading images on the web.",
+    longDescription: [
+      "JPG to WEBP converts your JPG images into WEBP, a modern format that typically produces noticeably smaller files at similar visual quality — great for speeding up websites and saving storage.",
+      "Adjust the quality to find the right balance and convert many images at once. Conversion happens entirely in your browser, so your images are never uploaded. Creating WEBP files needs a recent version of Chrome, Edge, or Firefox.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "RefreshCw",
+    acceptedExtensions: [".jpg", ".jpeg"],
+    acceptedMimeTypes: ["image/jpeg"],
+    multipleFiles: true,
+    outputExtension: ".webp",
+    faq: [
+      {
+        question: "Is WEBP smaller than JPG?",
+        answer:
+          "Usually, yes — WEBP often saves a significant amount of space at similar quality, which helps pages load faster.",
+      },
+      {
+        question: "Do all browsers support WEBP?",
+        answer:
+          "All modern browsers can display WEBP. Creating WEBP files here requires a recent Chrome, Edge, or Firefox.",
+      },
+      {
+        question: "Can I convert several JPGs at once?",
+        answer: "Yes. Add up to 30 images and download them as a .zip.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Conversion happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["webp-to-jpg", "png-to-webp", "compress-image"],
+    keywords: [
+      "jpg to webp",
+      "jpeg to webp",
+      "convert jpg to webp",
+      "webp converter online",
+      "optimize images webp",
+    ],
+  },
+  {
+    slug: "webp-to-png",
+    name: "WEBP to PNG",
+    actionLabel: "Convert to PNG",
+    shortDescription: "Convert WEBP images to PNG while keeping transparency.",
+    longDescription: [
+      "WEBP to PNG converts WEBP images into PNG, the lossless format supported by every image editor. Transparency is preserved, so logos, icons, and cut-out graphics keep their clear backgrounds.",
+      "Convert several images at once and download them together. Conversion happens entirely in your browser, so your images are never uploaded.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "RefreshCw",
+    acceptedExtensions: [".webp"],
+    acceptedMimeTypes: ["image/webp"],
+    multipleFiles: true,
+    outputExtension: ".png",
+    faq: [
+      {
+        question: "Is transparency kept?",
+        answer:
+          "Yes. PNG supports transparency, so transparent areas in your WEBP image stay transparent.",
+      },
+      {
+        question: "Why convert WEBP to PNG?",
+        answer:
+          "PNG opens in every editor and design tool and won't lose quality when you edit and re-save it.",
+      },
+      {
+        question: "Can I convert several WEBP files at once?",
+        answer: "Yes. Add up to 30 images and download them as a .zip.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Conversion happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["webp-to-jpg", "png-to-webp", "compress-image"],
+    keywords: [
+      "webp to png",
+      "convert webp to png",
+      "webp to png transparent",
+      "webp to png online",
+      "save webp as png",
+    ],
+  },
+  {
+    slug: "png-to-webp",
+    name: "PNG to WEBP",
+    actionLabel: "Convert to WEBP",
+    shortDescription: "Convert PNG images to WEBP for smaller files that keep transparency.",
+    longDescription: [
+      "PNG to WEBP converts your PNG images into WEBP, which usually makes files much smaller while keeping transparency — ideal for website graphics, icons, and screenshots.",
+      "Choose the quality, convert many images at once, and download them together. Conversion happens entirely in your browser, so your images are never uploaded. Creating WEBP files needs a recent version of Chrome, Edge, or Firefox.",
+    ],
+    category: "image",
+    processing: "client",
+    icon: "RefreshCw",
+    acceptedExtensions: [".png"],
+    acceptedMimeTypes: ["image/png"],
+    multipleFiles: true,
+    outputExtension: ".webp",
+    faq: [
+      {
+        question: "Does WEBP keep transparency?",
+        answer: "Yes. WEBP supports transparency, so transparent PNG areas stay transparent.",
+      },
+      {
+        question: "How much smaller will my images be?",
+        answer:
+          "It varies, but WEBP files are often significantly smaller than the same image saved as PNG.",
+      },
+      {
+        question: "Can I convert several PNGs at once?",
+        answer: "Yes. Add up to 30 images and download them as a .zip.",
+      },
+      {
+        question: "Are my images uploaded?",
+        answer: "No. Conversion happens locally in your browser.",
+      },
+    ],
+    relatedSlugs: ["webp-to-png", "jpg-to-webp", "compress-image"],
+    keywords: [
+      "png to webp",
+      "convert png to webp",
+      "png to webp online",
+      "compress png to webp",
+      "png webp converter",
     ],
   },
 ];

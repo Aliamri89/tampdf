@@ -80,14 +80,14 @@ export async function Footer({ locale }: { locale: Locale }) {
   return (
     <footer className="mt-16 border-t border-border bg-surface-muted/50">
       <Container className="py-12">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 sm:gap-10 lg:grid-cols-6">
-          <div className="col-span-2 sm:col-span-3 lg:col-span-1">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 justify-items-center gap-x-8 gap-y-10 text-center sm:grid-cols-3 sm:gap-10 lg:grid-cols-5">
+          <div className="col-span-2 flex flex-col items-center sm:col-span-3 lg:col-span-1">
             <Logo locale={locale} />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-foreground/60">
+            <p className="mx-auto mt-4 max-w-xs text-sm leading-relaxed text-foreground/60">
               {siteConfig.description}
             </p>
             {socialLinks.length > 0 && (
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-4 flex items-center justify-center gap-3">
                 {socialLinks.map((link, index) => {
                   const SocialIcon = SOCIAL_ICONS[link.platform];
                   return (
@@ -129,7 +129,7 @@ export async function Footer({ locale }: { locale: Locale }) {
           <FooterColumn title={dict.footer.company} links={companyLinks} />
           <FooterColumn title={dict.footer.legal} links={legalLinks} />
         </div>
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-sm text-foreground/50 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-center gap-2 border-t border-border pt-6 text-center text-sm text-foreground/50">
           <p>
             &copy; {new Date().getFullYear()} {siteName}. {dict.footer.rights}
           </p>

@@ -180,6 +180,25 @@ export interface Post {
         | 'crop-pdf'
         | 'resize-pdf'
         | 'png-to-pdf'
+        | 'extract-pdf-pages'
+        | 'add-page-numbers'
+        | 'add-watermark'
+        | 'remove-watermark'
+        | 'pdf-to-images'
+        | 'images-to-pdf'
+        | 'flip-pdf'
+        | 'edit-pdf-metadata'
+        | 'remove-pdf-metadata'
+        | 'pdf-info'
+        | 'resize-image'
+        | 'crop-image'
+        | 'flip-image'
+        | 'png-to-jpg'
+        | 'jpg-to-png'
+        | 'webp-to-jpg'
+        | 'jpg-to-webp'
+        | 'webp-to-png'
+        | 'png-to-webp'
       )
     | null;
   /**
@@ -345,7 +364,26 @@ export interface ToolUsageEvent {
     | 'reorder-pdf-pages'
     | 'crop-pdf'
     | 'resize-pdf'
-    | 'png-to-pdf';
+    | 'png-to-pdf'
+    | 'extract-pdf-pages'
+    | 'add-page-numbers'
+    | 'add-watermark'
+    | 'remove-watermark'
+    | 'pdf-to-images'
+    | 'images-to-pdf'
+    | 'flip-pdf'
+    | 'edit-pdf-metadata'
+    | 'remove-pdf-metadata'
+    | 'pdf-info'
+    | 'resize-image'
+    | 'crop-image'
+    | 'flip-image'
+    | 'png-to-jpg'
+    | 'jpg-to-png'
+    | 'webp-to-jpg'
+    | 'jpg-to-webp'
+    | 'webp-to-png'
+    | 'png-to-webp';
   success: boolean;
   /**
    * The JS exception's name (e.g. PasswordException), when success is false.

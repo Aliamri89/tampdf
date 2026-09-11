@@ -19,6 +19,11 @@ export interface ToolDefinition {
   slug: string;
   /** Short display name, e.g. "Merge PDF" */
   name: string;
+  /**
+   * Optional compact label for homepage tool cards only (keeps long names on
+   * one line). Never used for page titles, headings, or SEO.
+   */
+  shortName?: string;
   /** Action verb used in buttons, e.g. "Merge PDFs" */
   actionLabel: string;
   /** One-sentence summary used on cards and as meta description base */

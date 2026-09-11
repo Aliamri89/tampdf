@@ -47,7 +47,9 @@ export function getLocalizedTool(slug: string, locale: Locale): ToolDefinition |
   if (!base) return undefined;
   if (locale === defaultLocale) return base;
   const override = toolsAr[slug];
-  return override ? { ...base, ...override } : base;
+  // The English card label must never leak into another locale, so
+  // `shortName` only survives when the translation provides its own.
+  return override ? { ...base, shortName: undefined, ...override } : base;
 }
 
 export function getLocalizedTools(locale: Locale): ToolDefinition[] {

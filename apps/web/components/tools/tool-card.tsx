@@ -20,35 +20,35 @@ export function ToolCard({
   return (
     <Link
       href={`/${locale}/${tool.slug}`}
+      title={tool.name}
       className={cn(
-        "group flex h-full items-center justify-between gap-2 rounded-xl border p-3 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md",
+        "group flex h-full min-h-[4.5rem] items-center gap-2.5 rounded-2xl border px-2.5 py-3 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg sm:min-h-[5.25rem] sm:gap-3.5 sm:px-4 xl:gap-2.5 xl:px-3.5",
         accent.card,
         accent.border,
+        accent.shadow,
       )}
     >
-      <span className="flex min-w-0 items-center gap-2.5">
-        <span
-          className={cn(
-            "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-transform duration-300 ease-out group-hover:scale-105 sm:h-10 sm:w-10",
-            accent.iconBg,
-            accent.iconText,
-          )}
-        >
-          <Icon name={tool.icon} size={19} />
-        </span>
-        <span className="min-w-0 text-[13px] font-semibold leading-tight text-foreground line-clamp-2 sm:text-sm">
-          {tool.name}
-        </span>
+      <span
+        className={cn(
+          "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 ease-out group-hover:scale-105 sm:h-12 sm:w-12",
+          accent.iconBg,
+          accent.iconText,
+        )}
+      >
+        <Icon name={tool.icon} strokeWidth={2.1} className="h-[22px] w-[22px] sm:h-[26px] sm:w-[26px]" />
+      </span>
+      <span className="min-w-0 flex-1 text-[13.5px] font-bold leading-snug text-foreground line-clamp-2 sm:text-[15px] xl:text-[14.5px]">
+        {tool.shortName ?? tool.name}
       </span>
       <span
         className={cn(
-          "hidden h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-surface/70 text-foreground/40 transition-colors duration-300 ease-out lg:flex",
+          "hidden h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/80 bg-white/90 text-foreground/55 shadow-sm transition-colors duration-300 ease-out md:flex xl:h-7 xl:w-7 dark:bg-surface",
           accent.arrowHover,
         )}
       >
         <ArrowRight
-          size={14}
-          className="transition-transform duration-300 ease-out group-hover:translate-x-0.5 rtl:rotate-180"
+          size={15}
+          className="transition-transform duration-300 ease-out group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
         />
       </span>
     </Link>

@@ -86,6 +86,15 @@ export async function loadPdfDocument(file: File): Promise<PDFDocumentProxy> {
 }
 
 /**
+ * Releases a document *and* its dedicated pdf.js worker. `cleanup()` alone
+ * only frees page caches, leaving one worker thread alive per loaded file,
+ * which made the tab noticeably slower after several conversions.
+ */
+export async function closePdfDocument(pdf: PDFDocumentProxy): Promise<void> {
+  await pdf.loadingTask.destroy();
+}
+
+/**
  * True when a PDF failed to load specifically because it's encrypted with a
  * password. Unlike pdf-lib (used elsewhere for merge/rotate/compress, which
  * can proceed past a nominal owner-password via `ignoreEncryption`), pdf.js
@@ -147,7 +156,40 @@ export async function renderPdfThumbnail(file: File, maxDimension = 160): Promis
     releaseCanvas(canvas);
     return dataUrl;
   } finally {
-    await pdf.cleanup();
+    await closePdfDocument(pdf);
+  }
+}
+
+/** Page count of a PDF (throws a PasswordException for protected files). */
+export async function countPdfPages(file: File): Promise<number> {
+  const pdf = await loadPdfDocument(file);
+  try {
+    return pdf.numPages;
+  } finally {
+    await closePdfDocument(pdf);
+  }
+}
+
+export interface PagePreview {
+  dataUrl: string;
+  /** Visible page size in PDF points (rotation applied). */
+  pageWidth: number;
+  pageHeight: number;
+  pageCount: number;
+}
+
+/** Renders page 1 at up to `maxDimension` px, plus the page's visible size and the document's page count. */
+export async function renderFirstPagePreview(file: File, maxDimension = 520): Promise<PagePreview> {
+  const pdf = await loadPdfDocument(file);
+  try {
+    const page = await pdf.getPage(1);
+    const base = page.getViewport({ scale: 1 });
+    const canvas = await renderPageToCanvas(pdf, 1, maxDimension / Math.max(base.width, base.height));
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+    releaseCanvas(canvas);
+    return { dataUrl, pageWidth: base.width, pageHeight: base.height, pageCount: pdf.numPages };
+  } finally {
+    await closePdfDocument(pdf);
   }
 }
 
@@ -175,7 +217,7 @@ export async function renderAllPageThumbnails(
     }
     return thumbnails;
   } finally {
-    await pdf.cleanup();
+    await closePdfDocument(pdf);
   }
 }
 
@@ -204,6 +246,47 @@ export async function renderPdfToJpegs(
     }
     return pages;
   } finally {
-    await pdf.cleanup();
+    await closePdfDocument(pdf);
+  }
+}
+
+export type PageImageType = "image/jpeg" | "image/png" | "image/webp";
+
+/** Thrown when the browser can't encode the requested format (WebP in older Safari). */
+export class PageImageEncodingError extends Error {
+  constructor(type: string) {
+    super(`Encoding ${type} is not supported in this browser`);
+    this.name = "PageImageEncodingError";
+  }
+}
+
+/** Renders every page of a PDF to an image blob of the given type. */
+export async function renderPdfToImages(
+  file: File,
+  options: { scale: number; type: PageImageType; quality?: number },
+  onProgress?: (rendered: number, total: number) => void,
+): Promise<RenderedPage[]> {
+  const pdf = await loadPdfDocument(file);
+  try {
+    const total = pdf.numPages;
+    const pages: RenderedPage[] = [];
+    for (let pageNumber = 1; pageNumber <= total; pageNumber++) {
+      const canvas = await renderPageToCanvas(pdf, pageNumber, options.scale);
+      try {
+        const blob = await canvasToBlob(
+          canvas,
+          options.type,
+          options.type === "image/png" ? undefined : (options.quality ?? 0.9),
+        );
+        if (blob.type !== options.type) throw new PageImageEncodingError(options.type);
+        pages.push({ pageNumber, blob });
+      } finally {
+        releaseCanvas(canvas);
+      }
+      onProgress?.(pageNumber, total);
+    }
+    return pages;
+  } finally {
+    await closePdfDocument(pdf);
   }
 }
