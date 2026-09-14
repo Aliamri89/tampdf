@@ -16,6 +16,8 @@ npm run dev    # apps/web on http://localhost:3000
 
 ## Deployment
 
+See **[DEPLOYMENT.md](DEPLOYMENT.md)** for the production runbook — Hostinger app type, entry file, standalone output, media persistence, and troubleshooting.
+
 **apps/web** needs a host with a **persistent disk** for uploaded media (`media-uploads/`) — a VM, a Railway/Fly.io/Render service with a volume attached, or shared/managed Node.js hosting like Hostinger Business — not a serverless/edge platform like Vercel. The admin CMS (Payload) stores its data in an external Postgres database (see `DATABASE_URI` below), so the database itself survives redeploys regardless of host; only uploaded media still needs a persistent volume/disk, or every deploy wipes uploaded images.
 
 Payload's SQLite adapter was tried first but dropped: shared Node.js hosts like Hostinger's Business plan cap the number of OS threads/processes a single account can spawn, and SQLite's client (`libsql`, a Rust binary) opens a new OS thread per connection — under load this hits the cap and crashes with `OS can't spawn worker thread`. An external Postgres (e.g. Supabase's free tier) connects over the network instead and doesn't have this failure mode.
@@ -29,6 +31,7 @@ See `apps/web/.env.example` for the canonical, commented list. No `NEXT_PUBLIC_*
 | `PAYLOAD_SECRET` | **Required** | Long random string used to sign Payload's auth tokens/cookies. Must be generated (not copied from anywhere) — e.g. `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`. Unique per environment; the app throws `Error: missing secret key` at startup if it's unset. |
 | `DATABASE_URI` | **Required** | Postgres connection string, e.g. `postgresql://user:pass@host:5432/dbname`. Point this at a managed Postgres instance (this project uses Supabase's free tier — use the **Session pooler** connection string, not the Direct connection one, since most shared hosts including Hostinger only support outbound IPv4 and the Direct connection is IPv6-only by default). If the password contains special characters (e.g. `@`), percent-encode them in the URI. |
 | `SERVER_URL` | Optional | The site's real public origin, e.g. `https://tampdf.com` (no trailing path). Enables Payload's CSRF origin allowlist for authenticated requests. Safe to leave unset for this single-admin app; recommended once the production domain is live. |
+| `MEDIA_UPLOAD_DIR` | **Required in production** | Absolute path where Payload writes uploaded media, e.g. `/home/<user>/media-uploads`. Must be outside the deployed app directory, which the host replaces on every deploy — otherwise uploads are wiped while their database rows survive. Unset locally falls back to `apps/web/media-uploads/`. See [DEPLOYMENT.md](DEPLOYMENT.md). |
 
 Set `PAYLOAD_SECRET` and `DATABASE_URI` in Hostinger's Node.js app environment-variables panel (not committed to git — they're per-environment secrets/config). No other env vars are read anywhere in this codebase.
 
