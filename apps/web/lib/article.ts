@@ -7,6 +7,9 @@ import type { Media, Post, Setting } from "@/payload/payload-types";
 
 const WORDS_PER_MINUTE = 200;
 
+/** Payload's Posts collection is only localized in English/Arabic (see `toArticleLocale` in `@tampdf/config`). */
+type ArticleLocale = "en" | "ar";
+
 /** Rounded up to the nearest minute, minimum 1 — matches how every major reading-time convention rounds. */
 export function calculateReadingMinutes(wordCount: number): number {
   return Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
@@ -14,9 +17,7 @@ export function calculateReadingMinutes(wordCount: number): number {
 
 /** Shared by every date display on the blog (article header, post cards). */
 export function formatArticleDate(value: string, locale: Locale): string {
-  return new Date(value).toLocaleDateString(locale === "ar" ? "ar" : "en-US", {
-    dateStyle: "medium",
-  });
+  return new Date(value).toLocaleDateString(locale, { dateStyle: "medium" });
 }
 
 /** 1 and 2 minutes need their own template (singular/dual, most pronounced in Arabic); 3+ shares one plural template. */
@@ -80,7 +81,7 @@ export function getLastUpdatedDate(post: Post): string | null {
 
 export async function getAdjacentPosts(
   post: Post,
-  locale: Locale,
+  locale: ArticleLocale,
 ): Promise<{ previous: Post | null; next: Post | null }> {
   if (!post.publishedDate) return { previous: null, next: null };
 
@@ -126,7 +127,7 @@ export async function getAdjacentPosts(
   }
 }
 
-async function getAutoRelatedPosts(post: Post, locale: Locale, limit: number): Promise<Post[]> {
+async function getAutoRelatedPosts(post: Post, locale: ArticleLocale, limit: number): Promise<Post[]> {
   const payload = await getPayloadClient();
   const result = await payload.find({
     collection: "posts",
@@ -139,7 +140,7 @@ async function getAutoRelatedPosts(post: Post, locale: Locale, limit: number): P
   return result.docs as Post[];
 }
 
-export async function getRelatedPosts(post: Post, locale: Locale, limit = 3): Promise<Post[]> {
+export async function getRelatedPosts(post: Post, locale: ArticleLocale, limit = 3): Promise<Post[]> {
   const manualIds = (post.relatedPosts ?? [])
     .map((related) => (typeof related === "object" ? related.id : related))
     .filter((id) => id !== post.id);

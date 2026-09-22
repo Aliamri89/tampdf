@@ -5,9 +5,12 @@ export interface ToolTranslationOverride {
   shortName?: string;
   actionLabel: string;
   shortDescription: string;
-  longDescription: string[];
-  faq: ToolFaq[];
-  keywords: string[];
+  /** Omit for a locale that only translates the short, high-visibility fields so far — falls back to the English paragraphs. */
+  longDescription?: string[];
+  /** Omit for a locale that only translates the short, high-visibility fields so far — falls back to the English FAQ. */
+  faq?: ToolFaq[];
+  /** Omit for a locale that hasn't translated SEO keywords yet — falls back to the English keywords. */
+  keywords?: string[];
 }
 
 export const toolsAr: Record<string, ToolTranslationOverride> = {

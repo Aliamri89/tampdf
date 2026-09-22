@@ -11,6 +11,7 @@ const en = {
     processedClient: "Processed in your browser — files never uploaded",
     faqHeading: "Frequently asked questions",
     relatedHeading: "Related tools",
+    metaTitleSuffix: "— Free Online Tool",
   },
   article: {
     tocHeading: "Table of Contents",
@@ -588,6 +589,7 @@ const ar: typeof en = {
     processedClient: "تتم المعالجة داخل متصفحك — لا يتم رفع الملفات أبدًا",
     faqHeading: "الأسئلة الشائعة",
     relatedHeading: "أدوات ذات صلة",
+    metaTitleSuffix: "— أداة مجانية عبر الإنترنت",
   },
   article: {
     tocHeading: "جدول المحتويات",
@@ -1150,6 +1152,72 @@ const ar: typeof en = {
   },
 };
 
-export const dictionaries = { en, ar };
+import type { Locale } from "@tampdf/config";
+import { deepMerge, type DeepPartial } from "./merge";
+import { cs } from "./locales/cs";
+import { da } from "./locales/da";
+import { de } from "./locales/de";
+import { el } from "./locales/el";
+import { es } from "./locales/es";
+import { fi } from "./locales/fi";
+import { fr } from "./locales/fr";
+import { hi } from "./locales/hi";
+import { id } from "./locales/id";
+import { it } from "./locales/it";
+import { ja } from "./locales/ja";
+import { ko } from "./locales/ko";
+import { nl } from "./locales/nl";
+import { no } from "./locales/no";
+import { pl } from "./locales/pl";
+import { pt } from "./locales/pt";
+import { ru } from "./locales/ru";
+import { sv } from "./locales/sv";
+import { th } from "./locales/th";
+import { tr } from "./locales/tr";
+import { vi } from "./locales/vi";
+import { zh } from "./locales/zh";
 
 export type Dictionary = typeof en;
+
+// Only `en`/`ar` are full, hand-authored dictionaries; every other locale
+// is a partial translation (see `i18n/locales/*.ts`) merged key-by-key onto
+// the English base with `deepMerge` -- so a locale with, say, no
+// `workspace.*` translations yet still gets a fully-translated header,
+// hero, tool picker, footer, etc., and only the untranslated leaves fall
+// back to English (never a whole section, and never silently the whole
+// dictionary).
+const partialTranslations: Partial<Record<Locale, DeepPartial<Dictionary>>> = {
+  es,
+  fr,
+  de,
+  it,
+  pt,
+  nl,
+  tr,
+  ru,
+  zh,
+  ja,
+  ko,
+  hi,
+  id,
+  vi,
+  th,
+  pl,
+  sv,
+  da,
+  no,
+  fi,
+  cs,
+  el,
+};
+
+export const dictionaries: Record<Locale, Dictionary> = {
+  en,
+  ar,
+  ...(Object.fromEntries(
+    Object.entries(partialTranslations).map(([locale, translation]) => [
+      locale,
+      deepMerge(en, translation),
+    ]),
+  ) as Record<Locale, Dictionary>),
+};

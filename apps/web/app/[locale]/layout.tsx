@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
-import {
-  getLocalizedSiteConfig,
-  isSiteLocale,
-  isValidLocale,
-  localeDirection,
-  locales,
-  resolveContentLocale,
-} from "@tampdf/config";
+import { getLocalizedSiteConfig, isValidLocale, localeDirection, locales } from "@tampdf/config";
 import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import { Footer } from "@/components/footer";
@@ -30,8 +23,16 @@ const tajawal = Tajawal({
   weight: ["400", "500", "700"],
 });
 
+// Every locale in `locales` is a real, fully-dictionaried page (see
+// i18n/get-dictionary.ts), but only English/Arabic are pre-rendered at
+// build time -- pre-rendering all 24 would multiply build time/output for
+// languages that get a fraction of the traffic. The other 22 render
+// on-demand on first visit and are cached afterwards via `revalidate`
+// below, same as any other dynamic param; nothing about them is a stub.
+const PRERENDERED_LOCALES = ["en", "ar"] as const;
+
 export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+  return PRERENDERED_LOCALES.map((locale) => ({ locale }));
 }
 
 // Pages under this layout are prerendered at build time (SSG). Without
@@ -46,11 +47,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale = resolveContentLocale(rawLocale);
-  // Languages without their own dictionary render the English content, so
-  // their canonical URL points at the real `/en` page instead of claiming
-  // an independent (but actually duplicate) `/xx` page.
-  const canonicalLocale = isValidLocale(rawLocale) ? locale : "en";
+  const locale = isValidLocale(rawLocale) ? rawLocale : "en";
   const siteConfig = getLocalizedSiteConfig(locale);
   const settings = await getSettings();
   const siteName = settings.siteName || siteConfig.name;
@@ -61,16 +58,19 @@ export async function generateMetadata({
     title: { default: title, template: `%s | ${siteName}` },
     description: siteConfig.description,
     alternates: {
-      canonical: `/${canonicalLocale}`,
-      languages: { en: "/en", ar: "/ar", "x-default": "/en" },
+      canonical: `/${locale}`,
+      languages: Object.fromEntries([
+        ...locales.map((l) => [l, `/${l}`]),
+        ["x-default", "/en"],
+      ]),
     },
     openGraph: {
       type: "website",
       siteName,
       title,
       description: siteConfig.description,
-      url: `/${canonicalLocale}`,
-      locale: locale === "ar" ? "ar_SA" : "en_US",
+      url: `/${locale}`,
+      locale,
     },
     twitter: {
       card: "summary_large_image",
@@ -88,8 +88,8 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  if (!isSiteLocale(rawLocale)) notFound();
-  const locale = resolveContentLocale(rawLocale);
+  if (!isValidLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   const dir = localeDirection[locale];
   const dict = getDictionary(locale);
 

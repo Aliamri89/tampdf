@@ -1,9 +1,4 @@
-import {
-  getLocalizedSiteConfig,
-  getLocalizedTools,
-  isSiteLocale,
-  resolveContentLocale,
-} from "@tampdf/config";
+import { getLocalizedSiteConfig, getLocalizedTools, isValidLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { FeaturesRow } from "@/components/home/features-row";
 import { HeroVisuals } from "@/components/home/hero-visuals";
@@ -32,8 +27,8 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  if (!isSiteLocale(rawLocale)) notFound();
-  const locale = resolveContentLocale(rawLocale);
+  if (!isValidLocale(rawLocale)) notFound();
+  const locale = rawLocale;
 
   const siteConfig = getLocalizedSiteConfig(locale);
   const dict = getDictionary(locale);

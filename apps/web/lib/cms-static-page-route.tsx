@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { isSiteLocale, resolveContentLocale } from "@tampdf/config";
+import { isValidLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { StaticPage } from "@/components/static-page";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -33,15 +33,15 @@ export function createStaticCmsPage(
     params: Promise<{ locale: string }>;
   }): Promise<Metadata> {
     const { locale: rawLocale } = await params;
-    const locale = resolveContentLocale(rawLocale);
+    const locale = isValidLocale(rawLocale) ? rawLocale : "en";
     const fallback = getFallback(getDictionary(locale));
     return getStaticPageMetadata(key, rawLocale, locale, path, fallback.title, fallback.intro);
   }
 
   async function Page({ params }: { params: Promise<{ locale: string }> }) {
     const { locale: rawLocale } = await params;
-    if (!isSiteLocale(rawLocale)) notFound();
-    const locale = resolveContentLocale(rawLocale);
+    if (!isValidLocale(rawLocale)) notFound();
+    const locale = rawLocale;
     const fallback = getFallback(getDictionary(locale));
     const doc = await getStaticPageContent(key, locale);
 

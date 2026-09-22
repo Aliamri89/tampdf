@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { isSiteLocale, resolveContentLocale } from "@tampdf/config";
+import { isValidLocale, toArticleLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { BlogPostCard } from "@/components/article/blog-post-card";
 import { StaticPage } from "@/components/static-page";
@@ -14,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const dict = getDictionary(resolveContentLocale(rawLocale));
+  const dict = getDictionary(isValidLocale(rawLocale) ? rawLocale : "en");
   return buildStaticPageMetadata(
     rawLocale,
     "/blog",
@@ -29,9 +29,13 @@ export default async function BlogPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  if (!isSiteLocale(rawLocale)) notFound();
-  const locale = resolveContentLocale(rawLocale);
+  if (!isValidLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   const dict = getDictionary(locale);
+  // Articles are only localized in English/Arabic in Payload (see
+  // `toArticleLocale`) -- every other UI language still reads them in
+  // English, the site's own chrome around them stays fully translated.
+  const articleLocale = toArticleLocale(locale);
 
   let posts: Post[] = [];
   try {
@@ -40,7 +44,7 @@ export default async function BlogPage({
       collection: "posts",
       where: { status: { equals: "published" } },
       sort: "-publishedDate",
-      locale,
+      locale: articleLocale,
       depth: 1,
       limit: 50,
     });

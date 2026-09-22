@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { isSiteLocale, resolveContentLocale } from "@tampdf/config";
+import { isValidLocale, toArticleLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { StaticPage } from "@/components/static-page";
@@ -19,21 +19,22 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale = resolveContentLocale(rawLocale);
+  const locale = isValidLocale(rawLocale) ? rawLocale : "en";
   const dict = getDictionary(locale);
   return buildStaticPageMetadata(rawLocale, "/faq", dict.staticPages.faq.title, dict.staticPages.faq.intro);
 }
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
-  if (!isSiteLocale(rawLocale)) notFound();
-  const locale = resolveContentLocale(rawLocale);
+  if (!isValidLocale(rawLocale)) notFound();
+  const locale = rawLocale;
   const dict = getDictionary(locale);
 
-  // Single request for every published FAQ; the accordion below is a pure
-  // Client Component over this already-fetched data — no further requests
-  // fire when a question is expanded or collapsed.
-  const faqs = await getFaqs(locale);
+  // The general FAQ collection is CMS-managed content (Payload), only
+  // localized in English/Arabic like Posts -- every other UI language
+  // reads the English FAQs; the page chrome (title, empty-state note)
+  // still shows in the visitor's real chosen language via `dict`.
+  const faqs = await getFaqs(toArticleLocale(locale));
 
   const jsonLd =
     faqs.length > 0

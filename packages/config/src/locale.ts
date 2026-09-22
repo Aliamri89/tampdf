@@ -1,48 +1,18 @@
-export const locales = ["en", "ar"] as const;
-
-export type Locale = (typeof locales)[number];
-
-export const defaultLocale: Locale = "en";
-
-export const localeDirection: Record<Locale, "ltr" | "rtl"> = {
-  en: "ltr",
-  ar: "rtl",
-};
-
-/**
- * Each language's own name, in its own script — always shown as-is
- * regardless of the site's current UI language (an Arabic reader picking
- * English from the switcher should see "English", not a translated label,
- * and vice versa). Used by the header's language menu.
- */
-export const localeNativeNames: Record<Locale, string> = {
-  en: "English",
-  ar: "العربية",
-};
-
-export function isValidLocale(value: string): value is Locale {
-  return (locales as readonly string[]).includes(value);
-}
-
 export interface LanguageOption {
-  /** Not necessarily a `Locale` — most entries here have no dedicated dictionary yet. */
   code: string;
   /** The language's own name, in its own script. */
   name: string;
 }
 
 /**
- * Every language the header's language menu displays and every one of
- * them is a real, clickable route (see `isSiteLocale`/`resolveContentLocale`
- * below) — picking one always navigates and always renders a full page,
- * never a 404. Only `locales` above (English/Arabic) have their own
- * dictionary; every other entry here falls back to rendering the English
- * dictionary/content until it gets a real translation, which keeps every
- * page honest (it never claims to be in a language it isn't) while still
- * being a genuine, navigable page rather than a dead end.
+ * Every language the site supports, in the order the header's language
+ * menu displays them — each one is a real `Locale` with its own dictionary
+ * and routes (see `i18n/get-dictionary.ts`; untranslated individual keys
+ * fall back to English at the key level, never the whole dictionary).
  */
 export const languageMenuOptions: LanguageOption[] = [
-  ...locales.map((code) => ({ code, name: localeNativeNames[code] }) as const),
+  { code: "en", name: "English" },
+  { code: "ar", name: "العربية" },
   { code: "es", name: "Español" },
   { code: "fr", name: "Français" },
   { code: "de", name: "Deutsch" },
@@ -67,24 +37,40 @@ export const languageMenuOptions: LanguageOption[] = [
   { code: "el", name: "Ελληνικά" },
 ];
 
-/** Every URL locale segment the site accepts — the two real locales above, plus every language menu entry. */
-export const siteLocaleCodes: readonly string[] = [
-  ...new Set([...locales, ...languageMenuOptions.map((option) => option.code)]),
-];
+export const locales = languageMenuOptions.map((option) => option.code) as [string, ...string[]];
 
-export function isSiteLocale(value: string): boolean {
-  return siteLocaleCodes.includes(value);
+export type Locale = (typeof languageMenuOptions)[number]["code"];
+
+export const defaultLocale: Locale = "en";
+
+const RTL_LOCALES = new Set(["ar"]);
+
+export const localeDirection: Record<Locale, "ltr" | "rtl"> = Object.fromEntries(
+  locales.map((code) => [code, RTL_LOCALES.has(code) ? "rtl" : "ltr"]),
+) as Record<Locale, "ltr" | "rtl">;
+
+/**
+ * Each language's own name, in its own script — always shown as-is
+ * regardless of the site's current UI language (an Arabic reader picking
+ * English from the switcher should see "English", not a translated label,
+ * and vice versa). Used by the header's language menu.
+ */
+export const localeNativeNames: Record<Locale, string> = Object.fromEntries(
+  languageMenuOptions.map((option) => [option.code, option.name]),
+) as Record<Locale, string>;
+
+export function isValidLocale(value: string): value is Locale {
+  return (locales as readonly string[]).includes(value);
 }
 
 /**
- * Maps any accepted URL locale segment to the real `Locale` whose
- * dictionary/content actually renders it: itself when it's "en"/"ar",
- * otherwise the safe English fallback. Route guards should check
- * `isSiteLocale` (404 only outside the full menu) and then resolve with
- * this before touching a dictionary or any `getLocalized*` helper — those
- * only know "en"/"ar" and would otherwise treat anything non-English as
- * Arabic.
+ * Payload's Posts collection is only localized in English/Arabic (see
+ * `payload.config.ts`) — articles are deliberately not translated into the
+ * other 22 site languages yet. Any other locale reads articles in English,
+ * their closest real translation being none, so this is the locale to pass
+ * to `payload.find({ locale })` for post queries regardless of the site's
+ * current UI language.
  */
-export function resolveContentLocale(siteLocale: string): Locale {
-  return isValidLocale(siteLocale) ? siteLocale : defaultLocale;
+export function toArticleLocale(locale: Locale): "en" | "ar" {
+  return locale === "ar" ? "ar" : "en";
 }

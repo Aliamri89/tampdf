@@ -1,4 +1,4 @@
-import type { Locale } from "@tampdf/config";
+import { toArticleLocale, type Locale } from "@tampdf/config";
 import type { Metadata } from "next";
 import { getPayloadClient } from "@/lib/payload-client";
 import { buildStaticPageMetadata } from "@/lib/static-page-metadata";
@@ -12,13 +12,16 @@ export type StaticPageKey =
   | "cookie-policy"
   | "faq";
 
+// The static-pages collection is only localized in English/Arabic in
+// Payload, like Posts and FAQs -- `toArticleLocale` maps any other UI
+// language to its closest real content.
 async function findStaticPage(key: StaticPageKey, locale: Locale): Promise<StaticPageDoc | null> {
   try {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
       collection: "static-pages",
       where: { key: { equals: key } },
-      locale,
+      locale: toArticleLocale(locale),
       limit: 1,
     });
     return (docs[0] as StaticPageDoc | undefined) ?? null;

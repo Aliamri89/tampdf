@@ -1,4 +1,3 @@
-import type { Locale } from "@tampdf/config";
 import { getPayloadClient } from "@/lib/payload-client";
 
 export interface FaqItem {
@@ -16,8 +15,11 @@ export interface FaqItem {
  * Pass `toolSlug` to get the FAQs scoped to that tool (e.g. "compress-pdf")
  * instead of the general list — a document only ever belongs to one or the
  * other, so this is never additive with the global set.
+ *
+ * The FAQs collection is only localized in English/Arabic in Payload, like
+ * Posts — callers pass `toArticleLocale(uiLocale)` from `@tampdf/config`.
  */
-export async function getFaqs(locale: Locale, toolSlug?: string): Promise<FaqItem[]> {
+export async function getFaqs(locale: "en" | "ar", toolSlug?: string): Promise<FaqItem[]> {
   try {
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
