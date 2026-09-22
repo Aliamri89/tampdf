@@ -11,12 +11,20 @@ import { cn } from "@/lib/utils";
 
 /**
  * The homepage's single entry point into every PDF tool: one big red
- * "Choose a PDF Tool" trigger that opens a scrollable dropdown listing
- * every PDF-producing tool from the shared registry (see
+ * "Choose a PDF Tool" trigger that expands a panel listing every
+ * PDF-producing tool from the shared registry (see
  * `sortForPicker`/`TOOL_PICKER_ESSENTIALS_COUNT` in `lib/home-order.ts` for
  * the ordering), split into an "essentials" group and a "more tools" group
  * below a divider. Every row is a real link, so the tools are crawlable and
  * reachable without JS.
+ *
+ * The panel is laid out in-flow (a `grid-template-rows: 0fr -> 1fr`
+ * transition on an always-mounted wrapper), not as a `position: absolute`
+ * overlay — opening it grows the page and pushes everything below it
+ * (the features row) down, rather than floating on top and covering them.
+ * This also sidesteps the homepage's `overflow-hidden` wrapper (there to
+ * clip the decorative hero shapes), which would otherwise clip an
+ * absolutely-positioned panel taller than the space left under it.
  */
 export function ToolPicker({
   locale,
@@ -83,7 +91,7 @@ export function ToolPicker({
   }
 
   return (
-    <div ref={rootRef} className="relative mx-auto w-full max-w-md sm:max-w-lg">
+    <div ref={rootRef} className="mx-auto w-full max-w-md sm:max-w-lg">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -97,31 +105,41 @@ export function ToolPicker({
         <ChevronDown size={18} className={cn("transition-transform duration-200", open && "rotate-180")} />
       </button>
 
-      {open && (
-        <div
-          role="menu"
-          className="absolute inset-x-0 top-full z-50 mt-3 max-h-[70vh] overflow-y-auto rounded-3xl border border-border bg-surface p-2.5 shadow-2xl shadow-slate-900/15 sm:p-3"
-        >
-          <div className="space-y-0.5">
-            {essentials.map((tool, index) => (
-              <Row key={tool.slug} tool={tool} index={index} />
-            ))}
-          </div>
+      {/* Always mounted (not `{open && ...}`) so the height transition can
+          animate both ways instead of the panel just popping in/out. */}
+      <div
+        className={cn(
+          "grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        )}
+      >
+        <div className="overflow-hidden">
+          <div
+            role="menu"
+            inert={!open}
+            className="mt-3 max-h-[65vh] overflow-y-auto rounded-3xl border border-border bg-surface p-2.5 shadow-2xl shadow-slate-900/15 sm:p-3 lg:max-h-[70vh]"
+          >
+            <div className="space-y-0.5">
+              {essentials.map((tool, index) => (
+                <Row key={tool.slug} tool={tool} index={index} />
+              ))}
+            </div>
 
-          {rest.length > 0 && (
-            <>
-              <p className="mt-2 px-3 pb-1.5 pt-3 text-xs font-bold uppercase tracking-wide text-foreground/40">
-                {dict.moreHeading}
-              </p>
-              <div className="space-y-0.5">
-                {rest.map((tool, index) => (
-                  <Row key={tool.slug} tool={tool} index={essentials.length + index} />
-                ))}
-              </div>
-            </>
-          )}
+            {rest.length > 0 && (
+              <>
+                <p className="mt-2 px-3 pb-1.5 pt-3 text-xs font-bold uppercase tracking-wide text-foreground/40">
+                  {dict.moreHeading}
+                </p>
+                <div className="space-y-0.5">
+                  {rest.map((tool, index) => (
+                    <Row key={tool.slug} tool={tool} index={essentials.length + index} />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
