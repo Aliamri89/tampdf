@@ -18,13 +18,21 @@ import { cn } from "@/lib/utils";
  * below a divider. Every row is a real link, so the tools are crawlable and
  * reachable without JS.
  *
- * The panel is laid out in-flow (a `grid-template-rows: 0fr -> 1fr`
- * transition on an always-mounted wrapper), not as a `position: absolute`
- * overlay — opening it grows the page and pushes everything below it
- * (the features row) down, rather than floating on top and covering them.
- * This also sidesteps the homepage's `overflow-hidden` wrapper (there to
- * clip the decorative hero shapes), which would otherwise clip an
- * absolutely-positioned panel taller than the space left under it.
+ * The panel is laid out in-flow (a `max-height: 0 -> 2000px` transition on
+ * an always-mounted wrapper — comfortably above any real panel height, so
+ * the wrapper always ends up sized to the panel's own intrinsic height),
+ * not as a `position: absolute` overlay — opening it grows the page and
+ * pushes everything below it (the features row) down, rather than
+ * floating on top and covering them. This also sidesteps the homepage's
+ * `overflow-hidden` wrapper (there to clip the decorative hero shapes),
+ * which would otherwise clip an absolutely-positioned panel taller than
+ * the space left under it.
+ *
+ * (An earlier version animated `grid-template-rows: 0fr -> 1fr` instead,
+ * the more commonly-cited version of this trick — it animated correctly
+ * in dev, but the production build's minified CSS resolved `1fr` to `0px`
+ * on the live site, so the panel never actually visually opened there.
+ * `max-height` has no such edge case.)
  */
 export function ToolPicker({
   locale,
@@ -109,35 +117,33 @@ export function ToolPicker({
           animate both ways instead of the panel just popping in/out. */}
       <div
         className={cn(
-          "grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none",
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+          "overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none",
+          open ? "max-h-[2000px]" : "max-h-0",
         )}
       >
-        <div className="overflow-hidden">
-          <div
-            role="menu"
-            inert={!open}
-            className="mt-3 max-h-[65vh] overflow-y-auto rounded-3xl border border-border bg-surface p-2.5 shadow-2xl shadow-slate-900/15 sm:p-3 lg:max-h-[70vh]"
-          >
-            <div className="space-y-0.5">
-              {essentials.map((tool, index) => (
-                <Row key={tool.slug} tool={tool} index={index} />
-              ))}
-            </div>
-
-            {rest.length > 0 && (
-              <>
-                <p className="mt-2 px-3 pb-1.5 pt-3 text-xs font-bold uppercase tracking-wide text-foreground/40">
-                  {dict.moreHeading}
-                </p>
-                <div className="space-y-0.5">
-                  {rest.map((tool, index) => (
-                    <Row key={tool.slug} tool={tool} index={essentials.length + index} />
-                  ))}
-                </div>
-              </>
-            )}
+        <div
+          role="menu"
+          inert={!open}
+          className="mt-3 max-h-[65vh] overflow-y-auto rounded-3xl border border-border bg-surface p-2.5 shadow-2xl shadow-slate-900/15 sm:p-3 lg:max-h-[70vh]"
+        >
+          <div className="space-y-0.5">
+            {essentials.map((tool, index) => (
+              <Row key={tool.slug} tool={tool} index={index} />
+            ))}
           </div>
+
+          {rest.length > 0 && (
+            <>
+              <p className="mt-2 px-3 pb-1.5 pt-3 text-xs font-bold uppercase tracking-wide text-foreground/40">
+                {dict.moreHeading}
+              </p>
+              <div className="space-y-0.5">
+                {rest.map((tool, index) => (
+                  <Row key={tool.slug} tool={tool} index={essentials.length + index} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
