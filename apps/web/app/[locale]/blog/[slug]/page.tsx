@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { cache } from "react";
 import { ChevronRight } from "lucide-react";
-import { getLocalizedSiteConfig, isValidLocale, locales, type Locale } from "@tampdf/config";
+import {
+  getLocalizedSiteConfig,
+  isSiteLocale,
+  locales,
+  resolveContentLocale,
+  type Locale,
+} from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { ArticleCta } from "@/components/article/article-cta";
 import { ArticleImage } from "@/components/article/article-image";
@@ -59,8 +65,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
-  if (!isValidLocale(rawLocale)) return {};
-  const locale = rawLocale as Locale;
+  const locale = resolveContentLocale(rawLocale);
   const post = await getPost(slug, locale);
   if (!post) return {};
 
@@ -69,12 +74,15 @@ export async function generateMetadata({
   const description = post.seo?.metaDescription || post.excerpt || undefined;
   const ogImage = getOgImage(post);
   const path = `/blog/${post.slug}`;
+  // Languages without their own dictionary render the English post, so
+  // their canonical URL points at the real `/en` page.
+  const canonicalLocale = rawLocale === "ar" ? "ar" : "en";
 
   return {
     title,
     description,
     alternates: {
-      canonical: `/${locale}${path}`,
+      canonical: `/${canonicalLocale}${path}`,
       languages: {
         ...Object.fromEntries(locales.map((l) => [l, `/${l}${path}`])),
         "x-default": `/en${path}`,
@@ -84,7 +92,7 @@ export async function generateMetadata({
       type: "article",
       title,
       description,
-      url: `/${locale}${path}`,
+      url: `/${canonicalLocale}${path}`,
       publishedTime: post.publishedDate ?? post.createdAt,
       modifiedTime: post.updatedAt,
       images: ogImage
@@ -112,8 +120,8 @@ export default async function BlogPostPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale: rawLocale, slug } = await params;
-  if (!isValidLocale(rawLocale)) notFound();
-  const locale = rawLocale as Locale;
+  if (!isSiteLocale(rawLocale)) notFound();
+  const locale = resolveContentLocale(rawLocale);
   const dict = getDictionary(locale);
   const post = await getPost(slug, locale);
   if (!post) notFound();

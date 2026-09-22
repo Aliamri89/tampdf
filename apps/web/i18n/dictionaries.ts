@@ -30,10 +30,12 @@ const en = {
   },
   home: {
     heroHighlight: "PDF",
+    heroSubtitle: "Free, fast, and easy-to-use PDF tools",
     toolPicker: {
       trigger: "Choose a PDF Tool",
       ariaLabel: "PDF tools menu",
-      moreHeading: "More tools",
+      loadMore: "More tools",
+      allShown: "All tools shown",
     },
     features: {
       devices: "Works on every device",
@@ -610,10 +612,12 @@ const ar: typeof en = {
   },
   home: {
     heroHighlight: "PDF",
+    heroSubtitle: "أدوات PDF مجانية وسريعة وسهلة الاستخدام",
     toolPicker: {
       trigger: "اختر أداة PDF",
       ariaLabel: "قائمة أدوات PDF",
-      moreHeading: "المزيد من الأدوات",
+      loadMore: "المزيد من الأدوات",
+      allShown: "تم عرض جميع الأدوات",
     },
     features: {
       devices: "يعمل على جميع الأجهزة",

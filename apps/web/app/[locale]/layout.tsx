@@ -3,10 +3,11 @@ import { Geist_Mono, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 import {
   getLocalizedSiteConfig,
+  isSiteLocale,
   isValidLocale,
   localeDirection,
   locales,
-  type Locale,
+  resolveContentLocale,
 } from "@tampdf/config";
 import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
@@ -45,7 +46,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale = isValidLocale(rawLocale) ? rawLocale : "en";
+  const locale = resolveContentLocale(rawLocale);
+  // Languages without their own dictionary render the English content, so
+  // their canonical URL points at the real `/en` page instead of claiming
+  // an independent (but actually duplicate) `/xx` page.
+  const canonicalLocale = isValidLocale(rawLocale) ? locale : "en";
   const siteConfig = getLocalizedSiteConfig(locale);
   const settings = await getSettings();
   const siteName = settings.siteName || siteConfig.name;
@@ -56,7 +61,7 @@ export async function generateMetadata({
     title: { default: title, template: `%s | ${siteName}` },
     description: siteConfig.description,
     alternates: {
-      canonical: locale === "en" ? "/en" : "/ar",
+      canonical: `/${canonicalLocale}`,
       languages: { en: "/en", ar: "/ar", "x-default": "/en" },
     },
     openGraph: {
@@ -64,7 +69,7 @@ export async function generateMetadata({
       siteName,
       title,
       description: siteConfig.description,
-      url: locale === "en" ? "/en" : "/ar",
+      url: `/${canonicalLocale}`,
       locale: locale === "ar" ? "ar_SA" : "en_US",
     },
     twitter: {
@@ -83,8 +88,8 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: rawLocale } = await params;
-  if (!isValidLocale(rawLocale)) notFound();
-  const locale = rawLocale as Locale;
+  if (!isSiteLocale(rawLocale)) notFound();
+  const locale = resolveContentLocale(rawLocale);
   const dir = localeDirection[locale];
   const dict = getDictionary(locale);
 

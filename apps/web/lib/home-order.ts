@@ -24,6 +24,3 @@ export function sortForPicker<T extends { slug: string }>(tools: T[]): T[] {
   };
   return [...tools].sort((a, b) => rank(a.slug) - rank(b.slug));
 }
-
-/** How many leading tools (in picker order) count as the "essentials" shown before the "more tools" divider. */
-export const TOOL_PICKER_ESSENTIALS_COUNT = TOOL_PICKER_ORDER.length;

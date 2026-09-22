@@ -7,10 +7,11 @@ import {
   getLocalizedRelatedTools,
   getLocalizedSiteConfig,
   getLocalizedTool,
+  isSiteLocale,
   isValidLocale,
   locales,
+  resolveContentLocale,
   tools,
-  type Locale,
 } from "@tampdf/config";
 import { Icon } from "@/components/icon";
 import { PageBackdrop } from "@/components/page-backdrop";
@@ -32,27 +33,29 @@ export async function generateMetadata({
   params: Promise<{ locale: string; tool: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale, tool: slug } = await params;
-  if (!isValidLocale(rawLocale)) return {};
-  const locale = rawLocale as Locale;
+  const locale = resolveContentLocale(rawLocale);
   const tool = getLocalizedTool(slug, locale);
   if (!tool) return {};
 
   const title = locale === "ar" ? `${tool.name} — أداة مجانية عبر الإنترنت` : `${tool.name} — Free Online Tool`;
   const description = tool.shortDescription;
   const path = `/${tool.slug}`;
+  // Languages without their own dictionary render the English/Arabic page
+  // content as-is, so their canonical URL points at that real page.
+  const canonicalLocale = isValidLocale(rawLocale) ? rawLocale : "en";
 
   return {
     title,
     description,
     keywords: tool.keywords,
     alternates: {
-      canonical: `/${locale}${path}`,
+      canonical: `/${canonicalLocale}${path}`,
       languages: {
         ...Object.fromEntries(locales.map((l) => [l, `/${l}${path}`])),
         "x-default": `/en${path}`,
       },
     },
-    openGraph: { title, description, url: `/${locale}${path}` },
+    openGraph: { title, description, url: `/${canonicalLocale}${path}` },
     twitter: { title, description },
   };
 }
@@ -63,8 +66,8 @@ export default async function ToolPage({
   params: Promise<{ locale: string; tool: string }>;
 }) {
   const { locale: rawLocale, tool: slug } = await params;
-  if (!isValidLocale(rawLocale)) notFound();
-  const locale = rawLocale as Locale;
+  if (!isSiteLocale(rawLocale)) notFound();
+  const locale = resolveContentLocale(rawLocale);
   const tool = getLocalizedTool(slug, locale);
   if (!tool) notFound();
 

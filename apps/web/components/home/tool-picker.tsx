@@ -9,24 +9,29 @@ import { useDictionary } from "@/i18n/locale-context";
 import { getToolAccent } from "@/lib/tool-accent";
 import { cn } from "@/lib/utils";
 
+const PAGE_SIZE = 5;
+
 /**
- * The homepage's single entry point into every PDF tool: one big red
- * "Choose a PDF Tool" trigger that expands a panel listing every
- * PDF-producing tool from the shared registry (see
- * `sortForPicker`/`TOOL_PICKER_ESSENTIALS_COUNT` in `lib/home-order.ts` for
- * the ordering), split into an "essentials" group and a "more tools" group
- * below a divider. Every row is a real link, so the tools are crawlable and
- * reachable without JS.
+ * The homepage's single entry point into every tool: one big red
+ * "Choose a PDF Tool" trigger that expands a panel listing every tool from
+ * the shared registry, most-used first (see `sortForPicker` in
+ * `lib/home-order.ts`). Every row is a real link, so the tools are
+ * crawlable and reachable without JS.
  *
- * The panel is laid out in-flow (a `max-height: 0 -> 2000px` transition on
- * an always-mounted wrapper — comfortably above any real panel height, so
- * the wrapper always ends up sized to the panel's own intrinsic height),
- * not as a `position: absolute` overlay — opening it grows the page and
- * pushes everything below it (the features row) down, rather than
- * floating on top and covering them. This also sidesteps the homepage's
- * `overflow-hidden` wrapper (there to clip the decorative hero shapes),
- * which would otherwise clip an absolutely-positioned panel taller than
- * the space left under it.
+ * Progressive disclosure, not scroll: only the first `PAGE_SIZE` tools
+ * render initially, with a "load more" button revealing `PAGE_SIZE` more
+ * per click until every tool is shown — no tool is ever reachable only by
+ * scrolling a clipped sub-panel.
+ *
+ * The panel is laid out in-flow (a `max-height: 0 -> large` transition on
+ * an always-mounted wrapper, sized comfortably above the panel's own
+ * intrinsic height even with all tools revealed), not as a
+ * `position: absolute` overlay — opening it (and revealing more tools)
+ * grows the page and pushes everything below it (the features row) down,
+ * rather than floating on top and covering them. This also sidesteps the
+ * homepage's `overflow-hidden` wrapper (there to clip the decorative hero
+ * shapes), which would otherwise clip an absolutely-positioned panel taller
+ * than the space left under it.
  *
  * (An earlier version animated `grid-template-rows: 0fr -> 1fr` instead,
  * the more commonly-cited version of this trick — it animated correctly
@@ -34,17 +39,10 @@ import { cn } from "@/lib/utils";
  * on the live site, so the panel never actually visually opened there.
  * `max-height` has no such edge case.)
  */
-export function ToolPicker({
-  locale,
-  tools,
-  essentialsCount,
-}: {
-  locale: Locale;
-  tools: ToolDefinition[];
-  essentialsCount: number;
-}) {
+export function ToolPicker({ locale, tools }: { locale: Locale; tools: ToolDefinition[] }) {
   const dict = useDictionary().home.toolPicker;
   const [open, setOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,8 +61,8 @@ export function ToolPicker({
     };
   }, [open]);
 
-  const essentials = tools.slice(0, essentialsCount);
-  const rest = tools.slice(essentialsCount);
+  const visibleTools = tools.slice(0, visibleCount);
+  const allShown = visibleCount >= tools.length;
 
   function Row({ tool, index }: { tool: ToolDefinition; index: number }) {
     const accent = getToolAccent(tool.slug, index);
@@ -73,7 +71,7 @@ export function ToolPicker({
         href={`/${locale}/${tool.slug}`}
         role="menuitem"
         onClick={() => setOpen(false)}
-        className="flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-surface-muted"
+        className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-start transition-colors hover:bg-surface-muted"
       >
         <span
           className={cn(
@@ -84,12 +82,12 @@ export function ToolPicker({
         >
           <Icon name={tool.icon} size={19} strokeWidth={2.1} />
         </span>
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-[15px] font-semibold text-foreground">
+        <span className="min-w-0 flex-1 text-start">
+          <span className="block truncate text-start text-[15px] font-semibold text-foreground">
             {tool.name}
           </span>
           {tool.shortDescription && (
-            <span className="block truncate text-xs text-foreground/50">
+            <span className="block truncate text-start text-xs text-foreground/50">
               {tool.shortDescription}
             </span>
           )}
@@ -114,35 +112,39 @@ export function ToolPicker({
       </button>
 
       {/* Always mounted (not `{open && ...}`) so the height transition can
-          animate both ways instead of the panel just popping in/out. */}
+          animate both ways instead of the panel just popping in/out. The
+          cap is generous enough to fit every tool revealed (no internal
+          scroll sub-panel — see the module doc above) without clipping. */}
       <div
         className={cn(
           "overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none",
-          open ? "max-h-[2000px]" : "max-h-0",
+          open ? "max-h-[3000px]" : "max-h-0",
         )}
       >
         <div
           role="menu"
           inert={!open}
-          className="mt-3 max-h-[65vh] overflow-y-auto rounded-3xl border border-border bg-surface p-2.5 shadow-2xl shadow-slate-900/15 sm:p-3 lg:max-h-[70vh]"
+          className="mt-3 rounded-3xl border border-border bg-surface p-2.5 shadow-2xl shadow-slate-900/15 sm:p-3"
         >
           <div className="space-y-0.5">
-            {essentials.map((tool, index) => (
+            {visibleTools.map((tool, index) => (
               <Row key={tool.slug} tool={tool} index={index} />
             ))}
           </div>
 
-          {rest.length > 0 && (
-            <>
-              <p className="mt-2 px-3 pb-1.5 pt-3 text-xs font-bold uppercase tracking-wide text-foreground/40">
-                {dict.moreHeading}
-              </p>
-              <div className="space-y-0.5">
-                {rest.map((tool, index) => (
-                  <Row key={tool.slug} tool={tool} index={essentials.length + index} />
-                ))}
-              </div>
-            </>
+          {allShown ? (
+            <p className="mt-2 px-3 py-2.5 text-center text-xs font-semibold text-foreground/40">
+              {dict.allShown}
+            </p>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setVisibleCount((v) => Math.min(v + PAGE_SIZE, tools.length))}
+              className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl border border-border bg-surface-muted px-3 py-2.5 text-sm font-semibold text-foreground/70 transition-colors hover:bg-surface-muted/70 hover:text-foreground"
+            >
+              {dict.loadMore}
+              <ChevronDown size={15} />
+            </button>
           )}
         </div>
       </div>

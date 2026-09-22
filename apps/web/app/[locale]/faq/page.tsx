@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { isValidLocale, type Locale } from "@tampdf/config";
+import { isSiteLocale, resolveContentLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { StaticPage } from "@/components/static-page";
@@ -19,15 +19,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale = isValidLocale(rawLocale) ? rawLocale : "en";
+  const locale = resolveContentLocale(rawLocale);
   const dict = getDictionary(locale);
   return buildStaticPageMetadata(rawLocale, "/faq", dict.staticPages.faq.title, dict.staticPages.faq.intro);
 }
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
-  if (!isValidLocale(rawLocale)) notFound();
-  const locale = rawLocale as Locale;
+  if (!isSiteLocale(rawLocale)) notFound();
+  const locale = resolveContentLocale(rawLocale);
   const dict = getDictionary(locale);
 
   // Single request for every published FAQ; the accordion below is a pure

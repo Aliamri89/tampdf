@@ -25,46 +25,66 @@ export function isValidLocale(value: string): value is Locale {
 }
 
 export interface LanguageOption {
-  /** Not necessarily a `Locale` — most entries here have no routes yet. */
+  /** Not necessarily a `Locale` — most entries here have no dedicated dictionary yet. */
   code: string;
   /** The language's own name, in its own script. */
   name: string;
-  /** Whether this language has real routes/dictionaries today. */
-  supported: boolean;
 }
 
 /**
- * Every language the header's language menu displays, supported ones
- * first. Only `supported` entries correspond to an actual `Locale` with
- * routes and a dictionary (today: `locales` above, i.e. English/Arabic) —
- * the rest are shown so the menu matches the product's intended
- * multi-language design, but the menu renders them as inert/disabled so
- * picking one can never lead to a broken page. Add a language for real by
- * adding it to `locales` (and its dictionary/direction/native name) first,
- * then flipping its `supported` flag here — never the other way around.
+ * Every language the header's language menu displays and every one of
+ * them is a real, clickable route (see `isSiteLocale`/`resolveContentLocale`
+ * below) — picking one always navigates and always renders a full page,
+ * never a 404. Only `locales` above (English/Arabic) have their own
+ * dictionary; every other entry here falls back to rendering the English
+ * dictionary/content until it gets a real translation, which keeps every
+ * page honest (it never claims to be in a language it isn't) while still
+ * being a genuine, navigable page rather than a dead end.
  */
 export const languageMenuOptions: LanguageOption[] = [
-  ...locales.map((code) => ({ code, name: localeNativeNames[code], supported: true }) as const),
-  { code: "es", name: "Español", supported: false },
-  { code: "fr", name: "Français", supported: false },
-  { code: "de", name: "Deutsch", supported: false },
-  { code: "it", name: "Italiano", supported: false },
-  { code: "pt", name: "Português", supported: false },
-  { code: "nl", name: "Nederlands", supported: false },
-  { code: "tr", name: "Türkçe", supported: false },
-  { code: "ru", name: "Русский", supported: false },
-  { code: "zh", name: "中文", supported: false },
-  { code: "ja", name: "日本語", supported: false },
-  { code: "ko", name: "한국어", supported: false },
-  { code: "hi", name: "हिन्दी", supported: false },
-  { code: "id", name: "Bahasa Indonesia", supported: false },
-  { code: "vi", name: "Tiếng Việt", supported: false },
-  { code: "th", name: "ไทย", supported: false },
-  { code: "pl", name: "Polski", supported: false },
-  { code: "sv", name: "Svenska", supported: false },
-  { code: "da", name: "Dansk", supported: false },
-  { code: "no", name: "Norsk", supported: false },
-  { code: "fi", name: "Suomi", supported: false },
-  { code: "cs", name: "Čeština", supported: false },
-  { code: "el", name: "Ελληνικά", supported: false },
+  ...locales.map((code) => ({ code, name: localeNativeNames[code] }) as const),
+  { code: "es", name: "Español" },
+  { code: "fr", name: "Français" },
+  { code: "de", name: "Deutsch" },
+  { code: "it", name: "Italiano" },
+  { code: "pt", name: "Português" },
+  { code: "nl", name: "Nederlands" },
+  { code: "tr", name: "Türkçe" },
+  { code: "ru", name: "Русский" },
+  { code: "zh", name: "中文" },
+  { code: "ja", name: "日本語" },
+  { code: "ko", name: "한국어" },
+  { code: "hi", name: "हिन्दी" },
+  { code: "id", name: "Bahasa Indonesia" },
+  { code: "vi", name: "Tiếng Việt" },
+  { code: "th", name: "ไทย" },
+  { code: "pl", name: "Polski" },
+  { code: "sv", name: "Svenska" },
+  { code: "da", name: "Dansk" },
+  { code: "no", name: "Norsk" },
+  { code: "fi", name: "Suomi" },
+  { code: "cs", name: "Čeština" },
+  { code: "el", name: "Ελληνικά" },
 ];
+
+/** Every URL locale segment the site accepts — the two real locales above, plus every language menu entry. */
+export const siteLocaleCodes: readonly string[] = [
+  ...new Set([...locales, ...languageMenuOptions.map((option) => option.code)]),
+];
+
+export function isSiteLocale(value: string): boolean {
+  return siteLocaleCodes.includes(value);
+}
+
+/**
+ * Maps any accepted URL locale segment to the real `Locale` whose
+ * dictionary/content actually renders it: itself when it's "en"/"ar",
+ * otherwise the safe English fallback. Route guards should check
+ * `isSiteLocale` (404 only outside the full menu) and then resolve with
+ * this before touching a dictionary or any `getLocalized*` helper — those
+ * only know "en"/"ar" and would otherwise treat anything non-English as
+ * Arabic.
+ */
+export function resolveContentLocale(siteLocale: string): Locale {
+  return isValidLocale(siteLocale) ? siteLocale : defaultLocale;
+}

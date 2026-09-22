@@ -4,22 +4,34 @@ import { Check, ChevronDown, Globe } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { languageMenuOptions, localeNativeNames, type Locale } from "@tampdf/config";
+import { isSiteLocale, languageMenuOptions, type Locale } from "@tampdf/config";
 import { useDictionary } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
 
 /**
  * Header language control: a button showing the current language, opening a
- * dropdown grid of every language in `languageMenuOptions`. Only the
- * `supported` ones (today: en/ar) are real links with routes/dictionaries —
- * the rest render as inert rows (no `href`, so no navigation is possible)
- * so the menu can show the product's full intended language list without
- * ever leading to a broken page.
+ * dropdown grid of every language in `languageMenuOptions`. Every entry is
+ * a real `<Link>` — picking any of them navigates for real (see
+ * `resolveContentLocale` in `@tampdf/config` for how a language without its
+ * own dictionary yet still renders a full page instead of a 404).
+ *
+ * The dropdown is a `position: absolute` overlay, deliberately never part
+ * of the page's normal flow: opening/closing it, or switching language,
+ * must never change the header's height or move anything below it (the
+ * homepage's tool picker in particular) — unlike the tool picker's own
+ * panel, which is *supposed* to push the page down when it grows.
  *
  * The trigger button and the dropdown panel are deliberately independent:
  * the button has no width utility, so it always shrinks to fit the current
  * language's name (see `shrink-0`/`whitespace-nowrap` below) regardless of
  * how wide the panel is or how many options it lists.
+ *
+ * The "current" language reflects the actual URL (read from `pathname`),
+ * not the `locale` prop — `locale` is the resolved *content* locale (always
+ * "en" or "ar"), so on a menu-only language without a dictionary yet (e.g.
+ * `/fr/...`, rendered with English content) the button and checkmark still
+ * correctly show "Français" as selected rather than falling back to
+ * English.
  */
 export function LanguageMenu({ locale }: { locale: Locale }) {
   const pathname = usePathname();
@@ -43,7 +55,11 @@ export function LanguageMenu({ locale }: { locale: Locale }) {
     };
   }, [open]);
 
-  const restOfPath = pathname.replace(/^\/(en|ar)/, "");
+  const firstSegment = pathname.split("/")[1] ?? "";
+  const urlLocale = isSiteLocale(firstSegment) ? firstSegment : locale;
+  const restOfPath = pathname.slice(urlLocale.length + 1);
+  const currentOption =
+    languageMenuOptions.find((option) => option.code === urlLocale) ?? languageMenuOptions[0];
 
   return (
     <div ref={rootRef} className="relative shrink-0">
@@ -56,7 +72,7 @@ export function LanguageMenu({ locale }: { locale: Locale }) {
         className="inline-flex h-9 w-fit shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border border-border px-3 text-sm font-medium text-foreground/70 transition-colors hover:border-brand-300 hover:text-foreground"
       >
         <Globe size={15} className="shrink-0" />
-        {localeNativeNames[locale]}
+        {currentOption.name}
         <ChevronDown size={14} className={cn("shrink-0 transition-transform", open && "rotate-180")} />
       </button>
 
@@ -67,20 +83,7 @@ export function LanguageMenu({ locale }: { locale: Locale }) {
         >
           <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">
             {languageMenuOptions.map((option) => {
-              const isCurrent = option.code === locale;
-
-              if (!option.supported) {
-                return (
-                  <span
-                    key={option.code}
-                    role="menuitem"
-                    aria-disabled="true"
-                    className="flex cursor-not-allowed items-center rounded-xl px-3 py-2 text-sm text-foreground/35"
-                  >
-                    {option.name}
-                  </span>
-                );
-              }
+              const isCurrent = option.code === urlLocale;
 
               return (
                 <Link
