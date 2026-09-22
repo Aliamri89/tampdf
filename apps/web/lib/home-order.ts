@@ -1,49 +1,29 @@
 /**
- * Display order of tools on the homepage (most-used first, so the first
- * rows of each section show the essentials). Tools not listed here keep
- * their registry order and appear after the listed ones.
+ * Display order for the homepage's PDF tool picker (most-used/most-useful
+ * first). Tools not listed here keep their registry order from
+ * `packages/config/src/tools.ts` and appear after every listed tool.
  */
-const HOME_ORDER = [
-  // PDF
+const TOOL_PICKER_ORDER = [
   "compress-pdf",
   "merge-pdf",
   "split-pdf",
+  "image-to-pdf",
   "pdf-to-jpg",
-  "images-to-pdf",
-  "crop-pdf",
-  "resize-pdf",
+  "rotate-pdf",
+  "add-page-numbers",
   "delete-pdf-pages",
   "reorder-pdf-pages",
-  "rotate-pdf",
-  "extract-pdf-pages",
-  "add-page-numbers",
-  "add-watermark",
-  "remove-watermark",
-  "pdf-to-images",
-  "flip-pdf",
-  "edit-pdf-metadata",
-  "remove-pdf-metadata",
-  "pdf-info",
-  // Images
-  "crop-image",
-  "resize-image",
-  "compress-image",
-  "rotate-images",
-  "flip-image",
-  "image-to-pdf",
-  "png-to-pdf",
-  "png-to-jpg",
-  "jpg-to-png",
-  "webp-to-jpg",
-  "jpg-to-webp",
-  "webp-to-png",
-  "png-to-webp",
+  "crop-pdf",
+  "resize-pdf",
 ];
 
-export function sortForHome<T extends { slug: string }>(tools: T[]): T[] {
+export function sortForPicker<T extends { slug: string }>(tools: T[]): T[] {
   const rank = (slug: string) => {
-    const index = HOME_ORDER.indexOf(slug);
-    return index === -1 ? HOME_ORDER.length : index;
+    const index = TOOL_PICKER_ORDER.indexOf(slug);
+    return index === -1 ? TOOL_PICKER_ORDER.length : index;
   };
   return [...tools].sort((a, b) => rank(a.slug) - rank(b.slug));
 }
+
+/** How many leading tools (in picker order) count as the "essentials" shown before the "more tools" divider. */
+export const TOOL_PICKER_ESSENTIALS_COUNT = TOOL_PICKER_ORDER.length;

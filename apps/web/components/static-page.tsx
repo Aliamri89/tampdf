@@ -1,5 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import type { ComponentProps } from "react";
 import type { Locale } from "@tampdf/config";
 import { Container } from "@/components/ui/container";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -9,12 +10,15 @@ export function StaticPage({
   title,
   children,
   isPlaceholder = false,
+  contentMaxWidth = "2xl",
 }: {
   locale: Locale;
   title: string;
   children: React.ReactNode;
   /** Shows the "full content is on its way" note. Only set this when `children` is the fallback copy, not real CMS content. */
   isPlaceholder?: boolean;
+  /** Widen the content area for pages that need more than prose width (e.g. the blog's card grid). */
+  contentMaxWidth?: ComponentProps<typeof Container>["maxWidth"];
 }) {
   const dict = getDictionary(locale);
 
@@ -33,7 +37,7 @@ export function StaticPage({
         </nav>
       </Container>
 
-      <Container maxWidth="2xl" className="py-10">
+      <Container maxWidth={contentMaxWidth} className="py-10">
         <h1 className="break-words text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
         <div className="mt-6 space-y-4 leading-relaxed text-foreground/70">{children}</div>
         {isPlaceholder && (

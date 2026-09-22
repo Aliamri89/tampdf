@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { isValidLocale, type Locale } from "@tampdf/config";
 import { notFound } from "next/navigation";
-import { PostCard } from "@/components/article/post-card";
+import { BlogPostCard } from "@/components/article/blog-post-card";
 import { StaticPage } from "@/components/static-page";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { buildStaticPageMetadata } from "@/lib/static-page-metadata";
@@ -56,11 +56,12 @@ export default async function BlogPage({
       locale={locale}
       title={dict.staticPages.blog.title}
       isPlaceholder={posts.length === 0}
+      contentMaxWidth="6xl"
     >
       {posts.length > 0 && (
-        <div className="not-prose grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="not-prose grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <PostCard key={post.id} post={post} locale={locale} />
+            <BlogPostCard key={post.id} post={post} locale={locale} />
           ))}
         </div>
       )}

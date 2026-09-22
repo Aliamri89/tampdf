@@ -1,6 +1,8 @@
 const en = {
   header: {
-    switchLanguageTo: "العربية",
+    languageMenu: {
+      ariaLabel: "Change language",
+    },
   },
   breadcrumb: {
     home: "Home",
@@ -27,21 +29,17 @@ const en = {
     comingSoon: "Coming soon",
   },
   home: {
-    quickBar: {
-      allTools: "All tools",
-      compressPdf: "Compress PDF",
-      mergePdf: "Merge PDF",
-      convertPdf: "Convert PDF",
-      imageTools: "Image tools",
-      rotatePdf: "Rotate PDF",
+    heroHighlight: "PDF",
+    toolPicker: {
+      trigger: "Choose a PDF Tool",
+      ariaLabel: "PDF tools menu",
+      moreHeading: "More tools",
     },
-    section: {
-      toolCount: "{count} tools",
-      showMore: "Show more {name}",
-      showLess: "Show less",
+    features: {
+      devices: "Works on every device",
+      fast: "Fast",
+      secure: "Secure",
     },
-    backToTop: "Back to top",
-    heroHighlight: "in one place",
   },
   footer: {
     rights: "All rights reserved.",
@@ -577,7 +575,9 @@ const en = {
 
 const ar: typeof en = {
   header: {
-    switchLanguageTo: "English",
+    languageMenu: {
+      ariaLabel: "تغيير اللغة",
+    },
   },
   breadcrumb: {
     home: "الرئيسية",
@@ -609,21 +609,17 @@ const ar: typeof en = {
     comingSoon: "قريبًا",
   },
   home: {
-    quickBar: {
-      allTools: "جميع الأدوات",
-      compressPdf: "ضغط PDF",
-      mergePdf: "دمج PDF",
-      convertPdf: "تحويل PDF",
-      imageTools: "أدوات الصور",
-      rotatePdf: "تدوير PDF",
+    heroHighlight: "PDF",
+    toolPicker: {
+      trigger: "اختر أداة PDF",
+      ariaLabel: "قائمة أدوات PDF",
+      moreHeading: "المزيد من الأدوات",
     },
-    section: {
-      toolCount: "{count} أدوات",
-      showMore: "عرض المزيد من {name}",
-      showLess: "عرض أقل",
+    features: {
+      devices: "يعمل على جميع الأجهزة",
+      fast: "سريع",
+      secure: "آمن",
     },
-    backToTop: "العودة إلى الأعلى",
-    heroHighlight: "مكان واحد",
   },
   footer: {
     rights: "جميع الحقوق محفوظة.",

@@ -36,9 +36,9 @@ export const siteConfig = {
   name: "TAMPDF",
   domain: "tampdf.com",
   url: "https://tampdf.com",
-  tagline: "Every file tool you need, in one place.",
+  tagline: "All Your PDF Tools in One Place",
   description:
-    "TAMPDF is a free online toolkit for merging, splitting, compressing, and converting PDFs, images, and documents — fast, private, and secure.",
+    "Free, fast, and easy-to-use PDF tools — no installs, no sign-ups. Everything runs securely in your browser.",
 };
 
 /** Returns a tool's content (name/description/FAQ/keywords) translated for `locale`. */
