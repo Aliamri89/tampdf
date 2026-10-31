@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/fr";
 
 export const fr: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Changer de langue" } },
@@ -55,6 +56,7 @@ export const fr: DeepPartial<Dictionary> = {
       title: "À propos",
       intro:
         "TAMPDF est une boîte à outils en ligne gratuite conçue pour rendre les tâches quotidiennes sur les fichiers — fusionner, diviser, compresser et convertir des PDF, images et documents — rapides, privées et sans effort.",
+      toolsHeading: "Tous les outils TAMPDF",
     },
     contactUs: {
       title: "Nous contacter",
@@ -98,10 +100,12 @@ export const fr: DeepPartial<Dictionary> = {
     newSize: "Nouvelle taille",
     reducedBy: "Réduit de",
     spaceSaved: "Espace économisé",
+    alreadyOptimized: "Ce fichier était déjà bien optimisé : il restait peu à réduire sans nuire à la qualité.",
   },
   notFound: {
     title: "Page introuvable",
     description: "La page que vous cherchez n'existe pas ou a peut-être été déplacée.",
     cta: "Retour à l'accueil",
   },
+  workspace,
 };

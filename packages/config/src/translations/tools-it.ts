@@ -216,13 +216,13 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     actionLabel: "Aggiungi numeri di pagina",
     shortDescription: "Numera le pagine di un PDF, scegliendo posizione, formato e numero iniziale.",
     longDescription: [
-      "Aggiungi numeri di pagina applica un numero su ogni pagina del tuo PDF. Scegli tra sei posizioni, uno stile come «1», «1 / 10» o «Pagina 1 di 10», imposta il numero iniziale, e salta opzionalmente la copertina.",
+      "Aggiungi numeri di pagina applica un numero su ogni pagina del tuo PDF. Scegli tra sei posizioni, uno stile come «1», «1 / 10» o «Page 1 of 10», imposta il numero iniziale, e salta opzionalmente la copertina.",
       "I numeri vengono disegnati come testo reale in un font standard, così si stampano nitidamente e restano dritti anche su pagine ruotate. L'intero processo avviene nel tuo browser — il tuo documento non viene mai caricato.",
     ],
     faq: [
       { question: "Posso iniziare la numerazione da un numero diverso da 1?", answer: "Sì. Imposta qualsiasi numero iniziale — utile quando il tuo PDF è un capitolo o appendice di un documento più grande." },
       { question: "Posso lasciare la copertina senza numero?", answer: "Sì. Attiva «Non numerare la prima pagina» e la numerazione inizia dalla seconda pagina." },
-      { question: "Quali cifre vengono usate?", answer: "Cifre standard (1, 2, 3), che si visualizzano correttamente in ogni lettore PDF. Etichette come «Pagina 1 di 10» sono scritte in italiano." },
+      { question: "Quali cifre vengono usate?", answer: "Cifre standard (1, 2, 3), che si visualizzano correttamente in ogni lettore PDF. Etichette come «Page 1 of 10» sono scritte in inglese." },
       { question: "Il mio file viene caricato?", answer: "No. I numeri di pagina vengono aggiunti localmente nel tuo browser e il tuo PDF resta sul tuo dispositivo." },
     ],
   },

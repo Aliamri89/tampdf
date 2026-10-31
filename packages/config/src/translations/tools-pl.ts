@@ -216,13 +216,13 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     actionLabel: "Dodaj numerację stron",
     shortDescription: "Ponumeruj strony PDF, wybierając pozycję, format i numer początkowy.",
     longDescription: [
-      "Dodaj numerację stron umieszcza numer na każdej stronie PDF. Wybierz jedną z sześciu pozycji, styl taki jak „1”, „1 / 10” lub „Strona 1 z 10”, ustaw numer początkowy i opcjonalnie pomiń stronę tytułową.",
+      "Dodaj numerację stron umieszcza numer na każdej stronie PDF. Wybierz jedną z sześciu pozycji, styl taki jak „1”, „1 / 10” lub „Page 1 of 10”, ustaw numer początkowy i opcjonalnie pomiń stronę tytułową.",
       "Numery są rysowane jako prawdziwy tekst w standardowej czcionce, więc drukują się wyraźnie i pozostają pionowe nawet na obróconych stronach. Cały proces odbywa się w przeglądarce — dokument nigdy nie jest przesyłany.",
     ],
     faq: [
       { question: "Czy mogę zacząć numerację od innej liczby niż 1?", answer: "Tak. Ustaw dowolny numer początkowy — przydatne, gdy Twój PDF jest rozdziałem lub załącznikiem większego dokumentu." },
       { question: "Czy mogę zostawić stronę tytułową bez numeru?", answer: "Tak. Włącz „Nie numeruj pierwszej strony”, a numeracja zacznie się od drugiej strony." },
-      { question: "Jakie cyfry są używane?", answer: "Standardowe cyfry (1, 2, 3), które są poprawnie wyświetlane w każdym czytniku PDF. Etykiety takie jak „Strona 1 z 10” są napisane po polsku." },
+      { question: "Jakie cyfry są używane?", answer: "Standardowe cyfry (1, 2, 3), które są poprawnie wyświetlane w każdym czytniku PDF. Etykiety takie jak „Page 1 of 10” są napisane po angielsku." },
       { question: "Czy mój plik jest przesyłany?", answer: "Nie. Numery stron są dodawane lokalnie w przeglądarce, a PDF pozostaje na Twoim urządzeniu." },
     ],
   },

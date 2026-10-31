@@ -216,13 +216,13 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     actionLabel: "Sayfa numarası ekle",
     shortDescription: "Konum, biçim ve başlangıç numarasını seçerek PDF sayfalarını numaralandırın.",
     longDescription: [
-      "Sayfa Numarası Ekle, PDF'inizin her sayfasına bir numara damgalar. Altı konumdan birini, «1», «1 / 10» veya «Sayfa 1 / 10» gibi bir stil seçin, başlangıç numarasını ayarlayın ve isteğe bağlı olarak kapak sayfasını atlayın.",
+      "Sayfa Numarası Ekle, PDF'inizin her sayfasına bir numara damgalar. Altı konumdan birini, «1», «1 / 10» veya «Page 1 of 10» gibi bir stil seçin, başlangıç numarasını ayarlayın ve isteğe bağlı olarak kapak sayfasını atlayın.",
       "Numaralar standart bir yazı tipinde gerçek metin olarak çizilir, böylece net şekilde basılır ve döndürülmüş sayfalarda bile dik kalır. Tüm işlem tarayıcınızda gerçekleşir — belgeniz asla yüklenmez.",
     ],
     faq: [
       { question: "Numaralandırmaya 1'den farklı bir sayıdan başlayabilir miyim?", answer: "Evet. Herhangi bir başlangıç numarası ayarlayın — PDF'iniz daha büyük bir belgenin bölümü veya eki olduğunda kullanışlıdır." },
       { question: "Kapak sayfasını numarasız bırakabilir miyim?", answer: "Evet. «İlk sayfayı numaralandırma»yı açın ve numaralandırma ikinci sayfadan başlar." },
-      { question: "Hangi rakamlar kullanılıyor?", answer: "Her PDF okuyucuda doğru görüntülenen standart rakamlar (1, 2, 3). «Sayfa 1 / 10» gibi etiketler Türkçe yazılır." },
+      { question: "Hangi rakamlar kullanılıyor?", answer: "Her PDF okuyucuda doğru görüntülenen standart rakamlar (1, 2, 3). «Page 1 of 10» gibi etiketler İngilizce yazılır." },
       { question: "Dosyam yükleniyor mu?", answer: "Hayır. Sayfa numaraları tarayıcınızda yerel olarak eklenir ve PDF'iniz cihazınızda kalır." },
     ],
   },

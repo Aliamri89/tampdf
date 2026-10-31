@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/nl";
 
 export const nl: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Taal wijzigen" } },
@@ -55,6 +56,7 @@ export const nl: DeepPartial<Dictionary> = {
       title: "Over ons",
       intro:
         "TAMPDF is een gratis online toolkit die alledaagse bestandstaken — PDF's, afbeeldingen en documenten samenvoegen, splitsen, comprimeren en converteren — snel, privé en moeiteloos maakt.",
+      toolsHeading: "Alle TAMPDF-tools",
     },
     contactUs: {
       title: "Contact",
@@ -98,10 +100,12 @@ export const nl: DeepPartial<Dictionary> = {
     newSize: "Nieuwe grootte",
     reducedBy: "Verkleind met",
     spaceSaved: "Bespaarde ruimte",
+    alreadyOptimized: "Dit bestand was al goed geoptimaliseerd — er viel weinig meer te besparen zonder kwaliteitsverlies.",
   },
   notFound: {
     title: "Pagina niet gevonden",
     description: "De pagina die je zoekt bestaat niet of is mogelijk verplaatst.",
     cta: "Terug naar home",
   },
+  workspace,
 };

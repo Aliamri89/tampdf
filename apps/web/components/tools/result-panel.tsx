@@ -69,6 +69,10 @@ export function ResultPanel({
         </div>
       )}
 
+      {hasComparison && savedPercent! < 5 && (
+        <p className="max-w-sm text-sm text-foreground/60">{dict.result.alreadyOptimized}</p>
+      )}
+
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Button onClick={onDownload}>
           <Download size={16} />

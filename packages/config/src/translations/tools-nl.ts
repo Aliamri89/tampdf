@@ -216,13 +216,13 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     actionLabel: "Paginanummers toevoegen",
     shortDescription: "Nummer de pagina's van een PDF, met zelf gekozen positie, opmaak en startnummer.",
     longDescription: [
-      "Paginanummers toevoegen stempelt een nummer op elke pagina van je PDF. Kies uit zes posities, een stijl zoals «1», «1 / 10» of «Pagina 1 van 10», stel het startnummer in, en sla optioneel de voorpagina over.",
+      "Paginanummers toevoegen stempelt een nummer op elke pagina van je PDF. Kies uit zes posities, een stijl zoals «1», «1 / 10» of «Page 1 of 10», stel het startnummer in, en sla optioneel de voorpagina over.",
       "Nummers worden als echte tekst getekend in een standaardlettertype, dus ze drukken scherp af en blijven rechtop, zelfs op gedraaide pagina's. Het hele proces gebeurt in je browser — je document wordt nooit geüpload.",
     ],
     faq: [
       { question: "Kan ik beginnen met nummeren vanaf een ander getal dan 1?", answer: "Ja. Stel elk startnummer in — handig wanneer je PDF een hoofdstuk of bijlage van een groter document is." },
       { question: "Kan ik de voorpagina zonder nummer laten?", answer: "Ja. Zet «Eerste pagina niet nummeren» aan en de nummering begint op de tweede pagina." },
-      { question: "Welke cijfers worden gebruikt?", answer: "Standaardcijfers (1, 2, 3), die correct worden weergegeven in elke PDF-lezer. Labels zoals «Pagina 1 van 10» worden in het Nederlands geschreven." },
+      { question: "Welke cijfers worden gebruikt?", answer: "Standaardcijfers (1, 2, 3), die correct worden weergegeven in elke PDF-lezer. Labels zoals «Page 1 of 10» worden in het Engels geschreven." },
       { question: "Wordt mijn bestand geüpload?", answer: "Nee. Paginanummers worden lokaal in je browser toegevoegd en je PDF blijft op je apparaat." },
     ],
   },

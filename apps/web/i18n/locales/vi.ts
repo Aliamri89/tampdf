@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/vi";
 
 export const vi: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Đổi ngôn ngữ" } },
@@ -55,6 +56,7 @@ export const vi: DeepPartial<Dictionary> = {
       title: "Về chúng tôi",
       intro:
         "TAMPDF là bộ công cụ trực tuyến miễn phí được tạo ra để giúp các tác vụ tệp hằng ngày — gộp, tách, nén và chuyển đổi PDF, hình ảnh và tài liệu — trở nên nhanh chóng, riêng tư và dễ dàng.",
+      toolsHeading: "Tất cả công cụ của TAMPDF",
     },
     contactUs: {
       title: "Liên hệ",
@@ -98,10 +100,12 @@ export const vi: DeepPartial<Dictionary> = {
     newSize: "Kích thước mới",
     reducedBy: "Giảm được",
     spaceSaved: "Dung lượng tiết kiệm",
+    alreadyOptimized: "Tệp này đã được tối ưu tốt — gần như không còn gì để giảm mà không ảnh hưởng chất lượng.",
   },
   notFound: {
     title: "Không tìm thấy trang",
     description: "Trang bạn đang tìm không tồn tại hoặc có thể đã được di chuyển.",
     cta: "Về trang chủ",
   },
+  workspace,
 };

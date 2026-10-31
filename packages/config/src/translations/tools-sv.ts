@@ -216,13 +216,13 @@ export const toolsSv: Record<string, ToolTranslationOverride> = {
     actionLabel: "Lägg till sidnummer",
     shortDescription: "Numrera PDF-sidor med vald position, format och startnummer.",
     longDescription: [
-      "Lägg till sidnummer placerar ett nummer på varje sida i din PDF. Välj en av sex positioner, en stil som \"1\", \"1 / 10\" eller \"Sida 1 av 10\", ställ in ett startnummer och hoppa eventuellt över försättsbladet.",
+      "Lägg till sidnummer placerar ett nummer på varje sida i din PDF. Välj en av sex positioner, en stil som \"1\", \"1 / 10\" eller \"Page 1 of 10\", ställ in ett startnummer och hoppa eventuellt över försättsbladet.",
       "Numren ritas som riktig text i ett standardteckensnitt, så de skrivs ut skarpt och förblir upprätta även på roterade sidor. Hela processen sker i din webbläsare — ditt dokument laddas aldrig upp.",
     ],
     faq: [
       { question: "Kan jag börja numreringen på ett annat nummer än 1?", answer: "Ja. Ställ in valfritt startnummer — användbart när din PDF är ett kapitel eller en bilaga till ett större dokument." },
       { question: "Kan jag lämna försättsbladet utan nummer?", answer: "Ja. Aktivera \"Numrera inte den första sidan\" så börjar numreringen på den andra sidan." },
-      { question: "Vilka siffror används?", answer: "Standardsiffror (1, 2, 3) som visas korrekt i alla PDF-läsare. Etiketter som \"Sida 1 av 10\" skrivs på svenska." },
+      { question: "Vilka siffror används?", answer: "Standardsiffror (1, 2, 3) som visas korrekt i alla PDF-läsare. Etiketter som \"Page 1 of 10\" skrivs på engelska." },
       { question: "Laddas min fil upp?", answer: "Nej. Sidnummer läggs till lokalt i din webbläsare, och din PDF stannar på din enhet." },
     ],
   },

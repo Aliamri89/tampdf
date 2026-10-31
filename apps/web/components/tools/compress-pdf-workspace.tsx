@@ -12,7 +12,7 @@ import { useDictionary } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
 import { trackToolUsage } from "@/lib/analytics";
 import { downloadBlob } from "@/lib/download";
-import { compressPdf, type CompressionLevel } from "@/lib/pdf/compress";
+import { compressPdf, isEncryptedPdfError, type CompressionLevel } from "@/lib/pdf/compress";
 import { zipFiles } from "@/lib/zip";
 
 type Status = "idle" | "processing" | "done" | "error";
@@ -49,14 +49,18 @@ export function CompressPdfWorkspace() {
     if (files.length === 0) return;
     setStatus("processing");
     setError(null);
+    let current: File | null = null;
     try {
-      const compressed = await Promise.all(
-        files.map(async (file) => ({
+      // One file at a time: each holds decoded images in memory, which adds up fast on phones.
+      const compressed: { name: string; bytes: Uint8Array; originalSize: number }[] = [];
+      for (const file of files) {
+        current = file;
+        compressed.push({
           name: resultName(file.name),
           bytes: await compressPdf(file, level),
           originalSize: file.size,
-        })),
-      );
+        });
+      }
       const originalSize = compressed.reduce((sum, c) => sum + c.originalSize, 0);
 
       if (compressed.length === 1) {
@@ -74,7 +78,9 @@ export function CompressPdfWorkspace() {
       setStatus("done");
       trackToolUsage("compress-pdf", true);
     } catch (err) {
-      setError(dict.error);
+      setError(
+        isEncryptedPdfError(err) && current ? t(dict.encryptedError, { name: current.name }) : dict.error,
+      );
       setStatus("error");
       trackToolUsage("compress-pdf", false, err);
     }

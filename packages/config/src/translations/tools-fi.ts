@@ -216,13 +216,13 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     actionLabel: "Lisää sivunumerot",
     shortDescription: "Numeroi PDF-sivut valitsemallasi sijainnilla, muodolla ja aloitusnumerolla.",
     longDescription: [
-      "Lisää sivunumerot sijoittaa numeron jokaiselle PDF-tiedostosi sivulle. Valitse yksi kuudesta sijainnista, tyyli kuten \"1\", \"1 / 10\" tai \"Sivu 1/10\", aseta aloitusnumero ja ohita kansilehti valinnaisesti.",
+      "Lisää sivunumerot sijoittaa numeron jokaiselle PDF-tiedostosi sivulle. Valitse yksi kuudesta sijainnista, tyyli kuten \"1\", \"1 / 10\" tai \"Page 1 of 10\", aseta aloitusnumero ja ohita kansilehti valinnaisesti.",
       "Numerot piirretään todellisena tekstinä vakiofontilla, joten ne tulostuvat terävinä ja pysyvät pystysuorina jopa käännetyillä sivuilla. Koko prosessi tapahtuu selaimessasi — asiakirjaasi ei koskaan ladata.",
     ],
     faq: [
       { question: "Voinko aloittaa numeroinnin muusta luvusta kuin 1?", answer: "Kyllä. Aseta mikä tahansa aloitusnumero — hyödyllinen, kun PDF-tiedostosi on luku tai liite suuremmasta asiakirjasta." },
       { question: "Voinko jättää kansilehden ilman numeroa?", answer: "Kyllä. Ota käyttöön \"Älä numeroi ensimmäistä sivua\", jolloin numerointi alkaa toiselta sivulta." },
-      { question: "Mitä numeroita käytetään?", answer: "Vakiolukuja (1, 2, 3), jotka näkyvät oikein kaikissa PDF-lukijoissa. Merkinnät kuten \"Sivu 1/10\" kirjoitetaan suomeksi." },
+      { question: "Mitä numeroita käytetään?", answer: "Vakiolukuja (1, 2, 3), jotka näkyvät oikein kaikissa PDF-lukijoissa. Merkinnät kuten \"Page 1 of 10\" kirjoitetaan englanniksi." },
       { question: "Ladataanko tiedostoni?", answer: "Ei. Sivunumerot lisätään paikallisesti selaimessasi, ja PDF-tiedostosi pysyy laitteellasi." },
     ],
   },

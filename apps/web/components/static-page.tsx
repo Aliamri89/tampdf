@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { Locale } from "@tampdf/config";
+import { PageBackdrop } from "@/components/page-backdrop";
 import { Container } from "@/components/ui/container";
 import { getDictionary } from "@/i18n/get-dictionary";
 
@@ -24,6 +25,7 @@ export function StaticPage({
 
   return (
     <>
+      <PageBackdrop />
       <Container className="pt-8">
         <nav
           aria-label="Breadcrumb"

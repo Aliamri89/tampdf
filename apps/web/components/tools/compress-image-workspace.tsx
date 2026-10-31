@@ -45,7 +45,9 @@ export function CompressImageWorkspace() {
     setStatus("processing");
     setError(null);
     try {
-      const compressed = await Promise.all(files.map((file) => compressImage(file, level)));
+      // One at a time: decoding many large photos in parallel can exhaust memory on phones.
+      const compressed = [];
+      for (const file of files) compressed.push(await compressImage(file, level));
       const originalSize = compressed.reduce((sum, c) => sum + c.originalSize, 0);
 
       if (compressed.length === 1) {

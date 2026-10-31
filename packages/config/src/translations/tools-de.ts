@@ -216,13 +216,13 @@ export const toolsDe: Record<string, ToolTranslationOverride> = {
     actionLabel: "Seitenzahlen hinzufügen",
     shortDescription: "Nummeriere die Seiten eines PDFs, mit frei wählbarer Position, Format und Startnummer.",
     longDescription: [
-      "Seitenzahlen hinzufügen stempelt eine Zahl auf jede Seite deines PDFs. Wähle eine von sechs Positionen, einen Stil wie „1\", „1 / 10\" oder „Seite 1 von 10\", lege die Startnummer fest und überspringe optional das Deckblatt.",
+      "Seitenzahlen hinzufügen stempelt eine Zahl auf jede Seite deines PDFs. Wähle eine von sechs Positionen, einen Stil wie „1\", „1 / 10\" oder „Page 1 of 10\", lege die Startnummer fest und überspringe optional das Deckblatt.",
       "Zahlen werden als echter Text in einer Standardschrift gezeichnet, sodass sie scharf gedruckt werden und auch auf gedrehten Seiten aufrecht bleiben. Der gesamte Vorgang läuft in deinem Browser — dein Dokument wird nie hochgeladen.",
     ],
     faq: [
       { question: "Kann ich die Nummerierung bei einer anderen Zahl als 1 beginnen?", answer: "Ja. Lege jede beliebige Startnummer fest — nützlich, wenn dein PDF ein Kapitel oder Anhang eines größeren Dokuments ist." },
       { question: "Kann ich das Deckblatt ohne Nummer lassen?", answer: "Ja. Aktiviere „Erste Seite nicht nummerieren\" und die Nummerierung beginnt auf der zweiten Seite." },
-      { question: "Welche Ziffern werden verwendet?", answer: "Standardziffern (1, 2, 3), die in jedem PDF-Reader korrekt angezeigt werden. Beschriftungen wie „Seite 1 von 10\" werden auf Deutsch geschrieben." },
+      { question: "Welche Ziffern werden verwendet?", answer: "Standardziffern (1, 2, 3), die in jedem PDF-Reader korrekt angezeigt werden. Beschriftungen wie „Page 1 of 10\" werden auf Englisch geschrieben." },
       { question: "Wird meine Datei hochgeladen?", answer: "Nein. Seitenzahlen werden lokal in deinem Browser hinzugefügt und dein PDF bleibt auf deinem Gerät." },
     ],
   },

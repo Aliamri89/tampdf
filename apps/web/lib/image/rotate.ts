@@ -21,7 +21,8 @@ export async function rotateImage(file: File, degrees: number): Promise<Blob> {
 
   const outputType = SUPPORTED_OUTPUT_TYPES.has(file.type) ? file.type : "image/png";
   const blob = await new Promise<Blob | null>((resolve) =>
-    canvas.toBlob(resolve, outputType, outputType === "image/png" ? undefined : 1),
+    // 0.92 is visually lossless; 1.0 balloons JPEGs and switches WebP to lossless mode (≈10× larger).
+    canvas.toBlob(resolve, outputType, outputType === "image/png" ? undefined : 0.92),
   );
   releaseCanvas(canvas);
   if (!blob) throw new Error("Failed to rotate image");

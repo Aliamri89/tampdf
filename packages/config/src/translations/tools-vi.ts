@@ -216,13 +216,13 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     actionLabel: "Thêm số trang",
     shortDescription: "Đánh số các trang PDF, tùy chọn vị trí, định dạng và số bắt đầu.",
     longDescription: [
-      "Thêm số trang đóng dấu một số lên mỗi trang PDF của bạn. Chọn một trong sáu vị trí, kiểu như «1», «1 / 10» hoặc «Trang 1 trên 10», đặt số bắt đầu, và tùy chọn bỏ qua trang bìa.",
+      "Thêm số trang đóng dấu một số lên mỗi trang PDF của bạn. Chọn một trong sáu vị trí, kiểu như «1», «1 / 10» hoặc «Page 1 of 10», đặt số bắt đầu, và tùy chọn bỏ qua trang bìa.",
       "Các số được vẽ dưới dạng văn bản thực bằng phông chữ tiêu chuẩn, vì vậy chúng in ra rõ nét và luôn thẳng đứng ngay cả trên các trang đã xoay. Toàn bộ quá trình diễn ra trong trình duyệt của bạn — tài liệu của bạn không bao giờ được tải lên.",
     ],
     faq: [
       { question: "Tôi có thể bắt đầu đánh số từ số khác 1 không?", answer: "Có. Đặt bất kỳ số bắt đầu nào — hữu ích khi PDF của bạn là một chương hoặc phụ lục của tài liệu lớn hơn." },
       { question: "Tôi có thể để trang bìa không có số không?", answer: "Có. Bật «Không đánh số trang đầu tiên» và việc đánh số sẽ bắt đầu từ trang thứ hai." },
-      { question: "Những chữ số nào được sử dụng?", answer: "Chữ số tiêu chuẩn (1, 2, 3), hiển thị đúng trong mọi trình đọc PDF. Các nhãn như «Trang 1 trên 10» được viết bằng tiếng Việt." },
+      { question: "Những chữ số nào được sử dụng?", answer: "Chữ số tiêu chuẩn (1, 2, 3), hiển thị đúng trong mọi trình đọc PDF. Các nhãn như «Page 1 of 10» được viết bằng tiếng Anh." },
       { question: "Tệp của tôi có được tải lên không?", answer: "Không. Số trang được thêm cục bộ trong trình duyệt của bạn và PDF của bạn vẫn ở trên thiết bị." },
     ],
   },

@@ -64,6 +64,7 @@ const en = {
       title: "About Us",
       intro:
         "TAMPDF is a free online toolkit built to make everyday file tasks — merging, splitting, compressing, and converting PDFs, images, and documents — fast, private, and effortless.",
+      toolsHeading: "All TAMPDF tools",
     },
     contactUs: {
       title: "Contact Us",
@@ -129,6 +130,7 @@ const en = {
     newSize: "New size",
     reducedBy: "Reduced by",
     spaceSaved: "Space saved",
+    alreadyOptimized: "This file was already well optimized — there was little left to remove without hurting quality.",
   },
   notFound: {
     title: "Page not found",
@@ -176,6 +178,7 @@ const en = {
       buttonPlural: "Compress {count} PDFs",
       buttonBusy: "Compressing…",
       error: "Something went wrong while compressing your PDFs. Please try again.",
+      encryptedError: "{name} is password-protected or encrypted. Remove the protection first, then compress it.",
       resultSuffix: "-compressed.pdf",
       resultZipName: "compressed-pdfs.zip",
     },
@@ -647,6 +650,7 @@ const ar: typeof en = {
       title: "من نحن",
       intro:
         "TAMPDF مجموعة أدوات مجانية عبر الإنترنت صُممت لتسهيل مهام الملفات اليومية — دمج وتقسيم وضغط وتحويل ملفات PDF والصور والمستندات — بسرعة وخصوصية وسهولة.",
+      toolsHeading: "جميع أدوات TAMPDF",
     },
     contactUs: {
       title: "اتصل بنا",
@@ -707,6 +711,7 @@ const ar: typeof en = {
     newSize: "الحجم الجديد",
     reducedBy: "نسبة التقليل",
     spaceSaved: "المساحة الموفَّرة",
+    alreadyOptimized: "هذا الملف مضغوط بكفاءة مسبقًا — لم يتبقَّ الكثير لإزالته دون التأثير على الجودة.",
   },
   notFound: {
     title: "الصفحة غير موجودة",
@@ -754,6 +759,7 @@ const ar: typeof en = {
       buttonPlural: "ضغط {count} ملفات PDF",
       buttonBusy: "جارٍ الضغط…",
       error: "حدث خطأ أثناء ضغط ملفات PDF. حاول مرة أخرى.",
+      encryptedError: "الملف {name} محمي بكلمة مرور أو مشفّر. أزل الحماية أولًا ثم أعد ضغطه.",
       resultSuffix: "-compressed.pdf",
       resultZipName: "compressed-pdfs.zip",
     },

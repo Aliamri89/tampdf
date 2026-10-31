@@ -216,13 +216,13 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     actionLabel: "Tambah nomor halaman",
     shortDescription: "Beri nomor pada halaman PDF, dengan pilihan posisi, format, dan nomor awal.",
     longDescription: [
-      "Tambah Nomor Halaman mencantumkan nomor pada setiap halaman PDF Anda. Pilih salah satu dari enam posisi, gaya seperti «1», «1 / 10», atau «Halaman 1 dari 10», atur nomor awal, dan lewati halaman sampul jika diinginkan.",
+      "Tambah Nomor Halaman mencantumkan nomor pada setiap halaman PDF Anda. Pilih salah satu dari enam posisi, gaya seperti «1», «1 / 10», atau «Page 1 of 10», atur nomor awal, dan lewati halaman sampul jika diinginkan.",
       "Nomor digambar sebagai teks asli dengan font standar, sehingga tercetak dengan jelas dan tetap tegak bahkan di halaman yang diputar. Seluruh proses berjalan di browser Anda — dokumen Anda tidak pernah diunggah.",
     ],
     faq: [
       { question: "Bisakah saya memulai penomoran dari angka selain 1?", answer: "Bisa. Atur nomor awal apa pun — berguna saat PDF Anda adalah bab atau lampiran dari dokumen yang lebih besar." },
       { question: "Bisakah saya membiarkan halaman sampul tanpa nomor?", answer: "Bisa. Aktifkan «Jangan beri nomor pada halaman pertama» dan penomoran dimulai dari halaman kedua." },
-      { question: "Angka apa yang digunakan?", answer: "Angka standar (1, 2, 3), yang tampil dengan benar di setiap pembaca PDF. Label seperti «Halaman 1 dari 10» ditulis dalam Bahasa Indonesia." },
+      { question: "Angka apa yang digunakan?", answer: "Angka standar (1, 2, 3), yang tampil dengan benar di setiap pembaca PDF. Label seperti «Page 1 of 10» ditulis dalam bahasa Inggris." },
       { question: "Apakah file saya diunggah?", answer: "Tidak. Nomor halaman ditambahkan secara lokal di browser Anda dan PDF Anda tetap di perangkat Anda." },
     ],
   },

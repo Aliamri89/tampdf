@@ -10,6 +10,7 @@ import {
   decodePDFRawStream,
   type PDFPage,
 } from "pdf-lib";
+import { removeUnreachableObjects } from "@/lib/pdf/gc";
 
 export interface RemoveWatermarkResult {
   bytes: Uint8Array;
@@ -46,7 +47,37 @@ export async function removeWatermarks(file: File): Promise<RemoveWatermarkResul
     }
   }
 
-  return { bytes: await pdf.save(), removed };
+  if (removed > 0) {
+    dropUnusedXObjects(pdf.getPages());
+    // The watermark's image and the replaced content streams are now orphans.
+    removeUnreachableObjects(pdf);
+  }
+  return { bytes: await pdf.save({ useObjectStreams: true }), removed };
+}
+
+/**
+ * Removes XObject resources no page content names anymore (e.g. the stripped
+ * watermark image). XObject dictionaries can be shared between pages, so a
+ * name is only dropped when none of the pages using that dictionary needs it.
+ */
+function dropUnusedXObjects(pages: PDFPage[]): void {
+  const usage = new Map<PDFDict, (string | null)[]>();
+  for (const page of pages) {
+    const xobjects = page.node.Resources()?.lookup(PDFName.of("XObject"));
+    if (!(xobjects instanceof PDFDict)) continue;
+    const content = readPageContent(page);
+    const texts = usage.get(xobjects) ?? [];
+    texts.push(content ? new TextDecoder("latin1").decode(content) : null);
+    usage.set(xobjects, texts);
+  }
+  for (const [xobjects, texts] of usage) {
+    if (texts.some((text) => text === null)) continue;
+    for (const key of xobjects.keys()) {
+      const escaped = key.asString().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const pattern = new RegExp(`${escaped}(?=[\\s/\\[\\]<>()%]|$)`);
+      if (!texts.some((text) => pattern.test(text!))) xobjects.delete(key);
+    }
+  }
 }
 
 function removeWatermarkAnnotations(page: PDFPage): number {

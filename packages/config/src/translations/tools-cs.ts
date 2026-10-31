@@ -216,13 +216,13 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     actionLabel: "Přidat čísla stránek",
     shortDescription: "Očíslujte stránky PDF s pozicí, formátem a počátečním číslem, které zvolíte.",
     longDescription: [
-      "Přidat čísla stránek umístí číslo na každou stránku vašeho PDF. Vyberte si jednu ze šesti pozic, styl jako „1“, „1 / 10“ nebo „Strana 1 z 10“, nastavte počáteční číslo a volitelně přeskočte titulní stránku.",
+      "Přidat čísla stránek umístí číslo na každou stránku vašeho PDF. Vyberte si jednu ze šesti pozic, styl jako „1“, „1 / 10“ nebo „Page 1 of 10“, nastavte počáteční číslo a volitelně přeskočte titulní stránku.",
       "Čísla se kreslí jako skutečný text ve standardním písmu, takže se tisknou ostře a zůstávají vzpřímená i na otočených stránkách. Celý proces probíhá ve vašem prohlížeči — váš dokument se nikdy nenahrává.",
     ],
     faq: [
       { question: "Mohu začít číslování jiným číslem než 1?", answer: "Ano. Nastavte libovolné počáteční číslo — užitečné, pokud je vaše PDF kapitolou nebo přílohou většího dokumentu." },
       { question: "Mohu nechat titulní stránku bez čísla?", answer: "Ano. Zapněte „Nečíslovat první stránku“ a číslování začne od druhé stránky." },
-      { question: "Jaké číslice se používají?", answer: "Standardní číslice (1, 2, 3), které se správně zobrazují v jakékoli čtečce PDF. Popisky jako „Strana 1 z 10“ jsou psány česky." },
+      { question: "Jaké číslice se používají?", answer: "Standardní číslice (1, 2, 3), které se správně zobrazují v jakékoli čtečce PDF. Popisky jako „Page 1 of 10“ jsou psány anglicky." },
       { question: "Nahrává se můj soubor?", answer: "Ne. Čísla stránek se přidávají lokálně ve vašem prohlížeči a vaše PDF zůstává na vašem zařízení." },
     ],
   },

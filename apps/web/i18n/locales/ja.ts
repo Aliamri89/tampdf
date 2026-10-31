@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/ja";
 
 export const ja: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "言語を変更" } },
@@ -55,6 +56,7 @@ export const ja: DeepPartial<Dictionary> = {
       title: "私たちについて",
       intro:
         "TAMPDFは、PDF・画像・文書の結合、分割、圧縮、変換といった日々のファイル作業を、高速かつプライベートに、そして手間なく行えるようにする無料のオンラインツール集です。",
+      toolsHeading: "TAMPDF のすべてのツール",
     },
     contactUs: {
       title: "お問い合わせ",
@@ -98,10 +100,12 @@ export const ja: DeepPartial<Dictionary> = {
     newSize: "新しいサイズ",
     reducedBy: "削減率",
     spaceSaved: "節約した容量",
+    alreadyOptimized: "このファイルはすでに十分に最適化されています。画質を損なわずに削減できる余地はほとんどありませんでした。",
   },
   notFound: {
     title: "ページが見つかりません",
     description: "お探しのページは存在しないか、移動した可能性があります。",
     cta: "ホームに戻る",
   },
+  workspace,
 };

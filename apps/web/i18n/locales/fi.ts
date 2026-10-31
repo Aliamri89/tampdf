@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/fi";
 
 export const fi: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Vaihda kieli" } },
@@ -55,6 +56,7 @@ export const fi: DeepPartial<Dictionary> = {
       title: "Tietoa meistä",
       intro:
         "TAMPDF on ilmainen verkkotyökalusarja, joka tekee arkisista tiedostotehtävistä — PDF-tiedostojen, kuvien ja asiakirjojen yhdistämisestä, jakamisesta, pakkaamisesta ja muuntamisesta — nopeita, yksityisiä ja vaivattomia.",
+      toolsHeading: "Kaikki TAMPDF-työkalut",
     },
     contactUs: {
       title: "Ota yhteyttä",
@@ -98,10 +100,12 @@ export const fi: DeepPartial<Dictionary> = {
     newSize: "Uusi koko",
     reducedBy: "Pienennetty",
     spaceSaved: "Säästetty tila",
+    alreadyOptimized: "Tiedosto oli jo hyvin optimoitu — laatua heikentämättä pienennettävää oli vain vähän.",
   },
   notFound: {
     title: "Sivua ei löytynyt",
     description: "Etsimääsi sivua ei ole olemassa, tai se on saatettu siirtää.",
     cta: "Takaisin etusivulle",
   },
+  workspace,
 };

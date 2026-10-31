@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/ru";
 
 export const ru: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Сменить язык" } },
@@ -55,6 +56,7 @@ export const ru: DeepPartial<Dictionary> = {
       title: "О нас",
       intro:
         "TAMPDF — это бесплатный набор онлайн-инструментов, созданный для того, чтобы повседневные задачи с файлами — объединение, разделение, сжатие и конвертация PDF, изображений и документов — стали быстрыми, приватными и простыми.",
+      toolsHeading: "Все инструменты TAMPDF",
     },
     contactUs: {
       title: "Связаться с нами",
@@ -98,10 +100,12 @@ export const ru: DeepPartial<Dictionary> = {
     newSize: "Новый размер",
     reducedBy: "Уменьшено на",
     spaceSaved: "Сэкономлено места",
+    alreadyOptimized: "Этот файл уже хорошо оптимизирован — без потери качества уменьшить его почти некуда.",
   },
   notFound: {
     title: "Страница не найдена",
     description: "Страница, которую вы ищете, не существует или могла быть перемещена.",
     cta: "На главную",
   },
+  workspace,
 };

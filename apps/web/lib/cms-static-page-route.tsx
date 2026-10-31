@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { isValidLocale } from "@tampdf/config";
+import type { ReactNode } from "react";
+import { isValidLocale, type Locale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { StaticPage } from "@/components/static-page";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -26,6 +27,12 @@ export function createStaticCmsPage(
   key: StaticPageKey,
   path: string,
   getFallback: (dict: Dictionary) => Fallback,
+  /**
+   * Generated content added to every version of the page (CMS or fallback).
+   * Placed before the last <h2> of CMS content — conventionally a closing
+   * "contact us" section — or at the end when there isn't one.
+   */
+  renderAppendix?: (locale: Locale, dict: Dictionary) => ReactNode,
 ) {
   async function generateMetadata({
     params,
@@ -42,8 +49,10 @@ export function createStaticCmsPage(
     const { locale: rawLocale } = await params;
     if (!isValidLocale(rawLocale)) notFound();
     const locale = rawLocale;
-    const fallback = getFallback(getDictionary(locale));
+    const dict = getDictionary(locale);
+    const fallback = getFallback(dict);
     const doc = await getStaticPageContent(key, locale);
+    const appendix = renderAppendix?.(locale, dict);
 
     if (!doc) {
       const paragraphs = fallback.body ?? [fallback.intro];
@@ -52,16 +61,27 @@ export function createStaticCmsPage(
           {paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
+          {appendix}
         </StaticPage>
       );
     }
 
+    // Unwrap the converter's outer <div> so splitting at a heading can never
+    // leave unbalanced tags (which the browser repairs → hydration mismatch).
+    const rawHtml = richTextToHtml(doc.content);
+    const html = rawHtml.match(/^\s*<div class="payload-richtext">([\s\S]*)<\/div>\s*$/)?.[1] ?? rawHtml;
+    const headingCount = html.split("<h2").length - 1;
+    const splitAt = appendix && headingCount >= 2 ? html.lastIndexOf("<h2") : html.length;
+    const proseClassName =
+      "[&_a]:text-brand-600 [&_a]:underline [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:mt-5 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_li]:ms-5 [&_ol]:list-decimal [&_ul]:list-disc";
+
     return (
       <StaticPage locale={locale} title={doc.title}>
-        <div
-          className="[&_a]:text-brand-600 [&_a]:underline [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:mt-5 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_li]:ms-5 [&_ol]:list-decimal [&_ul]:list-disc"
-          dangerouslySetInnerHTML={{ __html: richTextToHtml(doc.content) }}
-        />
+        <div className={proseClassName} dangerouslySetInnerHTML={{ __html: html.slice(0, splitAt) }} />
+        {appendix}
+        {splitAt < html.length && (
+          <div className={proseClassName} dangerouslySetInnerHTML={{ __html: html.slice(splitAt) }} />
+        )}
       </StaticPage>
     );
   }

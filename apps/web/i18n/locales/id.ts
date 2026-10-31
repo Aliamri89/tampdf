@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/id";
 
 export const id: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Ganti bahasa" } },
@@ -55,6 +56,7 @@ export const id: DeepPartial<Dictionary> = {
       title: "Tentang Kami",
       intro:
         "TAMPDF adalah kumpulan alat online gratis yang dibuat untuk membuat tugas file sehari-hari — menggabungkan, memisahkan, mengompres, dan mengonversi PDF, gambar, dan dokumen — menjadi cepat, privat, dan tanpa repot.",
+      toolsHeading: "Semua alat TAMPDF",
     },
     contactUs: {
       title: "Hubungi Kami",
@@ -98,10 +100,12 @@ export const id: DeepPartial<Dictionary> = {
     newSize: "Ukuran baru",
     reducedBy: "Berkurang sebesar",
     spaceSaved: "Ruang yang dihemat",
+    alreadyOptimized: "File ini sudah teroptimalkan dengan baik — hampir tidak ada lagi yang bisa dikurangi tanpa menurunkan kualitas.",
   },
   notFound: {
     title: "Halaman tidak ditemukan",
     description: "Halaman yang Anda cari tidak ada atau mungkin telah dipindahkan.",
     cta: "Kembali ke beranda",
   },
+  workspace,
 };

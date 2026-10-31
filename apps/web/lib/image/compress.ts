@@ -1,4 +1,5 @@
 import { clampToSafeCanvasSize, releaseCanvas } from "@/lib/canvas-limits";
+import { quantizeToPng } from "@/lib/image/png-quantize";
 
 export interface CompressedImage {
   name: string;
@@ -9,89 +10,92 @@ export interface CompressedImage {
 
 export type CompressionLevel = "low" | "medium" | "high";
 
-const QUALITY_BY_LEVEL: Record<CompressionLevel, number> = {
-  low: 0.88,
-  medium: 0.75,
-  high: 0.6,
+interface LevelSettings {
+  /** JPEG/WebP encoder quality. */
+  quality: number;
+  /** Pixel-area cap (only ever downscales). Area, not long edge, so tall screenshots stay readable. */
+  maxPixels: number;
+  /** Palette size for PNG output. */
+  pngColors: number;
+}
+
+const SETTINGS: Record<CompressionLevel, LevelSettings> = {
+  low: { quality: 0.78, maxPixels: 16_000_000, pngColors: 256 },
+  medium: { quality: 0.66, maxPixels: 6_000_000, pngColors: 192 },
+  high: { quality: 0.52, maxPixels: 3_000_000, pngColors: 112 },
 };
 
-/**
- * JPEG quality alone gives underwhelming results on modern camera photos,
- * which routinely ship at 4000px+ on the long edge — far beyond what's
- * visible at any normal viewing size. Capping the long edge (only ever
- * downscaling, never up) does most of the real size reduction while a
- * higher quality factor than before keeps the result visually clean; only
- * applied when the source actually exceeds the cap.
- */
-const MAX_DIMENSION_BY_LEVEL: Record<CompressionLevel, number> = {
-  low: 3200,
-  medium: 2200,
-  high: 1600,
-};
+function toBlob(canvas: HTMLCanvasElement, type: string, quality?: number): Promise<Blob | null> {
+  return new Promise((resolve) => canvas.toBlob(resolve, type, quality));
+}
 
-/** Samples the alpha channel to check whether an image actually uses transparency. */
-function hasTransparency(ctx: CanvasRenderingContext2D, width: number, height: number): boolean {
-  const { data } = ctx.getImageData(0, 0, width, height);
-  const totalPixels = width * height;
-  const stride = Math.max(1, Math.floor(totalPixels / 50_000)) * 4;
-  for (let i = 3; i < data.length; i += stride) {
-    if (data[i] < 255) return true;
-  }
+function hasTransparency(data: Uint8ClampedArray): boolean {
+  for (let i = 3; i < data.length; i += 4) if (data[i] < 255) return true;
   return false;
 }
 
 /**
- * Compresses an image entirely client-side via the canvas API.
- *
- * Canvas ignores the `quality` argument for PNG output (lossless by spec),
- * so re-encoding a PNG as PNG barely shrinks it. To get a real size
- * reduction, every image is re-encoded as JPEG at the chosen quality level
- * unless it actually uses transparency (checked directly, not just guessed
- * from the source format) — in which case it stays PNG to preserve the
- * alpha channel, with a smaller size gain.
+ * Compresses an image entirely client-side while keeping its format:
+ * - JPEG → re-encoded JPEG (quality + resolution cap; also strips EXIF bloat);
+ * - PNG → palette-quantised PNG (pngquant-style), keeping transparency;
+ * - WebP → re-encoded lossy WebP, keeping transparency (falls back to JPEG/PNG
+ *   in browsers that can't encode WebP).
+ * Never returns a file larger than the original.
  */
-export async function compressImage(
-  file: File,
-  level: CompressionLevel = "medium",
-): Promise<CompressedImage> {
-  const quality = QUALITY_BY_LEVEL[level];
+export async function compressImage(file: File, level: CompressionLevel = "medium"): Promise<CompressedImage> {
+  const settings = SETTINGS[level];
   const bitmap = await createImageBitmap(file);
-  const maxDimension = MAX_DIMENSION_BY_LEVEL[level];
-  const longEdge = Math.max(bitmap.width, bitmap.height);
-  const downscale = longEdge > maxDimension ? maxDimension / longEdge : 1;
+  const area = bitmap.width * bitmap.height;
+  const downscale = area > settings.maxPixels ? Math.sqrt(settings.maxPixels / area) : 1;
   const { width, height } = clampToSafeCanvasSize(
-    Math.round(bitmap.width * downscale),
-    Math.round(bitmap.height * downscale),
+    Math.max(1, Math.round(bitmap.width * downscale)),
+    Math.max(1, Math.round(bitmap.height * downscale)),
   );
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Canvas is not supported in this browser");
+  ctx.imageSmoothingQuality = "high";
   ctx.drawImage(bitmap, 0, 0, width, height);
   bitmap.close();
 
-  const mightHaveAlpha = file.type === "image/png" || file.type === "image/webp";
-  const outputType =
-    mightHaveAlpha && hasTransparency(ctx, canvas.width, canvas.height)
-      ? "image/png"
-      : "image/jpeg";
+  const isPng = file.type === "image/png" || /\.png$/i.test(file.name);
+  const isWebp = file.type === "image/webp" || /\.webp$/i.test(file.name);
 
-  const blob = await new Promise<Blob | null>((resolve) =>
-    canvas.toBlob(resolve, outputType, quality),
-  );
-  releaseCanvas(canvas);
+  let blob: Blob | null = null;
+  try {
+    if (isPng) {
+      const imageData = ctx.getImageData(0, 0, width, height);
+      blob = await quantizeToPng(imageData, settings.pngColors);
+    } else if (isWebp) {
+      const webp = await toBlob(canvas, "image/webp", settings.quality);
+      if (webp?.type === "image/webp") {
+        blob = webp;
+      } else {
+        const imageData = ctx.getImageData(0, 0, width, height);
+        blob = hasTransparency(imageData.data)
+          ? await quantizeToPng(imageData, settings.pngColors)
+          : await toBlob(canvas, "image/jpeg", settings.quality);
+      }
+    } else {
+      blob = await toBlob(canvas, "image/jpeg", settings.quality);
+    }
+  } finally {
+    releaseCanvas(canvas);
+  }
   if (!blob) throw new Error("Failed to compress image");
 
-  const compressedIsSmaller = blob.size < file.size;
-  const finalBlob = compressedIsSmaller ? blob : file;
-  const originalExtension = file.name.match(/\.[^.]+$/)?.[0] ?? "";
-  const newExtension = outputType === "image/png" ? ".png" : ".jpg";
-  const extension = compressedIsSmaller ? newExtension : originalExtension || newExtension;
+  const smaller = blob.size < file.size;
+  const finalBlob = smaller ? blob : file;
   const baseName = file.name.replace(/\.[^.]+$/, "");
+  const extensionFor: Record<string, string> = { "image/png": ".png", "image/webp": ".webp", "image/jpeg": ".jpg" };
+  const originalExtension = file.name.match(/\.[^.]+$/)?.[0] ?? "";
+  const sameFormat = blob.type === file.type;
+  const extension = smaller && !sameFormat ? (extensionFor[blob.type] ?? originalExtension) : originalExtension;
 
   return {
-    name: `${baseName}${extension}`,
+    name: `${baseName}${extension || ".jpg"}`,
     blob: finalBlob,
     originalSize: file.size,
     compressedSize: finalBlob.size,

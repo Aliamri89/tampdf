@@ -216,13 +216,13 @@ export const toolsDa: Record<string, ToolTranslationOverride> = {
     actionLabel: "Tilføj sidetal",
     shortDescription: "Nummerer PDF-sider med den position, det format og det startnummer, du vælger.",
     longDescription: [
-      "Tilføj sidetal placerer et tal på hver side i din PDF. Vælg mellem seks positioner, en stil som \"1\", \"1 / 10\" eller \"Side 1 af 10\", indstil et startnummer, og spring eventuelt forsiden over.",
+      "Tilføj sidetal placerer et tal på hver side i din PDF. Vælg mellem seks positioner, en stil som \"1\", \"1 / 10\" eller \"Page 1 of 10\", indstil et startnummer, og spring eventuelt forsiden over.",
       "Tallene tegnes som rigtig tekst i en standardskrifttype, så de udskrives skarpt og forbliver opretstående selv på roterede sider. Hele processen foregår i din browser — dit dokument bliver aldrig uploadet.",
     ],
     faq: [
       { question: "Kan jeg starte nummereringen på et andet tal end 1?", answer: "Ja. Indstil et hvilket som helst startnummer — nyttigt, når din PDF er et kapitel eller bilag til et større dokument." },
       { question: "Kan jeg lade forsiden være uden tal?", answer: "Ja. Aktivér \"Nummerer ikke den første side\", og nummereringen starter på anden side." },
-      { question: "Hvilke tal bruges?", answer: "Standardtal (1, 2, 3), der vises korrekt i enhver PDF-læser. Etiketter som \"Side 1 af 10\" skrives på dansk." },
+      { question: "Hvilke tal bruges?", answer: "Standardtal (1, 2, 3), der vises korrekt i enhver PDF-læser. Etiketter som \"Page 1 of 10\" skrives på engelsk." },
       { question: "Bliver min fil uploadet?", answer: "Nej. Sidetal tilføjes lokalt i din browser, og din PDF forbliver på din enhed." },
     ],
   },

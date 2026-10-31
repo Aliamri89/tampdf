@@ -216,13 +216,13 @@ export const toolsFr: Record<string, ToolTranslationOverride> = {
     actionLabel: "Ajouter les numéros de page",
     shortDescription: "Numérotez les pages d'un PDF, en choisissant la position, le format et le numéro de départ.",
     longDescription: [
-      "Ajouter des numéros de page appose un numéro sur chaque page de votre PDF. Choisissez parmi six positions, un style comme « 1 », « 1 / 10 » ou « Page 1 sur 10 », définissez le numéro de départ, et sautez éventuellement la page de garde.",
+      "Ajouter des numéros de page appose un numéro sur chaque page de votre PDF. Choisissez parmi six positions, un style comme « 1 », « 1 / 10 » ou « Page 1 of 10 », définissez le numéro de départ, et sautez éventuellement la page de garde.",
       "Les numéros sont dessinés comme du texte réel dans une police standard, ils s'impriment donc nettement et restent bien orientés même sur des pages pivotées. Tout le processus se déroule dans votre navigateur — votre document n'est jamais téléversé.",
     ],
     faq: [
       { question: "Puis-je commencer la numérotation à un autre chiffre que 1 ?", answer: "Oui. Définissez n'importe quel numéro de départ — pratique lorsque votre PDF est un chapitre ou une annexe d'un document plus large." },
       { question: "Puis-je laisser la page de garde sans numéro ?", answer: "Oui. Activez « Ne pas numéroter la première page » et la numérotation commence à la deuxième page." },
-      { question: "Quels chiffres sont utilisés ?", answer: "Des chiffres standard (1, 2, 3), qui s'affichent correctement dans tout lecteur PDF. Les libellés comme « Page 1 sur 10 » sont écrits en français." },
+      { question: "Quels chiffres sont utilisés ?", answer: "Des chiffres standard (1, 2, 3), qui s'affichent correctement dans tout lecteur PDF. Les libellés comme « Page 1 of 10 » sont écrits en anglais." },
       { question: "Mon fichier est-il téléversé ?", answer: "Non. Les numéros de page sont ajoutés localement dans votre navigateur et votre PDF reste sur votre appareil." },
     ],
   },

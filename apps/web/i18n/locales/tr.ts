@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/tr";
 
 export const tr: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Dili değiştir" } },
@@ -55,6 +56,7 @@ export const tr: DeepPartial<Dictionary> = {
       title: "Hakkımızda",
       intro:
         "TAMPDF, günlük dosya işlerini — PDF, görsel ve belgeleri birleştirme, bölme, sıkıştırma ve dönüştürme — hızlı, özel ve zahmetsiz hale getirmek için oluşturulmuş ücretsiz bir çevrimiçi araç setidir.",
+      toolsHeading: "Tüm TAMPDF araçları",
     },
     contactUs: {
       title: "Bize Ulaşın",
@@ -98,10 +100,12 @@ export const tr: DeepPartial<Dictionary> = {
     newSize: "Yeni boyut",
     reducedBy: "Azaltma oranı",
     spaceSaved: "Kazanılan alan",
+    alreadyOptimized: "Bu dosya zaten iyi optimize edilmiş — kaliteyi bozmadan küçültülecek pek bir şey kalmadı.",
   },
   notFound: {
     title: "Sayfa bulunamadı",
     description: "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
     cta: "Ana sayfaya dön",
   },
+  workspace,
 };

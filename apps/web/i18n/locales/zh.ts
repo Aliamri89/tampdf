@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/zh";
 
 export const zh: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "更改语言" } },
@@ -55,6 +56,7 @@ export const zh: DeepPartial<Dictionary> = {
       title: "关于我们",
       intro:
         "TAMPDF 是一套免费的在线工具，旨在让合并、拆分、压缩和转换 PDF、图片与文档等日常文件任务变得快速、私密且轻松。",
+      toolsHeading: "TAMPDF 全部工具",
     },
     contactUs: {
       title: "联系我们",
@@ -98,10 +100,12 @@ export const zh: DeepPartial<Dictionary> = {
     newSize: "新大小",
     reducedBy: "减少了",
     spaceSaved: "节省空间",
+    alreadyOptimized: "此文件已经过充分优化——在不影响质量的情况下几乎没有可压缩的空间。",
   },
   notFound: {
     title: "页面未找到",
     description: "您要查找的页面不存在，或可能已被移动。",
     cta: "返回首页",
   },
+  workspace,
 };

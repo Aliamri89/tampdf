@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/da";
 
 export const da: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Skift sprog" } },
@@ -55,6 +56,7 @@ export const da: DeepPartial<Dictionary> = {
       title: "Om os",
       intro:
         "TAMPDF er et gratis online værktøjssæt, der gør dagligdags filopgaver — at flette, opdele, komprimere og konvertere PDF'er, billeder og dokumenter — hurtige, private og uden besvær.",
+      toolsHeading: "Alle TAMPDF-værktøjer",
     },
     contactUs: {
       title: "Kontakt os",
@@ -98,10 +100,12 @@ export const da: DeepPartial<Dictionary> = {
     newSize: "Ny størrelse",
     reducedBy: "Reduceret med",
     spaceSaved: "Sparet plads",
+    alreadyOptimized: "Filen var allerede godt optimeret — der var ikke meget at fjerne uden at gå på kompromis med kvaliteten.",
   },
   notFound: {
     title: "Siden blev ikke fundet",
     description: "Siden, du leder efter, findes ikke eller er måske blevet flyttet.",
     cta: "Tilbage til forsiden",
   },
+  workspace,
 };

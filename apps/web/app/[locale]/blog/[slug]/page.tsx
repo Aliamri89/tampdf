@@ -10,6 +10,7 @@ import { ArticleMeta } from "@/components/article/article-meta";
 import { ArticlePagination } from "@/components/article/article-pagination";
 import { RelatedArticles } from "@/components/article/related-articles";
 import { TableOfContents } from "@/components/article/table-of-contents";
+import { PageBackdrop } from "@/components/page-backdrop";
 import { Container } from "@/components/ui/container";
 import { getDictionary } from "@/i18n/get-dictionary";
 import {
@@ -157,6 +158,7 @@ export default async function BlogPostPage({
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(articleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd) }} />
+      <PageBackdrop />
 
       <Container className="pt-8">
         <nav

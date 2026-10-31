@@ -402,7 +402,31 @@ export interface ToolUsageEvent {
  */
 export interface PageVisitEvent {
   id: number;
-  locale: 'en' | 'ar';
+  locale:
+    | 'en'
+    | 'ar'
+    | 'es'
+    | 'fr'
+    | 'de'
+    | 'it'
+    | 'pt'
+    | 'nl'
+    | 'tr'
+    | 'ru'
+    | 'zh'
+    | 'ja'
+    | 'ko'
+    | 'hi'
+    | 'id'
+    | 'vi'
+    | 'th'
+    | 'pl'
+    | 'sv'
+    | 'da'
+    | 'no'
+    | 'fi'
+    | 'cs'
+    | 'el';
   updatedAt: string;
   createdAt: string;
 }

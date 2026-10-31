@@ -1,5 +1,6 @@
 import type { Dictionary } from "../dictionaries";
 import type { DeepPartial } from "../merge";
+import { workspace } from "./workspace/el";
 
 export const el: DeepPartial<Dictionary> = {
   header: { languageMenu: { ariaLabel: "Αλλαγή γλώσσας" } },
@@ -55,6 +56,7 @@ export const el: DeepPartial<Dictionary> = {
       title: "Σχετικά με εμάς",
       intro:
         "Το TAMPDF είναι μια δωρεάν σουίτα διαδικτυακών εργαλείων που δημιουργήθηκε για να κάνει τις καθημερινές εργασίες με αρχεία — συγχώνευση, διαχωρισμό, συμπίεση και μετατροπή PDF, εικόνων και εγγράφων — γρήγορες, ιδιωτικές και χωρίς κόπο.",
+      toolsHeading: "Όλα τα εργαλεία του TAMPDF",
     },
     contactUs: {
       title: "Επικοινωνία",
@@ -98,10 +100,12 @@ export const el: DeepPartial<Dictionary> = {
     newSize: "Νέο μέγεθος",
     reducedBy: "Μειώθηκε κατά",
     spaceSaved: "Χώρος που εξοικονομήθηκε",
+    alreadyOptimized: "Αυτό το αρχείο ήταν ήδη καλά βελτιστοποιημένο — δεν έμενε πολύ περιθώριο μείωσης χωρίς απώλεια ποιότητας.",
   },
   notFound: {
     title: "Η σελίδα δεν βρέθηκε",
     description: "Η σελίδα που αναζητάτε δεν υπάρχει ή μπορεί να έχει μετακινηθεί.",
     cta: "Επιστροφή στην αρχική",
   },
+  workspace,
 };
