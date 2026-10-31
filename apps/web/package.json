@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true})\"",
-    "build": "npm run clean && payload run ./scripts/clear-dev-migration-marker.ts && payload migrate && next build",
+    "build": "npm run clean && payload run ./scripts/clear-dev-migration-marker.ts && payload migrate && next build --webpack",
     "start": "next start -p ${PORT:-3000} -H ${HOST:-0.0.0.0}",
     "lint": "eslint",
     "payload": "payload",

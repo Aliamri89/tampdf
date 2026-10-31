@@ -195,6 +195,7 @@ constant in `packages/config/src/index.ts`.
 | `turbopack.root` pinned to the repo root | `next.config.ts` | A stale second `package-lock.json` above the checkout made Turbopack infer the wrong workspace root and misplace build output. Also fixes the `apps/web/` nesting inside the standalone folder. |
 | Postgres pool caps (`max`, `idleTimeoutMillis: 10_000`, acquisition timeout) | `payload.config.ts` | Connections accumulating at the Session pooler across builds/deploys until it refuses new ones. |
 | `clear-dev-migration-marker.ts` before `payload migrate` | `apps/web/package.json` | Build hanging forever on an interactive migration prompt with no TTY. |
+| `next build --webpack` | `apps/web/package.json` | On Hostinger the Turbopack production build hung at "Creating an optimized production build" until the ~15 min build timeout killed it (exit 143), while the same commit compiles in ~2 min on Linux with 1 CPU elsewhere. Webpack compiles in ~3 min there. |
 | Post-build copy of `public/` and `.next/static` | root `package.json` | Unstyled site and 404s for all static assets. |
 | Admin at `/amriadmin` + `X-Robots-Tag: noindex` | `next.config.ts` | Admin panel being indexed. |
 
