@@ -1,36 +1,30 @@
-import Link from "next/link";
-import type { Locale } from "@tampdf/config";
-import { LanguageMenu } from "@/components/language-menu";
+import {
+  getLocalizedCategories,
+  getLocalizedToolsByCategory,
+  type Locale,
+} from "@tampdf/config";
+import { HeaderMenu, type MenuGroup } from "@/components/header-menu";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { getDictionary } from "@/i18n/get-dictionary";
 
 export function Header({ locale }: { locale: Locale }) {
-  const dict = getDictionary(locale);
-  const navLinks = [
-    { href: `/${locale}/about`, label: dict.footer.aboutUs },
-    { href: `/${locale}/contact`, label: dict.footer.contactUs },
-    { href: `/${locale}/blog`, label: dict.footer.blog },
-  ];
+  const groups: MenuGroup[] = getLocalizedCategories(locale).map((category) => ({
+    id: category.id,
+    name: category.name,
+    icon: category.icon,
+    tools: getLocalizedToolsByCategory(category.id, locale).map((tool) => ({
+      slug: tool.slug,
+      name: tool.name,
+    })),
+  }));
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Logo locale={locale} />
-        <nav className="hidden items-center gap-7 sm:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-foreground/65 transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <LanguageMenu locale={locale} />
+          <HeaderMenu locale={locale} groups={groups} />
         </div>
       </div>
     </header>

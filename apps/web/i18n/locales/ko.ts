@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/ko";
 
 export const ko: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "언어 변경" } },
+  header: { languageMenu: { ariaLabel: "언어 변경" }, menu: { open: "메뉴", close: "닫기" } },
   breadcrumb: { home: "홈" },
   tool: {
     processedClient: "브라우저 내에서 처리됩니다 — 파일이 업로드되지 않습니다",
@@ -26,6 +26,21 @@ export const ko: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "출시 예정" },
   home: {
+    hero: {
+      badge: "프리랜서와 전문가를 위한 최고의 PDF 선택",
+      title: "지금 PDF 압축하기",
+      dropLabel: "PDF 파일을 여기에 끌어다 놓으세요",
+      uploadButton: "업로드",
+    },
+    moreTools: "더 많은 도구",
+    groups: {
+      all: "전체",
+      toPdf: "PDF로 변환",
+      fromPdf: "PDF에서 변환",
+      organize: "정리",
+      optimize: "최적화",
+      edit: "편집",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "무료로 빠르고 사용하기 쉬운 PDF 도구",
     toolPicker: {

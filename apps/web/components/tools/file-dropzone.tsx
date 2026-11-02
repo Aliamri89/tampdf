@@ -1,7 +1,8 @@
 "use client";
 
-import { UploadCloud } from "lucide-react";
+import { ArrowUp, Cloud, Upload, UploadCloud } from "lucide-react";
 import { useId, useRef, useState } from "react";
+import { HighlightedText } from "@/components/home/highlighted-text";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { cn, formatBytes } from "@/lib/utils";
@@ -20,6 +21,8 @@ interface FileDropzoneProps {
   maxFiles?: number;
   /** Files already added, so the cap applies cumulatively. Required when maxFiles is set. */
   currentCount?: number;
+  /** "hero" is the large homepage look: cloud icon, centred label and a prominent upload button. */
+  variant?: "default" | "hero";
 }
 
 export function FileDropzone({
@@ -31,7 +34,9 @@ export function FileDropzone({
   maxSizeBytes = DEFAULT_MAX_SIZE_BYTES,
   maxFiles,
   currentCount = 0,
+  variant = "default",
 }: FileDropzoneProps) {
+  const isHero = variant === "hero";
   const dict = useDictionary();
   const [isDragging, setIsDragging] = useState(false);
   const [rejectionMessage, setRejectionMessage] = useState<string | null>(null);
@@ -113,22 +118,45 @@ export function FileDropzone({
           handleFiles(e.dataTransfer.files);
         }}
         className={cn(
-          "group flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed px-6 py-14 text-center transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "group flex cursor-pointer flex-col items-center justify-center text-center transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          isHero
+            ? "gap-5 rounded-3xl border-2 border-dashed px-6 py-10 sm:py-12"
+            : "gap-3 rounded-2xl border-2 border-dashed px-6 py-14",
           isDragging
             ? "scale-[1.01] border-brand-400 bg-brand-50 dark:bg-brand-500/10"
-            : "border-border bg-surface-muted hover:border-brand-300 hover:bg-brand-50/40 dark:hover:bg-brand-500/10",
+            : isHero
+              ? "border-foreground/25 bg-home-card hover:border-brand-400"
+              : "border-border bg-surface-muted hover:border-brand-300 hover:bg-brand-50/40 dark:hover:bg-brand-500/10",
           disabled && "pointer-events-none opacity-50",
         )}
       >
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-500/10 text-brand-600 transition-transform duration-300 ease-out group-hover:scale-110">
-          <UploadCloud size={26} />
-        </span>
-        <div>
-          <p className="font-medium text-foreground">{label}</p>
-          <p className="mt-1 text-sm text-foreground/50">
-            {dict.dropzone.browse} &middot; {accept.join(", ").toUpperCase()}
-          </p>
-        </div>
+        {isHero ? (
+          <>
+            <span className="relative flex h-20 w-20 items-center justify-center text-foreground transition-transform duration-300 ease-out group-hover:scale-105">
+              <Cloud size={80} strokeWidth={1.4} />
+              <ArrowUp size={30} strokeWidth={2.6} className="absolute top-[34px] text-brand-500" />
+            </span>
+            <p className="text-lg font-bold text-foreground sm:text-xl">
+              <HighlightedText text={label} highlight={dict.home.heroHighlight} />
+            </p>
+            <span className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-9 py-3 text-base font-bold text-white shadow-lg shadow-brand-500/30 transition-colors group-hover:bg-brand-600">
+              {dict.home.hero.uploadButton}
+              <Upload size={18} strokeWidth={2.4} />
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-500/10 text-brand-600 transition-transform duration-300 ease-out group-hover:scale-110">
+              <UploadCloud size={26} />
+            </span>
+            <div>
+              <p className="font-medium text-foreground">{label}</p>
+              <p className="mt-1 text-sm text-foreground/50">
+                {dict.dropzone.browse} &middot; {accept.join(", ").toUpperCase()}
+              </p>
+            </div>
+          </>
+        )}
         <input
           ref={inputRef}
           id={inputId}

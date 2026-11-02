@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/el";
 
 export const el: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Αλλαγή γλώσσας" } },
+  header: { languageMenu: { ariaLabel: "Αλλαγή γλώσσας" }, menu: { open: "Μενού", close: "Κλείσιμο" } },
   breadcrumb: { home: "Αρχική" },
   tool: {
     processedClient: "Επεξεργάζεται στο πρόγραμμα περιήγησής σας — τα αρχεία δεν μεταφορτώνονται ποτέ",
@@ -26,6 +26,21 @@ export const el: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Έρχεται σύντομα" },
   home: {
+    hero: {
+      badge: "Η καλύτερη επιλογή για αρχεία PDF για ελεύθερους επαγγελματίες και επαγγελματίες",
+      title: "Συμπίεσε PDF τώρα",
+      dropLabel: "Σύρετε και αφήστε εδώ ένα αρχείο PDF",
+      uploadButton: "Μεταφόρτωση",
+    },
+    moreTools: "Περισσότερα εργαλεία",
+    groups: {
+      all: "Όλα",
+      toPdf: "Μετατροπή σε PDF",
+      fromPdf: "Μετατροπή από PDF",
+      organize: "Οργάνωση",
+      optimize: "Βελτιστοποίηση",
+      edit: "Επεξεργασία",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Δωρεάν, γρήγορα και εύχρηστα εργαλεία PDF",
     toolPicker: {

@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/ja";
 
 export const ja: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "言語を変更" } },
+  header: { languageMenu: { ariaLabel: "言語を変更" }, menu: { open: "メニュー", close: "閉じる" } },
   breadcrumb: { home: "ホーム" },
   tool: {
     processedClient: "お使いのブラウザ内で処理されます — ファイルがアップロードされることはありません",
@@ -26,6 +26,21 @@ export const ja: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "近日公開" },
   home: {
+    hero: {
+      badge: "フリーランスやプロのための最適なPDFツール",
+      title: "今すぐPDFを圧縮",
+      dropLabel: "PDFファイルをここにドラッグ＆ドロップ",
+      uploadButton: "アップロード",
+    },
+    moreTools: "その他のツール",
+    groups: {
+      all: "すべて",
+      toPdf: "PDFに変換",
+      fromPdf: "PDFから変換",
+      organize: "整理",
+      optimize: "最適化",
+      edit: "編集",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "無料・高速・簡単に使えるPDFツール",
     toolPicker: {

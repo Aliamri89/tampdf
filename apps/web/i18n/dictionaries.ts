@@ -3,6 +3,10 @@ const en = {
     languageMenu: {
       ariaLabel: "Change language",
     },
+    menu: {
+      open: "Menu",
+      close: "Close",
+    },
   },
   breadcrumb: {
     home: "Home",
@@ -30,6 +34,21 @@ const en = {
     comingSoon: "Coming soon",
   },
   home: {
+    hero: {
+      badge: "The best choice for PDF files for freelancers and professionals",
+      title: "Compress PDF Now",
+      dropLabel: "Drag & drop a PDF file here",
+      uploadButton: "Upload",
+    },
+    moreTools: "More tools",
+    groups: {
+      all: "All",
+      toPdf: "Convert to PDF",
+      fromPdf: "Convert from PDF",
+      organize: "Organize",
+      optimize: "Optimize",
+      edit: "Edit",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Free, fast, and easy-to-use PDF tools",
     toolPicker: {
@@ -584,6 +603,10 @@ const ar: typeof en = {
     languageMenu: {
       ariaLabel: "تغيير اللغة",
     },
+    menu: {
+      open: "القائمة",
+      close: "إغلاق",
+    },
   },
   breadcrumb: {
     home: "الرئيسية",
@@ -616,6 +639,21 @@ const ar: typeof en = {
     comingSoon: "قريبًا",
   },
   home: {
+    hero: {
+      badge: "الخيار الأفضل لملفات PDF للعاملين المستقلين والمحترفين",
+      title: "اضغط PDF الآن",
+      dropLabel: "اسحب وأفلت ملف PDF هنا",
+      uploadButton: "تحميل",
+    },
+    moreTools: "المزيد من الأدوات",
+    groups: {
+      all: "الكل",
+      toPdf: "تحويل إلى PDF",
+      fromPdf: "تحويل من PDF",
+      organize: "تنظيم",
+      optimize: "تحسين",
+      edit: "تحرير",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "أدوات PDF مجانية وسريعة وسهلة الاستخدام",
     toolPicker: {

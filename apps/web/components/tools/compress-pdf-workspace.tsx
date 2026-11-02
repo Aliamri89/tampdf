@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Loader2, Minimize2 } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
@@ -19,8 +19,13 @@ type Status = "idle" | "processing" | "done" | "error";
 
 const MAX_FILES = 10;
 
-export function CompressPdfWorkspace() {
-  const dict = useDictionary().workspace.compressPdf;
+export function CompressPdfWorkspace({ variant = "default" }: { variant?: "default" | "hero" }) {
+  const fullDict = useDictionary();
+  const dict = fullDict.workspace.compressPdf;
+  const isHero = variant === "hero";
+  // The homepage hero has no card chrome around it: the dropzone is the frame.
+  const shell = (children: ReactNode) =>
+    isHero ? <div>{children}</div> : <Card className="p-6 sm:p-8">{children}</Card>;
   const levels: { id: CompressionLevel; label: string; hint: string }[] = [
     { id: "low", label: dict.levelLow, hint: dict.levelLowHint },
     { id: "medium", label: dict.levelMedium, hint: dict.levelMediumHint },
@@ -87,29 +92,28 @@ export function CompressPdfWorkspace() {
   }
 
   if (status === "done" && result) {
-    return (
-      <Card className="p-6 sm:p-8">
-        <ResultPanel
-          filename={result.filename}
-          size={result.blob.size}
-          originalSize={result.originalSize}
-          onDownload={() => downloadBlob(result.blob, result.filename)}
-          onReset={reset}
-        />
-      </Card>
+    return shell(
+      <ResultPanel
+        filename={result.filename}
+        size={result.blob.size}
+        originalSize={result.originalSize}
+        onDownload={() => downloadBlob(result.blob, result.filename)}
+        onReset={reset}
+      />,
     );
   }
 
-  return (
-    <Card className="p-6 sm:p-8">
+  return shell(
+    <>
       <FileDropzone
+        variant={variant}
         accept={[".pdf"]}
         multiple
         maxFiles={MAX_FILES}
         currentCount={files.length}
         disabled={status === "processing"}
         onFilesAdded={(added) => setFiles((prev) => [...prev, ...added])}
-        label={dict.dropLabel}
+        label={isHero ? fullDict.home.hero.dropLabel : dict.dropLabel}
       />
 
       {files.length > 0 && (
@@ -169,6 +173,6 @@ export function CompressPdfWorkspace() {
           </Button>
         </>
       )}
-    </Card>
+    </>,
   );
 }

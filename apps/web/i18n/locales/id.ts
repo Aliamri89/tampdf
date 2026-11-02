@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/id";
 
 export const id: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Ganti bahasa" } },
+  header: { languageMenu: { ariaLabel: "Ganti bahasa" }, menu: { open: "Menu", close: "Tutup" } },
   breadcrumb: { home: "Beranda" },
   tool: {
     processedClient: "Diproses di browser Anda — file tidak pernah diunggah",
@@ -26,6 +26,21 @@ export const id: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Segera hadir" },
   home: {
+    hero: {
+      badge: "Pilihan terbaik untuk file PDF bagi freelancer dan profesional",
+      title: "Kompres PDF Sekarang",
+      dropLabel: "Seret dan lepas file PDF di sini",
+      uploadButton: "Unggah",
+    },
+    moreTools: "Alat lainnya",
+    groups: {
+      all: "Semua",
+      toPdf: "Ubah ke PDF",
+      fromPdf: "Ubah dari PDF",
+      organize: "Atur",
+      optimize: "Optimalkan",
+      edit: "Edit",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Alat PDF gratis, cepat, dan mudah digunakan",
     toolPicker: {

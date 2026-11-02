@@ -1,25 +1,11 @@
-import { getLocalizedSiteConfig, getLocalizedTools, isValidLocale } from "@tampdf/config";
+import { getLocalizedTools, isValidLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
-import { FeaturesRow } from "@/components/home/features-row";
-import { HeroVisuals } from "@/components/home/hero-visuals";
-import { ToolPicker } from "@/components/home/tool-picker";
-import { PageBackdrop } from "@/components/page-backdrop";
+import { HeroUploader } from "@/components/home/hero-uploader";
+import { HighlightedText } from "@/components/home/highlighted-text";
+import { ToolsGrid, type GridTool } from "@/components/home/tools-grid";
 import { Container } from "@/components/ui/container";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { sortForPicker } from "@/lib/home-order";
-
-/** Colours the highlight phrase of the tagline (e.g. "PDF") without changing its text. */
-function Tagline({ text, highlight }: { text: string; highlight: string }) {
-  const index = text.indexOf(highlight);
-  if (!highlight || index === -1) return <>{text}</>;
-  return (
-    <>
-      {text.slice(0, index)}
-      <span className="text-brand-500">{highlight}</span>
-      {text.slice(index + highlight.length)}
-    </>
-  );
-}
 
 export default async function HomePage({
   params,
@@ -30,40 +16,49 @@ export default async function HomePage({
   if (!isValidLocale(rawLocale)) notFound();
   const locale = rawLocale;
 
-  const siteConfig = getLocalizedSiteConfig(locale);
   const dict = getDictionary(locale);
+  const highlight = dict.home.heroHighlight;
 
-  // Every tool in the shared registry, pulled live rather than a separate
-  // hardcoded list, most-used first.
-  const pickerTools = sortForPicker(getLocalizedTools(locale));
+  // Every tool in the shared registry (never a separate list), most-used first.
+  const tools: GridTool[] = sortForPicker(getLocalizedTools(locale)).map((tool) => ({
+    slug: tool.slug,
+    name: tool.shortName ?? tool.name,
+    icon: tool.icon,
+    category: tool.category,
+  }));
 
   return (
     <>
-      <PageBackdrop />
-      {/* `id`s kept for the footer's existing "+N more" column links
-          (`#pdf` / `#image`), which still point here now that the homepage
-          no longer has separate tool-category sections. */}
-      <div id="pdf" className="relative overflow-hidden pb-16 pt-8 sm:pt-10">
-        <span id="image" className="sr-only" aria-hidden />
-        <HeroVisuals />
+      <div aria-hidden className="home-backdrop pointer-events-none fixed inset-0 -z-10" />
 
-        <Container maxWidth="3xl" className="relative text-center">
-          <h1 className="mx-auto max-w-2xl text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            <Tagline text={siteConfig.tagline} highlight={dict.home.heroHighlight} />
-          </h1>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-foreground/60 sm:text-base">
-            {dict.home.heroSubtitle}
+      <Container maxWidth="3xl" className="pt-8 text-center sm:pt-12">
+        <div className="flex items-center justify-center gap-3 sm:gap-4">
+          <span aria-hidden className="h-px w-8 shrink-0 bg-brand-500 sm:w-16" />
+          <p className="text-xs font-medium leading-snug text-foreground/80 sm:text-sm">
+            <HighlightedText text={dict.home.hero.badge} highlight={highlight} />
           </p>
+          <span aria-hidden className="h-px w-8 shrink-0 bg-brand-500 sm:w-16" />
+        </div>
 
-          <div className="mt-6 sm:mt-7">
-            <ToolPicker locale={locale} tools={pickerTools} />
-          </div>
+        <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <HighlightedText text={dict.home.hero.title} highlight={highlight} />
+        </h1>
 
-          <div className="mt-14 sm:mt-16">
-            <FeaturesRow locale={locale} />
-          </div>
+        <div className="mx-auto mt-7 max-w-2xl sm:mt-9">
+          <HeroUploader />
+        </div>
+      </Container>
+
+      {/* `id`s kept for the footer's "+N more" column links (`#pdf` / `#image`). */}
+      <section id="pdf" className="scroll-mt-20 pb-6 pt-16 sm:pt-24">
+        <span id="image" className="sr-only" aria-hidden />
+        <Container>
+          <h2 className="mb-6 text-center text-2xl font-bold tracking-tight text-foreground sm:mb-8 sm:text-3xl">
+            {dict.home.moreTools}
+          </h2>
+          <ToolsGrid locale={locale} tools={tools} />
         </Container>
-      </div>
+      </section>
     </>
   );
 }

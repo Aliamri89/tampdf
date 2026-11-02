@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/zh";
 
 export const zh: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "更改语言" } },
+  header: { languageMenu: { ariaLabel: "更改语言" }, menu: { open: "菜单", close: "关闭" } },
   breadcrumb: { home: "首页" },
   tool: {
     processedClient: "在您的浏览器中处理 — 文件从不上传",
@@ -26,6 +26,21 @@ export const zh: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "即将推出" },
   home: {
+    hero: {
+      badge: "为自由职业者和专业人士打造的最佳 PDF 工具",
+      title: "立即压缩 PDF",
+      dropLabel: "将 PDF 文件拖放到此处",
+      uploadButton: "上传",
+    },
+    moreTools: "更多工具",
+    groups: {
+      all: "全部",
+      toPdf: "转换为 PDF",
+      fromPdf: "从 PDF 转换",
+      organize: "整理",
+      optimize: "优化",
+      edit: "编辑",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "免费、快速、易用的 PDF 工具",
     toolPicker: {

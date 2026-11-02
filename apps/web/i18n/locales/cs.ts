@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/cs";
 
 export const cs: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Změnit jazyk" } },
+  header: { languageMenu: { ariaLabel: "Změnit jazyk" }, menu: { open: "Nabídka", close: "Zavřít" } },
   breadcrumb: { home: "Domů" },
   tool: {
     processedClient: "Zpracováno ve vašem prohlížeči — soubory se nikdy nenahrávají",
@@ -26,6 +26,21 @@ export const cs: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Již brzy" },
   home: {
+    hero: {
+      badge: "Nejlepší volba pro soubory PDF pro freelancery a profesionály",
+      title: "Komprimovat PDF hned",
+      dropLabel: "Přetáhněte sem soubor PDF",
+      uploadButton: "Nahrát",
+    },
+    moreTools: "Další nástroje",
+    groups: {
+      all: "Vše",
+      toPdf: "Převést do PDF",
+      fromPdf: "Převést z PDF",
+      organize: "Uspořádat",
+      optimize: "Optimalizovat",
+      edit: "Upravit",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Bezplatné, rychlé a snadno použitelné nástroje pro PDF",
     toolPicker: {

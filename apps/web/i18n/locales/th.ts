@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/th";
 
 export const th: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "เปลี่ยนภาษา" } },
+  header: { languageMenu: { ariaLabel: "เปลี่ยนภาษา" }, menu: { open: "เมนู", close: "ปิด" } },
   breadcrumb: { home: "หน้าแรก" },
   tool: {
     processedClient: "ประมวลผลในเบราว์เซอร์ของคุณ — ไม่มีการอัปโหลดไฟล์เลย",
@@ -26,6 +26,21 @@ export const th: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "เร็ว ๆ นี้" },
   home: {
+    hero: {
+      badge: "ตัวเลือกที่ดีที่สุดสำหรับไฟล์ PDF สำหรับฟรีแลนซ์และมืออาชีพ",
+      title: "บีบอัด PDF ตอนนี้",
+      dropLabel: "ลากและวางไฟล์ PDF ที่นี่",
+      uploadButton: "อัปโหลด",
+    },
+    moreTools: "เครื่องมืออื่น ๆ",
+    groups: {
+      all: "ทั้งหมด",
+      toPdf: "แปลงเป็น PDF",
+      fromPdf: "แปลงจาก PDF",
+      organize: "จัดระเบียบ",
+      optimize: "ปรับให้เหมาะสม",
+      edit: "แก้ไข",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "เครื่องมือ PDF ฟรี รวดเร็ว และใช้งานง่าย",
     toolPicker: {

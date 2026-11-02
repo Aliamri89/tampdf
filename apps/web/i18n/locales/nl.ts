@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/nl";
 
 export const nl: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Taal wijzigen" } },
+  header: { languageMenu: { ariaLabel: "Taal wijzigen" }, menu: { open: "Menu", close: "Sluiten" } },
   breadcrumb: { home: "Home" },
   tool: {
     processedClient: "Verwerkt in je browser — bestanden worden nooit geüpload",
@@ -26,6 +26,21 @@ export const nl: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Binnenkort beschikbaar" },
   home: {
+    hero: {
+      badge: "De beste keuze voor PDF-bestanden voor freelancers en professionals",
+      title: "PDF nu comprimeren",
+      dropLabel: "Sleep een PDF-bestand hierheen",
+      uploadButton: "Uploaden",
+    },
+    moreTools: "Meer tools",
+    groups: {
+      all: "Alles",
+      toPdf: "Converteren naar PDF",
+      fromPdf: "Converteren van PDF",
+      organize: "Organiseren",
+      optimize: "Optimaliseren",
+      edit: "Bewerken",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Gratis, snelle en eenvoudige PDF-tools",
     toolPicker: {

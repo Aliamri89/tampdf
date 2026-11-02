@@ -16,7 +16,11 @@ export function ThemeToggle() {
       className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border text-foreground/70 transition-colors hover:border-brand-300 hover:text-foreground"
       suppressHydrationWarning
     >
-      {isDark ? <Sun size={16} /> : <Moon size={16} />}
+      {/* Both icons are always rendered and CSS picks one from the data-theme
+          attribute, so server and client markup match even when a returning
+          visitor's saved theme differs from the server's default. */}
+      <Sun size={16} className="hidden dark:block" />
+      <Moon size={16} className="dark:hidden" />
     </button>
   );
 }

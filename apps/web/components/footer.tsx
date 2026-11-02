@@ -6,6 +6,7 @@ import {
   getLocalizedToolsByCategory,
   type Locale,
 } from "@tampdf/config";
+import { LanguageMenu } from "@/components/language-menu";
 import { Logo } from "@/components/logo";
 import { Container } from "@/components/ui/container";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -33,7 +34,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
   return (
     <div>
       <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-      <ul className="mt-4 space-y-2.5">
+      <ul className="mt-3 space-y-1.5">
         {links.map((link) => (
           <li key={link.href}>
             <Link
@@ -78,16 +79,16 @@ export async function Footer({ locale }: { locale: Locale }) {
   ];
 
   return (
-    <footer className="mt-16 border-t border-border bg-surface-muted/50">
-      <Container className="py-12">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 text-start sm:grid-cols-3 sm:gap-10 lg:grid-cols-5">
+    <footer className="mt-12 border-t border-border bg-surface-muted/50">
+      <Container className="py-8">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-7 text-start sm:grid-cols-3 sm:gap-8 lg:grid-cols-5">
           <div className="col-span-2 flex flex-col items-start sm:col-span-3 lg:col-span-1">
             <Logo locale={locale} />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-foreground/60">
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/60">
               {siteConfig.description}
             </p>
             {socialLinks.length > 0 && (
-              <div className="mt-4 flex items-center gap-3">
+              <div className="mt-3 flex items-center gap-3">
                 {socialLinks.map((link, index) => {
                   const SocialIcon = SOCIAL_ICONS[link.platform];
                   return (
@@ -129,11 +130,14 @@ export async function Footer({ locale }: { locale: Locale }) {
           <FooterColumn title={dict.footer.company} links={companyLinks} />
           <FooterColumn title={dict.footer.legal} links={legalLinks} />
         </div>
-        <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-start text-sm text-foreground/50 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-          <p>
-            &copy; {new Date().getFullYear()} {siteName}. {dict.footer.rights}
-          </p>
-          <p>{dict.footer.privacyNote}</p>
+        <div className="mt-7 flex flex-col gap-3 border-t border-border pt-5 text-sm text-foreground/50 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+          <div className="flex flex-col gap-1">
+            <p>
+              &copy; {new Date().getFullYear()} {siteName}. {dict.footer.rights}
+            </p>
+            <p>{dict.footer.privacyNote}</p>
+          </div>
+          <LanguageMenu locale={locale} placement="top" />
         </div>
       </Container>
     </footer>

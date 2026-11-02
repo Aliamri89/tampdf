@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/da";
 
 export const da: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Skift sprog" } },
+  header: { languageMenu: { ariaLabel: "Skift sprog" }, menu: { open: "Menu", close: "Luk" } },
   breadcrumb: { home: "Forside" },
   tool: {
     processedClient: "Behandles i din browser — filer uploades aldrig",
@@ -26,6 +26,21 @@ export const da: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Kommer snart" },
   home: {
+    hero: {
+      badge: "Det bedste valg til PDF-filer for freelancere og professionelle",
+      title: "Komprimer PDF nu",
+      dropLabel: "Træk og slip en PDF-fil her",
+      uploadButton: "Upload",
+    },
+    moreTools: "Flere værktøjer",
+    groups: {
+      all: "Alle",
+      toPdf: "Konverter til PDF",
+      fromPdf: "Konverter fra PDF",
+      organize: "Organiser",
+      optimize: "Optimer",
+      edit: "Rediger",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Gratis, hurtige og nemme PDF-værktøjer",
     toolPicker: {

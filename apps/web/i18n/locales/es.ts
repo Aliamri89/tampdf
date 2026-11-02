@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/es";
 
 export const es: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Cambiar idioma" } },
+  header: { languageMenu: { ariaLabel: "Cambiar idioma" }, menu: { open: "Menú", close: "Cerrar" } },
   breadcrumb: { home: "Inicio" },
   tool: {
     processedClient: "Procesado en tu navegador — los archivos nunca se suben",
@@ -26,6 +26,21 @@ export const es: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Próximamente" },
   home: {
+    hero: {
+      badge: "La mejor opción en PDF para autónomos y profesionales",
+      title: "Comprime PDF ahora",
+      dropLabel: "Arrastra y suelta un archivo PDF aquí",
+      uploadButton: "Subir",
+    },
+    moreTools: "Más herramientas",
+    groups: {
+      all: "Todas",
+      toPdf: "Convertir a PDF",
+      fromPdf: "Convertir desde PDF",
+      organize: "Organizar",
+      optimize: "Optimizar",
+      edit: "Editar",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Herramientas PDF gratuitas, rápidas y fáciles de usar",
     toolPicker: {

@@ -25,7 +25,14 @@ import { cn } from "@/lib/utils";
  * language's name (see `shrink-0`/`whitespace-nowrap` below) regardless of
  * how wide the panel is or how many options it lists.
  */
-export function LanguageMenu({ locale }: { locale: Locale }) {
+export function LanguageMenu({
+  locale,
+  placement = "bottom",
+}: {
+  locale: Locale;
+  /** Which side of the button the dropdown opens on ("top" for controls at the bottom of the page). */
+  placement?: "bottom" | "top";
+}) {
   const pathname = usePathname();
   const dict = useDictionary();
   const [open, setOpen] = useState(false);
@@ -66,7 +73,10 @@ export function LanguageMenu({ locale }: { locale: Locale }) {
 
       {open && (
         <div
-          className="absolute end-0 top-full z-50 mt-2 max-h-[60vh] w-[min(92vw,20rem)] overflow-y-auto rounded-2xl border border-border bg-surface p-2 shadow-xl sm:w-[26rem] lg:max-h-none lg:w-[30rem] lg:overflow-visible"
+          className={cn(
+            "absolute end-0 z-50 max-h-[60vh] w-[min(92vw,20rem)] overflow-y-auto rounded-2xl border border-border bg-surface p-2 shadow-xl sm:w-[26rem] lg:max-h-none lg:w-[30rem] lg:overflow-visible",
+            placement === "top" ? "bottom-full mb-2" : "top-full mt-2",
+          )}
           role="menu"
         >
           <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">

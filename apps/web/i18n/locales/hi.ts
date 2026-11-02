@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/hi";
 
 export const hi: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "भाषा बदलें" } },
+  header: { languageMenu: { ariaLabel: "भाषा बदलें" }, menu: { open: "मेन्यू", close: "बंद करें" } },
   breadcrumb: { home: "होम" },
   tool: {
     processedClient: "आपके ब्राउज़र में ही प्रोसेस होता है — फ़ाइलें कभी अपलोड नहीं होतीं",
@@ -26,6 +26,21 @@ export const hi: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "जल्द आ रहा है" },
   home: {
+    hero: {
+      badge: "फ्रीलांसरों और प्रोफेशनल्स के लिए PDF का सबसे अच्छा विकल्प",
+      title: "अभी PDF कम्प्रेस करें",
+      dropLabel: "PDF फ़ाइल यहाँ खींचकर छोड़ें",
+      uploadButton: "अपलोड",
+    },
+    moreTools: "और टूल",
+    groups: {
+      all: "सभी",
+      toPdf: "PDF में बदलें",
+      fromPdf: "PDF से बदलें",
+      organize: "व्यवस्थित करें",
+      optimize: "ऑप्टिमाइज़ करें",
+      edit: "एडिट करें",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "मुफ़्त, तेज़ और उपयोग में आसान PDF टूल",
     toolPicker: {

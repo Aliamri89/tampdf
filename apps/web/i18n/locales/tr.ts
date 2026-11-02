@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/tr";
 
 export const tr: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Dili değiştir" } },
+  header: { languageMenu: { ariaLabel: "Dili değiştir" }, menu: { open: "Menü", close: "Kapat" } },
   breadcrumb: { home: "Ana Sayfa" },
   tool: {
     processedClient: "Tarayıcınızda işlenir — dosyalar asla yüklenmez",
@@ -26,6 +26,21 @@ export const tr: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Yakında" },
   home: {
+    hero: {
+      badge: "Serbest çalışanlar ve profesyoneller için en iyi PDF seçimi",
+      title: "PDF'yi şimdi sıkıştır",
+      dropLabel: "PDF dosyasını buraya sürükleyip bırakın",
+      uploadButton: "Yükle",
+    },
+    moreTools: "Daha fazla araç",
+    groups: {
+      all: "Tümü",
+      toPdf: "PDF'ye dönüştür",
+      fromPdf: "PDF'den dönüştür",
+      organize: "Düzenle ve yönet",
+      optimize: "Optimize et",
+      edit: "Düzenle",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Ücretsiz, hızlı ve kullanımı kolay PDF araçları",
     toolPicker: {

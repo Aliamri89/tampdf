@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/fi";
 
 export const fi: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Vaihda kieli" } },
+  header: { languageMenu: { ariaLabel: "Vaihda kieli" }, menu: { open: "Valikko", close: "Sulje" } },
   breadcrumb: { home: "Etusivu" },
   tool: {
     processedClient: "Käsitellään selaimessasi — tiedostoja ei koskaan ladata palvelimelle",
@@ -26,6 +26,21 @@ export const fi: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Tulossa pian" },
   home: {
+    hero: {
+      badge: "Paras valinta PDF-tiedostoille freelancereille ja ammattilaisille",
+      title: "Pakkaa PDF nyt",
+      dropLabel: "Vedä ja pudota PDF-tiedosto tähän",
+      uploadButton: "Lataa",
+    },
+    moreTools: "Lisää työkaluja",
+    groups: {
+      all: "Kaikki",
+      toPdf: "Muunna PDF:ksi",
+      fromPdf: "Muunna PDF:stä",
+      organize: "Järjestä",
+      optimize: "Optimoi",
+      edit: "Muokkaa",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Ilmaisia, nopeita ja helppokäyttöisiä PDF-työkaluja",
     toolPicker: {

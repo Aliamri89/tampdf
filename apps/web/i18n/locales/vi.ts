@@ -3,7 +3,7 @@ import type { DeepPartial } from "../merge";
 import { workspace } from "./workspace/vi";
 
 export const vi: DeepPartial<Dictionary> = {
-  header: { languageMenu: { ariaLabel: "Đổi ngôn ngữ" } },
+  header: { languageMenu: { ariaLabel: "Đổi ngôn ngữ" }, menu: { open: "Menu", close: "Đóng" } },
   breadcrumb: { home: "Trang chủ" },
   tool: {
     processedClient: "Được xử lý ngay trong trình duyệt của bạn — tệp không bao giờ được tải lên",
@@ -26,6 +26,21 @@ export const vi: DeepPartial<Dictionary> = {
   },
   card: { comingSoon: "Sắp ra mắt" },
   home: {
+    hero: {
+      badge: "Lựa chọn tốt nhất cho tệp PDF dành cho freelancer và chuyên gia",
+      title: "Nén PDF ngay",
+      dropLabel: "Kéo và thả tệp PDF vào đây",
+      uploadButton: "Tải lên",
+    },
+    moreTools: "Thêm công cụ",
+    groups: {
+      all: "Tất cả",
+      toPdf: "Chuyển sang PDF",
+      fromPdf: "Chuyển từ PDF",
+      organize: "Sắp xếp",
+      optimize: "Tối ưu",
+      edit: "Chỉnh sửa",
+    },
     heroHighlight: "PDF",
     heroSubtitle: "Công cụ PDF miễn phí, nhanh và dễ sử dụng",
     toolPicker: {
