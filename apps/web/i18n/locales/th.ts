@@ -53,7 +53,7 @@ export const th: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "สงวนลิขสิทธิ์",
-    privacyNote: "ไฟล์ได้รับการประมวลผลอย่างปลอดภัยและจะไม่ถูกเก็บไว้นานเกินความจำเป็น",
+    privacyNote: "ไฟล์ได้รับการประมวลผลอย่างปลอดภัยและไม่ถูกจัดเก็บไว้กับเรา",
     moreCount: "อีก {count} รายการ",
     company: "บริษัท",
     legal: "กฎหมาย",

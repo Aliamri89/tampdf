@@ -6,7 +6,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -56,19 +55,19 @@ export function PngToPdfWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={dict.resultName}
           size={result.byteLength}
           onDownload={() => downloadBytes(result, dict.resultName, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".png"]}
         multiple
@@ -94,7 +93,7 @@ export function PngToPdfWorkspace() {
             ))}
           </ul>
 
-          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+          {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
           <Button
             className="mt-6 w-full"
@@ -115,6 +114,6 @@ export function PngToPdfWorkspace() {
           </Button>
         </>
       )}
-    </Card>
+    </div>
   );
 }

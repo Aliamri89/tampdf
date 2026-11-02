@@ -6,7 +6,6 @@ import { ErrorText, SelectedFile } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -148,19 +147,19 @@ export function CropImageWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && (
         <>
           <FileDropzone
@@ -180,7 +179,7 @@ export function CropImageWorkspace() {
             detail={`${natural.width} × ${natural.height} px`}
             onRemove={reset}
           >
-            <p className="mt-4 text-xs text-foreground/60">{dict.hint}</p>
+            <p className="mt-4 text-sm text-foreground/60">{dict.hint}</p>
             <div className="mt-2 flex justify-center">
               {/* The frame uses physical left/right, so keep it left-to-right in RTL too. */}
               <div
@@ -219,12 +218,12 @@ export function CropImageWorkspace() {
 
           <div className="mt-5">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-sm font-medium text-foreground">{dict.marginsLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.marginsLabel}</span>
               <button
                 type="button"
                 onClick={() => setMargins(NO_MARGINS)}
                 disabled={!anyCrop}
-                className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 hover:text-brand-700 disabled:opacity-40"
+                className="inline-flex items-center gap-1 text-sm font-medium text-brand-600 hover:text-brand-700 disabled:opacity-40"
               >
                 <RotateCcw size={12} />
                 {dict.reset}
@@ -233,7 +232,7 @@ export function CropImageWorkspace() {
             <div className="mt-3 grid grid-cols-2 gap-4 sm:grid-cols-4">
               {EDGES.map((edge) => (
                 <label key={edge} className="block">
-                  <span className="text-xs font-medium text-foreground/70">{dict[edge]}</span>
+                  <span className="text-sm font-medium text-foreground/70">{dict[edge]}</span>
                   <div className="mt-1.5 flex items-center gap-2">
                     <input
                       type="range"
@@ -244,20 +243,20 @@ export function CropImageWorkspace() {
                       onChange={(e) => setEdge(edge, Number(e.target.value))}
                       className="w-full accent-brand-500"
                     />
-                    <span className="w-10 shrink-0 text-end text-xs tabular-nums text-foreground/60" dir="ltr">
+                    <span className="w-10 shrink-0 text-end text-sm tabular-nums text-foreground/60" dir="ltr">
                       {Math.round(margins[edge])}%
                     </span>
                   </div>
                 </label>
               ))}
             </div>
-            <p className="mt-3 text-xs text-foreground/60" dir="auto">
+            <p className="mt-3 text-sm text-foreground/60" dir="auto">
               {t(dict.resultSize, { width: cropRect.width, height: cropRect.height })}
             </p>
           </div>
 
           {error && <ErrorText>{error}</ErrorText>}
-          {!anyCrop && <p className="mt-4 text-xs text-foreground/50">{dict.noCrop}</p>}
+          {!anyCrop && <p className="mt-4 text-sm text-foreground/50">{dict.noCrop}</p>}
 
           <Button
             className="mt-6 w-full"
@@ -270,6 +269,6 @@ export function CropImageWorkspace() {
           </Button>
         </>
       )}
-    </Card>
+    </div>
   );
 }

@@ -6,7 +6,6 @@ import { ErrorText, LoadingLine, SelectedFile } from "@/components/tools/control
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { downloadBytes } from "@/lib/download";
@@ -74,21 +73,21 @@ export function RemovePdfMetadataWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   const found = values ? METADATA_FIELDS.filter((field) => values[field]) : [];
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
@@ -101,15 +100,15 @@ export function RemovePdfMetadataWorkspace() {
         <div className="mt-5">
           {found.length > 0 ? (
             <>
-              <span className="text-sm font-medium text-foreground">{dict.currentLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.currentLabel}</span>
               <dl className="mt-2 overflow-hidden rounded-xl border border-border">
                 {found.map((field) => (
                   <div
                     key={field}
                     className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3 border-b border-border px-4 py-2.5 last:border-b-0"
                   >
-                    <dt className="text-sm text-foreground/55">{common.metadataFields[field]}</dt>
-                    <dd className="break-words text-sm font-medium text-foreground" dir="auto">
+                    <dt className="text-base text-foreground/55">{common.metadataFields[field]}</dt>
+                    <dd className="break-words text-base font-medium text-foreground" dir="auto">
                       {values[field]}
                     </dd>
                   </div>
@@ -117,7 +116,7 @@ export function RemovePdfMetadataWorkspace() {
               </dl>
             </>
           ) : (
-            <p className="rounded-xl border border-border bg-surface-muted px-4 py-3 text-sm text-foreground/60">
+            <p className="rounded-xl border border-border bg-surface-muted px-4 py-3 text-base text-foreground/60">
               {dict.noneFound}
             </p>
           )}
@@ -132,6 +131,6 @@ export function RemovePdfMetadataWorkspace() {
           {processing ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

@@ -65,7 +65,7 @@ const en = {
   },
   footer: {
     rights: "All rights reserved.",
-    privacyNote: "Files are processed securely and never stored longer than necessary.",
+    privacyNote: "Files are processed securely and are never stored by us.",
     moreCount: "+{count} more",
     company: "Company",
     legal: "Legal",
@@ -670,7 +670,7 @@ const ar: typeof en = {
   },
   footer: {
     rights: "جميع الحقوق محفوظة.",
-    privacyNote: "تتم معالجة الملفات بأمان ولا يتم تخزينها لفترة أطول من اللازم.",
+    privacyNote: "تتم معالجة الملفات بأمان ولا يتم تخزينها لدينا",
     moreCount: "+{count} أخرى",
     company: "الشركة",
     legal: "قانوني",

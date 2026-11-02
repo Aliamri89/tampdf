@@ -20,9 +20,9 @@ export const categoryStyles: Record<ToolCategoryId, CategoryStyle> = {
     hoverShadow: "hover:shadow-brand-500/10",
   },
   image: {
-    iconBg: "bg-sky-50 dark:bg-sky-500/10",
-    iconText: "text-sky-600 dark:text-sky-400",
-    hoverBorder: "hover:border-sky-200 dark:hover:border-sky-500/30",
-    hoverShadow: "hover:shadow-sky-500/10",
+    iconBg: "bg-blue-50 dark:bg-blue-500/10",
+    iconText: "text-blue-600 dark:text-blue-400",
+    hoverBorder: "hover:border-blue-200 dark:hover:border-blue-500/30",
+    hoverShadow: "hover:shadow-blue-500/10",
   },
 };

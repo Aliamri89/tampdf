@@ -14,7 +14,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { usePdfSource } from "@/components/tools/use-pdf-source";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -109,14 +108,14 @@ export function AddWatermarkWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
@@ -132,7 +131,7 @@ export function AddWatermarkWorkspace() {
       : [];
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && (
         <FileDropzone
           accept={[".pdf"]}
@@ -155,7 +154,7 @@ export function AddWatermarkWorkspace() {
           )}
           {preview && (
             <div className="mt-4">
-              <p className="text-xs text-foreground/60">{dict.previewLabel}</p>
+              <p className="text-sm text-foreground/60">{dict.previewLabel}</p>
               <div className="mt-2 flex justify-center">
                 <div className="relative inline-block overflow-hidden rounded border border-border">
                   {/* eslint-disable-next-line @next/next/no-img-element -- local canvas-rendered data URL */}
@@ -188,7 +187,7 @@ export function AddWatermarkWorkspace() {
       {source.ready && (
         <div className="mt-5 space-y-5">
           <label className="block">
-            <span className="text-sm font-medium text-foreground">{dict.textLabel}</span>
+            <span className="text-base font-medium text-foreground">{dict.textLabel}</span>
             <input
               type="text"
               value={text}
@@ -200,7 +199,7 @@ export function AddWatermarkWorkspace() {
           </label>
 
           <div>
-            <span className="text-sm font-medium text-foreground">{dict.colorLabel}</span>
+            <span className="text-base font-medium text-foreground">{dict.colorLabel}</span>
             <div className="mt-2 flex flex-wrap gap-2" role="radiogroup" aria-label={dict.colorLabel}>
               {(Object.keys(COLORS) as ColorKey[]).map((key) => (
                 <button
@@ -210,7 +209,7 @@ export function AddWatermarkWorkspace() {
                   aria-checked={color === key}
                   onClick={() => setColor(key)}
                   className={cn(
-                    "flex items-center gap-2 rounded-xl border px-3 py-2 text-sm transition-colors",
+                    "flex items-center gap-2 rounded-xl border px-3 py-2 text-base transition-colors",
                     color === key
                       ? "border-brand-400 bg-brand-50 text-foreground dark:bg-brand-500/10"
                       : "border-border bg-surface text-foreground/70 hover:border-brand-200",
@@ -269,7 +268,7 @@ export function AddWatermarkWorkspace() {
 
       {error && <ErrorText>{error}</ErrorText>}
       {source.ready && !trimmed && (
-        <p className="mt-4 text-xs text-foreground/50">{dict.emptyText}</p>
+        <p className="mt-4 text-sm text-foreground/50">{dict.emptyText}</p>
       )}
 
       {source.ready && (
@@ -283,6 +282,6 @@ export function AddWatermarkWorkspace() {
           {processing ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

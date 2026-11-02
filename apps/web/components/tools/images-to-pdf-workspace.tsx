@@ -6,7 +6,6 @@ import { ErrorText, OptionGroup } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -110,19 +109,19 @@ export function ImagesToPdfWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={dict.resultName}
           size={result.byteLength}
           onDownload={() => downloadBytes(result, dict.resultName, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
@@ -136,7 +135,7 @@ export function ImagesToPdfWorkspace() {
 
       {entries.length > 0 && (
         <>
-          <p className="mt-5 text-xs text-foreground/60">{dict.reorderHint}</p>
+          <p className="mt-5 text-sm text-foreground/60">{dict.reorderHint}</p>
           <ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
             {entries.map((entry, index) => (
               <li
@@ -168,7 +167,7 @@ export function ImagesToPdfWorkspace() {
                   draggedId === entry.id && "opacity-40",
                 )}
               >
-                <span className="absolute start-1.5 top-1.5 z-10 flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground/75 px-1 text-[10px] font-semibold text-background">
+                <span className="absolute start-1.5 top-1.5 z-10 flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground/75 px-1 text-[11px] font-semibold text-background">
                   {index + 1}
                 </span>
                 <button
@@ -243,6 +242,6 @@ export function ImagesToPdfWorkspace() {
           </Button>
         </>
       )}
-    </Card>
+    </div>
   );
 }

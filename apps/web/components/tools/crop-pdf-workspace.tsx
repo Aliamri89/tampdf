@@ -5,7 +5,6 @@ import { Crop, Loader2, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -104,14 +103,14 @@ export function CropPdfWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
@@ -124,15 +123,15 @@ export function CropPdfWorkspace() {
   };
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-foreground/50">{formatBytes(file.size)}</p>
+              <p className="truncate text-base font-medium text-foreground">{file.name}</p>
+              <p className="text-sm text-foreground/50">{formatBytes(file.size)}</p>
             </div>
             <button
               type="button"
@@ -145,21 +144,21 @@ export function CropPdfWorkspace() {
           </div>
 
           {status === "loading" && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-foreground/50">
+            <div className="mt-4 flex items-center gap-2 text-base text-foreground/50">
               <Loader2 size={16} className="animate-spin" />
               {dict.loadingPreview}
             </div>
           )}
 
           {readError && (
-            <p className="mt-4 text-sm text-red-600">
+            <p className="mt-4 text-base text-red-600">
               {readError === "password" ? dict.passwordError : dict.readError}
             </p>
           )}
 
           {preview && (
             <div className="mt-4">
-              <p className="text-xs text-foreground/60">{dict.previewLabel}</p>
+              <p className="text-sm text-foreground/60">{dict.previewLabel}</p>
               <div className="mt-2 flex justify-center">
                 <div className="relative inline-block">
                   {/* eslint-disable-next-line @next/next/no-img-element -- local canvas-rendered data URL */}
@@ -181,11 +180,11 @@ export function CropPdfWorkspace() {
 
       {preview && (
         <div className="mt-5">
-          <span className="text-sm font-medium text-foreground">{dict.marginsLabel}</span>
+          <span className="text-base font-medium text-foreground">{dict.marginsLabel}</span>
           <div className="mt-3 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {EDGES.map((edge) => (
               <label key={edge} className="block">
-                <span className="text-xs font-medium text-foreground/70">{dict[edge]}</span>
+                <span className="text-sm font-medium text-foreground/70">{dict[edge]}</span>
                 <div className="mt-1.5 flex items-center gap-2">
                   <input
                     type="range"
@@ -197,7 +196,7 @@ export function CropPdfWorkspace() {
                     }
                     className="w-full accent-brand-500"
                   />
-                  <span className="w-9 shrink-0 text-right text-xs tabular-nums text-foreground/60">
+                  <span className="w-9 shrink-0 text-right text-sm tabular-nums text-foreground/60">
                     {percent[edge]}%
                   </span>
                 </div>
@@ -207,9 +206,9 @@ export function CropPdfWorkspace() {
         </div>
       )}
 
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-base text-red-600">{error}</p>}
       {preview && !anyMargin && status !== "processing" && (
-        <p className="mt-4 text-xs text-foreground/50">{dict.noMargins}</p>
+        <p className="mt-4 text-sm text-foreground/50">{dict.noMargins}</p>
       )}
 
       {preview && (
@@ -227,6 +226,6 @@ export function CropPdfWorkspace() {
           {status === "processing" ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

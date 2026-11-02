@@ -7,7 +7,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { usePdfSource } from "@/components/tools/use-pdf-source";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -49,21 +48,21 @@ export function FlipPdfWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   const file = source.file;
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && (
         <FileDropzone
           accept={[".pdf"]}
@@ -86,7 +85,7 @@ export function FlipPdfWorkspace() {
           )}
           {source.preview && (
             <div className="mt-4">
-              <p className="text-xs text-foreground/60">{dict.previewLabel}</p>
+              <p className="text-sm text-foreground/60">{dict.previewLabel}</p>
               <div className="mt-2 flex justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element -- local canvas-rendered data URL */}
                 <img
@@ -122,6 +121,6 @@ export function FlipPdfWorkspace() {
           {processing ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

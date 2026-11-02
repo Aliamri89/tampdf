@@ -53,7 +53,7 @@ export const ja: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "全著作権所有。",
-    privacyNote: "ファイルは安全に処理され、必要以上に保存されることはありません。",
+    privacyNote: "ファイルは安全に処理され、当社に保存されることはありません。",
     moreCount: "他 {count} 件",
     company: "会社情報",
     legal: "法的情報",

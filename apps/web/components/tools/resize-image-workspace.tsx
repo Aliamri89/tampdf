@@ -7,7 +7,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -119,21 +118,21 @@ export function ResizeImageWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   const preview = first ? targetSize(first) : null;
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
@@ -183,7 +182,7 @@ export function ResizeImageWorkspace() {
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <label className="block">
-                    <span className="text-sm font-medium text-foreground">{dict.widthLabel}</span>
+                    <span className="text-base font-medium text-foreground">{dict.widthLabel}</span>
                     <input
                       type="number"
                       min={1}
@@ -195,7 +194,7 @@ export function ResizeImageWorkspace() {
                     />
                   </label>
                   <label className="block">
-                    <span className="text-sm font-medium text-foreground">{dict.heightLabel}</span>
+                    <span className="text-base font-medium text-foreground">{dict.heightLabel}</span>
                     <input
                       type="number"
                       min={1}
@@ -207,7 +206,7 @@ export function ResizeImageWorkspace() {
                     />
                   </label>
                 </div>
-                <label className="flex items-center gap-2.5 text-sm text-foreground/80">
+                <label className="flex items-center gap-2.5 text-base text-foreground/80">
                   <input
                     type="checkbox"
                     checked={keepRatio}
@@ -220,14 +219,14 @@ export function ResizeImageWorkspace() {
                   {dict.keepRatio}
                 </label>
                 {entries.length > 1 && keepRatio && (
-                  <p className="text-xs text-foreground/50">{dict.multiNote}</p>
+                  <p className="text-sm text-foreground/50">{dict.multiNote}</p>
                 )}
-                {!validDimensions && <p className="text-xs text-red-600">{dict.invalidSize}</p>}
+                {!validDimensions && <p className="text-sm text-red-600">{dict.invalidSize}</p>}
               </div>
             )}
           </div>
 
-          <p className="mt-4 text-xs text-foreground/60" dir="auto">
+          <p className="mt-4 text-sm text-foreground/60" dir="auto">
             {t(dict.originalSize, { width: first.width, height: first.height })}
             {preview && validDimensions && (
               <> · {t(dict.newSize, { width: preview.width, height: preview.height })}</>
@@ -253,6 +252,6 @@ export function ResizeImageWorkspace() {
       )}
 
       {entries.length === 0 && error && <ErrorText>{error}</ErrorText>}
-    </Card>
+    </div>
   );
 }

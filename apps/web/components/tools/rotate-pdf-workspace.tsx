@@ -5,7 +5,6 @@ import { Loader2, RotateCw, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -159,19 +158,19 @@ export function RotatePdfWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".pdf"]}
         multiple
@@ -186,8 +185,8 @@ export function RotatePdfWorkspace() {
             <div key={entry.id} className="rounded-xl border border-border p-4">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-foreground">{entry.file.name}</p>
-                  <p className="text-xs text-foreground/50">
+                  <p className="truncate text-base font-medium text-foreground">{entry.file.name}</p>
+                  <p className="text-sm text-foreground/50">
                     {formatBytes(entry.file.size)}
                     {entry.pages.length > 0
                       ? ` · ${t(dict.pageCountLabel, { count: entry.pages.length })}`
@@ -205,14 +204,14 @@ export function RotatePdfWorkspace() {
               </div>
 
               {entry.loading && (
-                <div className="mt-4 flex items-center gap-2 text-sm text-foreground/50">
+                <div className="mt-4 flex items-center gap-2 text-base text-foreground/50">
                   <Loader2 size={16} className="animate-spin" />
                   {dict.loadingPages}
                 </div>
               )}
 
               {entry.readError && (
-                <p className="mt-4 text-sm text-red-600">
+                <p className="mt-4 text-base text-red-600">
                   {entry.readError === "password" ? dict.passwordError : dict.readError}
                 </p>
               )}
@@ -220,7 +219,7 @@ export function RotatePdfWorkspace() {
               {!entry.loading && !entry.readError && entry.pages.length > 0 && (
                 <>
                   <div className="mt-4 flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-medium text-foreground/60">
+                    <span className="text-sm font-medium text-foreground/60">
                       {dict.rotateAllLabel}
                     </span>
                     {BULK_ANGLES.map((angle) => (
@@ -228,7 +227,7 @@ export function RotatePdfWorkspace() {
                         key={angle}
                         type="button"
                         onClick={() => rotateAllPages(entry.id, angle)}
-                        className="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-foreground/70 transition-colors hover:border-brand-300 hover:text-brand-600"
+                        className="rounded-lg border border-border px-2.5 py-1 text-sm font-medium text-foreground/70 transition-colors hover:border-brand-300 hover:text-brand-600"
                       >
                         {angle}°
                       </button>
@@ -255,7 +254,7 @@ export function RotatePdfWorkspace() {
                         >
                           <RotateCw size={14} />
                         </button>
-                        <p className="mt-1 text-center text-[11px] text-foreground/50">
+                        <p className="mt-1 text-center text-xs text-foreground/50">
                           {page.pageNumber}
                           {page.rotation ? ` · ${page.rotation}°` : ""}
                         </p>
@@ -269,7 +268,7 @@ export function RotatePdfWorkspace() {
         </div>
       )}
 
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
       {entries.length > 0 && (
         <Button className="mt-6 w-full" size="lg" disabled={!canSubmit} onClick={handleRotate}>
@@ -281,6 +280,6 @@ export function RotatePdfWorkspace() {
           {status === "processing" ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

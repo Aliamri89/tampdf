@@ -9,11 +9,11 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
-  --background: #fdfdfd;
-  --foreground: #1a1a1a;
+  --background: #f5f6fa;
+  --foreground: #14161d;
   --surface: #ffffff;
-  --surface-muted: #f5f5f5;
-  --border: #e6e6e6;
+  --surface-muted: #eceef4;
+  --border: #e2e5ee;
 
   --brand-50: #fef1f1;
   --brand-100: #fde1e1;
@@ -30,8 +30,8 @@
   --accent-500: #262626;
   --accent-600: #0d0d0d;
 
-  --home-card: #ffffff;
-  --home-border: #e4e6ec;
+  --home-card: var(--surface);
+  --home-border: var(--border);
 }
 
 @theme inline {
@@ -71,14 +71,11 @@
  * `prefers-color-scheme`, per product requirement.
  */
 :root[data-theme="dark"] {
-  --background: #0f0f10;
+  --background: #0a0f1d;
   --foreground: #f5f5f5;
-  --surface: #1a1a1c;
-  --surface-muted: #232326;
-  --border: #2e2e32;
-
-  --home-card: #111829;
-  --home-border: #232d44;
+  --surface: #111829;
+  --surface-muted: #182035;
+  --border: #232d44;
 }
 
 html {
@@ -97,35 +94,13 @@ body {
 }
 
 /*
- * Soft pastel wash behind the homepage and tool pages (see PageBackdrop).
- * Radial gradients rather than blurred shapes: same look, no per-frame
- * filter cost on a fixed layer.
- */
-.page-backdrop {
-  background:
-    radial-gradient(60rem 38rem at 8% -8%, rgb(186 230 253 / 0.55), transparent 62%),
-    radial-gradient(52rem 36rem at 96% 2%, rgb(153 246 228 / 0.45), transparent 60%),
-    radial-gradient(58rem 40rem at 55% 108%, rgb(167 243 208 / 0.35), transparent 62%),
-    linear-gradient(180deg, #f6fbfd 0%, #fbfefc 48%, #f4fdfa 100%);
-}
-
-:root[data-theme="dark"] .page-backdrop {
-  background:
-    radial-gradient(60rem 38rem at 8% -8%, rgb(14 165 233 / 0.1), transparent 62%),
-    radial-gradient(52rem 36rem at 96% 2%, rgb(20 184 166 / 0.1), transparent 60%),
-    radial-gradient(58rem 40rem at 55% 108%, rgb(16 185 129 / 0.08), transparent 62%),
-    var(--background);
-}
-
-/*
- * Homepage-only backdrop: soft light wash by day, near-black navy with a
- * faint red glow at night. Kept separate from .page-backdrop so the tool
- * pages, blog and static pages keep their existing look.
+ * Site-wide backdrop (see PageBackdrop): soft light wash by day, near-black
+ * navy with a faint red glow at night.
  */
 .home-backdrop {
   background:
-    radial-gradient(46rem 24rem at 50% -7rem, rgb(237 10 10 / 0.08), transparent 68%),
-    linear-gradient(180deg, #fbfbfd 0%, #f3f4f8 100%);
+    radial-gradient(46rem 24rem at 50% -7rem, rgb(237 10 10 / 0.07), transparent 68%),
+    linear-gradient(180deg, #f8f9fc 0%, #f3f4f9 100%);
 }
 
 :root[data-theme="dark"] .home-backdrop {

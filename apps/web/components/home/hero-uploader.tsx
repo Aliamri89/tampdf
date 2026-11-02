@@ -9,7 +9,6 @@ function HeroUploaderPlaceholder() {
   const dict = useDictionary();
   return (
     <FileDropzone
-      variant="hero"
       accept={[".pdf"]}
       disabled
       onFilesAdded={() => {}}
@@ -27,5 +26,5 @@ const CompressPdfWorkspace = dynamic(
 
 /** The real Compress PDF tool, embedded at the top of the homepage. */
 export function HeroUploader() {
-  return <CompressPdfWorkspace variant="hero" />;
+  return <CompressPdfWorkspace />;
 }

@@ -53,7 +53,7 @@ export const zh: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "版权所有。",
-    privacyNote: "文件会被安全处理，且不会存储超过必要的时间。",
+    privacyNote: "文件会被安全处理，且不会存储在我们这里。",
     moreCount: "还有 {count} 个",
     company: "公司",
     legal: "法律信息",

@@ -33,16 +33,16 @@ interface FooterLink {
 function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-      <ul className="mt-3 space-y-1.5">
+      <h3 className="text-base font-bold text-foreground">{title}</h3>
+      <ul className="mt-2.5 space-y-0.5">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
               className={
                 link.accent
-                  ? "text-sm font-medium text-brand-500 transition-colors hover:text-brand-600"
-                  : "text-sm text-foreground/60 transition-colors hover:text-brand-500"
+                  ? "text-[15px] font-medium text-brand-500 transition-colors hover:text-brand-600"
+                  : "text-[15px] text-foreground/70 transition-colors hover:text-brand-500"
               }
             >
               {link.label}
@@ -84,7 +84,7 @@ export async function Footer({ locale }: { locale: Locale }) {
         <div className="grid grid-cols-2 gap-x-8 gap-y-7 text-start sm:grid-cols-3 sm:gap-8 lg:grid-cols-5">
           <div className="col-span-2 flex flex-col items-start sm:col-span-3 lg:col-span-1">
             <Logo locale={locale} />
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/60">
+            <p className="mt-3 max-w-xs text-[15px] leading-relaxed text-foreground/70">
               {siteConfig.description}
             </p>
             {socialLinks.length > 0 && (
@@ -130,7 +130,7 @@ export async function Footer({ locale }: { locale: Locale }) {
           <FooterColumn title={dict.footer.company} links={companyLinks} />
           <FooterColumn title={dict.footer.legal} links={legalLinks} />
         </div>
-        <div className="mt-7 flex flex-col gap-3 border-t border-border pt-5 text-sm text-foreground/50 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <div className="mt-7 flex flex-col gap-3 border-t border-border pt-5 text-[15px] text-foreground/60 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <div className="flex flex-col gap-1">
             <p>
               &copy; {new Date().getFullYear()} {siteName}. {dict.footer.rights}

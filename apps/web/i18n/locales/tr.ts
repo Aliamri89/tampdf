@@ -53,7 +53,7 @@ export const tr: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Tüm hakları saklıdır.",
-    privacyNote: "Dosyalar güvenli şekilde işlenir ve gerekenden daha uzun süre saklanmaz.",
+    privacyNote: "Dosyalar güvenle işlenir ve bizde saklanmaz.",
     moreCount: "+{count} daha",
     company: "Şirket",
     legal: "Yasal",

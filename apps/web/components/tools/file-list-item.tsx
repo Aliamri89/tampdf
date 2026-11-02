@@ -65,8 +65,8 @@ export function FileListItem({
         </span>
       )}
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-        <p className="text-xs text-foreground/50">{formatBytes(file.size)}</p>
+        <p className="truncate text-base font-medium text-foreground">{file.name}</p>
+        <p className="text-sm text-foreground/50">{formatBytes(file.size)}</p>
       </div>
       {(onMoveUp || onMoveDown) && (
         <div className="flex shrink-0 flex-col">

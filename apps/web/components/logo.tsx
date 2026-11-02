@@ -12,7 +12,7 @@ export async function Logo({ locale, className }: { locale: Locale; className?: 
 
   return (
     <Link href={`/${locale}`} dir="ltr" className={`inline-flex shrink-0 items-center ${className ?? ""}`}>
-      <ThemedLogoImage overrideUrl={logoUrl} alt={siteName} className="h-7 w-auto sm:h-8" />
+      <ThemedLogoImage overrideUrl={logoUrl} alt={siteName} className="h-9 w-auto sm:h-11" />
     </Link>
   );
 }

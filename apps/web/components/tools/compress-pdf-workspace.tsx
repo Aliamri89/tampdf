@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Loader2, Minimize2 } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
@@ -19,13 +18,10 @@ type Status = "idle" | "processing" | "done" | "error";
 
 const MAX_FILES = 10;
 
-export function CompressPdfWorkspace({ variant = "default" }: { variant?: "default" | "hero" }) {
+export function CompressPdfWorkspace() {
   const fullDict = useDictionary();
   const dict = fullDict.workspace.compressPdf;
-  const isHero = variant === "hero";
-  // The homepage hero has no card chrome around it: the dropzone is the frame.
-  const shell = (children: ReactNode) =>
-    isHero ? <div>{children}</div> : <Card className="p-6 sm:p-8">{children}</Card>;
+  const shell = (children: React.ReactNode) => <div>{children}</div>;
   const levels: { id: CompressionLevel; label: string; hint: string }[] = [
     { id: "low", label: dict.levelLow, hint: dict.levelLowHint },
     { id: "medium", label: dict.levelMedium, hint: dict.levelMediumHint },
@@ -106,14 +102,13 @@ export function CompressPdfWorkspace({ variant = "default" }: { variant?: "defau
   return shell(
     <>
       <FileDropzone
-        variant={variant}
         accept={[".pdf"]}
         multiple
         maxFiles={MAX_FILES}
         currentCount={files.length}
         disabled={status === "processing"}
         onFilesAdded={(added) => setFiles((prev) => [...prev, ...added])}
-        label={isHero ? fullDict.home.hero.dropLabel : dict.dropLabel}
+        label={fullDict.home.hero.dropLabel}
       />
 
       {files.length > 0 && (
@@ -129,7 +124,7 @@ export function CompressPdfWorkspace({ variant = "default" }: { variant?: "defau
           </ul>
 
           <div className="mt-5">
-            <span className="text-sm font-medium text-foreground">{dict.levelLabel}</span>
+            <span className="text-base font-medium text-foreground">{dict.levelLabel}</span>
             <div className="mt-2 grid grid-cols-3 gap-2">
               {levels.map((option) => (
                 <button
@@ -143,16 +138,16 @@ export function CompressPdfWorkspace({ variant = "default" }: { variant?: "defau
                       : "border-border bg-surface hover:border-brand-200",
                   )}
                 >
-                  <span className="block text-sm font-medium text-foreground">
+                  <span className="block text-base font-medium text-foreground">
                     {option.label}
                   </span>
-                  <span className="block text-xs text-foreground/50">{option.hint}</span>
+                  <span className="block text-sm text-foreground/50">{option.hint}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+          {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
           <Button
             className="mt-6 w-full"

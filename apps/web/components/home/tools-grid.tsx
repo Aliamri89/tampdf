@@ -48,7 +48,7 @@ export function ToolsGrid({ locale, tools }: { locale: string; tools: GridTool[]
               aria-selected={active}
               onClick={() => setFilter(id)}
               className={cn(
-                "rounded-full border px-4 py-1.5 text-sm font-medium transition-colors",
+                "rounded-full border px-5 py-2 text-[15px] font-medium transition-colors",
                 active
                   ? "border-brand-500 bg-brand-500 text-white"
                   : "border-home-border bg-home-card text-foreground/70 hover:border-brand-400 hover:text-foreground",
@@ -84,7 +84,7 @@ export function ToolsGrid({ locale, tools }: { locale: string; tools: GridTool[]
               >
                 <Icon name={tool.icon} size={28} strokeWidth={2} />
               </span>
-              <span className="line-clamp-2 text-balance text-[13px] font-semibold leading-snug text-foreground sm:text-sm">
+              <span className="line-clamp-2 text-balance text-[15px] font-semibold leading-snug text-foreground sm:text-base">
                 {tool.name}
               </span>
             </Link>

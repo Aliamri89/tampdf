@@ -7,7 +7,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { usePdfSource } from "@/components/tools/use-pdf-source";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -93,14 +92,14 @@ export function ExtractPdfPagesWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.name)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
@@ -109,7 +108,7 @@ export function ExtractPdfPagesWorkspace() {
   const allSelected = source.pageCount > 0 && count === source.pageCount;
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
@@ -127,7 +126,7 @@ export function ExtractPdfPagesWorkspace() {
           {source.thumbs.length > 0 && (
             <>
               <div className="mt-4 flex items-center justify-between gap-3">
-                <p className="text-xs text-foreground/60">
+                <p className="text-sm text-foreground/60">
                   {count > 0 ? t(dict.selectedLabel, { count }) : dict.selectHint}
                 </p>
                 <button
@@ -137,7 +136,7 @@ export function ExtractPdfPagesWorkspace() {
                       allSelected ? new Set() : new Set(source.thumbs.map((p) => p.pageNumber)),
                     )
                   }
-                  className="text-xs font-medium text-brand-600 hover:text-brand-700"
+                  className="text-sm font-medium text-brand-600 hover:text-brand-700"
                 >
                   {allSelected ? common.clearSelection : common.selectAll}
                 </button>
@@ -162,7 +161,7 @@ export function ExtractPdfPagesWorkspace() {
                         {/* eslint-disable-next-line @next/next/no-img-element -- local canvas-rendered data URL */}
                         <img src={page.dataUrl} alt="" className="max-h-[85%] max-w-[85%] object-contain" />
                       </span>
-                      <span className="mt-1 block text-[11px] text-foreground/60">{page.pageNumber}</span>
+                      <span className="mt-1 block text-xs text-foreground/60">{page.pageNumber}</span>
                       {isSelected && (
                         <span className="absolute end-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-500 text-white">
                           <Check size={12} />
@@ -209,6 +208,6 @@ export function ExtractPdfPagesWorkspace() {
                 : t(dict.buttonPlural, { count })}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

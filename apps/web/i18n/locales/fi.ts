@@ -53,7 +53,7 @@ export const fi: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Kaikki oikeudet pidätetään.",
-    privacyNote: "Tiedostot käsitellään turvallisesti eikä niitä säilytetä tarpeettoman kauan.",
+    privacyNote: "Tiedostot käsitellään turvallisesti, eikä niitä tallenneta meille.",
     moreCount: "+{count} lisää",
     company: "Yritys",
     legal: "Lakiasiat",

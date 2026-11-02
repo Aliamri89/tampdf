@@ -53,7 +53,7 @@ export const nl: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Alle rechten voorbehouden.",
-    privacyNote: "Bestanden worden veilig verwerkt en nooit langer bewaard dan nodig.",
+    privacyNote: "Bestanden worden veilig verwerkt en nooit door ons opgeslagen.",
     moreCount: "+{count} meer",
     company: "Bedrijf",
     legal: "Juridisch",

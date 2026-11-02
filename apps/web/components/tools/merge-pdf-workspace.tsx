@@ -7,7 +7,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -132,19 +131,19 @@ export function MergePdfWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={dict.resultName}
           size={result.byteLength}
           onDownload={() => downloadBytes(result, dict.resultName, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".pdf"]}
         multiple
@@ -176,7 +175,7 @@ export function MergePdfWorkspace() {
             ))}
           </ul>
 
-          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+          {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
           <Button
             className="mt-6 w-full"
@@ -194,10 +193,10 @@ export function MergePdfWorkspace() {
               : t(dict.button, { count: entries.length })}
           </Button>
           {entries.length === 1 && (
-            <p className="mt-2 text-center text-xs text-foreground/50">{dict.hint}</p>
+            <p className="mt-2 text-center text-sm text-foreground/50">{dict.hint}</p>
           )}
         </>
       )}
-    </Card>
+    </div>
   );
 }

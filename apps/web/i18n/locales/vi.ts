@@ -53,7 +53,7 @@ export const vi: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Đã đăng ký bản quyền.",
-    privacyNote: "Tệp được xử lý an toàn và không bao giờ được lưu trữ lâu hơn mức cần thiết.",
+    privacyNote: "Tệp được xử lý an toàn và không được lưu trữ tại hệ thống của chúng tôi.",
     moreCount: "+{count} nữa",
     company: "Công ty",
     legal: "Pháp lý",

@@ -7,7 +7,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -102,19 +101,19 @@ export function PdfToImagesWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".pdf"]}
         multiple
@@ -184,6 +183,6 @@ export function PdfToImagesWorkspace() {
           </Button>
         </>
       )}
-    </Card>
+    </div>
   );
 }

@@ -6,7 +6,6 @@ import { ErrorText, LoadingLine, SelectedFile, inputClass } from "@/components/t
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { downloadBytes } from "@/lib/download";
@@ -75,19 +74,19 @@ export function EditPdfMetadataWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
@@ -98,11 +97,11 @@ export function EditPdfMetadataWorkspace() {
 
       {values && (
         <div className="mt-5">
-          <p className="text-sm text-foreground/60">{dict.intro}</p>
+          <p className="text-base text-foreground/60">{dict.intro}</p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {METADATA_FIELDS.map((field) => (
               <label key={field} className={cn("block", field === "subject" && "sm:col-span-2")}>
-                <span className="text-sm font-medium text-foreground">
+                <span className="text-base font-medium text-foreground">
                   {common.metadataFields[field]}
                 </span>
                 <input
@@ -116,7 +115,7 @@ export function EditPdfMetadataWorkspace() {
                   className={cn(inputClass, "mt-1.5")}
                 />
                 {field === "keywords" && (
-                  <span className="mt-1 block text-xs text-foreground/50">{dict.keywordsHint}</span>
+                  <span className="mt-1 block text-sm text-foreground/50">{dict.keywordsHint}</span>
                 )}
               </label>
             ))}
@@ -132,6 +131,6 @@ export function EditPdfMetadataWorkspace() {
           {processing ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

@@ -53,7 +53,7 @@ export const sv: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Alla rättigheter förbehållna.",
-    privacyNote: "Filer bearbetas säkert och lagras aldrig längre än nödvändigt.",
+    privacyNote: "Filer behandlas säkert och lagras aldrig hos oss.",
     moreCount: "+{count} till",
     company: "Företag",
     legal: "Juridiskt",

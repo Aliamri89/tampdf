@@ -116,7 +116,7 @@ export default async function ToolPage({
         <Container className="pt-8">
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-1.5 text-sm text-foreground/50"
+            className="flex items-center gap-1.5 text-[15px] text-foreground/55"
           >
             <Link href={`/${locale}`} className="hover:text-foreground">
               {dict.breadcrumb.home}
@@ -135,32 +135,24 @@ export default async function ToolPage({
         </Container>
 
         <Container className="pt-7 pb-8 text-center">
-          <div className="relative mx-auto h-16 w-16">
-            <span
-              aria-hidden
-              className="absolute -inset-4 rounded-full bg-brand-200/50 blur-2xl dark:bg-brand-500/20"
-            />
-            <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-brand-500 shadow-lg shadow-brand-500/15 ring-1 ring-brand-100 dark:bg-surface dark:text-brand-400 dark:ring-brand-500/25">
-              <Icon name={tool.icon} size={30} strokeWidth={2.1} />
-            </span>
-          </div>
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-xl bg-brand-500 text-white shadow-lg shadow-brand-500/25">
+            <Icon name={tool.icon} size={30} strokeWidth={2.1} />
+          </span>
           <h1 className="mx-auto mt-5 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
             {tool.name}
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-foreground/60">{tool.shortDescription}</p>
-          <p className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-white/75 px-3.5 py-1.5 text-xs font-medium text-foreground/60 ring-1 ring-border backdrop-blur dark:bg-surface/70">
-            <Lock size={13} className="text-brand-500" /> {dict.tool.processedClient}
+          <p className="mx-auto mt-3 max-w-xl text-lg text-foreground/65">{tool.shortDescription}</p>
+          <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-sm font-medium text-foreground/70 ring-1 ring-border">
+            <Lock size={15} className="text-brand-500" /> {dict.tool.processedClient}
           </p>
         </Container>
 
         <Container maxWidth="3xl" className="pb-14">
-          <div className="rounded-[1.75rem] bg-linear-to-b from-brand-100/80 via-brand-50/40 to-white/30 p-1.5 shadow-xl shadow-brand-500/10 ring-1 ring-brand-100/80 dark:from-brand-500/15 dark:via-brand-500/5 dark:to-transparent dark:ring-brand-500/20">
-            <ToolWorkspace slug={tool.slug} />
-          </div>
+          <ToolWorkspace slug={tool.slug} />
         </Container>
 
         <Container maxWidth="3xl" className="pb-14">
-          <div className="space-y-4 rounded-3xl border border-white/80 bg-white/70 p-6 text-foreground/70 shadow-sm backdrop-blur-sm sm:p-8 dark:border-border dark:bg-surface/70">
+          <div className="space-y-4 rounded-xl border border-border bg-surface p-6 text-lg text-foreground/75 sm:p-8">
             {tool.longDescription.map((paragraph, i) => (
               <p key={i} className="leading-relaxed">
                 {paragraph}

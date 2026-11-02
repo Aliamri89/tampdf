@@ -6,7 +6,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -96,19 +95,19 @@ export function PdfToJpgWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".pdf"]}
         multiple
@@ -132,7 +131,7 @@ export function PdfToJpgWorkspace() {
           </ul>
 
           <div className="mt-5">
-            <span className="text-sm font-medium text-foreground">{dict.qualityLabel}</span>
+            <span className="text-base font-medium text-foreground">{dict.qualityLabel}</span>
             <div className="mt-2 grid grid-cols-3 gap-2">
               {levels.map((option) => (
                 <button
@@ -145,14 +144,14 @@ export function PdfToJpgWorkspace() {
                       : "rounded-xl border border-border bg-surface px-3 py-2.5 text-center transition-colors hover:border-brand-200"
                   }
                 >
-                  <span className="block text-sm font-medium text-foreground">{option.label}</span>
-                  <span className="block text-xs text-foreground/50">{option.hint}</span>
+                  <span className="block text-base font-medium text-foreground">{option.label}</span>
+                  <span className="block text-sm text-foreground/50">{option.hint}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+          {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
           <Button
             className="mt-6 w-full"
@@ -180,6 +179,6 @@ export function PdfToJpgWorkspace() {
           </Button>
         </>
       )}
-    </Card>
+    </div>
   );
 }

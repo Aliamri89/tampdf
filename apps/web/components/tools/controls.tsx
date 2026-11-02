@@ -9,7 +9,7 @@ import { cn, formatBytes } from "@/lib/utils";
 /** Shared building blocks for tool workspaces, matching the existing workspace styling. */
 
 export const inputClass =
-  "w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-foreground focus-visible:border-brand-400 focus-visible:outline-none";
+  "w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-base text-foreground focus-visible:border-brand-400 focus-visible:outline-none";
 
 const GRID_BY_COUNT: Record<number, string> = {
   2: "grid-cols-2",
@@ -32,7 +32,7 @@ export function OptionGroup<T extends string>({
 }) {
   return (
     <div className={className}>
-      {label && <span className="text-sm font-medium text-foreground">{label}</span>}
+      {label && <span className="text-base font-medium text-foreground">{label}</span>}
       <div
         role="radiogroup"
         aria-label={label}
@@ -52,9 +52,9 @@ export function OptionGroup<T extends string>({
                 : "border-border bg-surface hover:border-brand-200",
             )}
           >
-            <span className="block text-sm font-medium text-foreground">{option.label}</span>
+            <span className="block text-base font-medium text-foreground">{option.label}</span>
             {option.hint && (
-              <span className="block text-xs text-foreground/50">{option.hint}</span>
+              <span className="block text-sm text-foreground/50">{option.hint}</span>
             )}
           </button>
         ))}
@@ -82,7 +82,7 @@ export function RangeField({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-foreground">{label}</span>
+      <span className="text-base font-medium text-foreground">{label}</span>
       <div className="mt-1.5 flex items-center gap-3">
         <input
           type="range"
@@ -93,7 +93,7 @@ export function RangeField({
           onChange={(e) => onChange(Number(e.target.value))}
           className="w-full accent-brand-500"
         />
-        <span className="w-14 shrink-0 text-end text-sm tabular-nums text-foreground/70" dir="ltr">
+        <span className="w-14 shrink-0 text-end text-base tabular-nums text-foreground/70" dir="ltr">
           {display}
         </span>
       </div>
@@ -118,8 +118,8 @@ export function SelectedFile({
     <div className="rounded-xl border border-border p-4">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-          <p className="text-xs text-foreground/50">
+          <p className="truncate text-base font-medium text-foreground">{file.name}</p>
+          <p className="text-sm text-foreground/50">
             {formatBytes(file.size)}
             {detail ? ` · ${detail}` : ""}
           </p>
@@ -140,7 +140,7 @@ export function SelectedFile({
 
 export function LoadingLine({ label }: { label: string }) {
   return (
-    <div className="mt-4 flex items-center gap-2 text-sm text-foreground/50">
+    <div className="mt-4 flex items-center gap-2 text-base text-foreground/50">
       <Loader2 size={16} className="animate-spin" />
       {label}
     </div>
@@ -148,5 +148,5 @@ export function LoadingLine({ label }: { label: string }) {
 }
 
 export function ErrorText({ children }: { children: ReactNode }) {
-  return <p className="mt-4 text-sm text-red-600">{children}</p>;
+  return <p className="mt-4 text-base text-red-600">{children}</p>;
 }

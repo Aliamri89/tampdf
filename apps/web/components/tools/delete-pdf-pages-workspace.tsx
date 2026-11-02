@@ -5,7 +5,6 @@ import { Loader2, Trash2, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -92,14 +91,14 @@ export function DeletePdfPagesWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
@@ -107,15 +106,15 @@ export function DeletePdfPagesWorkspace() {
   const canSubmit = status === "ready" && selected.size > 0 && !allSelected;
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-foreground/50">
+              <p className="truncate text-base font-medium text-foreground">{file.name}</p>
+              <p className="text-sm text-foreground/50">
                 {formatBytes(file.size)}
                 {thumbs.length > 0 ? ` · ${t(dict.pageCountLabel, { count: thumbs.length })}` : ""}
               </p>
@@ -131,14 +130,14 @@ export function DeletePdfPagesWorkspace() {
           </div>
 
           {status === "loading" && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-foreground/50">
+            <div className="mt-4 flex items-center gap-2 text-base text-foreground/50">
               <Loader2 size={16} className="animate-spin" />
               {dict.loadingPages}
             </div>
           )}
 
           {readError && (
-            <p className="mt-4 text-sm text-red-600">
+            <p className="mt-4 text-base text-red-600">
               {readError === "password" ? dict.passwordError : dict.readError}
             </p>
           )}
@@ -146,7 +145,7 @@ export function DeletePdfPagesWorkspace() {
           {thumbs.length > 0 && (
             <>
               <div className="mt-4 flex items-center justify-between gap-3">
-                <p className="text-xs text-foreground/60">
+                <p className="text-sm text-foreground/60">
                   {selected.size > 0
                     ? t(dict.selectedLabel, { count: selected.size })
                     : dict.selectHint}
@@ -155,14 +154,14 @@ export function DeletePdfPagesWorkspace() {
                   <button
                     type="button"
                     onClick={() => setSelected(new Set())}
-                    className="shrink-0 text-xs font-medium text-brand-600 hover:text-brand-700"
+                    className="shrink-0 text-sm font-medium text-brand-600 hover:text-brand-700"
                   >
                     {dict.clearSelection}
                   </button>
                 )}
               </div>
               {allSelected && (
-                <p className="mt-2 text-xs text-red-600">{dict.allSelectedError}</p>
+                <p className="mt-2 text-sm text-red-600">{dict.allSelectedError}</p>
               )}
               <div className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
                 {thumbs.map((page) => {
@@ -196,7 +195,7 @@ export function DeletePdfPagesWorkspace() {
                           <Trash2 size={18} className="text-red-600" />
                         </span>
                       )}
-                      <p className="mt-1 text-center text-[11px] text-foreground/50">
+                      <p className="mt-1 text-center text-xs text-foreground/50">
                         {page.pageNumber}
                       </p>
                     </button>
@@ -208,7 +207,7 @@ export function DeletePdfPagesWorkspace() {
         </div>
       )}
 
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
       {thumbs.length > 0 && (
         <Button
@@ -229,6 +228,6 @@ export function DeletePdfPagesWorkspace() {
               : t(dict.button, { count: selected.size })}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

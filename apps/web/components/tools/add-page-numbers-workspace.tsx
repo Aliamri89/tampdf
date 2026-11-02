@@ -13,7 +13,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { usePdfSource } from "@/components/tools/use-pdf-source";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -83,14 +82,14 @@ export function AddPageNumbersWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
@@ -98,7 +97,7 @@ export function AddPageNumbersWorkspace() {
   const total = Math.max(1, startAt + source.pageCount - (skipFirst ? 2 : 1));
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && (
         <FileDropzone
           accept={[".pdf"]}
@@ -125,7 +124,7 @@ export function AddPageNumbersWorkspace() {
       {source.ready && (
         <div className="mt-5 grid gap-6 sm:grid-cols-[auto_1fr]">
           <div>
-            <span className="text-sm font-medium text-foreground">{dict.positionLabel}</span>
+            <span className="text-base font-medium text-foreground">{dict.positionLabel}</span>
             {/* Positions are physical page corners, so the picker is always laid out left-to-right. */}
             <div
               dir="ltr"
@@ -151,7 +150,7 @@ export function AddPageNumbersWorkspace() {
                     title={dict.positions[spot]}
                     onClick={() => setPosition(spot)}
                     className={cn(
-                      "absolute flex h-7 w-7 items-center justify-center rounded-md text-[11px] font-semibold transition-colors",
+                      "absolute flex h-7 w-7 items-center justify-center rounded-md text-xs font-semibold transition-colors",
                       vertical === "top" ? "top-1.5" : "bottom-1.5",
                       horizontal === "left"
                         ? "left-1.5"
@@ -172,7 +171,7 @@ export function AddPageNumbersWorkspace() {
 
           <div className="space-y-4">
             <label className="block">
-              <span className="text-sm font-medium text-foreground">{dict.formatLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.formatLabel}</span>
               <select
                 value={format}
                 onChange={(e) => setFormat(e.target.value as PageNumberFormat)}
@@ -185,7 +184,7 @@ export function AddPageNumbersWorkspace() {
                   </option>
                 ))}
               </select>
-              <span className="mt-1 block text-xs text-foreground/50">{dict.formatHint}</span>
+              <span className="mt-1 block text-sm text-foreground/50">{dict.formatHint}</span>
             </label>
 
             <OptionGroup
@@ -200,7 +199,7 @@ export function AddPageNumbersWorkspace() {
             />
 
             <label className="block">
-              <span className="text-sm font-medium text-foreground">{dict.startLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.startLabel}</span>
               <input
                 type="number"
                 min={0}
@@ -212,7 +211,7 @@ export function AddPageNumbersWorkspace() {
               />
             </label>
 
-            <label className="flex items-center gap-2.5 text-sm text-foreground/80">
+            <label className="flex items-center gap-2.5 text-base text-foreground/80">
               <input
                 type="checkbox"
                 checked={skipFirst}
@@ -233,6 +232,6 @@ export function AddPageNumbersWorkspace() {
           {processing ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

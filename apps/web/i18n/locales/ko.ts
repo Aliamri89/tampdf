@@ -53,7 +53,7 @@ export const ko: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "모든 권리 보유.",
-    privacyNote: "파일은 안전하게 처리되며 필요 이상으로 저장되지 않습니다.",
+    privacyNote: "파일은 안전하게 처리되며 저희 서버에 저장되지 않습니다.",
     moreCount: "+{count}개 더보기",
     company: "회사",
     legal: "법적 정보",

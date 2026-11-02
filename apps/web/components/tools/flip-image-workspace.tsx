@@ -6,7 +6,6 @@ import { ErrorText, OptionGroup } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -75,19 +74,19 @@ export function FlipImageWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
@@ -153,6 +152,6 @@ export function FlipImageWorkspace() {
           </Button>
         </>
       )}
-    </Card>
+    </div>
   );
 }

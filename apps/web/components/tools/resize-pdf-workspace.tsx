@@ -6,7 +6,6 @@ import { PDFDocument } from "pdf-lib";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -95,27 +94,27 @@ export function ResizePdfWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-foreground/50">
+              <p className="truncate text-base font-medium text-foreground">{file.name}</p>
+              <p className="text-sm text-foreground/50">
                 {formatBytes(file.size)}
                 {pageCount > 0 ? ` · ${t(dict.pageCountLabel, { count: pageCount })}` : ""}
               </p>
@@ -131,19 +130,19 @@ export function ResizePdfWorkspace() {
           </div>
 
           {status === "loading" && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-foreground/50">
+            <div className="mt-4 flex items-center gap-2 text-base text-foreground/50">
               <Loader2 size={16} className="animate-spin" />
               {dict.loadingPages}
             </div>
           )}
-          {readError && <p className="mt-4 text-sm text-red-600">{dict.readError}</p>}
+          {readError && <p className="mt-4 text-base text-red-600">{dict.readError}</p>}
         </div>
       )}
 
       {file && !readError && status !== "loading" && (
         <div className="mt-5 space-y-4">
           <div>
-            <span className="text-sm font-medium text-foreground">{dict.modeLabel}</span>
+            <span className="text-base font-medium text-foreground">{dict.modeLabel}</span>
             <div className="mt-2 grid grid-cols-2 gap-2">
               {(
                 [
@@ -156,7 +155,7 @@ export function ResizePdfWorkspace() {
                   type="button"
                   onClick={() => setMode(option.id)}
                   className={cn(
-                    "rounded-xl border px-3 py-2.5 text-center text-sm font-medium transition-colors",
+                    "rounded-xl border px-3 py-2.5 text-center text-base font-medium transition-colors",
                     mode === option.id
                       ? "border-brand-400 bg-brand-50 text-foreground dark:bg-brand-500/10"
                       : "border-border bg-surface text-foreground/70 hover:border-brand-200",
@@ -170,11 +169,11 @@ export function ResizePdfWorkspace() {
 
           {mode === "preset" ? (
             <label className="block">
-              <span className="text-sm font-medium text-foreground">{dict.sizeLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.sizeLabel}</span>
               <select
                 value={preset}
                 onChange={(e) => setPreset(e.target.value as ResizePreset)}
-                className="mt-1.5 w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-foreground focus-visible:border-brand-400 focus-visible:outline-none"
+                className="mt-1.5 w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-base text-foreground focus-visible:border-brand-400 focus-visible:outline-none"
               >
                 {presets.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -185,7 +184,7 @@ export function ResizePdfWorkspace() {
             </label>
           ) : (
             <label className="block">
-              <span className="text-sm font-medium text-foreground">{dict.scaleLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.scaleLabel}</span>
               <div className="mt-1.5 flex items-center gap-3">
                 <input
                   type="range"
@@ -196,7 +195,7 @@ export function ResizePdfWorkspace() {
                   onChange={(e) => setScale(Number(e.target.value))}
                   className="w-full accent-brand-500"
                 />
-                <span className="w-12 shrink-0 text-right text-sm tabular-nums text-foreground/70">
+                <span className="w-12 shrink-0 text-right text-base tabular-nums text-foreground/70">
                   {scale}%
                 </span>
               </div>
@@ -205,7 +204,7 @@ export function ResizePdfWorkspace() {
         </div>
       )}
 
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
       {file && !readError && status !== "loading" && (
         <Button
@@ -222,6 +221,6 @@ export function ResizePdfWorkspace() {
           {status === "processing" ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

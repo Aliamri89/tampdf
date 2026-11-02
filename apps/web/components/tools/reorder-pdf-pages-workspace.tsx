@@ -6,7 +6,6 @@ import { ArrowUpDown, ChevronLeft, ChevronRight, Loader2, X } from "lucide-react
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -149,29 +148,29 @@ export function ReorderPdfPagesWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   const changed = items.some((item, index) => item.sourceIndex !== index);
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-foreground/50">
+              <p className="truncate text-base font-medium text-foreground">{file.name}</p>
+              <p className="text-sm text-foreground/50">
                 {formatBytes(file.size)}
                 {items.length > 0 ? ` · ${t(dict.pageCountLabel, { count: items.length })}` : ""}
               </p>
@@ -187,21 +186,21 @@ export function ReorderPdfPagesWorkspace() {
           </div>
 
           {status === "loading" && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-foreground/50">
+            <div className="mt-4 flex items-center gap-2 text-base text-foreground/50">
               <Loader2 size={16} className="animate-spin" />
               {dict.loadingPages}
             </div>
           )}
 
           {readError && (
-            <p className="mt-4 text-sm text-red-600">
+            <p className="mt-4 text-base text-red-600">
               {readError === "password" ? dict.passwordError : dict.readError}
             </p>
           )}
 
           {items.length > 0 && (
             <>
-              <p className="mt-4 text-xs text-foreground/60">{dict.reorderHint}</p>
+              <p className="mt-4 text-sm text-foreground/60">{dict.reorderHint}</p>
               <ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
                 {items.map((item, index) => (
                   <li
@@ -237,7 +236,7 @@ export function ReorderPdfPagesWorkspace() {
                       >
                         <ChevronLeft size={15} />
                       </button>
-                      <span className="text-[11px] text-foreground/50">{item.pageNumber}</span>
+                      <span className="text-xs text-foreground/50">{item.pageNumber}</span>
                       <button
                         type="button"
                         onClick={() => move(index, 1)}
@@ -256,7 +255,7 @@ export function ReorderPdfPagesWorkspace() {
         </div>
       )}
 
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
       {items.length > 0 && (
         <Button
@@ -274,8 +273,8 @@ export function ReorderPdfPagesWorkspace() {
         </Button>
       )}
       {items.length > 0 && !changed && status !== "processing" && (
-        <p className="mt-2 text-center text-xs text-foreground/50">{dict.notChanged}</p>
+        <p className="mt-2 text-center text-sm text-foreground/50">{dict.notChanged}</p>
       )}
-    </Card>
+    </div>
   );
 }

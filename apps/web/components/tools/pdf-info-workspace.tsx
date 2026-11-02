@@ -5,7 +5,6 @@ import { FileSearch, RotateCcw } from "lucide-react";
 import { ErrorText, LoadingLine } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary, useLocale } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -18,8 +17,8 @@ const POINTS_TO_MM = 25.4 / 72;
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3 border-b border-border px-4 py-2.5 last:border-b-0">
-      <dt className="text-sm text-foreground/55">{label}</dt>
-      <dd className="break-words text-sm font-medium text-foreground">{value}</dd>
+      <dt className="text-base text-foreground/55">{label}</dt>
+      <dd className="break-words text-base font-medium text-foreground">{value}</dd>
     </div>
   );
 }
@@ -27,7 +26,7 @@ function Row({ label, value }: { label: string; value: string }) {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-5">
-      <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+      <h3 className="text-base font-semibold text-foreground">{title}</h3>
       <dl className="mt-2 overflow-hidden rounded-xl border border-border bg-surface">{children}</dl>
     </section>
   );
@@ -83,23 +82,23 @@ export function PdfInfoWorkspace() {
 
   if (!file) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />
-      </Card>
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <div className="flex items-center gap-3 rounded-xl border border-border bg-surface-muted p-4">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10">
           <FileSearch size={20} />
         </span>
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-foreground" dir="auto">
+          <p className="truncate text-base font-semibold text-foreground" dir="auto">
             {file.name}
           </p>
-          <p className="text-xs text-foreground/50" dir="ltr">
+          <p className="text-sm text-foreground/50" dir="ltr">
             {formatBytes(file.size)}
           </p>
         </div>
@@ -143,7 +142,7 @@ export function PdfInfoWorkspace() {
             })}
           </Section>
           {info.sampledPages < info.pageCount && (
-            <p className="mt-2 text-xs text-foreground/50">
+            <p className="mt-2 text-sm text-foreground/50">
               {t(dict.sampledNote, { count: info.sampledPages })}
             </p>
           )}
@@ -154,6 +153,6 @@ export function PdfInfoWorkspace() {
         <RotateCcw size={16} />
         {dict.checkAnother}
       </Button>
-    </Card>
+    </div>
   );
 }

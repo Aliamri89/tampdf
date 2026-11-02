@@ -7,7 +7,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { usePdfSource } from "@/components/tools/use-pdf-source";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -54,8 +53,8 @@ export function RemoveWatermarkWorkspace() {
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
-        <p className="mb-4 text-center text-sm font-medium text-foreground/70">
+      <div>
+        <p className="mb-4 text-center text-base font-medium text-foreground/70">
           {result.removed === 1 ? dict.removedOne : t(dict.removedCount, { count: result.removed })}
         </p>
         <ResultPanel
@@ -64,14 +63,14 @@ export function RemoveWatermarkWorkspace() {
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   const file = source.file;
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && (
         <>
           <FileDropzone
@@ -79,7 +78,7 @@ export function RemoveWatermarkWorkspace() {
             onFilesAdded={(added) => added[0] && void source.load(added[0])}
             label={dict.dropLabel}
           />
-          <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-foreground/55">
+          <p className="mt-4 flex items-start gap-2 text-sm leading-relaxed text-foreground/55">
             <Info size={14} className="mt-0.5 shrink-0" />
             {dict.intro}
           </p>
@@ -102,7 +101,7 @@ export function RemoveWatermarkWorkspace() {
       )}
 
       {noneFound && (
-        <div className="mt-5 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-200">
+        <div className="mt-5 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-base text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-200">
           <SearchX size={18} className="mt-0.5 shrink-0" />
           <p>{dict.noneFound}</p>
         </div>
@@ -121,6 +120,6 @@ export function RemoveWatermarkWorkspace() {
           {dict.tryAnother}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

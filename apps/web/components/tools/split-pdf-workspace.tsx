@@ -5,7 +5,6 @@ import { Loader2, Scissors, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -117,14 +116,14 @@ export function SplitPdfWorkspace() {
 
   if (status === "done" && result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.name}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.name)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
@@ -134,15 +133,15 @@ export function SplitPdfWorkspace() {
   ];
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       {!file && <FileDropzone accept={[".pdf"]} onFilesAdded={handleFile} label={dict.dropLabel} />}
 
       {file && (
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-foreground/50">
+              <p className="truncate text-base font-medium text-foreground">{file.name}</p>
+              <p className="text-sm text-foreground/50">
                 {formatBytes(file.size)}
                 {pageCount > 0 ? ` · ${t(dict.pageCountLabel, { count: pageCount })}` : ""}
               </p>
@@ -158,14 +157,14 @@ export function SplitPdfWorkspace() {
           </div>
 
           {status === "loading" && (
-            <div className="mt-4 flex items-center gap-2 text-sm text-foreground/50">
+            <div className="mt-4 flex items-center gap-2 text-base text-foreground/50">
               <Loader2 size={16} className="animate-spin" />
               {dict.loadingPages}
             </div>
           )}
 
           {readError && (
-            <p className="mt-4 text-sm text-red-600">
+            <p className="mt-4 text-base text-red-600">
               {readError === "password" ? dict.passwordError : dict.readError}
             </p>
           )}
@@ -182,7 +181,7 @@ export function SplitPdfWorkspace() {
                       className="max-h-[85%] max-w-[85%] object-contain"
                     />
                   </div>
-                  <p className="mt-0.5 text-[10px] text-foreground/50">{page.pageNumber}</p>
+                  <p className="mt-0.5 text-[11px] text-foreground/50">{page.pageNumber}</p>
                 </div>
               ))}
             </div>
@@ -193,7 +192,7 @@ export function SplitPdfWorkspace() {
       {pageCount > 0 && (
         <div className="mt-5 space-y-4">
           <div>
-            <span className="text-sm font-medium text-foreground">{dict.modeLabel}</span>
+            <span className="text-base font-medium text-foreground">{dict.modeLabel}</span>
             <div className="mt-2 grid grid-cols-2 gap-2">
               {modes.map((option) => (
                 <button
@@ -201,7 +200,7 @@ export function SplitPdfWorkspace() {
                   type="button"
                   onClick={() => setMode(option.id)}
                   className={cn(
-                    "rounded-xl border px-3 py-2.5 text-center text-sm font-medium transition-colors",
+                    "rounded-xl border px-3 py-2.5 text-center text-base font-medium transition-colors",
                     mode === option.id
                       ? "border-brand-400 bg-brand-50 text-foreground dark:bg-brand-500/10"
                       : "border-border bg-surface text-foreground/70 hover:border-brand-200",
@@ -215,7 +214,7 @@ export function SplitPdfWorkspace() {
 
           {mode === "ranges" ? (
             <label className="block">
-              <span className="text-sm font-medium text-foreground">{dict.rangesLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.rangesLabel}</span>
               <input
                 type="text"
                 inputMode="numeric"
@@ -223,13 +222,13 @@ export function SplitPdfWorkspace() {
                 value={ranges}
                 onChange={(e) => setRanges(e.target.value)}
                 placeholder={dict.rangesPlaceholder}
-                className="mt-1.5 w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-foreground focus-visible:border-brand-400 focus-visible:outline-none"
+                className="mt-1.5 w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-base text-foreground focus-visible:border-brand-400 focus-visible:outline-none"
               />
-              <span className="mt-1 block text-xs text-foreground/50">{dict.rangesHint}</span>
+              <span className="mt-1 block text-sm text-foreground/50">{dict.rangesHint}</span>
             </label>
           ) : (
             <label className="block">
-              <span className="text-sm font-medium text-foreground">{dict.everyLabel}</span>
+              <span className="text-base font-medium text-foreground">{dict.everyLabel}</span>
               <input
                 type="number"
                 min={1}
@@ -237,14 +236,14 @@ export function SplitPdfWorkspace() {
                 dir="ltr"
                 value={everyN}
                 onChange={(e) => setEveryN(Math.max(1, Number(e.target.value) || 1))}
-                className="mt-1.5 w-28 rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-foreground focus-visible:border-brand-400 focus-visible:outline-none"
+                className="mt-1.5 w-28 rounded-xl border border-border bg-surface px-3.5 py-2.5 text-base text-foreground focus-visible:border-brand-400 focus-visible:outline-none"
               />
             </label>
           )}
         </div>
       )}
 
-      {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-4 text-base text-red-600">{error}</p>}
 
       {pageCount > 0 && (
         <Button
@@ -263,6 +262,6 @@ export function SplitPdfWorkspace() {
           {status === "processing" ? dict.buttonBusy : dict.button}
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

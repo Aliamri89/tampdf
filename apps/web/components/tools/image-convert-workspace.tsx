@@ -7,7 +7,6 @@ import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
@@ -86,21 +85,21 @@ export function ImageConvertWorkspace({
 
   if (result) {
     return (
-      <Card className="p-6 sm:p-8">
+      <div>
         <ResultPanel
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
           onReset={reset}
         />
-      </Card>
+      </div>
     );
   }
 
   const labels = { from: source.label, to: target.label };
 
   return (
-    <Card className="p-6 sm:p-8">
+    <div>
       <FileDropzone
         accept={source.accept}
         multiple
@@ -138,7 +137,7 @@ export function ImageConvertWorkspace({
           )}
 
           {to === "jpg" && from !== "jpg" && (
-            <p className="mt-4 flex items-start gap-2 text-xs text-foreground/55">
+            <p className="mt-4 flex items-start gap-2 text-sm text-foreground/55">
               <Info size={14} className="mt-0.5 shrink-0" />
               {dict.transparencyNote}
             </p>
@@ -156,6 +155,6 @@ export function ImageConvertWorkspace({
           </Button>
         </>
       )}
-    </Card>
+    </div>
   );
 }

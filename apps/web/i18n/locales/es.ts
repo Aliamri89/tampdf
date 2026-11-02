@@ -53,7 +53,7 @@ export const es: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Todos los derechos reservados.",
-    privacyNote: "Los archivos se procesan de forma segura y nunca se almacenan más tiempo del necesario.",
+    privacyNote: "Los archivos se procesan de forma segura y nunca los almacenamos.",
     moreCount: "+{count} más",
     company: "Empresa",
     legal: "Legal",
