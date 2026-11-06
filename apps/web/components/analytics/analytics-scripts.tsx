@@ -1,5 +1,5 @@
 import { ConsentGate } from "@/components/consent/consent-gate";
-import { getSettings } from "@/lib/get-settings";
+import { getServices } from "@/lib/services";
 import { GoogleAnalytics } from "./google-analytics";
 import { MicrosoftClarity } from "./microsoft-clarity";
 
@@ -38,14 +38,16 @@ import { MicrosoftClarity } from "./microsoft-clarity";
  *   3. Render it below, reading its value from `settings.analytics`.
  */
 export async function AnalyticsScripts() {
-  const settings = await getSettings();
-  const { ga4MeasurementId, clarityProjectId } = settings.analytics ?? {};
+  // Ids come from Settings, the on/off switches from Services (lib/services.ts);
+  // a switched-off or id-less service arrives here as null.
+  const { ga4Id, clarityId } = await getServices();
+  if (!ga4Id && !clarityId) return null;
 
   return (
     // Nothing here loads until the visitor's consent allows it (see lib/consent.ts).
     <ConsentGate>
-      <GoogleAnalytics measurementId={ga4MeasurementId} />
-      <MicrosoftClarity projectId={clarityProjectId} />
+      <GoogleAnalytics measurementId={ga4Id} />
+      <MicrosoftClarity projectId={clarityId} />
     </ConsentGate>
   );
 }

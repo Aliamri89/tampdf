@@ -178,10 +178,13 @@ needs its own verification.
 | `DATABASE_URI` | **Yes** | Postgres. Use Supabase's **Session pooler** string (IPv4). Percent-encode special characters in the password. |
 | `MEDIA_UPLOAD_DIR` | **Yes in production** | Absolute path outside the deploy directory — see section 5. |
 | `SERVER_URL` | Optional | e.g. `https://tampdf.com`. Enables Payload's CSRF origin allowlist. |
+| `APPROVED_ADMIN_EMAILS` | **Yes, to edit "Services & Privacy"** | Comma-separated e-mails (case-insensitive) allowed to change the admin page *Services & Privacy* (AdSense / GA4 / Clarity switches). Missing, empty or no match = the page is read-only for everyone and the site keeps using the values below. Set it **before** the first deploy that includes this page. |
+| `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT_TOOL`, `NEXT_PUBLIC_ADSENSE_SLOT_BLOG` | Optional (fallback) | Build-time AdSense values (`ca-pub-…`, ad unit ids). Used when *Services & Privacy* has no value of its own; a value saved in the admin wins. |
 | `PORT` / `HOST` / `HOSTNAME` | No | Provided by the host. Don't set manually. |
 
-No `NEXT_PUBLIC_*` variables exist — the public site URL is a compile-time
-constant in `packages/config/src/index.ts`.
+The public site URL is a compile-time constant in
+`packages/config/src/index.ts`; the only `NEXT_PUBLIC_*` variables are the
+optional AdSense fallbacks above.
 
 ---
 

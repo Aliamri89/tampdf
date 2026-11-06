@@ -1,5 +1,4 @@
 import Script from "next/script";
-import { ADSENSE_CLIENT } from "@/lib/ads";
 import {
   CONSENT_REQUIRED_COUNTRIES_SOURCE,
   CONSENT_REQUIRED_ZONES_SOURCE,
@@ -12,14 +11,18 @@ import {
  * then sends the matching `gtag('consent', 'update', …)` as soon as it is known
  * who decides (see the comment there).
  *
- *  - AdSense configured (Google's CMP may show a message): the visitor's region
+ *  - AdSense active (Google's CMP may show a message): the visitor's region
  *    is not known yet — Google's CMP decides it — so EVERYTHING starts
  *    "denied". Nothing is granted until the CMP answers (or, if it does not,
  *    until our fallback has decided).
- *  - AdSense not configured (no CMP can exist): the fallback region guess
+ *  - AdSense not active (no CMP can exist): the fallback region guess
  *    applies at once — time zone or language region, see lib/consent-region.ts.
  *    Where consent is required everything starts "denied"; elsewhere "granted";
  *    a saved choice wins for analytics_storage.
+ *
+ * `cmp` (AdSense active) and `analytics` (GA4/Clarity active) come from the
+ * server (lib/services.ts) and are also published as `window.__tampdfConsent`
+ * for lib/consent.ts.
  *
  * It also creates Google's `googlefc.callbackQueue`, the documented way to be
  * told when the CMP is ready, before the CMP script can load.
@@ -27,11 +30,14 @@ import {
  * `wait_for_update` gives an update a moment to arrive before tags send data.
  * Same `beforeInteractive` approach as ThemeInitScript (root layout only).
  */
-const script = `
+function buildScript(cmp: boolean, analytics: boolean): string {
+  return `
 (function () {
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
-  var cmp = ${JSON.stringify(Boolean(ADSENSE_CLIENT))};
+  var cmp = ${JSON.stringify(cmp)};
+  // Read by lib/consent.ts: which services are active on this site (set by the server, not build-time).
+  window.__tampdfConsent = { cmp: cmp, analytics: ${JSON.stringify(analytics)} };
   if (cmp) {
     window.googlefc = window.googlefc || {};
     window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
@@ -65,8 +71,9 @@ const script = `
   window.gtag("set", "ads_data_redaction", true);
 })();
 `;
+}
 
-export function ConsentModeDefaults() {
+export function ConsentModeDefaults({ cmp, analytics }: { cmp: boolean; analytics: boolean }) {
   // eslint-disable-next-line @next/next/no-before-interactive-script-outside-document -- App Router root layout, as in ThemeInitScript.
-  return <Script id="consent-mode-defaults" strategy="beforeInteractive">{script}</Script>;
+  return <Script id="consent-mode-defaults" strategy="beforeInteractive">{buildScript(cmp, analytics)}</Script>;
 }

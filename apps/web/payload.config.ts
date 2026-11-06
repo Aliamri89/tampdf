@@ -14,6 +14,7 @@ import { Posts } from "./payload/collections/Posts";
 import { StaticPages } from "./payload/collections/StaticPages";
 import { ToolUsageEvents } from "./payload/collections/ToolUsageEvents";
 import { Users } from "./payload/collections/Users";
+import { Services } from "./payload/globals/Services";
 import { Settings } from "./payload/globals/Settings";
 
 const filename = fileURLToPath(import.meta.url);
@@ -52,7 +53,7 @@ export default buildConfig({
     },
   },
   collections: [Posts, StaticPages, FAQs, Media, ToolUsageEvents, PageVisitEvents, Users],
-  globals: [Settings],
+  globals: [Settings, Services],
   editor: lexicalEditor(),
   // Admin UI chrome (menus, buttons, validation/confirmation messages, dates)
   // is Arabic by default; English stays available per-user via Account →

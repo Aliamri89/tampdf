@@ -13,6 +13,7 @@ import { Container } from "@/components/ui/container";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { t } from "@/i18n/format";
 import { getSettings } from "@/lib/get-settings";
+import { getServices } from "@/lib/services";
 
 const SOCIAL_ICONS = {
   facebook: Facebook,
@@ -69,6 +70,7 @@ export async function Footer({ locale }: { locale: Locale }) {
   const siteConfig = getLocalizedSiteConfig(locale);
   const categories = getLocalizedCategories(locale);
   const settings = await getSettings();
+  const services = await getServices();
   const siteName = settings.siteName || siteConfig.name;
   const socialLinks = (settings.socialLinks ?? []).filter(
     (link): link is typeof link & { platform: keyof typeof SOCIAL_ICONS } =>
@@ -142,7 +144,10 @@ export async function Footer({ locale }: { locale: Locale }) {
             title={dict.footer.legal}
             links={legalLinks}
             extra={
-              <ConsentSettingsButton className="text-[15px] text-foreground/70 transition-colors hover:text-brand-500" />
+              // Only when some service may need consent (otherwise there is nothing to manage).
+              services.anyService ? (
+                <ConsentSettingsButton className="text-[15px] text-foreground/70 transition-colors hover:text-brand-500" />
+              ) : undefined
             }
           />
         </div>

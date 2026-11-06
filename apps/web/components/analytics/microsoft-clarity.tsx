@@ -1,7 +1,5 @@
 import Script from "next/script";
-
-/** Clarity project ids are short alphanumeric strings, e.g. "abc1d2efgh". */
-const CLARITY_ID_PATTERN = /^[a-zA-Z0-9]+$/;
+import { CLARITY_ID_PATTERN } from "@/lib/services";
 
 /**
  * Renders Microsoft Clarity's loader snippet. No-ops when `projectId` is

@@ -1,9 +1,7 @@
 import { Suspense } from "react";
 import Script from "next/script";
+import { GA4_ID_PATTERN } from "@/lib/services";
 import { GA4PageviewTracker } from "./ga4-pageview-tracker";
-
-/** Google's documented GA4 Measurement ID format, e.g. "G-ABC1234DEF". */
-const GA4_ID_PATTERN = /^G-[A-Z0-9]+$/;
 
 /**
  * Renders Google Analytics 4's `gtag.js` loader + init snippet, plus a

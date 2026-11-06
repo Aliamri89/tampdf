@@ -1,7 +1,6 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { ADSENSE_CLIENT } from "@/lib/ads";
 import {
   CONSENT_REQUIRED_COUNTRIES_SOURCE,
   CONSENT_REQUIRED_ZONES_SOURCE,
@@ -92,11 +91,30 @@ interface ConsentWindow {
   gtag?: (...args: unknown[]) => void;
   clarity?: (...args: unknown[]) => void;
   __tampdfGaIds?: string[];
+  /** Set by ConsentModeDefaults from the server: which services are active. */
+  __tampdfConsent?: { cmp?: boolean; analytics?: boolean };
   [key: `ga-disable-${string}`]: boolean;
 }
 const w = (): ConsentWindow => window as unknown as ConsentWindow;
 
-let cmp: CmpState = ADSENSE_CLIENT ? "pending" : "none";
+let cmp: CmpState = "pending";
+/** What the server says is active on this site (see ensureConfig). */
+let config = { cmp: false, analytics: true };
+let configLoaded = false;
+
+/**
+ * Reads, once and only in the browser, which services the server switched on
+ * (published by ConsentModeDefaults before hydration). AdSense off means there
+ * is no Google CMP to wait for. If the flag is missing for any reason, the
+ * safe reading is "no CMP, analytics governed by our own fallback".
+ */
+function ensureConfig() {
+  if (configLoaded || typeof window === "undefined") return;
+  configLoaded = true;
+  const flags = w().__tampdfConsent;
+  config = { cmp: Boolean(flags?.cmp), analytics: flags ? flags.analytics !== false : true };
+  cmp = config.cmp ? "pending" : "none";
+}
 /** Google's consent-mode value for analytics_storage (0 unknown … 4 not configured). */
 let googleAnalytics = 0;
 let started = false;
@@ -132,6 +150,7 @@ function listenTcf() {
 function startCmpWatch() {
   if (started || typeof window === "undefined") return;
   started = true;
+  ensureConfig();
   if (cmp !== "pending") return;
   // The queue is created before Google's script by ConsentModeDefaults.
   const fc = (w().googlefc = w().googlefc ?? {});
@@ -186,6 +205,8 @@ export interface ConsentView {
   adsReady: boolean;
   /** Our own banner should be on screen (never while Google's message is in charge). */
   bannerVisible: boolean;
+  /** There is something for the footer "Cookie settings" to manage right now. */
+  settingsAvailable: boolean;
   /** The visitor has made an explicit choice in our banner before. */
   decided: boolean;
   /** The banner was opened on purpose (footer "Cookie settings"), so it can be closed again. */
@@ -198,6 +219,7 @@ const SERVER_VIEW: ConsentView = {
   analyticsAllowed: false,
   adsReady: false,
   bannerVisible: false,
+  settingsAvailable: false,
   decided: false,
   fromSettings: false,
 };
@@ -206,6 +228,7 @@ let cachedKey = "";
 let cachedView: ConsentView = SERVER_VIEW;
 
 function getSnapshot(): ConsentView {
+  ensureConfig();
   const stored = readStored();
   const required = cmp === "none" ? consentRequired() : false;
   const key = `${stored}|${required}|${cmp}|${googleAnalytics}|${settingsOpen}|${version}`;
@@ -231,7 +254,14 @@ function getSnapshot(): ConsentView {
       cmp,
       analyticsAllowed,
       adsReady: cmp !== "pending",
-      bannerVisible: cmp !== "pending" && cmp !== "regulated" && (settingsOpen || (cmp === "none" && required && stored === null)),
+      // Our banner only governs analytics (GA4/Clarity): with none active there is nothing to ask.
+      bannerVisible:
+        cmp !== "pending" &&
+        cmp !== "regulated" &&
+        config.analytics &&
+        (settingsOpen || (cmp === "none" && required && stored === null)),
+      // Google's message (regulated) can always be reopened; ours only has something to offer for analytics.
+      settingsAvailable: cmp === "regulated" || config.analytics,
       decided: stored !== null,
       fromSettings: settingsOpen,
     };
@@ -253,7 +283,9 @@ function sendConsentUpdate(signals: Record<string, string>) {
 
 /** Keep Google Consent Mode and the tracker libraries in step with the current decision. */
 function applySignals() {
-  if (typeof window === "undefined" || cmp === "pending") return;
+  if (typeof window === "undefined") return;
+  ensureConfig();
+  if (cmp === "pending") return;
   const view = getSnapshot();
   const signals: Record<string, string> = {
     analytics_storage: view.analyticsAllowed ? "granted" : "denied",
@@ -334,6 +366,8 @@ export function openConsentSettings() {
     w().googlefc?.showRevocationMessage?.();
     return;
   }
+  ensureConfig();
+  if (!config.analytics) return; // nothing of ours to manage (and Google's message is not in charge here)
   settingsOpen = true;
   emit();
 }

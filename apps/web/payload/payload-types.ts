@@ -99,9 +99,11 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'ar') | ('en' | 'ar')[];
   globals: {
     settings: Setting;
+    services: Service;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
   };
   locale: 'en' | 'ar';
   widgets: {
@@ -785,6 +787,42 @@ export interface Setting {
   createdAt?: string | null;
 }
 /**
+ * Turn AdSense, Google Analytics 4 and Microsoft Clarity on or off. A switch only removes a service; visitor consent is still required where it applies. Only e-mails listed in the server's APPROVED_ADMIN_EMAILS can change this page. Turning AdSense off also removes Google's consent message.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  adsense?: {
+    /**
+     * Off removes the AdSense code, the ad spaces, the ads.txt line and Google's consent message.
+     */
+    enabled?: boolean | null;
+    /**
+     * Leave blank to use NEXT_PUBLIC_ADSENSE_CLIENT from the server environment.
+     */
+    publisherId?: string | null;
+    /**
+     * Leave blank to use NEXT_PUBLIC_ADSENSE_SLOT_TOOL.
+     */
+    slotTool?: string | null;
+    /**
+     * Leave blank to use NEXT_PUBLIC_ADSENSE_SLOT_BLOG.
+     */
+    slotBlog?: string | null;
+  };
+  /**
+   * The ids stay in Settings ▸ Analytics. These switches turn each service off without deleting its id.
+   */
+  tracking?: {
+    ga4Enabled?: boolean | null;
+    clarityEnabled?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "settings_select".
  */
@@ -805,6 +843,29 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         ga4MeasurementId?: T;
         clarityProjectId?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  adsense?:
+    | T
+    | {
+        enabled?: T;
+        publisherId?: T;
+        slotTool?: T;
+        slotBlog?: T;
+      };
+  tracking?:
+    | T
+    | {
+        ga4Enabled?: T;
+        clarityEnabled?: T;
       };
   updatedAt?: T;
   createdAt?: T;

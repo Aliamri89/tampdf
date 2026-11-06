@@ -13,6 +13,7 @@ import { ThemeInitScript } from "@/components/theme-init-script";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { LocaleProvider } from "@/i18n/locale-context";
 import { getSettings } from "@/lib/get-settings";
+import { getServices } from "@/lib/services";
 import "../globals.css";
 
 const geistMono = Geist_Mono({
@@ -95,6 +96,7 @@ export default async function LocaleLayout({
   const locale = rawLocale;
   const dir = localeDirection[locale];
   const dict = getDictionary(locale);
+  const services = await getServices();
 
   return (
     <html
@@ -105,7 +107,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col">
         <ThemeInitScript />
-        <ConsentModeDefaults />
+        <ConsentModeDefaults cmp={Boolean(services.adsense.client)} analytics={services.analytics} />
         <AnalyticsScripts />
         <AdSenseScript />
         <LocaleProvider locale={locale} dict={dict}>
