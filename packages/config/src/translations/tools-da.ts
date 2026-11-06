@@ -229,7 +229,7 @@ export const toolsDa: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Tilføj vandmærke",
     actionLabel: "Tilføj vandmærke",
-    shortDescription: "Placer tekst som FORTROLIGT eller UDKAST hen over hver PDF-side.",
+    shortDescription: "Sæt tekst som FORTROLIG eller UDKAST på hver side i en PDF eller på et JPG-, PNG- eller WebP-billede.",
     longDescription: [
       "Tilføj vandmærke placerer din tekst hen over hver side i en PDF — én gang i midten eller gentaget hen over hele siden. Vælg farve, gennemsigtighed, størrelse og vinkel, og se en live forhåndsvisning på den første side, inden du anvender det.",
       "Dansk og andre skriftsystemer understøttes fuldt ud. Vandmærket gemmes som et standard vandmærkeobjekt, og alt sker i din browser, så dit dokument bliver aldrig uploadet.",
@@ -244,7 +244,7 @@ export const toolsDa: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Fjern vandmærke",
     actionLabel: "Fjern vandmærke",
-    shortDescription: "Fjern vandmærker, der er tilføjet som vandmærkeobjekter i en PDF.",
+    shortDescription: "Fjern vandmærker, der er tilføjet som vandmærkeobjekter, fra en PDF eller et Word-dokument (.docx).",
     longDescription: [
       "Fjern vandmærke finder og fjerner vandmærker, der er tilføjet som vandmærkeobjekter — den type, der oprettes af Adobe Acrobat, TAMPDF og de fleste PDF-redigeringsprogrammer — sammen med vandmærkeannoteringer og lag med navnet \"Watermark\". Resten af hver side forbliver præcis den samme.",
       "Vandmærker, der er en del af et scannet billede eller flettet ind i sidens almindelige tekst, har ingen markør, der adskiller dem fra rigtigt indhold, så de kan ikke fjernes automatisk. Fjern kun vandmærker fra dokumenter, du har ret til at redigere. Behandlingen sker i din browser, så filen bliver aldrig uploadet.",

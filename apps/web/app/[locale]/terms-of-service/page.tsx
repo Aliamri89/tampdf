@@ -4,6 +4,8 @@ const { generateMetadata, Page } = createStaticCmsPage(
   "terms-of-service",
   "/terms-of-service",
   (dict) => dict.staticPages.termsOfService,
+  undefined,
+  { builtIn: true },
 );
 
 export { generateMetadata };

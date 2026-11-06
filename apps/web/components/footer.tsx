@@ -6,6 +6,7 @@ import {
   getLocalizedToolsByCategory,
   type Locale,
 } from "@tampdf/config";
+import { ConsentSettingsButton } from "@/components/consent/consent-settings-button";
 import { LanguageMenu } from "@/components/language-menu";
 import { Logo } from "@/components/logo";
 import { Container } from "@/components/ui/container";
@@ -30,7 +31,15 @@ interface FooterLink {
   accent?: boolean;
 }
 
-function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+function FooterColumn({
+  title,
+  links,
+  extra,
+}: {
+  title: string;
+  links: FooterLink[];
+  extra?: React.ReactNode;
+}) {
   return (
     <div>
       <h3 className="text-base font-bold text-foreground">{title}</h3>
@@ -49,6 +58,7 @@ function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) 
             </Link>
           </li>
         ))}
+        {extra && <li>{extra}</li>}
       </ul>
     </div>
   );
@@ -128,7 +138,13 @@ export async function Footer({ locale }: { locale: Locale }) {
           })}
 
           <FooterColumn title={dict.footer.company} links={companyLinks} />
-          <FooterColumn title={dict.footer.legal} links={legalLinks} />
+          <FooterColumn
+            title={dict.footer.legal}
+            links={legalLinks}
+            extra={
+              <ConsentSettingsButton className="text-[15px] text-foreground/70 transition-colors hover:text-brand-500" />
+            }
+          />
         </div>
         <div className="mt-7 flex flex-col gap-3 border-t border-border pt-5 text-[15px] text-foreground/60 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <div className="flex flex-col gap-1">

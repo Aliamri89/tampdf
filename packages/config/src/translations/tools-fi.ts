@@ -229,7 +229,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Lisää vesileima",
     actionLabel: "Lisää vesileima",
-    shortDescription: "Sijoita teksti, kuten LUOTTAMUKSELLINEN tai LUONNOS, jokaiselle PDF-sivulle.",
+    shortDescription: "Lisää teksti, kuten LUOTTAMUKSELLINEN tai LUONNOS, PDF-tiedoston jokaiselle sivulle tai JPG-, PNG- tai WebP-kuvaan.",
     longDescription: [
       "Lisää vesileima sijoittaa tekstisi jokaiselle PDF-tiedoston sivulle — kerran keskelle tai toistuvasti koko sivulle. Valitse väri, läpinäkyvyys, koko ja kulma, ja näe reaaliaikainen esikatselu ensimmäisellä sivulla ennen käyttöä.",
       "Suomi ja muut kirjoitusjärjestelmät ovat täysin tuettuja. Vesileima tallennetaan vakiovesileimaobjektina, ja kaikki tapahtuu selaimessasi, joten asiakirjaasi ei koskaan ladata.",
@@ -244,7 +244,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Poista vesileima",
     actionLabel: "Poista vesileima",
-    shortDescription: "Poista PDF-tiedostoon vesileimaobjekteina lisätyt vesileimat.",
+    shortDescription: "Poista vesileimaobjekteina lisätyt vesileimat PDF-tiedostosta tai Word-asiakirjasta (.docx).",
     longDescription: [
       "Poista vesileima löytää ja poistaa vesileimaobjekteina lisätyt vesileimat — tyypin, jonka luovat Adobe Acrobat, TAMPDF ja useimmat PDF-editorit — sekä vesileimamerkinnät ja kerrokset nimeltä \"Watermark\". Jokaisen sivun loppuosa pysyy täsmälleen samana.",
       "Skannatun kuvan osana olevilla tai sivun tavalliseen tekstiin sulautuneilla vesileimoilla ei ole merkkiä, joka erottaisi ne todellisesta sisällöstä, joten niitä ei voida poistaa automaattisesti. Poista vesileimoja vain asiakirjoista, joita sinulla on oikeus muokata. Käsittely tapahtuu selaimessasi, joten tiedostoa ei koskaan ladata.",

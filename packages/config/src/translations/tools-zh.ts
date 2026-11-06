@@ -229,7 +229,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "添加水印",
     actionLabel: "添加水印",
-    shortDescription: "在 PDF 每一页上加盖如“机密”或“草稿”等文字水印。",
+    shortDescription: "在 PDF 的每一页或 JPG、PNG、WebP 图片上添加“机密”“草稿”等文字水印。",
     longDescription: [
       "添加水印会将您的文字放置在 PDF 的每一页上——居中显示一次，或重复铺满整页。选择颜色、不透明度、大小和角度，并在应用前于第一页查看实时预览。",
       "完全支持中文及其他文字。水印会保存为标准水印对象，一切都在您的浏览器中进行，您的文档绝不会被上传。",
@@ -244,7 +244,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "移除水印",
     actionLabel: "移除水印",
-    shortDescription: "移除以水印对象形式添加到 PDF 中的水印。",
+    shortDescription: "从 PDF 或 Word (.docx) 文档中删除以水印对象形式添加的水印。",
     longDescription: [
       "移除水印会查找并删除以水印对象形式添加的水印——即 Adobe Acrobat、TAMPDF 和大多数 PDF 编辑器创建的那种——以及水印注释和名为「Watermark」的图层。每一页的其余部分保持完全不变。",
       "属于扫描图像一部分或已合并到普通页面文本中的水印没有标记将其与真实内容区分开，因此无法自动移除。请只对您有权编辑的文档移除水印。处理在您的浏览器中进行，您的文件绝不会被上传。",

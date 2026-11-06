@@ -6,6 +6,7 @@ const { generateMetadata, Page } = createStaticCmsPage(
   "/cookie-policy",
   (dict) => dict.staticPages.cookiePolicy,
   (_locale, dict) => <AdsDisclosure dict={dict} />,
+  { builtIn: true },
 );
 
 export { generateMetadata };

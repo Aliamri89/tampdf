@@ -229,7 +229,7 @@ export const toolsSv: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Lägg till vattenstämpel",
     actionLabel: "Lägg till vattenstämpel",
-    shortDescription: "Placera text som KONFIDENTIELLT eller UTKAST över varje PDF-sida.",
+    shortDescription: "Lägg text som KONFIDENTIELLT eller UTKAST på varje sida i en PDF eller på en JPG-, PNG- eller WebP-bild.",
     longDescription: [
       "Lägg till vattenstämpel placerar din text över varje sida i en PDF — en gång i mitten eller upprepad över hela sidan. Välj färg, opacitet, storlek och vinkel, och se en direktuppdaterad förhandsgranskning på den första sidan innan du tillämpar.",
       "Svenska och andra skrifter stöds fullt ut. Vattenstämpeln sparas som ett standardvattenstämpelobjekt, och allt sker i din webbläsare, så ditt dokument laddas aldrig upp.",
@@ -244,7 +244,7 @@ export const toolsSv: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Ta bort vattenstämpel",
     actionLabel: "Ta bort vattenstämpel",
-    shortDescription: "Ta bort vattenstämplar som lagts till som vattenstämpelobjekt i en PDF.",
+    shortDescription: "Ta bort vattenstämplar som lagts till som vattenstämpelobjekt från en PDF eller ett Word-dokument (.docx).",
     longDescription: [
       "Ta bort vattenstämpel hittar och tar bort vattenstämplar som lagts till som vattenstämpelobjekt — den typ som skapas av Adobe Acrobat, TAMPDF och de flesta PDF-redigerare — tillsammans med vattenstämpelanteckningar och lager med namnet \"Watermark\". Resten av varje sida förblir exakt densamma.",
       "Vattenstämplar som är en del av en skannad bild eller sammanslagna med sidans vanliga text har ingen markör som skiljer dem från riktigt innehåll, så de kan inte tas bort automatiskt. Ta bara bort vattenstämplar från dokument du har rätt att redigera. Bearbetningen sker i din webbläsare, så filen laddas aldrig upp.",

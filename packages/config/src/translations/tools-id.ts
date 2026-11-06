@@ -229,7 +229,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Tambah Watermark",
     actionLabel: "Tambah watermark",
-    shortDescription: "Bubuhkan teks seperti RAHASIA atau DRAFT pada setiap halaman PDF.",
+    shortDescription: "Tempelkan teks seperti RAHASIA atau DRAF di setiap halaman PDF atau pada gambar JPG, PNG, atau WebP.",
     longDescription: [
       "Tambah Watermark menempatkan teks Anda pada setiap halaman PDF — sekali di tengah atau diulang di seluruh halaman. Pilih warna, opasitas, ukuran, dan sudut, lalu lihat pratinjau langsung pada halaman pertama sebelum menerapkannya.",
       "Bahasa Indonesia dan aksara lainnya didukung sepenuhnya. Watermark disimpan sebagai objek watermark standar, dan semuanya terjadi di browser Anda, sehingga dokumen Anda tidak pernah diunggah.",
@@ -244,7 +244,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Hapus Watermark",
     actionLabel: "Hapus watermark",
-    shortDescription: "Hapus watermark yang ditambahkan sebagai objek watermark pada PDF.",
+    shortDescription: "Hapus watermark yang ditambahkan sebagai objek watermark dari PDF atau dokumen Word (.docx).",
     longDescription: [
       "Hapus Watermark menemukan dan menghapus watermark yang ditambahkan sebagai objek watermark — jenis yang dibuat oleh Adobe Acrobat, TAMPDF, dan sebagian besar editor PDF — bersama anotasi watermark dan lapisan bernama «Watermark». Sisa setiap halaman tetap persis seperti sebelumnya.",
       "Watermark yang merupakan bagian dari gambar yang dipindai atau digabungkan ke dalam teks halaman biasa tidak memiliki penanda yang membedakannya dari konten asli, sehingga tidak dapat dihapus secara otomatis. Harap hanya hapus watermark dari dokumen yang Anda memiliki hak untuk mengeditnya. Pemrosesan terjadi di browser Anda, sehingga file Anda tidak pernah diunggah.",

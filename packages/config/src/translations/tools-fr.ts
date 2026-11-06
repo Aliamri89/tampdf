@@ -229,7 +229,7 @@ export const toolsFr: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Ajouter un filigrane",
     actionLabel: "Ajouter le filigrane",
-    shortDescription: "Apposez un texte comme CONFIDENTIEL ou BROUILLON sur toutes les pages d'un PDF.",
+    shortDescription: "Appliquez un texte comme CONFIDENTIEL ou BROUILLON sur chaque page d'un PDF, ou sur une image JPG, PNG ou WebP.",
     longDescription: [
       "Ajouter un filigrane place votre texte sur chaque page d'un PDF — une fois au centre ou répété sur toute la page. Choisissez la couleur, l'opacité, la taille et l'angle, et voyez un aperçu en direct sur votre première page avant de l'appliquer.",
       "Le français et les autres écritures sont entièrement pris en charge. Le filigrane est enregistré comme un objet filigrane standard, et tout se passe dans votre navigateur, votre document n'est donc jamais téléversé.",
@@ -244,7 +244,7 @@ export const toolsFr: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Supprimer un filigrane",
     actionLabel: "Supprimer le filigrane",
-    shortDescription: "Supprimez les filigranes ajoutés en tant qu'objets filigrane dans un PDF.",
+    shortDescription: "Supprimez les filigranes ajoutés comme objets de filigrane d'un PDF ou d'un document Word (.docx).",
     longDescription: [
       "Supprimer un filigrane trouve et supprime les filigranes ajoutés en tant qu'objets filigrane — le type créé par Adobe Acrobat, TAMPDF et la plupart des éditeurs PDF — ainsi que les annotations de filigrane et les calques nommés « Watermark ». Le reste de chaque page reste exactement identique.",
       "Les filigranes faisant partie d'une image scannée ou fusionnés dans le texte ordinaire de la page n'ont aucun marqueur permettant de les distinguer du contenu réel, ils ne peuvent donc pas être supprimés automatiquement. Merci de ne retirer des filigranes que de documents que vous avez le droit de modifier. Le traitement se fait dans votre navigateur, votre fichier n'est donc jamais téléversé.",

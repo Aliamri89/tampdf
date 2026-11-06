@@ -229,7 +229,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Filigran Ekle",
     actionLabel: "Filigran ekle",
-    shortDescription: "GİZLİ veya TASLAK gibi bir metni PDF'in her sayfasına damgalayın.",
+    shortDescription: "GİZLİ veya TASLAK gibi metni bir PDF'nin her sayfasına ya da bir JPG, PNG veya WebP görsele ekleyin.",
     longDescription: [
       "Filigran Ekle, metninizi PDF'in her sayfasına yerleştirir — bir kez ortalanmış veya sayfa boyunca tekrarlanmış olarak. Rengi, opaklığı, boyutu ve açıyı seçin, uygulamadan önce ilk sayfanızda canlı bir önizleme görün.",
       "Türkçe ve diğer yazı sistemleri tam olarak destekleniyor. Filigran standart bir filigran nesnesi olarak kaydedilir ve her şey tarayıcınızda gerçekleşir, dolayısıyla belgeniz asla yüklenmez.",
@@ -244,7 +244,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Filigranı Kaldır",
     actionLabel: "Filigranı kaldır",
-    shortDescription: "Bir PDF'e filigran nesnesi olarak eklenmiş filigranları kaldırın.",
+    shortDescription: "Filigran nesnesi olarak eklenen filigranları bir PDF'den veya Word (.docx) belgesinden kaldırın.",
     longDescription: [
       "Filigranı Kaldır, filigran nesnesi olarak eklenen filigranları bulur ve siler — Adobe Acrobat, TAMPDF ve çoğu PDF düzenleyicinin oluşturduğu türde — filigran açıklamaları ve «Watermark» adlı katmanlarla birlikte. Her sayfanın geri kalanı tam olarak eskisi gibi kalır.",
       "Taranmış bir görselin parçası olan veya normal sayfa metnine karışmış filigranların gerçek içerikten ayırt edilmesini sağlayacak bir işareti yoktur, bu nedenle otomatik olarak kaldırılamazlar. Lütfen filigranları yalnızca düzenleme hakkına sahip olduğunuz belgelerden kaldırın. İşleme tarayıcınızda gerçekleşir, dolayısıyla dosyanız asla yüklenmez.",

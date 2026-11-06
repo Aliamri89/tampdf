@@ -5,6 +5,7 @@ import { getLocalizedSiteConfig, isValidLocale, localeDirection, locales } from 
 import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { AdSenseScript } from "@/components/ads/adsense-script";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
+import { ConsentBanner } from "@/components/consent/consent-banner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ThemeInitScript } from "@/components/theme-init-script";
@@ -110,6 +111,7 @@ export default async function LocaleLayout({
           <Header locale={locale} />
           <main className="flex-1">{children}</main>
           <Footer locale={locale} />
+          <ConsentBanner />
         </LocaleProvider>
       </body>
     </html>

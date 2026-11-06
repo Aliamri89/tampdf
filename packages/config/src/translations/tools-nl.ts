@@ -229,7 +229,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Watermerk toevoegen",
     actionLabel: "Watermerk toevoegen",
-    shortDescription: "Zet tekst zoals VERTROUWELIJK of CONCEPT op elke pagina van een PDF.",
+    shortDescription: "Plaats tekst zoals VERTROUWELIJK of CONCEPT op elke pagina van een pdf of op een JPG-, PNG- of WebP-afbeelding.",
     longDescription: [
       "Watermerk toevoegen plaatst je tekst op elke pagina van een PDF — eenmaal gecentreerd of herhaald over de pagina. Kies de kleur, dekking, grootte en hoek, en bekijk een live preview op je eerste pagina voordat je het toepast.",
       "Nederlands en andere schriften worden volledig ondersteund. Het watermerk wordt opgeslagen als een standaard watermerkobject, en alles gebeurt in je browser, dus je document wordt nooit geüpload.",
@@ -244,7 +244,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Watermerk verwijderen",
     actionLabel: "Watermerk verwijderen",
-    shortDescription: "Verwijder watermerken die als watermerkobjecten aan een PDF zijn toegevoegd.",
+    shortDescription: "Verwijder watermerken die als watermerkobjecten zijn toegevoegd uit een pdf of Word-document (.docx).",
     longDescription: [
       "Watermerk verwijderen vindt en verwijdert watermerken die als watermerkobjecten zijn toegevoegd — het soort dat Adobe Acrobat, TAMPDF en de meeste PDF-editors maken — samen met watermerkannotaties en lagen genaamd «Watermark». De rest van elke pagina blijft precies zoals het was.",
       "Watermerken die deel uitmaken van een gescande afbeelding of samengevoegd zijn met gewone paginatekst hebben geen markering om ze te onderscheiden van echte inhoud, dus ze kunnen niet automatisch worden verwijderd. Verwijder watermerken alleen uit documenten die je mag bewerken. Verwerking gebeurt in je browser, dus je bestand wordt nooit geüpload.",

@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { isValidLocale, type Locale } from "@tampdf/config";
 import { notFound } from "next/navigation";
+import { LinkifiedText } from "@/components/linkified-text";
 import { StaticPage } from "@/components/static-page";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { richTextToHtml } from "@/lib/richtext";
+import { buildStaticPageMetadata } from "@/lib/static-page-metadata";
 import { getStaticPageContent, getStaticPageMetadata, type StaticPageKey } from "@/lib/static-pages";
 
 interface Fallback {
@@ -14,7 +16,13 @@ interface Fallback {
   intro: string;
   /** Full fallback body paragraphs shown on the page itself. Defaults to just `[intro]` when omitted. */
   body?: string[];
+  /** Built-in pages: a "last updated" line shown above the sections. */
+  updated?: string;
+  /** Built-in pages: headed sections (translated in every language). */
+  sections?: { heading: string; text: string }[];
 }
+
+const SECTION_HEADING_CLASS = "mt-6 text-xl font-semibold text-foreground";
 
 /**
  * Builds the `generateMetadata` + default-export page pair for one of the
@@ -33,6 +41,14 @@ export function createStaticCmsPage(
    * "contact us" section — or at the end when there isn't one.
    */
   renderAppendix?: (locale: Locale, dict: Dictionary) => ReactNode,
+  /**
+   * `builtIn`: always render the text from the translation files and ignore any
+   * CMS document with this key. Used for the legal pages, so every language
+   * shows the same reviewed, translated policy that matches what the site
+   * actually does (analytics consent, ads) instead of a CMS copy that only
+   * exists in English/Arabic and can silently drift out of date.
+   */
+  options: { builtIn?: boolean } = {},
 ) {
   async function generateMetadata({
     params,
@@ -42,6 +58,9 @@ export function createStaticCmsPage(
     const { locale: rawLocale } = await params;
     const locale = isValidLocale(rawLocale) ? rawLocale : "en";
     const fallback = getFallback(getDictionary(locale));
+    if (options.builtIn) {
+      return buildStaticPageMetadata(rawLocale, path, fallback.title, fallback.intro);
+    }
     return getStaticPageMetadata(key, rawLocale, locale, path, fallback.title, fallback.intro);
   }
 
@@ -51,8 +70,29 @@ export function createStaticCmsPage(
     const locale = rawLocale;
     const dict = getDictionary(locale);
     const fallback = getFallback(dict);
-    const doc = await getStaticPageContent(key, locale);
+    const doc = options.builtIn ? null : await getStaticPageContent(key, locale);
     const appendix = renderAppendix?.(locale, dict);
+
+    if (!doc && fallback.sections) {
+      // Optional appendix (e.g. the ads disclosure) goes before the closing section.
+      const sections = fallback.sections;
+      const renderSection = (section: { heading: string; text: string }) => (
+        <section key={section.heading}>
+          <h2 className={SECTION_HEADING_CLASS}>{section.heading}</h2>
+          <p className="mt-2">
+            <LinkifiedText text={section.text} />
+          </p>
+        </section>
+      );
+      return (
+        <StaticPage locale={locale} title={fallback.title}>
+          {fallback.updated && <p className="text-sm text-foreground/50">{fallback.updated}</p>}
+          {sections.slice(0, -1).map(renderSection)}
+          {appendix}
+          {sections.slice(-1).map(renderSection)}
+        </StaticPage>
+      );
+    }
 
     if (!doc) {
       const paragraphs = fallback.body ?? [fallback.intro];

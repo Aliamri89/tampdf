@@ -229,7 +229,7 @@ export const toolsDe: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Wasserzeichen hinzufügen",
     actionLabel: "Wasserzeichen hinzufügen",
-    shortDescription: "Setze Text wie VERTRAULICH oder ENTWURF auf jede Seite eines PDFs.",
+    shortDescription: "Setze Text wie VERTRAULICH oder ENTWURF auf jede Seite eines PDFs oder auf ein JPG-, PNG- oder WebP-Bild.",
     longDescription: [
       "Wasserzeichen hinzufügen platziert deinen Text auf jeder Seite eines PDFs — einmal zentriert oder wiederholt über die Seite. Wähle Farbe, Deckkraft, Größe und Winkel, und sieh eine Live-Vorschau auf deiner ersten Seite, bevor du es anwendest.",
       "Deutsch und andere Schriften werden vollständig unterstützt. Das Wasserzeichen wird als Standard-Wasserzeichenobjekt gespeichert, und alles geschieht in deinem Browser, dein Dokument wird also nie hochgeladen.",
@@ -244,7 +244,7 @@ export const toolsDe: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Wasserzeichen entfernen",
     actionLabel: "Wasserzeichen entfernen",
-    shortDescription: "Entferne Wasserzeichen, die als Wasserzeichen-Objekte in ein PDF eingefügt wurden.",
+    shortDescription: "Entferne als Wasserzeichen-Objekte hinzugefügte Wasserzeichen aus einem PDF oder Word-Dokument (.docx).",
     longDescription: [
       "Wasserzeichen entfernen findet und löscht Wasserzeichen, die als Wasserzeichenobjekte hinzugefügt wurden — die Art, die Adobe Acrobat, TAMPDF und die meisten PDF-Editoren erstellen — zusammen mit Wasserzeichen-Anmerkungen und Ebenen namens „Watermark\". Der Rest jeder Seite bleibt genau erhalten.",
       "Wasserzeichen, die Teil eines gescannten Bildes sind oder in normalen Seitentext eingebettet wurden, haben keinen Marker, der sie vom echten Inhalt unterscheidet, sie können also nicht automatisch entfernt werden. Bitte entferne Wasserzeichen nur aus Dokumenten, die du bearbeiten darfst. Die Verarbeitung erfolgt in deinem Browser, deine Datei wird also nie hochgeladen.",

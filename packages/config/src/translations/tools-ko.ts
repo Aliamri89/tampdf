@@ -229,7 +229,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "워터마크 추가",
     actionLabel: "워터마크 추가하기",
-    shortDescription: "기밀 또는 초안과 같은 텍스트를 PDF의 모든 페이지에 새깁니다.",
+    shortDescription: "‘대외비’, ‘초안’ 같은 텍스트를 PDF의 모든 페이지나 JPG, PNG, WebP 이미지에 넣으세요.",
     longDescription: [
       "워터마크 추가는 PDF의 각 페이지에 텍스트를 배치합니다 — 중앙에 한 번 또는 페이지 전체에 반복해서. 색상, 불투명도, 크기, 각도를 선택하고 적용하기 전에 첫 페이지에서 실시간 미리보기를 확인하세요.",
       "한국어와 다른 문자도 완전히 지원됩니다. 워터마크는 표준 워터마크 객체로 저장되며, 모든 작업이 브라우저에서 이루어지므로 문서가 업로드되지 않습니다.",
@@ -244,7 +244,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "워터마크 제거",
     actionLabel: "워터마크 제거하기",
-    shortDescription: "PDF에 워터마크 객체로 추가된 워터마크를 제거합니다.",
+    shortDescription: "워터마크 개체로 추가된 워터마크를 PDF 또는 Word(.docx) 문서에서 제거하세요.",
     longDescription: [
       "워터마크 제거는 워터마크 객체로 추가된 워터마크 — Adobe Acrobat, TAMPDF, 대부분의 PDF 편집기가 만드는 종류 — 를 워터마크 주석 및 「Watermark」라는 레이어와 함께 찾아서 삭제합니다. 각 페이지의 나머지 부분은 완전히 그대로 유지됩니다.",
       "스캔된 이미지의 일부이거나 일반 페이지 텍스트에 병합된 워터마크는 실제 내용과 구별할 표시가 없어 자동으로 제거할 수 없습니다. 편집할 권한이 있는 문서에서만 워터마크를 제거해 주세요. 처리는 브라우저에서 이루어지므로 파일이 업로드되지 않습니다.",

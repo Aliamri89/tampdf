@@ -229,7 +229,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Dodaj znak wodny",
     actionLabel: "Dodaj znak wodny",
-    shortDescription: "Umieść tekst, np. POUFNE lub WERSJA ROBOCZA, na każdej stronie PDF.",
+    shortDescription: "Nałóż tekst, np. POUFNE lub WERSJA ROBOCZA, na każdą stronę PDF lub na obraz JPG, PNG albo WebP.",
     longDescription: [
       "Dodaj znak wodny umieszcza Twój tekst na każdej stronie PDF — raz na środku lub powtórzony na całej stronie. Wybierz kolor, przezroczystość, rozmiar i kąt, i zobacz podgląd na żywo na pierwszej stronie przed zastosowaniem.",
       "Polski i inne pisma są w pełni obsługiwane. Znak wodny jest zapisywany jako standardowy obiekt znaku wodnego, a wszystko dzieje się w przeglądarce, więc dokument nigdy nie jest przesyłany.",
@@ -244,7 +244,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Usuń znak wodny",
     actionLabel: "Usuń znak wodny",
-    shortDescription: "Usuń znaki wodne dodane jako obiekty znaku wodnego w PDF.",
+    shortDescription: "Usuń znaki wodne dodane jako obiekty znaku wodnego z pliku PDF lub dokumentu Word (.docx).",
     longDescription: [
       "Usuń znak wodny znajduje i usuwa znaki wodne dodane jako obiekty znaku wodnego — rodzaj tworzony przez Adobe Acrobat, TAMPDF i większość edytorów PDF — wraz z adnotacjami znaku wodnego i warstwami o nazwie „Watermark”. Reszta każdej strony pozostaje dokładnie taka sama.",
       "Znaki wodne będące częścią zeskanowanego obrazu lub scalone ze zwykłym tekstem strony nie mają znacznika odróżniającego je od prawdziwej zawartości, więc nie można ich automatycznie usunąć. Usuwaj znaki wodne tylko z dokumentów, do których edycji masz prawo. Przetwarzanie odbywa się w przeglądarce, więc plik nigdy nie jest przesyłany.",

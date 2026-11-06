@@ -35,6 +35,10 @@ export const StaticPages: CollectionConfig = {
   },
   admin: {
     useAsTitle: "title",
+    description: {
+      en: "Privacy Policy, Cookie Policy and Terms of Service are shown from the site's built-in, translated text (so every language stays consistent and matches the site's analytics/ads behaviour); documents saved here under those keys are not displayed.",
+      ar: "صفحات سياسة الخصوصية وسياسة الكوكيز وشروط الخدمة تُعرض من النص المضمَّن في الموقع (مترجمًا لكل اللغات ومتوافقًا مع التحليلات والإعلانات)؛ والمستندات المحفوظة هنا بهذه المفاتيح لا تُعرض.",
+    },
   },
   access: {
     // `_status` (added by `versions.drafts` below) isn't filtered

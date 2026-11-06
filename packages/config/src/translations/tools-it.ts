@@ -229,7 +229,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Aggiungi filigrana",
     actionLabel: "Aggiungi filigrana",
-    shortDescription: "Applica un testo come RISERVATO o BOZZA su ogni pagina di un PDF.",
+    shortDescription: "Applica testo come RISERVATO o BOZZA su ogni pagina di un PDF o su un'immagine JPG, PNG o WebP.",
     longDescription: [
       "Aggiungi filigrana posiziona il tuo testo su ogni pagina di un PDF — una volta al centro o ripetuto su tutta la pagina. Scegli colore, opacità, dimensione e angolo, e vedi un'anteprima dal vivo sulla prima pagina prima di applicarlo.",
       "L'italiano e altre scritture sono pienamente supportati. La filigrana viene salvata come oggetto filigrana standard, e tutto avviene nel tuo browser, quindi il tuo documento non viene mai caricato.",
@@ -244,7 +244,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Rimuovi filigrana",
     actionLabel: "Rimuovi filigrana",
-    shortDescription: "Rimuovi le filigrane aggiunte come oggetti filigrana in un PDF.",
+    shortDescription: "Rimuovi le filigrane aggiunte come oggetti filigrana da un PDF o da un documento Word (.docx).",
     longDescription: [
       "Rimuovi filigrana trova ed elimina le filigrane aggiunte come oggetti filigrana — il tipo creato da Adobe Acrobat, TAMPDF e la maggior parte degli editor PDF — insieme ad annotazioni filigrana e livelli chiamati «Watermark». Il resto di ogni pagina resta esattamente com'era.",
       "Le filigrane che fanno parte di un'immagine scansionata o fuse nel testo normale della pagina non hanno alcun marcatore che le distingua dal contenuto reale, quindi non possono essere rimosse automaticamente. Rimuovi filigrane solo da documenti che hai il diritto di modificare. L'elaborazione avviene nel tuo browser, quindi il tuo file non viene mai caricato.",

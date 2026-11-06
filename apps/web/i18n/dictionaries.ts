@@ -78,6 +78,16 @@ const en = {
     termsOfService: "Terms of Service",
     cookiePolicy: "Cookie Policy",
   },
+  consent: {
+    title: "Cookies and analytics",
+    description: "We use analytics cookies (Google Analytics and Microsoft Clarity) to understand how the site is used. They only run if you accept. Your files never leave your browser.",
+    accept: "Accept",
+    reject: "Reject",
+    settings: "Cookie settings",
+    statusOn: "Analytics cookies are currently on.",
+    statusOff: "Analytics cookies are currently off.",
+    close: "Close"
+  },
   staticPages: {
     note: "This page is a placeholder — full content is on its way.",
     aboutUs: {
@@ -103,59 +113,135 @@ const en = {
     },
     privacyPolicy: {
       title: "Privacy Policy",
-      intro:
-        "How TAMPDF handles your files and data: files are processed in your browser and never uploaded; what analytics, cookies and advertising collect; and your rights.",
-      body: [
-        "Last updated: 6 November 2026.",
-        "Overview. TAMPDF (tampdf.com) offers free browser-based tools for working with PDFs and images. This policy explains what information we do and do not collect when you use the website.",
-        "Your files stay on your device. All file processing happens locally in your browser. The PDFs, images and documents you open in our tools are never uploaded to, stored on, or shared with our servers or any third party. If you choose “Save to Google Drive” or “Save to Dropbox” after processing a file, your browser sends the result directly to the service you signed in to; we never receive it.",
-        "Information collected automatically. To understand how the site is used and to keep it working, we use Google Analytics and Microsoft Clarity, and we keep simple first-party counters on our own server. They may record the pages you visit, your approximate location (country or city derived from your IP address), device type, browser, operating system, language, the website that referred you, which tool you used, and whether it succeeded. We do not collect your name, your email address or the contents of your files.",
-        "Cookies and similar technologies. Analytics and advertising services may place cookies or use local storage on your device. Our Cookie Policy lists them and explains how to control them. The site also remembers your light/dark theme choice in your browser.",
-        "Your rights. Where data-protection laws such as the GDPR, the UK GDPR or the CCPA apply, you may ask to access, correct or delete personal data we hold about you, object to or restrict its processing, withdraw consent at any time, and complain to your local data-protection authority. Because we do not collect your name or email address, most requests can be answered by explaining what our analytics providers hold. To make a request, use the Contact page.",
-        "Data retention. Analytics data is kept only as long as needed for statistics and to improve the service, in line with each provider's retention settings.",
-        "Third-party services and links. The site may link to, or load services run by, other companies (for example Google, Microsoft and Dropbox). They have their own privacy policies and we are not responsible for their practices.",
-        "Children. TAMPDF is a general-audience tool and is not directed to children under 13 (or under 16 where local law requires). We do not knowingly collect personal information from children.",
-        "Security. Because files are processed in your browser and never sent to us, they are never exposed to our servers. The site is served over HTTPS.",
-        "Changes to this policy. We may update this policy from time to time. The “Last updated” date shows when it last changed, and continuing to use the site means you accept the updated policy.",
-        "Contact. Questions about this policy? Please reach us through the Contact page.",
-      ],
+      intro: "How TAMPDF handles your files and data: files are processed in your browser and never uploaded; what analytics, cookies and advertising collect; and your rights.",
+      updated: "Last updated: 6 November 2026.",
+      sections: [
+        {
+          heading: "Overview",
+          text: "TAMPDF (tampdf.com) offers free browser-based tools for PDFs and images. This policy explains what we do and do not collect."
+        },
+        {
+          heading: "Your files stay on your device",
+          text: "Files are processed locally in your browser and are never uploaded to, stored on, or shared with our servers or any third party. If you choose “Save to Google Drive” or “Save to Dropbox”, your browser sends the result directly to the service you signed in to; we never receive it."
+        },
+        {
+          heading: "Information collected automatically",
+          text: "To understand how the site is used we keep simple first-party counters on our server and, only with your consent where it is required, use Google Analytics and Microsoft Clarity. They may record pages visited, approximate location, device, browser, language, referrer, and which tool you used and whether it worked. We never collect your name, email address or the contents of your files."
+        },
+        {
+          heading: "Cookies and similar technologies",
+          text: "Analytics and advertising services may set cookies or use local storage. Our Cookie Policy lists them and explains how to control them, and you can change your choice at any time with “Cookie settings” in the footer."
+        },
+        {
+          heading: "Your rights",
+          text: "Where laws such as the GDPR, UK GDPR or CCPA apply, you may ask to access, correct or delete personal data we hold about you, object to or restrict its processing, withdraw consent at any time, and complain to your local data-protection authority. Use the Contact page to make a request."
+        },
+        {
+          heading: "Data retention",
+          text: "Analytics data is kept only as long as needed for statistics and to improve the service, following each provider's retention settings."
+        },
+        {
+          heading: "Third-party services and links",
+          text: "The site may link to or load services from other companies (for example Google, Microsoft and Dropbox). They have their own privacy policies and we are not responsible for them."
+        },
+        {
+          heading: "Children",
+          text: "TAMPDF is not directed to children under 13 (or under 16 where local law requires), and we do not knowingly collect their personal information."
+        },
+        {
+          heading: "Security",
+          text: "Files are processed in your browser and never sent to us. The site is served over HTTPS."
+        },
+        {
+          heading: "Changes to this policy",
+          text: "We may update this policy; the “Last updated” date shows the latest version. Continuing to use the site means you accept the update."
+        },
+        {
+          heading: "Contact",
+          text: "Questions about this policy? Please use the Contact page."
+        }
+      ]
     },
     termsOfService: {
       title: "Terms of Service",
-      intro:
-        "These Terms of Service govern your use of TAMPDF's tools and website, including our disclaimer of warranties and limitation of liability.",
-      body: [
-        "By accessing or using TAMPDF, you agree to be bound by these Terms of Service. If you do not agree, please do not use our tools.",
-        "TAMPDF provides free, browser-based tools for merging, compressing, converting, and rotating PDFs and images. All processing happens locally in your browser — your files are never uploaded to our servers.",
-        'Disclaimer of Warranties. TAMPDF\'s tools are provided "as is" and "as available," without warranties of any kind, whether express or implied, including warranties of accuracy, reliability, merchantability, or fitness for a particular purpose. We do not guarantee that the tools will be error-free, uninterrupted, or compatible with every file, browser, or device.',
-        "Limitation of Liability. To the fullest extent permitted by law, TAMPDF and its owners shall not be liable for any indirect, incidental, special, or consequential damages — including but not limited to data loss, file corruption, or business interruption — arising from your use of, or inability to use, our tools.",
-        "You are solely responsible for keeping backups of your original files and for verifying the accuracy and integrity of any converted or processed output before relying on it. Because all processing happens locally in your browser, TAMPDF has no access to your files and cannot recover lost or corrupted files on your behalf.",
-        "Acceptable use. You agree to use TAMPDF only for lawful purposes and only with files you have the right to process. Do not use the tools to infringe the rights of others, to remove watermarks or protection from content you are not authorized to modify, or to interfere with the operation of the website.",
-        "Third-party services and advertising. The site may display advertising and may link to or integrate third-party services (such as Google AdSense, Google Drive and Dropbox). We do not control those services, and your use of them is governed by their own terms and privacy policies.",
-        "Intellectual property. The TAMPDF name, logo, design, text and code belong to TAMPDF or its licensors. Your files remain yours: we claim no rights to them.",
-        "We may update these Terms of Service from time to time. Continued use of TAMPDF after changes are posted constitutes acceptance of the revised terms.",
-      ],
+      intro: "These Terms of Service govern your use of TAMPDF's tools and website, including our disclaimer of warranties and limitation of liability.",
+      sections: [
+        {
+          heading: "Acceptance of terms",
+          text: "By using TAMPDF you agree to these Terms of Service. If you do not agree, please do not use our tools."
+        },
+        {
+          heading: "The service",
+          text: "TAMPDF provides free, browser-based tools for working with PDFs and images. All processing happens locally in your browser; your files are never uploaded to our servers."
+        },
+        {
+          heading: "Disclaimer of warranties",
+          text: "The tools are provided “as is” and “as available”, without warranties of any kind, express or implied, including accuracy, reliability, merchantability or fitness for a particular purpose. We do not guarantee they will be error-free, uninterrupted or compatible with every file, browser or device."
+        },
+        {
+          heading: "Limitation of liability",
+          text: "To the fullest extent permitted by law, TAMPDF and its owners are not liable for indirect, incidental, special or consequential damages — including data loss, file corruption or business interruption — arising from your use of, or inability to use, the tools."
+        },
+        {
+          heading: "Your files",
+          text: "You are responsible for keeping backups of your originals and for checking any output before relying on it. Because processing happens in your browser, we cannot access or recover your files."
+        },
+        {
+          heading: "Acceptable use",
+          text: "Use TAMPDF only for lawful purposes and only with files you have the right to process. Do not use the tools to infringe others' rights, to remove watermarks or protection from content you may not modify, or to disrupt the website."
+        },
+        {
+          heading: "Third-party services and advertising",
+          text: "The site may show advertising and link to or integrate third-party services (such as Google AdSense, Google Drive and Dropbox). We do not control them; your use of them is governed by their own terms and privacy policies."
+        },
+        {
+          heading: "Intellectual property",
+          text: "The TAMPDF name, logo, design, text and code belong to TAMPDF or its licensors. Your files remain yours; we claim no rights to them."
+        },
+        {
+          heading: "Changes to these terms",
+          text: "We may update these terms from time to time. Continuing to use TAMPDF after changes are posted means you accept them."
+        }
+      ]
     },
     cookiePolicy: {
       title: "Cookie Policy",
-      intro:
-        "The cookies and similar technologies TAMPDF uses for preferences, analytics and advertising, and how to control them.",
-      body: [
-        "Last updated: 6 November 2026.",
-        "What are cookies? Cookies are small text files that a website stores on your device. Similar technologies, such as local storage and tracking pixels, work in comparable ways. This policy covers all of them.",
-        "Strictly necessary storage. TAMPDF remembers your light/dark theme choice in your browser's local storage so the site looks the way you left it. It contains no personal data and is never sent to us.",
-        "Analytics cookies. We use Google Analytics 4 (cookies such as _ga and _ga_*) and Microsoft Clarity (cookies such as _clck and _clsk) to measure traffic and understand how visitors use the site; Clarity may also create anonymized session recordings and heatmaps. These services receive technical information such as your browser, device, approximate location and the pages you visit.",
-        "How to control cookies. Most browsers let you block or delete cookies in their settings. Blocking them will not stop our tools from working, because your files are processed locally. You can opt out of Google Analytics with Google's browser add-on (https://tools.google.com/dlpage/gaoptout), manage Microsoft Clarity data in your Microsoft privacy dashboard (https://account.microsoft.com/privacy), and opt out of personalized advertising at https://adssettings.google.com or https://www.aboutads.info/choices (https://www.youronlinechoices.eu in Europe).",
-        "Changes. We may update this policy from time to time; the date above shows the latest version. Questions? Please use the Contact page.",
-      ],
+      intro: "The cookies and similar technologies TAMPDF uses for preferences, analytics and advertising, and how to control them.",
+      updated: "Last updated: 6 November 2026.",
+      sections: [
+        {
+          heading: "What are cookies?",
+          text: "Small text files a website stores on your device. Similar technologies, such as local storage and pixels, work in comparable ways; this policy covers all of them."
+        },
+        {
+          heading: "Strictly necessary storage",
+          text: "TAMPDF remembers your light/dark theme and your cookie choice in your browser's local storage. They contain no personal data and are never sent to us."
+        },
+        {
+          heading: "Analytics cookies",
+          text: "With your consent where it is required, we use Google Analytics 4 (cookies such as _ga and _ga_*) and Microsoft Clarity (such as _clck and _clsk) to measure traffic and understand how the site is used; Clarity may also create anonymized session recordings and heatmaps."
+        },
+        {
+          heading: "Managing your choice",
+          text: "Where consent is required you can accept or reject analytics cookies in the banner, and change your mind at any time with “Cookie settings” in the footer; withdrawing consent stops the analytics scripts and deletes their cookies. You can also block cookies in your browser — the tools keep working because your files are processed locally."
+        },
+        {
+          heading: "More controls",
+          text: "You can opt out of personalized advertising at https://adssettings.google.com or https://www.aboutads.info/choices (https://www.youronlinechoices.eu in Europe), and manage Microsoft data at https://account.microsoft.com/privacy."
+        },
+        {
+          heading: "Changes and contact",
+          text: "We may update this policy; the date above shows the latest version. Questions? Use the Contact page."
+        }
+      ]
     },
     adsDisclosure: {
       heading: "Advertising",
       paragraphs: [
-        "We use Google AdSense to show ads on this website. Google and its partners are third-party vendors that use cookies, web beacons and similar technologies to serve ads based on your prior visits to this and other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the internet.",
-        "You can opt out of personalized advertising by visiting Google Ads Settings (https://adssettings.google.com), or opt out of some third-party vendors' use of cookies for personalized advertising at https://www.aboutads.info/choices. You can read how Google uses information from sites that use its services at https://policies.google.com/technologies/partner-sites.",
-        "In the European Economic Area, the United Kingdom and Switzerland, ads are personalized only with your consent, which you can give or withdraw through the consent message shown on the site.",
-      ],
+        "We use Google AdSense to show ads. Google and its partners are third-party vendors that use cookies, web beacons and similar technologies to serve ads based on your prior visits to this and other websites.",
+        "You can opt out of personalized advertising at Google Ads Settings (https://adssettings.google.com) or at https://www.aboutads.info/choices, and read how Google uses data from sites that use its services at https://policies.google.com/technologies/partner-sites.",
+        "In the European Economic Area, the United Kingdom and Switzerland, ads are personalized only with your consent, which you can give or withdraw through the consent message shown on the site."
+      ]
     },
 
   },
@@ -721,7 +807,7 @@ const ar: typeof en = {
     rights: "جميع الحقوق محفوظة.",
     privacyNote: "تتم معالجة الملفات بأمان داخل المتصفح ولا يتم تخزينها لدينا",
     moreCount: "+{count} أخرى",
-    company: "الشركة",
+    company: "عن الموقع",
     legal: "قانوني",
     aboutUs: "من نحن",
     contactUs: "اتصل بنا",
@@ -730,6 +816,16 @@ const ar: typeof en = {
     privacyPolicy: "سياسة الخصوصية",
     termsOfService: "شروط الخدمة",
     cookiePolicy: "سياسة الكوكيز",
+  },
+  consent: {
+    title: "ملفات الكوكيز والتحليلات",
+    description: "نستخدم كوكيز التحليلات (Google Analytics وMicrosoft Clarity) لفهم كيفية استخدام الموقع، ولا تعمل إلا إذا وافقت. ملفاتك لا تغادر متصفحك أبدًا.",
+    accept: "موافق",
+    reject: "رفض",
+    settings: "إعدادات الكوكيز",
+    statusOn: "كوكيز التحليلات مفعّلة حاليًا.",
+    statusOff: "كوكيز التحليلات متوقفة حاليًا.",
+    close: "إغلاق"
   },
   staticPages: {
     note: "هذه الصفحة مؤقتة — المحتوى الكامل في الطريق قريبًا.",
@@ -754,57 +850,135 @@ const ar: typeof en = {
     },
     privacyPolicy: {
       title: "سياسة الخصوصية",
-      intro:
-        "كيف يتعامل TAMPDF مع ملفاتك وبياناتك: تُعالَج الملفات داخل متصفحك ولا تُرفع أبدًا، وما تجمعه التحليلات والكوكيز والإعلانات، وحقوقك.",
-      body: [
-        "آخر تحديث: 6 نوفمبر 2026.",
-        "نظرة عامة: يقدّم موقع TAMPDF ‏(tampdf.com) أدوات مجانية تعمل داخل المتصفح للتعامل مع ملفات PDF والصور. توضح هذه السياسة ما نجمعه من معلومات وما لا نجمعه عند استخدامك الموقع.",
-        "ملفاتك تبقى على جهازك: تتم جميع عمليات معالجة الملفات محليًا داخل متصفحك. فملفات PDF والصور والمستندات التي تفتحها في أدواتنا لا تُرفع إلى خوادمنا ولا تُخزَّن لدينا ولا تُشارَك مع أي طرف ثالث. وإذا اخترت «الحفظ في Google Drive» أو «الحفظ في Dropbox» بعد معالجة ملف، فإن متصفحك يرسل النتيجة مباشرة إلى الخدمة التي سجّلت الدخول إليها، ولا نستلمها نحن.",
-        "المعلومات التي تُجمع تلقائيًا: لفهم كيفية استخدام الموقع والحفاظ على عمله نستخدم Google Analytics وMicrosoft Clarity، ونحتفظ بعدّادات بسيطة خاصة بنا على خادمنا. وقد تسجّل هذه الأدوات الصفحات التي تزورها وموقعك التقريبي (الدولة أو المدينة المستنتجة من عنوان IP) ونوع الجهاز والمتصفح ونظام التشغيل واللغة والموقع الذي أحالك إلينا والأداة التي استخدمتها ونجاح العملية من عدمه. نحن لا نجمع اسمك ولا بريدك الإلكتروني ولا محتوى ملفاتك.",
-        "ملفات تعريف الارتباط والتقنيات المشابهة: قد تضع خدمات التحليلات والإعلانات ملفات تعريف ارتباط (كوكيز) أو تستخدم التخزين المحلي على جهازك. تسرد سياسة الكوكيز لدينا هذه الملفات وتشرح كيفية التحكم بها. كما يتذكّر الموقع اختيارك للوضع الفاتح أو الداكن في متصفحك.",
-        "حقوقك: حيثما تنطبق قوانين حماية البيانات مثل GDPR أو GDPR البريطاني أو CCPA، يحق لك طلب الاطلاع على بياناتك الشخصية التي نحتفظ بها أو تصحيحها أو حذفها، والاعتراض على معالجتها أو تقييدها، وسحب موافقتك في أي وقت، وتقديم شكوى إلى جهة حماية البيانات في بلدك. ولأننا لا نجمع اسمك ولا بريدك الإلكتروني، يمكن الرد على معظم الطلبات بتوضيح ما تحتفظ به مزوّدات التحليلات. لتقديم طلب، استخدم صفحة «اتصل بنا».",
-        "مدة الاحتفاظ: تُحفظ بيانات التحليلات للمدة اللازمة فقط للإحصاءات ولتحسين الخدمة، وفق إعدادات الاحتفاظ لدى كل مزوّد.",
-        "الخدمات والروابط الخارجية: قد يتضمن الموقع روابط إلى شركات أخرى أو يحمّل خدمات تديرها (مثل Google وMicrosoft وDropbox). لكلٍّ منها سياسة خصوصية خاصة به، ولسنا مسؤولين عن ممارساتها.",
-        "الأطفال: TAMPDF أداة عامة وغير موجَّهة إلى الأطفال دون 13 عامًا (أو دون 16 حيث يشترط القانون المحلي ذلك). ولا نجمع عن قصد معلومات شخصية من الأطفال.",
-        "الأمان: بما أن الملفات تُعالَج داخل متصفحك ولا تُرسل إلينا، فهي لا تصل إلى خوادمنا أبدًا. ويُقدَّم الموقع عبر اتصال HTTPS.",
-        "التغييرات على هذه السياسة: قد نحدّث هذه السياسة من وقت لآخر. ويُظهر تاريخ «آخر تحديث» موعد آخر تعديل، واستمرارك في استخدام الموقع يعني موافقتك على السياسة المحدّثة.",
-        "التواصل: لأي استفسار عن هذه السياسة تواصل معنا عبر صفحة «اتصل بنا».",
-      ],
+      intro: "كيف يتعامل TAMPDF مع ملفاتك وبياناتك: تُعالَج الملفات داخل متصفحك ولا تُرفع أبدًا، وما تجمعه التحليلات والكوكيز والإعلانات، وحقوقك.",
+      updated: "آخر تحديث: 6 نوفمبر 2026.",
+      sections: [
+        {
+          heading: "نظرة عامة",
+          text: "يقدّم TAMPDF ‏(tampdf.com) أدوات مجانية تعمل داخل المتصفح لملفات PDF والصور. توضح هذه السياسة ما نجمعه وما لا نجمعه."
+        },
+        {
+          heading: "ملفاتك تبقى على جهازك",
+          text: "تُعالَج الملفات محليًا داخل متصفحك ولا تُرفع إلى خوادمنا ولا تُخزَّن لدينا ولا تُشارَك مع أي طرف ثالث. وإذا اخترت «الحفظ في Google Drive» أو «الحفظ في Dropbox» فإن متصفحك يرسل النتيجة مباشرة إلى الخدمة التي سجّلت الدخول إليها، ولا نستلمها نحن."
+        },
+        {
+          heading: "المعلومات التي تُجمع تلقائيًا",
+          text: "لفهم كيفية استخدام الموقع نحتفظ بعدّادات بسيطة خاصة بنا على خادمنا، ونستخدم Google Analytics وMicrosoft Clarity فقط بموافقتك حيثما تُشترط. وقد تسجّل الصفحات التي تزورها وموقعك التقريبي والجهاز والمتصفح واللغة والموقع المُحيل والأداة المستخدمة ونجاحها. نحن لا نجمع اسمك ولا بريدك الإلكتروني ولا محتوى ملفاتك."
+        },
+        {
+          heading: "ملفات تعريف الارتباط والتقنيات المشابهة",
+          text: "قد تضع خدمات التحليلات والإعلانات كوكيز أو تستخدم التخزين المحلي. تسردها سياسة الكوكيز وتشرح كيفية التحكم بها، ويمكنك تغيير اختيارك في أي وقت عبر «إعدادات الكوكيز» في أسفل الصفحة."
+        },
+        {
+          heading: "حقوقك",
+          text: "حيثما تنطبق قوانين مثل GDPR أو GDPR البريطاني أو CCPA، يحق لك طلب الاطلاع على بياناتك الشخصية لدينا أو تصحيحها أو حذفها، والاعتراض على معالجتها أو تقييدها، وسحب موافقتك في أي وقت، وتقديم شكوى إلى جهة حماية البيانات في بلدك. استخدم صفحة «اتصل بنا» لتقديم طلبك."
+        },
+        {
+          heading: "مدة الاحتفاظ",
+          text: "تُحفظ بيانات التحليلات للمدة اللازمة فقط للإحصاءات ولتحسين الخدمة، وفق إعدادات الاحتفاظ لدى كل مزوّد."
+        },
+        {
+          heading: "الخدمات والروابط الخارجية",
+          text: "قد يرتبط الموقع بخدمات شركات أخرى أو يحمّلها (مثل Google وMicrosoft وDropbox). لكلٍّ منها سياسة خصوصية خاصة به ولسنا مسؤولين عنها."
+        },
+        {
+          heading: "الأطفال",
+          text: "TAMPDF غير موجَّه إلى الأطفال دون 13 عامًا (أو دون 16 حيث يشترط القانون المحلي)، ولا نجمع عن قصد معلوماتهم الشخصية."
+        },
+        {
+          heading: "الأمان",
+          text: "تُعالَج الملفات في متصفحك ولا تُرسل إلينا. ويُقدَّم الموقع عبر HTTPS."
+        },
+        {
+          heading: "التغييرات على هذه السياسة",
+          text: "قد نحدّث هذه السياسة، ويُظهر تاريخ «آخر تحديث» أحدث نسخة. واستمرارك في استخدام الموقع يعني موافقتك على التحديث."
+        },
+        {
+          heading: "التواصل",
+          text: "لأي استفسار عن هذه السياسة استخدم صفحة «اتصل بنا»."
+        }
+      ]
     },
     termsOfService: {
       title: "شروط الخدمة",
       intro: "تحكم شروط الخدمة هذه استخدامك لأدوات وموقع TAMPDF، بما في ذلك إخلاء المسؤولية عن الضمانات وتحديد المسؤولية.",
-      body: [
-        "باستخدامك لموقع TAMPDF، فإنك توافق على الالتزام بشروط الخدمة هذه. إذا كنت لا توافق عليها، فيُرجى عدم استخدام أدواتنا.",
-        "يوفر TAMPDF أدوات مجانية تعمل داخل المتصفح لدمج ملفات PDF وضغطها وتحويلها وتدويرها، إلى جانب أدوات معالجة الصور. تتم جميع عمليات المعالجة محليًا داخل متصفحك، ولا يتم رفع ملفاتك إلى خوادمنا مطلقًا.",
-        'إخلاء المسؤولية عن الضمانات: تُقدَّم أدوات TAMPDF "كما هي" و"كما هي متاحة"، دون أي ضمانات من أي نوع، صريحة كانت أو ضمنية، بما في ذلك ضمانات الدقة أو الموثوقية أو الملاءمة لغرض معين. لا نضمن أن تكون الأدوات خالية من الأخطاء، أو تعمل دون انقطاع، أو متوافقة مع كل ملف أو متصفح أو جهاز.',
-        "تحديد المسؤولية: إلى أقصى حد يسمح به القانون، لا يتحمّل TAMPDF ومالكوه المسؤولية عن أي أضرار غير مباشرة أو عرضية أو تبعية — بما في ذلك على سبيل المثال لا الحصر فقدان البيانات أو تلف الملفات أو انقطاع الأعمال — الناشئة عن استخدامك لأدواتنا أو عدم قدرتك على استخدامها.",
-        "أنت المسؤول الوحيد عن الاحتفاظ بنسخ احتياطية من ملفاتك الأصلية والتحقق من دقة وسلامة أي ملف تم تحويله أو معالجته قبل الاعتماد عليه. وبما أن جميع عمليات المعالجة تتم محليًا داخل متصفحك، فإن TAMPDF لا يملك أي وصول إلى ملفاتك ولا يمكنه استرجاع الملفات المفقودة أو التالفة نيابةً عنك.",
-        "الاستخدام المقبول: توافق على استخدام TAMPDF لأغراض مشروعة فقط ومع ملفات يحق لك معالجتها. لا تستخدم الأدوات للتعدي على حقوق الآخرين، أو لإزالة علامات مائية أو حماية من محتوى لا يحق لك تعديله، أو للتدخل في عمل الموقع.",
-        "الخدمات الخارجية والإعلانات: قد يعرض الموقع إعلانات وقد يرتبط بخدمات جهات خارجية أو يتكامل معها (مثل Google AdSense وGoogle Drive وDropbox). نحن لا نتحكم بهذه الخدمات، ويخضع استخدامك لها لشروطها وسياسات الخصوصية الخاصة بها.",
-        "الملكية الفكرية: اسم TAMPDF وشعاره وتصميمه ونصوصه وشيفرته مملوكة لـ TAMPDF أو لمرخِّصيه. أما ملفاتك فتبقى ملكًا لك ولا ندّعي أي حقوق عليها.",
-        "قد نقوم بتحديث شروط الخدمة هذه من وقت لآخر. ويُعدّ استمرارك في استخدام TAMPDF بعد نشر أي تعديلات بمثابة قبول منك لهذه الشروط المُحدَّثة.",
-      ],
+      sections: [
+        {
+          heading: "قبول الشروط",
+          text: "باستخدامك TAMPDF فإنك توافق على شروط الخدمة هذه. إذا كنت لا توافق فيُرجى عدم استخدام أدواتنا."
+        },
+        {
+          heading: "الخدمة",
+          text: "يوفر TAMPDF أدوات مجانية تعمل داخل المتصفح للتعامل مع ملفات PDF والصور. تتم كل المعالجة محليًا داخل متصفحك ولا تُرفع ملفاتك إلى خوادمنا."
+        },
+        {
+          heading: "إخلاء المسؤولية عن الضمانات",
+          text: "تُقدَّم الأدوات «كما هي» و«كما هي متاحة»، دون أي ضمانات صريحة أو ضمنية، بما فيها الدقة والموثوقية والملاءمة لغرض معين. لا نضمن أنها خالية من الأخطاء أو تعمل دون انقطاع أو تتوافق مع كل ملف أو متصفح أو جهاز."
+        },
+        {
+          heading: "تحديد المسؤولية",
+          text: "إلى أقصى حد يسمح به القانون، لا يتحمّل TAMPDF ومالكوه المسؤولية عن أي أضرار غير مباشرة أو عرضية أو خاصة أو تبعية — ومنها فقدان البيانات أو تلف الملفات أو انقطاع الأعمال — الناشئة عن استخدام الأدوات أو عدم القدرة على استخدامها."
+        },
+        {
+          heading: "ملفاتك",
+          text: "أنت المسؤول عن الاحتفاظ بنسخ احتياطية من أصولك وعن مراجعة أي ناتج قبل الاعتماد عليه. وبما أن المعالجة تتم في متصفحك، فلا يمكننا الوصول إلى ملفاتك أو استرجاعها."
+        },
+        {
+          heading: "الاستخدام المقبول",
+          text: "استخدم TAMPDF لأغراض مشروعة فقط ومع ملفات يحق لك معالجتها. لا تستخدم الأدوات للتعدي على حقوق الآخرين أو لإزالة علامات مائية أو حماية من محتوى لا يحق لك تعديله أو لتعطيل الموقع."
+        },
+        {
+          heading: "الخدمات الخارجية والإعلانات",
+          text: "قد يعرض الموقع إعلانات وقد يرتبط بخدمات جهات خارجية أو يتكامل معها (مثل Google AdSense وGoogle Drive وDropbox). نحن لا نتحكم بها، ويخضع استخدامك لها لشروطها وسياسات الخصوصية الخاصة بها."
+        },
+        {
+          heading: "الملكية الفكرية",
+          text: "اسم TAMPDF وشعاره وتصميمه ونصوصه وشيفرته مملوكة لـ TAMPDF أو لمرخِّصيه. أما ملفاتك فتبقى ملكًا لك ولا ندّعي أي حقوق عليها."
+        },
+        {
+          heading: "التغييرات",
+          text: "قد نحدّث هذه الشروط من وقت لآخر. واستمرارك في استخدام TAMPDF بعد نشر التعديلات يعني موافقتك عليها."
+        }
+      ]
     },
     cookiePolicy: {
       title: "سياسة الكوكيز",
       intro: "ملفات تعريف الارتباط والتقنيات المشابهة التي يستخدمها TAMPDF للتفضيلات والتحليلات والإعلانات، وكيفية التحكم بها.",
-      body: [
-        "آخر تحديث: 6 نوفمبر 2026.",
-        "ما ملفات تعريف الارتباط؟ هي ملفات نصية صغيرة يخزّنها الموقع على جهازك. وتعمل تقنيات مشابهة، مثل التخزين المحلي وبكسلات التتبع، بطريقة مماثلة. وتشمل هذه السياسة كل ذلك.",
-        "التخزين الضروري: يتذكّر TAMPDF اختيارك للوضع الفاتح أو الداكن في التخزين المحلي لمتصفحك ليظهر الموقع كما تركته. لا يحتوي على بيانات شخصية ولا يُرسل إلينا أبدًا.",
-        "كوكيز التحليلات: نستخدم Google Analytics 4 ‏(كوكيز مثل ‎_ga و‎_ga_*‎) وMicrosoft Clarity ‏(كوكيز مثل ‎_clck و‎_clsk) لقياس الزيارات وفهم كيفية استخدام الزوار للموقع، وقد ينشئ Clarity أيضًا تسجيلات جلسات وخرائط حرارية مجهولة الهوية. وتتلقى هذه الخدمات معلومات تقنية مثل متصفحك وجهازك وموقعك التقريبي والصفحات التي تزورها.",
-        "كيف تتحكم بالكوكيز: تتيح لك معظم المتصفحات حظر الكوكيز أو حذفها من الإعدادات، ولن يوقف ذلك عمل أدواتنا لأن ملفاتك تُعالَج محليًا. ويمكنك إلغاء الاشتراك في Google Analytics عبر إضافة المتصفح من Google ‏(https://tools.google.com/dlpage/gaoptout)، وإدارة بيانات Microsoft Clarity من لوحة خصوصية Microsoft ‏(https://account.microsoft.com/privacy)، وإيقاف الإعلانات المخصّصة من https://adssettings.google.com أو https://www.aboutads.info/choices (و https://www.youronlinechoices.eu في أوروبا).",
-        "التغييرات: قد نحدّث هذه السياسة من وقت لآخر، ويُظهر التاريخ أعلاه آخر نسخة. لأي استفسار استخدم صفحة «اتصل بنا».",
-      ],
+      updated: "آخر تحديث: 6 نوفمبر 2026.",
+      sections: [
+        {
+          heading: "ما ملفات تعريف الارتباط؟",
+          text: "ملفات نصية صغيرة يخزّنها الموقع على جهازك. وتعمل تقنيات مشابهة، مثل التخزين المحلي والبكسلات، بالطريقة نفسها؛ وتشملها هذه السياسة جميعًا."
+        },
+        {
+          heading: "التخزين الضروري",
+          text: "يتذكّر TAMPDF وضعك الفاتح/الداكن واختيارك بشأن الكوكيز في التخزين المحلي لمتصفحك. لا تحتوي على بيانات شخصية ولا تُرسل إلينا."
+        },
+        {
+          heading: "كوكيز التحليلات",
+          text: "بموافقتك حيثما تُشترط، نستخدم Google Analytics 4 ‏(كوكيز مثل ‎_ga و‎_ga_*‎) وMicrosoft Clarity ‏(مثل ‎_clck و‎_clsk) لقياس الزيارات وفهم استخدام الموقع؛ وقد ينشئ Clarity تسجيلات جلسات وخرائط حرارية مجهولة الهوية."
+        },
+        {
+          heading: "إدارة اختيارك",
+          text: "حيثما تُشترط الموافقة يمكنك قبول كوكيز التحليلات أو رفضها من الشريط، وتغيير رأيك في أي وقت عبر «إعدادات الكوكيز» في أسفل الصفحة؛ وسحب الموافقة يوقف سكربتات التحليلات ويحذف كوكيزها. ويمكنك أيضًا حظر الكوكيز من متصفحك — وستبقى الأدوات تعمل لأن ملفاتك تُعالَج محليًا."
+        },
+        {
+          heading: "خيارات إضافية",
+          text: "يمكنك إيقاف الإعلانات المخصّصة من https://adssettings.google.com أو https://www.aboutads.info/choices (و https://www.youronlinechoices.eu في أوروبا)، وإدارة بيانات Microsoft من https://account.microsoft.com/privacy."
+        },
+        {
+          heading: "التغييرات والتواصل",
+          text: "قد نحدّث هذه السياسة، ويُظهر التاريخ أعلاه أحدث نسخة. لأي استفسار استخدم صفحة «اتصل بنا»."
+        }
+      ]
     },
     adsDisclosure: {
       heading: "الإعلانات",
       paragraphs: [
-        "نستخدم Google AdSense لعرض الإعلانات على هذا الموقع. تُعدّ Google وشركاؤها جهات خارجية تستخدم ملفات تعريف الارتباط وإشارات الويب وتقنيات مشابهة لعرض إعلانات بناءً على زياراتك السابقة لهذا الموقع ومواقع أخرى. ويتيح استخدام Google لكوكيز الإعلانات لها ولشركائها عرض إعلانات لك بناءً على زيارتك لموقعنا و/أو مواقع أخرى على الإنترنت.",
-        "يمكنك إيقاف الإعلانات المخصّصة من خلال إعدادات إعلانات Google ‏(https://adssettings.google.com)، أو إيقاف استخدام بعض الجهات الخارجية للكوكيز في الإعلانات المخصّصة من https://www.aboutads.info/choices. ويمكنك الاطلاع على كيفية استخدام Google للمعلومات من المواقع التي تستخدم خدماتها عبر https://policies.google.com/technologies/partner-sites.",
-        "في المنطقة الاقتصادية الأوروبية والمملكة المتحدة وسويسرا، لا تُخصَّص الإعلانات إلا بموافقتك، ويمكنك منحها أو سحبها عبر رسالة الموافقة التي تظهر على الموقع.",
-      ],
+        "نستخدم Google AdSense لعرض الإعلانات. وGoogle وشركاؤها جهات خارجية تستخدم الكوكيز وإشارات الويب وتقنيات مشابهة لعرض إعلانات بناءً على زياراتك السابقة لهذا الموقع ومواقع أخرى.",
+        "يمكنك إيقاف الإعلانات المخصّصة من إعدادات إعلانات Google ‏(https://adssettings.google.com) أو من https://www.aboutads.info/choices، والاطلاع على كيفية استخدام Google للبيانات من المواقع التي تستخدم خدماتها عبر https://policies.google.com/technologies/partner-sites.",
+        "في المنطقة الاقتصادية الأوروبية والمملكة المتحدة وسويسرا لا تُخصَّص الإعلانات إلا بموافقتك، ويمكنك منحها أو سحبها عبر رسالة الموافقة التي تظهر على الموقع."
+      ]
     },
 
   },
@@ -1294,6 +1468,7 @@ const ar: typeof en = {
 
 import type { Locale } from "@tampdf/config";
 import { deepMerge, type DeepPartial } from "./merge";
+import { extraTranslations } from "./locales/extra";
 import { cs } from "./locales/cs";
 import { da } from "./locales/da";
 import { de } from "./locales/de";
@@ -1357,7 +1532,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
   ...(Object.fromEntries(
     Object.entries(partialTranslations).map(([locale, translation]) => [
       locale,
-      deepMerge(en, translation),
+      deepMerge(deepMerge(en, translation), extraTranslations[locale as Locale]),
     ]),
   ) as Record<Locale, Dictionary>),
 };

@@ -229,7 +229,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "Přidat vodoznak",
     actionLabel: "Přidat vodoznak",
-    shortDescription: "Umístěte text, jako DŮVĚRNÉ nebo NÁVRH, na každou stránku PDF.",
+    shortDescription: "Umístěte text jako DŮVĚRNÉ nebo KONCEPT na každou stránku PDF nebo na obrázek JPG, PNG či WebP.",
     longDescription: [
       "Přidat vodoznak umístí váš text na každou stránku PDF — jednou uprostřed nebo opakovaně po celé stránce. Vyberte barvu, průhlednost, velikost a úhel a před použitím si prohlédněte živý náhled na první stránce.",
       "Čeština a další písma jsou plně podporována. Vodoznak se uloží jako standardní objekt vodoznaku a vše se odehrává ve vašem prohlížeči, takže váš dokument se nikdy nenahrává.",
@@ -244,7 +244,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "Odstranit vodoznak",
     actionLabel: "Odstranit vodoznak",
-    shortDescription: "Odstraňte vodoznaky přidané jako objekty vodoznaku v PDF.",
+    shortDescription: "Odstraňte vodoznaky přidané jako objekty vodoznaku z PDF nebo dokumentu Word (.docx).",
     longDescription: [
       "Odstranit vodoznak najde a odstraní vodoznaky přidané jako objekty vodoznaku — typ vytvářený Adobe Acrobat, TAMPDF a většinou editorů PDF — spolu s poznámkami vodoznaku a vrstvami nazvanými „Watermark“. Zbytek každé stránky zůstává přesně stejný.",
       "Vodoznaky, které jsou součástí naskenovaného obrázku nebo sloučené s běžným textem stránky, nemají žádný marker, který by je odlišoval od skutečného obsahu, takže je nelze odstranit automaticky. Odstraňujte vodoznaky pouze z dokumentů, které máte právo upravovat. Zpracování probíhá ve vašem prohlížeči, takže soubor se nikdy nenahrává.",

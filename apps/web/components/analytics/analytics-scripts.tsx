@@ -1,3 +1,4 @@
+import { ConsentGate } from "@/components/consent/consent-gate";
 import { getSettings } from "@/lib/get-settings";
 import { GoogleAnalytics } from "./google-analytics";
 import { MicrosoftClarity } from "./microsoft-clarity";
@@ -41,10 +42,11 @@ export async function AnalyticsScripts() {
   const { ga4MeasurementId, clarityProjectId } = settings.analytics ?? {};
 
   return (
-    <>
+    // Nothing here loads until the visitor's consent allows it (see lib/consent.ts).
+    <ConsentGate>
       <GoogleAnalytics measurementId={ga4MeasurementId} />
       <MicrosoftClarity projectId={clarityProjectId} />
-    </>
+    </ConsentGate>
   );
 }
 

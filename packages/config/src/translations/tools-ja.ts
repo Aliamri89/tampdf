@@ -229,7 +229,7 @@ export const toolsJa: Record<string, ToolTranslationOverride> = {
   "add-watermark": {
     name: "透かしを追加",
     actionLabel: "透かしを追加",
-    shortDescription: "「社外秘」や「下書き」などのテキストをPDFの全ページに透かしとして入れます。",
+    shortDescription: "「社外秘」や「下書き」などの文字を PDF の全ページ、または JPG・PNG・WebP 画像に重ねます。",
     longDescription: [
       "透かしを追加は、PDFの各ページにテキストを配置します——中央に1回、またはページ全体に繰り返し表示できます。色、不透明度、サイズ、角度を選び、適用する前に最初のページでライブプレビューを確認できます。",
       "日本語やその他の文字も完全にサポートされています。透かしは標準的な透かしオブジェクトとして保存され、すべてブラウザ内で行われるため、文書がアップロードされることはありません。",
@@ -244,7 +244,7 @@ export const toolsJa: Record<string, ToolTranslationOverride> = {
   "remove-watermark": {
     name: "透かしを削除",
     actionLabel: "透かしを削除",
-    shortDescription: "透かしオブジェクトとしてPDFに追加された透かしを削除します。",
+    shortDescription: "透かしオブジェクトとして追加された透かしを、PDF または Word（.docx）文書から削除します。",
     longDescription: [
       "透かしを削除は、透かしオブジェクトとして追加された透かし——Adobe Acrobat、TAMPDF、ほとんどのPDF編集ツールが作成する種類のもの——を、透かしの注釈や「Watermark」という名前のレイヤーとともに見つけて削除します。各ページのそれ以外の部分は完全にそのまま残ります。",
       "スキャン画像の一部になっている透かしや、通常のページテキストに統合されている透かしには、実際の内容と区別するためのマーカーがないため、自動的には削除できません。編集する権利のある文書からのみ透かしを削除してください。処理はブラウザ内で行われるため、ファイルがアップロードされることはありません。",
