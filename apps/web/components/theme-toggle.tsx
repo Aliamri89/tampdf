@@ -13,7 +13,7 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={isDark}
-      className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border text-foreground/70 transition-colors hover:border-brand-300 hover:text-foreground"
+      className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border text-foreground/70 transition-colors hover:border-brand-500 hover:text-foreground"
       suppressHydrationWarning
     >
       {/* Both icons are always rendered and CSS picks one from the data-theme

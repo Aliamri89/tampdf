@@ -49,12 +49,7 @@ export function HeaderNav({ locale, groups }: { locale: string; groups: MenuGrou
               aria-expanded={isOpen}
               aria-controls={panelId}
               aria-haspopup="true"
-              className={cn(
-                "inline-flex h-10 items-center gap-2 rounded-lg border px-4 text-base font-bold text-foreground transition-colors",
-                isOpen
-                  ? "border-brand-400 bg-surface-muted"
-                  : "border-border bg-background hover:border-brand-400 hover:bg-surface-muted",
-              )}
+              className="inline-flex h-10 items-center gap-2 rounded-lg border border-border bg-background px-4 text-base font-bold text-foreground transition-colors hover:border-brand-500"
             >
               <Icon name={group.icon} size={18} className={accent} />
               <span className="whitespace-nowrap">{group.name}</span>
