@@ -63,7 +63,7 @@ export function RotatePdfWorkspace() {
     setEntries((prev) => [...prev, ...newEntries]);
 
     for (const entry of newEntries) {
-      renderAllPageThumbnails(entry.file)
+      renderAllPageThumbnails(entry.file, 300)
         .then((thumbnails) => {
           setEntries((prev) =>
             prev.map((e) =>
@@ -163,6 +163,7 @@ export function RotatePdfWorkspace() {
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
+          getBlob={() => result.blob}
           onReset={reset}
         />
       </div>
@@ -234,7 +235,7 @@ export function RotatePdfWorkspace() {
                     ))}
                   </div>
 
-                  <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+                  <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
                     {entry.pages.map((page) => (
                       <div key={page.pageNumber} className="relative">
                         <div className="flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-border bg-surface-muted">
@@ -243,18 +244,18 @@ export function RotatePdfWorkspace() {
                             src={page.thumbnail}
                             alt=""
                             style={{ transform: `rotate(${page.rotation}deg)` }}
-                            className="max-h-[85%] max-w-[85%] object-contain transition-transform duration-200"
+                            className="max-h-[88%] max-w-[88%] object-contain transition-transform duration-200"
                           />
                         </div>
                         <button
                           type="button"
                           onClick={() => rotateSinglePage(entry.id, page.pageNumber)}
                           aria-label={t(dict.rotatePageLabel, { page: page.pageNumber })}
-                          className="absolute -right-1.5 -top-1.5 flex h-7 w-7 items-center justify-center rounded-full border border-border bg-surface text-foreground/70 shadow-sm transition-colors hover:border-brand-300 hover:text-brand-600 rtl:-left-1.5 rtl:right-auto"
+                          className="absolute -right-2.5 -top-2.5 flex h-11 w-11 items-center justify-center rounded-full border-2 border-background bg-brand-500 text-white shadow-lg transition-colors hover:bg-brand-600 rtl:-left-2.5 rtl:right-auto"
                         >
-                          <RotateCw size={14} />
+                          <RotateCw size={24} strokeWidth={2.5} />
                         </button>
-                        <p className="mt-1 text-center text-xs text-foreground/50">
+                        <p className="mt-1.5 text-center text-sm text-foreground/60">
                           {page.pageNumber}
                           {page.rotation ? ` · ${page.rotation}°` : ""}
                         </p>

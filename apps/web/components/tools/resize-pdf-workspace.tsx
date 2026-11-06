@@ -11,6 +11,7 @@ import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { downloadBytes } from "@/lib/download";
 import { resizePdfToPreset, scalePdf, type ResizePreset } from "@/lib/pdf/resize";
+import { useFileThumbnail } from "@/components/tools/use-file-thumbnail";
 import { formatBytes } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,7 @@ export function ResizePdfWorkspace() {
   const dict = useDictionary().workspace.resizePdf;
   const fileListDict = useDictionary().fileList;
   const [file, setFile] = useState<File | null>(null);
+  const preview = useFileThumbnail(file);
   const [pageCount, setPageCount] = useState(0);
   const [mode, setMode] = useState<Mode>("preset");
   const [preset, setPreset] = useState<ResizePreset>("a4-portrait");
@@ -99,6 +101,7 @@ export function ResizePdfWorkspace() {
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
+          getBlob={() => new Blob([new Uint8Array(result.bytes)], { type: "application/pdf" })}
           onReset={reset}
         />
       </div>
@@ -112,7 +115,15 @@ export function ResizePdfWorkspace() {
       {file && (
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0">
+            {preview && (
+              // eslint-disable-next-line @next/next/no-img-element -- local data URL thumbnail, not a static asset
+              <img
+                src={preview}
+                alt=""
+                className="h-20 w-16 shrink-0 rounded-md border border-border bg-surface-muted object-contain"
+              />
+            )}
+            <div className="min-w-0 flex-1">
               <p className="truncate text-base font-medium text-foreground">{file.name}</p>
               <p className="text-sm text-foreground/50">
                 {formatBytes(file.size)}

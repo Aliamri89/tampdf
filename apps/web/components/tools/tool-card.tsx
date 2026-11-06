@@ -27,7 +27,7 @@ export function ToolCard({
     >
       <span
         className={cn(
-          "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-transform duration-300 ease-out group-hover:scale-110 sm:h-12 sm:w-12",
+          "flex h-10 w-10 shrink-0 items-center justify-center rounded-md transition-transform duration-300 ease-out group-hover:scale-110 sm:h-12 sm:w-12",
           accent.iconBg,
           accent.iconText,
         )}

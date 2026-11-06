@@ -4,6 +4,7 @@ import { ChevronDown, ChevronUp, FileText, GripVertical, X } from "lucide-react"
 import type { DragEvent } from "react";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
+import { useFileThumbnail } from "@/components/tools/use-file-thumbnail";
 import { cn } from "@/lib/utils";
 import { formatBytes } from "@/lib/utils";
 
@@ -37,6 +38,8 @@ export function FileListItem({
   onDragEnd,
 }: FileListItemProps) {
   const dict = useDictionary();
+  const autoThumbnail = useFileThumbnail(file, Boolean(thumbnail));
+  const preview = thumbnail ?? autoThumbnail;
   return (
     <li
       draggable={draggable}
@@ -52,16 +55,16 @@ export function FileListItem({
       )}
     >
       {draggable && <GripVertical size={16} className="shrink-0 text-foreground/30" />}
-      {thumbnail ? (
+      {preview ? (
         // eslint-disable-next-line @next/next/no-img-element -- local blob/data URL thumbnail, not a static asset
         <img
-          src={thumbnail}
+          src={preview}
           alt=""
-          className="h-9 w-9 shrink-0 rounded-lg border border-border object-cover"
+          className="h-12 w-12 shrink-0 rounded-md border border-border bg-surface-muted object-cover"
         />
       ) : (
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10">
-          <FileText size={16} />
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600 dark:bg-brand-500/10">
+          <FileText size={20} />
         </span>
       )}
       <div className="min-w-0 flex-1">

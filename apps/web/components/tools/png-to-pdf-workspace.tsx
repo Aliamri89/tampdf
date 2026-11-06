@@ -60,6 +60,7 @@ export function PngToPdfWorkspace() {
           filename={dict.resultName}
           size={result.byteLength}
           onDownload={() => downloadBytes(result, dict.resultName, "application/pdf")}
+          getBlob={() => new Blob([new Uint8Array(result)], { type: "application/pdf" })}
           onReset={reset}
         />
       </div>

@@ -107,6 +107,7 @@ export function RotateImagesWorkspace() {
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
+          getBlob={() => result.blob}
           onReset={reset}
         />
       </div>
@@ -141,7 +142,7 @@ export function RotateImagesWorkspace() {
             ))}
           </div>
 
-          <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
             {entries.map((entry) => (
               <div key={entry.id} className="relative">
                 <div className="flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-border bg-surface-muted">
@@ -150,26 +151,26 @@ export function RotateImagesWorkspace() {
                     src={entry.thumbnail}
                     alt=""
                     style={{ transform: `rotate(${entry.rotation}deg)` }}
-                    className="max-h-[85%] max-w-[85%] object-contain transition-transform duration-200"
+                    className="max-h-[88%] max-w-[88%] object-contain transition-transform duration-200"
                   />
                 </div>
                 <button
                   type="button"
                   onClick={() => rotateSingle(entry.id)}
                   aria-label={t(dict.rotateImageLabel, { name: entry.file.name })}
-                  className="absolute -right-1.5 -top-1.5 flex h-7 w-7 items-center justify-center rounded-full border border-border bg-surface text-foreground/70 shadow-sm transition-colors hover:border-brand-300 hover:text-brand-600 rtl:-left-1.5 rtl:right-auto"
+                  className="absolute -right-2.5 -top-2.5 flex h-11 w-11 items-center justify-center rounded-full border-2 border-background bg-brand-500 text-white shadow-lg transition-colors hover:bg-brand-600 rtl:-left-2.5 rtl:right-auto"
                 >
-                  <RotateCw size={14} />
+                  <RotateCw size={24} strokeWidth={2.5} />
                 </button>
                 <button
                   type="button"
                   onClick={() => removeEntry(entry.id)}
                   aria-label={t(dict.removeImageLabel, { name: entry.file.name })}
-                  className="absolute -left-1.5 -top-1.5 flex h-7 w-7 items-center justify-center rounded-full border border-border bg-surface text-foreground/50 shadow-sm transition-colors hover:border-red-300 hover:text-red-500 rtl:-right-1.5 rtl:left-auto"
+                  className="absolute -left-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-surface text-foreground/60 shadow-sm transition-colors hover:border-red-300 hover:text-red-500 rtl:-right-2 rtl:left-auto"
                 >
-                  <X size={14} />
+                  <X size={16} />
                 </button>
-                <p className="mt-1 truncate text-center text-xs text-foreground/50">
+                <p className="mt-1.5 truncate text-center text-sm text-foreground/60">
                   {formatBytes(entry.file.size)}
                   {entry.rotation ? ` · ${entry.rotation}°` : ""}
                 </p>

@@ -2,6 +2,7 @@
 
 import { Loader2, X } from "lucide-react";
 import type { ReactNode } from "react";
+import { useFileThumbnail } from "@/components/tools/use-file-thumbnail";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { cn, formatBytes } from "@/lib/utils";
@@ -114,10 +115,19 @@ export function SelectedFile({
   children?: ReactNode;
 }) {
   const dict = useDictionary();
+  const preview = useFileThumbnail(file);
   return (
     <div className="rounded-xl border border-border p-4">
       <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
+        {preview && (
+          // eslint-disable-next-line @next/next/no-img-element -- local blob/data URL thumbnail, not a static asset
+          <img
+            src={preview}
+            alt=""
+            className="h-20 w-16 shrink-0 rounded-md border border-border bg-surface-muted object-contain"
+          />
+        )}
+        <div className="min-w-0 flex-1">
           <p className="truncate text-base font-medium text-foreground">{file.name}</p>
           <p className="text-sm text-foreground/50">
             {formatBytes(file.size)}

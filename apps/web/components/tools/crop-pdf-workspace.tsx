@@ -108,6 +108,7 @@ export function CropPdfWorkspace() {
           filename={result.name}
           size={result.bytes.byteLength}
           onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
+          getBlob={() => new Blob([new Uint8Array(result.bytes)], { type: "application/pdf" })}
           onReset={reset}
         />
       </div>

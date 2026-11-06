@@ -4,6 +4,7 @@ import {
   type Locale,
 } from "@tampdf/config";
 import { HeaderMenu, type MenuGroup } from "@/components/header-menu";
+import { HeaderNav } from "@/components/header-nav";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -21,7 +22,10 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="flex h-[4.5rem] w-full items-center justify-between gap-4 px-4 sm:px-6">
-        <Logo locale={locale} />
+        <div className="flex items-center gap-6">
+          <Logo locale={locale} />
+          <HeaderNav locale={locale} groups={groups} />
+        </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <HeaderMenu locale={locale} groups={groups} />

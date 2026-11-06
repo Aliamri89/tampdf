@@ -61,7 +61,7 @@ export function HeaderMenu({ locale, groups }: { locale: string; groups: MenuGro
   return (
     <div
       ref={rootRef}
-      className="relative shrink-0"
+      className="relative shrink-0 lg:hidden"
       onPointerEnter={(e) => {
         if (e.pointerType !== "mouse") return;
         cancelClose();
@@ -78,7 +78,7 @@ export function HeaderMenu({ locale, groups }: { locale: string; groups: MenuGro
         aria-haspopup="true"
         aria-expanded={open}
         aria-controls={panelId}
-        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-surface text-foreground/75 transition-colors hover:border-brand-400 hover:text-foreground"
+        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-foreground/75 transition-colors hover:border-brand-400 hover:text-foreground"
       >
         <Menu size={20} />
       </button>
@@ -108,7 +108,11 @@ export function HeaderMenu({ locale, groups }: { locale: string; groups: MenuGro
                   className="flex w-full items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-start text-base font-bold text-foreground transition-colors hover:bg-surface-muted"
                 >
                   <span className="flex items-center gap-2.5 whitespace-nowrap">
-                    <Icon name={group.icon} size={18} className="text-brand-500" />
+                    <Icon
+                      name={group.icon}
+                      size={18}
+                      className={group.id === "image" ? "text-[#2563eb]" : "text-brand-500"}
+                    />
                     {group.name}
                   </span>
                   <ChevronDown
@@ -116,7 +120,7 @@ export function HeaderMenu({ locale, groups }: { locale: string; groups: MenuGro
                     className={cn("shrink-0 transition-transform duration-200", isOpen && "rotate-180")}
                   />
                 </button>
-                <ul id={listId} hidden={!isOpen} className="mb-1 space-y-0.5">
+                <ul id={listId} hidden={!isOpen} className="mb-1 max-h-[45vh] space-y-0.5 overflow-y-auto overscroll-contain">
                   {group.tools.map((tool) => (
                     <li key={tool.slug}>
                       <Link

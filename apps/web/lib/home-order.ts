@@ -17,15 +17,20 @@ const TOOL_PICKER_ORDER = [
   "resize-pdf",
 ];
 
-/** Always shown last, side by side, after every other tool. */
+/** Shown at the very end of the image tools, side by side. */
 const TOOL_PICKER_LAST = ["image-to-pdf", "png-to-pdf"];
 
-export function sortForPicker<T extends { slug: string }>(tools: T[]): T[] {
-  const rank = (slug: string) => {
-    const last = TOOL_PICKER_LAST.indexOf(slug);
-    if (last !== -1) return TOOL_PICKER_ORDER.length + 1 + last;
-    const index = TOOL_PICKER_ORDER.indexOf(slug);
-    return index === -1 ? TOOL_PICKER_ORDER.length : index;
+/**
+ * PDF-category tools first (most-used first), then every image-category tool
+ * together at the bottom, so the blue squares sit next to each other.
+ */
+export function sortForPicker<T extends { slug: string; category?: string }>(tools: T[]): T[] {
+  const rank = (tool: T) => {
+    const imageOffset = tool.category === "image" ? 1000 : 0;
+    const last = TOOL_PICKER_LAST.indexOf(tool.slug);
+    if (last !== -1) return imageOffset + TOOL_PICKER_ORDER.length + 1 + last;
+    const index = TOOL_PICKER_ORDER.indexOf(tool.slug);
+    return imageOffset + (index === -1 ? TOOL_PICKER_ORDER.length : index);
   };
-  return [...tools].sort((a, b) => rank(a.slug) - rank(b.slug));
+  return [...tools].sort((a, b) => rank(a) - rank(b));
 }

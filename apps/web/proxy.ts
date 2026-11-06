@@ -30,6 +30,9 @@ export function proxy(request: NextRequest) {
     return response;
   }
 
+  // OAuth redirect pages (e.g. /oauth/dropbox) must keep their exact path.
+  if (pathname.startsWith("/oauth/")) return NextResponse.next();
+
   // Every language in the header's language menu is a real, dictionaried
   // locale (see `locales`/`isValidLocale` in `@tampdf/config`) — only a
   // path with no recognized locale segment at all needs one added.

@@ -106,6 +106,7 @@ export function PdfToImagesWorkspace() {
           filename={result.filename}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.filename)}
+          getBlob={() => result.blob}
           onReset={reset}
         />
       </div>

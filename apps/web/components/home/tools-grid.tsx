@@ -76,7 +76,7 @@ export function ToolsGrid({ locale, tools }: { locale: string; tools: GridTool[]
             >
               <span
                 className={cn(
-                  "flex h-14 w-14 items-center justify-center rounded-xl text-white shadow-md transition-transform duration-200 group-hover:scale-110 group-focus-visible:scale-110 sm:h-16 sm:w-16",
+                  "flex h-14 w-14 items-center justify-center rounded-md text-white shadow-md transition-transform duration-200 group-hover:scale-110 group-focus-visible:scale-110 sm:h-16 sm:w-16",
                   isImageTool
                     ? "bg-[#2563eb] shadow-[#2563eb]/25"
                     : "bg-[#ed0a0a] shadow-[#ed0a0a]/25",

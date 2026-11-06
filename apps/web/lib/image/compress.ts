@@ -17,12 +17,14 @@ interface LevelSettings {
   maxPixels: number;
   /** Palette size for PNG output. */
   pngColors: number;
+  /** Lowest quality the adaptive search may fall to when a file barely shrinks. */
+  minQuality: number;
 }
 
 const SETTINGS: Record<CompressionLevel, LevelSettings> = {
-  low: { quality: 0.78, maxPixels: 16_000_000, pngColors: 256 },
-  medium: { quality: 0.66, maxPixels: 6_000_000, pngColors: 192 },
-  high: { quality: 0.52, maxPixels: 3_000_000, pngColors: 112 },
+  low: { quality: 0.78, maxPixels: 16_000_000, pngColors: 256, minQuality: 0.62 },
+  medium: { quality: 0.68, maxPixels: 5_000_000, pngColors: 192, minQuality: 0.5 },
+  high: { quality: 0.54, maxPixels: 2_500_000, pngColors: 112, minQuality: 0.38 },
 };
 
 function toBlob(canvas: HTMLCanvasElement, type: string, quality?: number): Promise<Blob | null> {
@@ -32,6 +34,30 @@ function toBlob(canvas: HTMLCanvasElement, type: string, quality?: number): Prom
 function hasTransparency(data: Uint8ClampedArray): boolean {
   for (let i = 3; i < data.length; i += 4) if (data[i] < 255) return true;
   return false;
+}
+
+/**
+ * Lossy encode with a small adaptive search: start at the level's quality and,
+ * while the file has shrunk by less than ~30% (typical for photos that were
+ * already saved at a modest quality), step the quality down — never below the
+ * level's floor — and keep the smallest result.
+ */
+async function encodeLossy(
+  canvas: HTMLCanvasElement,
+  type: string,
+  settings: LevelSettings,
+  originalSize: number,
+): Promise<Blob | null> {
+  let quality = settings.quality;
+  let best = await toBlob(canvas, type, quality);
+  for (let step = 0; step < 3 && best && best.type === type; step++) {
+    if (best.size <= originalSize * 0.7 || quality - 0.07 < settings.minQuality) break;
+    quality -= 0.07;
+    const next = await toBlob(canvas, type, quality);
+    if (!next || next.size >= best.size) break;
+    best = next;
+  }
+  return best;
 }
 
 /**
@@ -69,17 +95,17 @@ export async function compressImage(file: File, level: CompressionLevel = "mediu
       const imageData = ctx.getImageData(0, 0, width, height);
       blob = await quantizeToPng(imageData, settings.pngColors);
     } else if (isWebp) {
-      const webp = await toBlob(canvas, "image/webp", settings.quality);
+      const webp = await encodeLossy(canvas, "image/webp", settings, file.size);
       if (webp?.type === "image/webp") {
         blob = webp;
       } else {
         const imageData = ctx.getImageData(0, 0, width, height);
         blob = hasTransparency(imageData.data)
           ? await quantizeToPng(imageData, settings.pngColors)
-          : await toBlob(canvas, "image/jpeg", settings.quality);
+          : await encodeLossy(canvas, "image/jpeg", settings, file.size);
       }
     } else {
-      blob = await toBlob(canvas, "image/jpeg", settings.quality);
+      blob = await encodeLossy(canvas, "image/jpeg", settings, file.size);
     }
   } finally {
     releaseCanvas(canvas);

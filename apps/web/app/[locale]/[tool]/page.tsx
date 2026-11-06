@@ -135,7 +135,7 @@ export default async function ToolPage({
         </Container>
 
         <Container className="pt-7 pb-8 text-center">
-          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-xl bg-brand-500 text-white shadow-lg shadow-brand-500/25">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-md bg-brand-500 text-white shadow-lg shadow-brand-500/25">
             <Icon name={tool.icon} size={30} strokeWidth={2.1} />
           </span>
           <h1 className="mx-auto mt-5 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">

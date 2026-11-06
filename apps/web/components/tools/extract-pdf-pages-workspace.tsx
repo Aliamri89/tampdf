@@ -97,6 +97,7 @@ export function ExtractPdfPagesWorkspace() {
           filename={result.name}
           size={result.blob.size}
           onDownload={() => downloadBlob(result.blob, result.name)}
+          getBlob={() => result.blob}
           onReset={reset}
         />
       </div>

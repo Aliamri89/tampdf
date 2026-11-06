@@ -128,7 +128,7 @@ export function FileDropzone({
         <p className="text-lg font-bold text-foreground sm:text-xl">
           <HighlightedText text={label} highlight={dict.home.heroHighlight} />
         </p>
-        <span className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-9 py-3 text-base font-bold text-white shadow-lg shadow-brand-500/30 transition-colors group-hover:bg-brand-600">
+        <span className="inline-flex items-center gap-2 rounded-md bg-brand-500 px-9 py-3 text-base font-bold text-white shadow-lg shadow-brand-500/30 transition-colors group-hover:bg-brand-600">
           {dict.home.hero.uploadButton}
           <Upload size={18} strokeWidth={2.4} />
         </span>

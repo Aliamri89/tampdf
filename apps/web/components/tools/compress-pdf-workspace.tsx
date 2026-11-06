@@ -94,6 +94,7 @@ export function CompressPdfWorkspace() {
         size={result.blob.size}
         originalSize={result.originalSize}
         onDownload={() => downloadBlob(result.blob, result.filename)}
+        getBlob={() => result.blob}
         onReset={reset}
       />,
     );
