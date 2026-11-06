@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { ADSENSE_CLIENT } from "@/lib/ads";
 import {
   CONSENT_REQUIRED_COUNTRIES_SOURCE,
   CONSENT_REQUIRED_ZONES_SOURCE,
@@ -7,27 +8,34 @@ import {
 
 /**
  * Google Consent Mode v2 defaults. Runs before any Google tag (gtag.js for GA4
- * and the AdSense library) so each starts in the right state:
+ * and the AdSense library) so each starts in the right state. lib/consent.ts
+ * then sends the matching `gtag('consent', 'update', …)` as soon as it is known
+ * who decides (see the comment there).
  *
- *  - Where consent is required (time zone or language region, see
- *    lib/consent-region.ts) everything starts
- *    "denied": no analytics or advertising storage, no ad personalisation.
- *  - Elsewhere everything starts "granted".
- *  - A saved choice in this browser wins for analytics_storage. The banner only
- *    asks about analytics, so the ad_* signals are never granted from it; if
- *    Google's own consent message is enabled in AdSense (Privacy & messaging),
- *    that message sends the ad_* updates itself.
+ *  - AdSense configured (Google's CMP may show a message): the visitor's region
+ *    is not known yet — Google's CMP decides it — so EVERYTHING starts
+ *    "denied". Nothing is granted until the CMP answers (or, if it does not,
+ *    until our fallback has decided).
+ *  - AdSense not configured (no CMP can exist): the fallback region guess
+ *    applies at once — time zone or language region, see lib/consent-region.ts.
+ *    Where consent is required everything starts "denied"; elsewhere "granted";
+ *    a saved choice wins for analytics_storage.
  *
- * lib/consent.ts sends `gtag('consent', 'update', …)` when the visitor changes
- * their choice. `wait_for_update` gives such an update a moment to arrive
- * before tags send anything.
+ * It also creates Google's `googlefc.callbackQueue`, the documented way to be
+ * told when the CMP is ready, before the CMP script can load.
  *
+ * `wait_for_update` gives an update a moment to arrive before tags send data.
  * Same `beforeInteractive` approach as ThemeInitScript (root layout only).
  */
 const script = `
 (function () {
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
+  var cmp = ${JSON.stringify(Boolean(ADSENSE_CLIENT))};
+  if (cmp) {
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+  }
   var required = true;
   try {
     var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -45,8 +53,8 @@ const script = `
   } catch (e) {}
   var stored = null;
   try { stored = window.localStorage.getItem(${JSON.stringify(CONSENT_STORAGE_KEY)}); } catch (e) {}
-  var analytics = stored === "granted" || (stored !== "denied" && !required) ? "granted" : "denied";
-  var ads = required ? "denied" : "granted";
+  var analytics = !cmp && (stored === "granted" || (stored !== "denied" && !required)) ? "granted" : "denied";
+  var ads = !cmp && !required ? "granted" : "denied";
   window.gtag("consent", "default", {
     analytics_storage: analytics,
     ad_storage: ads,

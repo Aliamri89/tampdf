@@ -38,6 +38,8 @@ export function GoogleAnalytics({ measurementId }: { measurementId?: string | nu
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
+          // Lets lib/consent.ts switch this tag off (GA's documented opt-out flag) on withdrawal.
+          (window.__tampdfGaIds = window.__tampdfGaIds || []).push('${measurementId}');
           gtag('js', new Date());
           // The automatic pageview GA4 would otherwise send right here is
           // disabled -- GA4PageviewTracker below is the single place that

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useConsent } from "@/lib/consent";
 
 declare global {
   interface Window {
@@ -23,17 +24,19 @@ export function AdUnit({ client, slot, label }: { client: string; slot: string; 
   const requested = useRef(false);
   const insRef = useRef<HTMLModElement>(null);
   const [gone, setGone] = useState(false);
+  const { adsReady } = useConsent();
 
-  // Ask Google for an ad once (guarded so React strict mode can't request twice).
+  // Ask Google for an ad once (guarded so React strict mode can't request twice),
+  // but only after the consent state is settled so the request carries the right signals.
   useEffect(() => {
-    if (requested.current) return;
+    if (!adsReady || requested.current) return;
     requested.current = true;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch {
       // The AdSense library was blocked or failed to load.
     }
-  }, []);
+  }, [adsReady]);
 
   // Watch for "nothing to show". Separate from the request above so strict
   // mode's cleanup/re-run keeps the observer attached.
