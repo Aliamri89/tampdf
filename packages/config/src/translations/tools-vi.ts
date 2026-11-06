@@ -231,8 +231,8 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     actionLabel: "Thêm hình mờ",
     shortDescription: "Chèn chữ như BẢO MẬT hoặc BẢN NHÁP lên mọi trang của PDF hoặc lên hình JPG, PNG, WebP.",
     longDescription: [
-      "Thêm hình mờ đặt văn bản của bạn lên mỗi trang PDF — một lần ở giữa hoặc lặp lại khắp trang. Chọn màu sắc, độ mờ, kích thước và góc, và xem bản xem trước trực tiếp trên trang đầu tiên trước khi áp dụng.",
-      "Tiếng Việt và các văn tự khác được hỗ trợ đầy đủ. Hình mờ được lưu dưới dạng đối tượng hình mờ tiêu chuẩn, và mọi thứ diễn ra trong trình duyệt của bạn, vì vậy tài liệu của bạn không bao giờ được tải lên.",
+      "Thêm hình mờ đặt văn bản của bạn lên mọi trang của PDF — hoặc lên ảnh JPG, PNG hay WebP — một lần ở giữa hoặc lặp lại khắp bề mặt. Chọn màu, độ trong suốt, kích thước và góc, rồi xem bản xem trước trực tiếp trước khi áp dụng.",
+      "Tiếng Việt và các chữ viết khác được hỗ trợ đầy đủ. Trong PDF, dấu được lưu dưới dạng đối tượng hình mờ chuẩn, và mọi thứ diễn ra trong trình duyệt của bạn nên tệp không bao giờ bị tải lên.",
     ],
     faq: [
       { question: "Tôi có thể viết hình mờ bằng tiếng Việt không?", answer: "Có. Văn bản được hiển thị bằng phông chữ của trình duyệt bạn, vì vậy tiếng Việt và các văn tự khác được hiển thị chính xác." },
@@ -246,8 +246,8 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     actionLabel: "Xóa hình mờ",
     shortDescription: "Xóa hình mờ được thêm dưới dạng đối tượng hình mờ khỏi PDF hoặc tài liệu Word (.docx).",
     longDescription: [
-      "Xóa hình mờ tìm và xóa các hình mờ được thêm dưới dạng đối tượng hình mờ — loại mà Adobe Acrobat, TAMPDF và hầu hết các trình chỉnh sửa PDF tạo ra — cùng với các chú thích hình mờ và lớp có tên «Watermark». Phần còn lại của mỗi trang vẫn giữ nguyên hoàn toàn.",
-      "Các hình mờ là một phần của ảnh quét hoặc được hợp nhất vào văn bản trang thông thường không có dấu hiệu nào để phân biệt chúng với nội dung thực, vì vậy chúng không thể tự động bị xóa. Vui lòng chỉ xóa hình mờ khỏi các tài liệu mà bạn có quyền chỉnh sửa. Việc xử lý diễn ra trong trình duyệt của bạn, vì vậy tệp của bạn không bao giờ được tải lên.",
+      "Xóa hình mờ tìm và xóa các hình mờ được thêm dưới dạng đối tượng hình mờ — loại mà Adobe Acrobat, TAMPDF và hầu hết trình chỉnh sửa PDF tạo ra — cùng với chú thích hình mờ và các lớp có tên “Watermark”, giữ nguyên phần còn lại của trang. Công cụ cũng xóa khỏi tài liệu .docx các hình mờ mà Word thêm qua Thiết kế ▸ Hình mờ.",
+      "Hình mờ là một phần của ảnh quét, bị gộp vào văn bản trang hoặc nhúng vào điểm ảnh của một hình ảnh không có dấu hiệu nào phân biệt với nội dung thật, nên không thể xóa tự động — đó là lý do tệp ảnh không được hỗ trợ. Chỉ dùng công cụ với tài liệu bạn được phép chỉnh sửa. Việc xử lý diễn ra trong trình duyệt của bạn nên tệp không bao giờ bị tải lên.",
     ],
     faq: [
       { question: "Những hình mờ nào có thể được xóa?", answer: "Hình mờ được thêm dưới dạng đối tượng hình mờ, chú thích hình mờ, hoặc lớp có tên «Watermark» — bao gồm những hình mờ được tạo bởi Adobe Acrobat và công cụ Thêm hình mờ của TAMPDF." },

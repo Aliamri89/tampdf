@@ -231,8 +231,8 @@ export const toolsEs: Record<string, ToolTranslationOverride> = {
     actionLabel: "Añadir marca de agua",
     shortDescription: "Estampa texto como CONFIDENCIAL o BORRADOR en todas las páginas de un PDF o sobre una imagen JPG, PNG o WebP.",
     longDescription: [
-      "Añadir marca de agua coloca tu texto en cada página de un PDF — una vez en el centro o repetido por toda la página. Elige el color, la opacidad, el tamaño y el ángulo, y observa una vista previa en vivo en tu primera página antes de aplicarlo.",
-      "El español y otros idiomas son totalmente compatibles. La marca de agua se guarda como un objeto de marca de agua estándar, y todo ocurre en tu navegador, así que tu documento nunca se sube.",
+      "Añadir marca de agua coloca tu texto en todas las páginas de un PDF — o en una imagen JPG, PNG o WebP — una vez en el centro o repetido por toda la superficie. Elige color, opacidad, tamaño y ángulo, y mira una vista previa en vivo antes de aplicarla.",
+      "El español y otras escrituras son totalmente compatibles. En un PDF la marca se guarda como un objeto de marca de agua estándar y todo ocurre en tu navegador, así que tu archivo nunca se sube.",
     ],
     faq: [
       { question: "¿Puedo escribir la marca de agua en español?", answer: "Sí. El texto se renderiza con las fuentes de tu navegador, así que el español y otros idiomas se representan correctamente." },
@@ -246,8 +246,8 @@ export const toolsEs: Record<string, ToolTranslationOverride> = {
     actionLabel: "Quitar marca de agua",
     shortDescription: "Elimina las marcas de agua añadidas como objetos de marca de agua de un PDF o de un documento de Word (.docx).",
     longDescription: [
-      "Quitar marca de agua encuentra y elimina marcas de agua que se añadieron como objetos de marca de agua — el tipo que crean Adobe Acrobat, TAMPDF y la mayoría de editores de PDF — junto con anotaciones de marca de agua y capas llamadas «Watermark». El resto de cada página queda exactamente igual.",
-      "Las marcas de agua que forman parte de una imagen escaneada o que se fusionaron con el texto normal de la página no tienen marcador que las distinga del contenido real, así que no se pueden eliminar automáticamente. Por favor, elimina marcas de agua solo de documentos que tengas derecho a editar. El proceso ocurre en tu navegador, así que tu archivo nunca se sube.",
+      "Quitar marca de agua busca y elimina las marcas de agua añadidas como objetos de marca de agua — las que crean Adobe Acrobat, TAMPDF y la mayoría de editores de PDF — junto con las anotaciones de marca de agua y las capas llamadas «Watermark», dejando el resto de la página exactamente igual. También quita de los documentos .docx las marcas que Word añade mediante Diseño ▸ Marca de agua.",
+      "Las marcas de agua que forman parte de una imagen escaneada, están integradas en el texto de la página o incrustadas en los píxeles de una imagen no tienen ningún marcador que las distinga del contenido real, por lo que no pueden eliminarse automáticamente — por eso no se admiten archivos de imagen. Usa la herramienta solo con documentos que tengas permiso para editar. El procesamiento ocurre en tu navegador, así que tu archivo nunca se sube.",
     ],
     faq: [
       { question: "¿Qué marcas de agua se pueden eliminar?", answer: "Marcas de agua añadidas como objetos de marca de agua, anotaciones de marca de agua, o capas llamadas «Watermark» — incluidas las creadas por Adobe Acrobat y la herramienta Añadir marca de agua de TAMPDF." },

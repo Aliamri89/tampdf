@@ -231,8 +231,8 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     actionLabel: "Tambah watermark",
     shortDescription: "Tempelkan teks seperti RAHASIA atau DRAF di setiap halaman PDF atau pada gambar JPG, PNG, atau WebP.",
     longDescription: [
-      "Tambah Watermark menempatkan teks Anda pada setiap halaman PDF — sekali di tengah atau diulang di seluruh halaman. Pilih warna, opasitas, ukuran, dan sudut, lalu lihat pratinjau langsung pada halaman pertama sebelum menerapkannya.",
-      "Bahasa Indonesia dan aksara lainnya didukung sepenuhnya. Watermark disimpan sebagai objek watermark standar, dan semuanya terjadi di browser Anda, sehingga dokumen Anda tidak pernah diunggah.",
+      "Tambah Watermark menaruh teks Anda di setiap halaman PDF — atau pada gambar JPG, PNG, atau WebP — sekali di tengah atau berulang di seluruh permukaan. Pilih warna, opasitas, ukuran, dan sudut, lalu lihat pratinjau langsung sebelum menerapkannya.",
+      "Bahasa Indonesia dan aksara lain didukung sepenuhnya. Pada PDF, tanda disimpan sebagai objek watermark standar, dan semuanya berjalan di browser Anda sehingga file Anda tidak pernah diunggah.",
     ],
     faq: [
       { question: "Bisakah saya menulis watermark dalam Bahasa Indonesia?", answer: "Bisa. Teks dirender dengan font browser Anda, sehingga Bahasa Indonesia dan aksara lainnya ditampilkan dengan benar." },
@@ -246,8 +246,8 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     actionLabel: "Hapus watermark",
     shortDescription: "Hapus watermark yang ditambahkan sebagai objek watermark dari PDF atau dokumen Word (.docx).",
     longDescription: [
-      "Hapus Watermark menemukan dan menghapus watermark yang ditambahkan sebagai objek watermark — jenis yang dibuat oleh Adobe Acrobat, TAMPDF, dan sebagian besar editor PDF — bersama anotasi watermark dan lapisan bernama «Watermark». Sisa setiap halaman tetap persis seperti sebelumnya.",
-      "Watermark yang merupakan bagian dari gambar yang dipindai atau digabungkan ke dalam teks halaman biasa tidak memiliki penanda yang membedakannya dari konten asli, sehingga tidak dapat dihapus secara otomatis. Harap hanya hapus watermark dari dokumen yang Anda memiliki hak untuk mengeditnya. Pemrosesan terjadi di browser Anda, sehingga file Anda tidak pernah diunggah.",
+      "Hapus Watermark menemukan dan menghapus watermark yang ditambahkan sebagai objek watermark — jenis yang dibuat Adobe Acrobat, TAMPDF, dan sebagian besar editor PDF — beserta anotasi watermark dan layer bernama “Watermark”, sementara bagian halaman lainnya tetap sama persis. Alat ini juga menghapus watermark yang ditambahkan Word lewat Desain ▸ Watermark dari dokumen .docx.",
+      "Watermark yang merupakan bagian dari gambar hasil pindai, menyatu dengan teks halaman, atau tertanam dalam piksel gambar tidak memiliki penanda yang membedakannya dari isi sebenarnya, sehingga tidak dapat dihapus secara otomatis — karena itu file gambar tidak didukung. Gunakan alat ini hanya pada dokumen yang boleh Anda edit. Pemrosesan berjalan di browser Anda sehingga file Anda tidak pernah diunggah.",
     ],
     faq: [
       { question: "Watermark mana yang bisa dihapus?", answer: "Watermark yang ditambahkan sebagai objek watermark, anotasi watermark, atau lapisan bernama «Watermark» — termasuk yang dibuat oleh Adobe Acrobat dan alat Tambah Watermark TAMPDF." },

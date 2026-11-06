@@ -6,6 +6,7 @@ import { AnalyticsBeacon } from "@/components/analytics-beacon";
 import { AdSenseScript } from "@/components/ads/adsense-script";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import { ConsentBanner } from "@/components/consent/consent-banner";
+import { ConsentModeDefaults } from "@/components/consent/consent-mode-defaults";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ThemeInitScript } from "@/components/theme-init-script";
@@ -104,6 +105,7 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col">
         <ThemeInitScript />
+        <ConsentModeDefaults />
         <AnalyticsScripts />
         <AdSenseScript />
         <LocaleProvider locale={locale} dict={dict}>

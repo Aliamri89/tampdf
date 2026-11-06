@@ -21,6 +21,7 @@ function detectLocale(request: NextRequest): Locale {
 // live in this server process's memory — enough for a single-instance host.
 const RATE_LIMITED_PATHS = new Set(["/api/page-visit-events", "/api/tool-usage-events"]);
 const RATE_LIMIT_PER_MINUTE = 60;
+const GLOBAL_LIMIT_PER_MINUTE = 1200;
 const RATE_WINDOW_MS = 60_000;
 const hits = new Map<string, { count: number; resetAt: number }>();
 
@@ -30,15 +31,37 @@ function isRateLimited(request: NextRequest, pathname: string): boolean {
   if (hits.size > 5000) {
     for (const [key, entry] of hits) if (entry.resetAt <= now) hits.delete(key);
   }
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  const key = `${ip}${pathname}`;
+  const ip = clientIp(request);
+  // The per-IP cap stops one noisy client; the shared cap per endpoint keeps
+  // the database safe even if someone rotates addresses or the address header
+  // can be forged (e.g. the app reached without going through the CDN).
+  return (
+    bump(`${ip}${pathname}`, RATE_LIMIT_PER_MINUTE, now) ||
+    bump(`*${pathname}`, GLOBAL_LIMIT_PER_MINUTE, now)
+  );
+}
+
+function bump(key: string, limit: number, now: number): boolean {
   const entry = hits.get(key);
   if (!entry || entry.resetAt <= now) {
     hits.set(key, { count: 1, resetAt: now + RATE_WINDOW_MS });
     return false;
   }
   entry.count += 1;
-  return entry.count > RATE_LIMIT_PER_MINUTE;
+  return entry.count > limit;
+}
+
+/**
+ * The visitor's address as seen by the host. Behind Hostinger CDN, `X-Real-IP`
+ * and the LAST `X-Forwarded-For` entry are the address that connected to the
+ * CDN; earlier entries are whatever the client sent and can be forged, so the
+ * first entry is never used.
+ */
+function clientIp(request: NextRequest): string {
+  const real = request.headers.get("x-real-ip")?.trim();
+  if (real) return real;
+  const forwarded = request.headers.get("x-forwarded-for")?.split(",");
+  return forwarded?.[forwarded.length - 1]?.trim() || "unknown";
 }
 
 export function proxy(request: NextRequest) {

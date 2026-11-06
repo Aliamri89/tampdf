@@ -231,8 +231,8 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     actionLabel: "Legg til vannmerke",
     shortDescription: "Legg tekst som KONFIDENSIELT eller UTKAST på hver side i en PDF eller på et JPG-, PNG- eller WebP-bilde.",
     longDescription: [
-      "Legg til vannmerke plasserer teksten din over hver side i en PDF — én gang i midten eller gjentatt over hele siden. Velg farge, gjennomsiktighet, størrelse og vinkel, og se en direkte forhåndsvisning på den første siden før du bruker den.",
-      "Norsk og andre skriftsystemer støttes fullt ut. Vannmerket lagres som et standard vannmerkeobjekt, og alt skjer i nettleseren din, så dokumentet ditt blir aldri lastet opp.",
+      "Legg til vannmerke plasserer teksten din på hver side i en PDF — eller på et JPG-, PNG- eller WebP-bilde — én gang i midten eller gjentatt utover flaten. Velg farge, gjennomsiktighet, størrelse og vinkel, og se en live forhåndsvisning før du bruker det.",
+      "Norsk og andre skriftsystemer støttes fullt ut. I en PDF lagres merket som et standard vannmerkeobjekt, og alt skjer i nettleseren din, så filen din lastes aldri opp.",
     ],
     faq: [
       { question: "Kan jeg skrive et vannmerke på norsk?", answer: "Ja. Teksten gjengis med nettleserens skrifter, så norsk og andre skriftsystemer vises riktig." },
@@ -246,8 +246,8 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     actionLabel: "Fjern vannmerke",
     shortDescription: "Fjern vannmerker som er lagt til som vannmerkeobjekter, fra en PDF eller et Word-dokument (.docx).",
     longDescription: [
-      "Fjern vannmerke finner og fjerner vannmerker lagt til som vannmerkeobjekter — typen som opprettes av Adobe Acrobat, TAMPDF og de fleste PDF-redigerere — sammen med vannmerkeannoteringer og lag med navnet «Watermark». Resten av hver side forblir nøyaktig den samme.",
-      "Vannmerker som er en del av et skannet bilde eller slått sammen med sidens vanlige tekst, har ingen markør som skiller dem fra ekte innhold, så de kan ikke fjernes automatisk. Fjern bare vannmerker fra dokumenter du har rett til å redigere. Behandlingen skjer i nettleseren din, så filen blir aldri lastet opp.",
+      "Fjern vannmerke finner og sletter vannmerker som er lagt til som vannmerkeobjekter — den typen Adobe Acrobat, TAMPDF og de fleste PDF-redigerere lager — sammen med vannmerkeannotasjoner og lag med navnet «Watermark», og resten av siden blir stående uendret. Fra .docx-dokumenter fjerner det også vannmerker som Word legger til via Utforming ▸ Vannmerke.",
+      "Vannmerker som er en del av et skannet bilde, flatet ut i sidens tekst eller brent inn i bildepiksler, har ingen markør som skiller dem fra det ekte innholdet, og kan derfor ikke fjernes automatisk — derfor støttes ikke bildefiler. Bruk verktøyet bare på dokumenter du har lov til å redigere. Behandlingen skjer i nettleseren din, så filen din lastes aldri opp.",
     ],
     faq: [
       { question: "Hvilke vannmerker kan fjernes?", answer: "Vannmerker lagt til som vannmerkeobjekter, vannmerkeannoteringer eller lag med navnet «Watermark» — inkludert de opprettet av Adobe Acrobat og TAMPDFs eget Legg til vannmerke-verktøy." },

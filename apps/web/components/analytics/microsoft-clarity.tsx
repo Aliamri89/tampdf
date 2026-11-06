@@ -25,6 +25,9 @@ export function MicrosoftClarity({ projectId }: { projectId?: string | null }) {
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window, document, "clarity", "script", "${projectId}");
+        // This script only runs after the visitor accepted analytics. Pass that
+        // on to Clarity's consent API (advertising storage is never granted).
+        window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
       `}
     </Script>
   );

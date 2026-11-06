@@ -231,8 +231,8 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     actionLabel: "Filigran ekle",
     shortDescription: "GİZLİ veya TASLAK gibi metni bir PDF'nin her sayfasına ya da bir JPG, PNG veya WebP görsele ekleyin.",
     longDescription: [
-      "Filigran Ekle, metninizi PDF'in her sayfasına yerleştirir — bir kez ortalanmış veya sayfa boyunca tekrarlanmış olarak. Rengi, opaklığı, boyutu ve açıyı seçin, uygulamadan önce ilk sayfanızda canlı bir önizleme görün.",
-      "Türkçe ve diğer yazı sistemleri tam olarak destekleniyor. Filigran standart bir filigran nesnesi olarak kaydedilir ve her şey tarayıcınızda gerçekleşir, dolayısıyla belgeniz asla yüklenmez.",
+      "Filigran Ekle, metninizi bir PDF'in her sayfasına — ya da bir JPG, PNG veya WebP görüntüsüne — ortaya bir kez veya yüzeye yayarak tekrarlı şekilde yerleştirir. Renk, saydamlık, boyut ve açıyı seçin; uygulamadan önce canlı önizlemeyi görün.",
+      "Türkçe ve diğer yazı sistemleri tam olarak desteklenir. PDF'te işaret standart bir filigran nesnesi olarak kaydedilir ve her şey tarayıcınızda gerçekleşir, bu yüzden dosyanız asla yüklenmez.",
     ],
     faq: [
       { question: "Filigranı Türkçe yazabilir miyim?", answer: "Evet. Metin tarayıcınızın yazı tipleriyle oluşturulur, dolayısıyla Türkçe ve diğer yazı sistemleri doğru şekillendirilir." },
@@ -246,8 +246,8 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     actionLabel: "Filigranı kaldır",
     shortDescription: "Filigran nesnesi olarak eklenen filigranları bir PDF'den veya Word (.docx) belgesinden kaldırın.",
     longDescription: [
-      "Filigranı Kaldır, filigran nesnesi olarak eklenen filigranları bulur ve siler — Adobe Acrobat, TAMPDF ve çoğu PDF düzenleyicinin oluşturduğu türde — filigran açıklamaları ve «Watermark» adlı katmanlarla birlikte. Her sayfanın geri kalanı tam olarak eskisi gibi kalır.",
-      "Taranmış bir görselin parçası olan veya normal sayfa metnine karışmış filigranların gerçek içerikten ayırt edilmesini sağlayacak bir işareti yoktur, bu nedenle otomatik olarak kaldırılamazlar. Lütfen filigranları yalnızca düzenleme hakkına sahip olduğunuz belgelerden kaldırın. İşleme tarayıcınızda gerçekleşir, dolayısıyla dosyanız asla yüklenmez.",
+      "Filigranı Kaldır, filigran nesnesi olarak eklenmiş filigranları — Adobe Acrobat, TAMPDF ve çoğu PDF düzenleyicisinin oluşturduğu türden — filigran ek açıklamaları ve “Watermark” adlı katmanlarla birlikte bulup siler; sayfanın geri kalanı olduğu gibi kalır. .docx belgelerinde Word'ün Tasarım ▸ Filigran ile eklediği işaretleri de kaldırır.",
+      "Taranmış bir görüntünün parçası olan, sayfa metnine düzleştirilmiş veya görüntü piksellerine gömülmüş filigranların gerçek içerikten ayıran bir işareti yoktur; bu yüzden otomatik olarak kaldırılamazlar — görüntü dosyalarının desteklenmemesinin nedeni budur. Aracı yalnızca düzenleme hakkınız olan belgelerde kullanın. İşlem tarayıcınızda gerçekleşir, bu yüzden dosyanız asla yüklenmez.",
     ],
     faq: [
       { question: "Hangi filigranlar kaldırılabilir?", answer: "Filigran nesnesi, filigran açıklaması veya «Watermark» adlı katmanlar olarak eklenen filigranlar — Adobe Acrobat ve TAMPDF'in Filigran Ekle aracıyla oluşturulanlar dahil." },

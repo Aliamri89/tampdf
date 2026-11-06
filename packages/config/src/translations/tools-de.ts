@@ -231,8 +231,8 @@ export const toolsDe: Record<string, ToolTranslationOverride> = {
     actionLabel: "Wasserzeichen hinzufügen",
     shortDescription: "Setze Text wie VERTRAULICH oder ENTWURF auf jede Seite eines PDFs oder auf ein JPG-, PNG- oder WebP-Bild.",
     longDescription: [
-      "Wasserzeichen hinzufügen platziert deinen Text auf jeder Seite eines PDFs — einmal zentriert oder wiederholt über die Seite. Wähle Farbe, Deckkraft, Größe und Winkel, und sieh eine Live-Vorschau auf deiner ersten Seite, bevor du es anwendest.",
-      "Deutsch und andere Schriften werden vollständig unterstützt. Das Wasserzeichen wird als Standard-Wasserzeichenobjekt gespeichert, und alles geschieht in deinem Browser, dein Dokument wird also nie hochgeladen.",
+      "Wasserzeichen hinzufügen platziert deinen Text auf jeder Seite eines PDFs — oder auf einem JPG-, PNG- oder WebP-Bild — einmal zentriert oder wiederholt über die Fläche. Wähle Farbe, Deckkraft, Größe und Winkel und sieh vor dem Anwenden eine Live-Vorschau.",
+      "Deutsch und andere Schriften werden vollständig unterstützt. In einem PDF wird das Wasserzeichen als Standard-Wasserzeichenobjekt gespeichert, und alles geschieht in deinem Browser, deine Datei wird also nie hochgeladen.",
     ],
     faq: [
       { question: "Kann ich das Wasserzeichen auf Deutsch schreiben?", answer: "Ja. Der Text wird mit den Schriften deines Browsers gerendert, Deutsch und andere Schriften werden also korrekt dargestellt." },
@@ -246,8 +246,8 @@ export const toolsDe: Record<string, ToolTranslationOverride> = {
     actionLabel: "Wasserzeichen entfernen",
     shortDescription: "Entferne als Wasserzeichen-Objekte hinzugefügte Wasserzeichen aus einem PDF oder Word-Dokument (.docx).",
     longDescription: [
-      "Wasserzeichen entfernen findet und löscht Wasserzeichen, die als Wasserzeichenobjekte hinzugefügt wurden — die Art, die Adobe Acrobat, TAMPDF und die meisten PDF-Editoren erstellen — zusammen mit Wasserzeichen-Anmerkungen und Ebenen namens „Watermark\". Der Rest jeder Seite bleibt genau erhalten.",
-      "Wasserzeichen, die Teil eines gescannten Bildes sind oder in normalen Seitentext eingebettet wurden, haben keinen Marker, der sie vom echten Inhalt unterscheidet, sie können also nicht automatisch entfernt werden. Bitte entferne Wasserzeichen nur aus Dokumenten, die du bearbeiten darfst. Die Verarbeitung erfolgt in deinem Browser, deine Datei wird also nie hochgeladen.",
+      "Wasserzeichen entfernen findet und löscht Wasserzeichen, die als Wasserzeichenobjekte hinzugefügt wurden — die Art, die Adobe Acrobat, TAMPDF und die meisten PDF-Editoren erstellen — sowie Wasserzeichen-Anmerkungen und Ebenen namens „Watermark“, der Rest der Seite bleibt unverändert. Aus .docx-Dokumenten entfernt es auch die Wasserzeichen, die Word über Entwurf ▸ Wasserzeichen einfügt.",
+      "Wasserzeichen, die Teil eines gescannten Bildes sind, in den Seitentext eingeflacht oder in Bildpixel eingebrannt wurden, haben keinen Marker, der sie vom echten Inhalt unterscheidet, und können daher nicht automatisch entfernt werden — deshalb werden Bilddateien nicht unterstützt. Nutze das Tool nur für Dokumente, die du bearbeiten darfst. Die Verarbeitung erfolgt in deinem Browser, deine Datei wird also nie hochgeladen.",
     ],
     faq: [
       { question: "Welche Wasserzeichen können entfernt werden?", answer: "Als Wasserzeichenobjekte, Wasserzeichen-Anmerkungen oder Ebenen namens „Watermark\" hinzugefügte Wasserzeichen — einschließlich solcher, die von Adobe Acrobat und TAMPDFs Wasserzeichen-hinzufügen-Tool erstellt wurden." },

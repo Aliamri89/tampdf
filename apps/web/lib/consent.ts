@@ -1,27 +1,46 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import {
+  CONSENT_REQUIRED_COUNTRIES_SOURCE,
+  CONSENT_REQUIRED_ZONES_SOURCE,
+  CONSENT_STORAGE_KEY,
+} from "@/lib/consent-region";
 
 /**
  * Consent for analytics/tracking cookies (Google Analytics 4 and Microsoft
  * Clarity). The choice lives in this browser's localStorage only.
  *
  * Where consent is legally required — approximated from the browser's time
- * zone: Europe (EEA, UK, Switzerland), the Atlantic/Arctic islands, EU
- * overseas regions, or an unknown time zone — nothing loads until the visitor
+ * zone and language regions (see lib/consent-region.ts): Europe (EEA, UK,
+ * Switzerland), the Atlantic/Arctic islands, EU overseas regions, or an
+ * unknown time zone — nothing loads until the visitor
  * accepts. Elsewhere analytics run by default, and the footer's "Cookie
  * settings" lets anyone turn them off (withdraw consent) at any time.
  */
-const STORAGE_KEY = "tampdf-consent";
+const STORAGE_KEY = CONSENT_STORAGE_KEY;
 type Stored = "granted" | "denied" | null;
 
-const REQUIRED_ZONES =
-  /^(Europe|Atlantic|Arctic)\/|^(Africa\/Ceuta|Asia\/Nicosia|Asia\/Famagusta|Indian\/Reunion|Indian\/Mayotte|America\/Martinique|America\/Guadeloupe|America\/Cayenne)$/;
+const REQUIRED_ZONES = new RegExp(CONSENT_REQUIRED_ZONES_SOURCE);
+const REQUIRED_COUNTRIES = new RegExp(CONSENT_REQUIRED_COUNTRIES_SOURCE);
+
+/** Region subtags of the browser's languages, upper-cased ("de-DE" → "DE"). */
+function languageRegions(): string[] {
+  const tags = navigator.languages?.length ? navigator.languages : [navigator.language];
+  const regions: string[] = [];
+  for (const tag of tags) {
+    for (const part of String(tag).split(/[-_]/).slice(1)) {
+      if (/^[A-Za-z]{2}$/.test(part)) regions.push(part.toUpperCase());
+    }
+  }
+  return regions;
+}
 
 export function consentRequired(): boolean {
   try {
     const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    return !zone || zone === "UTC" || zone === "Etc/UTC" || REQUIRED_ZONES.test(zone);
+    if (!zone || zone === "UTC" || zone === "Etc/UTC" || REQUIRED_ZONES.test(zone)) return true;
+    return languageRegions().some((region) => REQUIRED_COUNTRIES.test(region));
   } catch {
     return true;
   }
@@ -130,6 +149,10 @@ export function setConsent(granted: boolean) {
     // Storage blocked: the choice only lasts for this page view.
   }
   settingsOpen = false;
+  // Tell Google Consent Mode (defaults are set by ConsentModeDefaults) before
+  // any tag loads or keeps running.
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+  gtag?.("consent", "update", { analytics_storage: granted ? "granted" : "denied" });
   if (!granted && wasRunning) {
     // The scripts are already running in this page: remove their cookies and
     // reload so they are not loaded again.

@@ -231,8 +231,8 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     actionLabel: "Watermerk toevoegen",
     shortDescription: "Plaats tekst zoals VERTROUWELIJK of CONCEPT op elke pagina van een pdf of op een JPG-, PNG- of WebP-afbeelding.",
     longDescription: [
-      "Watermerk toevoegen plaatst je tekst op elke pagina van een PDF — eenmaal gecentreerd of herhaald over de pagina. Kies de kleur, dekking, grootte en hoek, en bekijk een live preview op je eerste pagina voordat je het toepast.",
-      "Nederlands en andere schriften worden volledig ondersteund. Het watermerk wordt opgeslagen als een standaard watermerkobject, en alles gebeurt in je browser, dus je document wordt nooit geüpload.",
+      "Watermerk toevoegen plaatst je tekst op elke pagina van een PDF — of op een JPG-, PNG- of WebP-afbeelding — één keer in het midden of herhaald over het oppervlak. Kies kleur, dekking, grootte en hoek en bekijk een live voorbeeld voordat je het toepast.",
+      "Nederlands en andere schriften worden volledig ondersteund. In een PDF wordt het merk opgeslagen als een standaard watermerkobject en alles gebeurt in je browser, dus je bestand wordt nooit geüpload.",
     ],
     faq: [
       { question: "Kan ik het watermerk in het Nederlands schrijven?", answer: "Ja. De tekst wordt weergegeven met de lettertypen van je browser, dus Nederlands en andere schriften worden correct weergegeven." },
@@ -246,8 +246,8 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     actionLabel: "Watermerk verwijderen",
     shortDescription: "Verwijder watermerken die als watermerkobjecten zijn toegevoegd uit een pdf of Word-document (.docx).",
     longDescription: [
-      "Watermerk verwijderen vindt en verwijdert watermerken die als watermerkobjecten zijn toegevoegd — het soort dat Adobe Acrobat, TAMPDF en de meeste PDF-editors maken — samen met watermerkannotaties en lagen genaamd «Watermark». De rest van elke pagina blijft precies zoals het was.",
-      "Watermerken die deel uitmaken van een gescande afbeelding of samengevoegd zijn met gewone paginatekst hebben geen markering om ze te onderscheiden van echte inhoud, dus ze kunnen niet automatisch worden verwijderd. Verwijder watermerken alleen uit documenten die je mag bewerken. Verwerking gebeurt in je browser, dus je bestand wordt nooit geüpload.",
+      "Watermerk verwijderen vindt en verwijdert watermerken die als watermerkobjecten zijn toegevoegd — het soort dat Adobe Acrobat, TAMPDF en de meeste pdf-editors maken — samen met watermerkannotaties en lagen met de naam „Watermark”, waarbij de rest van de pagina ongewijzigd blijft. Uit .docx-documenten verwijdert het ook de watermerken die Word toevoegt via Ontwerpen ▸ Watermerk.",
+      "Watermerken die deel uitmaken van een gescande afbeelding, in de paginatekst zijn samengevoegd of in de pixels van een afbeelding zijn ingebakken, hebben geen markering waaraan ze van de echte inhoud te onderscheiden zijn en kunnen dus niet automatisch worden verwijderd — daarom worden afbeeldingsbestanden niet ondersteund. Gebruik de tool alleen voor documenten die je mag bewerken. De verwerking gebeurt in je browser, dus je bestand wordt nooit geüpload.",
     ],
     faq: [
       { question: "Welke watermerken kunnen worden verwijderd?", answer: "Watermerken toegevoegd als watermerkobjecten, watermerkannotaties, of lagen genaamd «Watermark» — inclusief die gemaakt door Adobe Acrobat en TAMPDF's Watermerk toevoegen-tool." },
