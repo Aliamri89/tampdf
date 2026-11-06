@@ -3,6 +3,7 @@ import { Geist_Mono, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getLocalizedSiteConfig, isValidLocale, localeDirection, locales } from "@tampdf/config";
 import { AnalyticsBeacon } from "@/components/analytics-beacon";
+import { AdSenseScript } from "@/components/ads/adsense-script";
 import { AnalyticsScripts } from "@/components/analytics/analytics-scripts";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -103,6 +104,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-full flex-col">
         <ThemeInitScript />
         <AnalyticsScripts />
+        <AdSenseScript />
         <LocaleProvider locale={locale} dict={dict}>
           <AnalyticsBeacon locale={locale} />
           <Header locale={locale} />

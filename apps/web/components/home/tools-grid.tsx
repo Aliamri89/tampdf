@@ -14,7 +14,7 @@ export interface GridTool {
   category: "pdf" | "image";
 }
 
-type Filter = "all" | HomeGroupId;
+type Filter = "all" | HomeGroupId | "image";
 
 /**
  * Square tool cards with a filter-chip bar. Every card is a real link and all
@@ -24,12 +24,27 @@ type Filter = "all" | HomeGroupId;
  * Icon colour is fixed per category (PDF tools red, image tools blue) and
  * does not depend on the theme.
  */
-export function ToolsGrid({ locale, tools }: { locale: string; tools: GridTool[] }) {
+export function ToolsGrid({
+  locale,
+  tools,
+  imageLabel,
+}: {
+  locale: string;
+  tools: GridTool[];
+  /** Localised name of the image-tools category, used for its filter chip. */
+  imageLabel: string;
+}) {
   const dict = useDictionary().home;
   const [filter, setFilter] = useState<Filter>("all");
 
-  const filters: Filter[] = ["all", ...HOME_GROUP_ORDER];
-  const visible = tools.filter((tool) => filter === "all" || homeGroupOf(tool.slug) === filter);
+  const filters: Filter[] = ["all", ...HOME_GROUP_ORDER, "image"];
+  const visible = tools.filter((tool) =>
+    filter === "all"
+      ? true
+      : filter === "image"
+        ? tool.category === "image"
+        : homeGroupOf(tool.slug) === filter,
+  );
 
   return (
     <div>
@@ -40,6 +55,7 @@ export function ToolsGrid({ locale, tools }: { locale: string; tools: GridTool[]
       >
         {filters.map((id) => {
           const active = filter === id;
+          const isImageChip = id === "image";
           return (
             <button
               key={id}
@@ -50,11 +66,15 @@ export function ToolsGrid({ locale, tools }: { locale: string; tools: GridTool[]
               className={cn(
                 "rounded-full border px-5 py-2 text-[15px] font-medium transition-colors",
                 active
-                  ? "border-brand-500 bg-brand-500 text-white"
-                  : "border-home-border bg-home-card text-foreground/70 hover:border-brand-400 hover:text-foreground",
+                  ? isImageChip
+                    ? "border-[#2563eb] bg-[#2563eb] text-white"
+                    : "border-brand-500 bg-brand-500 text-white"
+                  : isImageChip
+                    ? "border-home-border bg-home-card text-foreground/70 hover:border-[#2563eb] hover:text-foreground"
+                    : "border-home-border bg-home-card text-foreground/70 hover:border-brand-400 hover:text-foreground",
               )}
             >
-              {dict.groups[id]}
+              {id === "image" ? imageLabel : dict.groups[id]}
             </button>
           );
         })}
@@ -76,15 +96,15 @@ export function ToolsGrid({ locale, tools }: { locale: string; tools: GridTool[]
             >
               <span
                 className={cn(
-                  "flex h-14 w-14 items-center justify-center rounded-md text-white shadow-md transition-transform duration-200 group-hover:scale-110 group-focus-visible:scale-110 sm:h-16 sm:w-16",
+                  "flex h-16 w-16 items-center justify-center rounded-md text-white shadow-md transition-transform duration-200 group-hover:scale-110 group-focus-visible:scale-110 sm:h-[4.5rem] sm:w-[4.5rem]",
                   isImageTool
                     ? "bg-[#2563eb] shadow-[#2563eb]/25"
                     : "bg-[#ed0a0a] shadow-[#ed0a0a]/25",
                 )}
               >
-                <Icon name={tool.icon} size={28} strokeWidth={2} />
+                <Icon name={tool.icon} size={34} strokeWidth={2} />
               </span>
-              <span className="line-clamp-2 text-balance text-[15px] font-semibold leading-snug text-foreground sm:text-base">
+              <span className="line-clamp-2 text-balance text-base font-semibold leading-snug text-foreground sm:text-lg">
                 {tool.name}
               </span>
             </Link>

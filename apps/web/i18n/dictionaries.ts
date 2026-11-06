@@ -12,7 +12,8 @@ const en = {
     home: "Home",
   },
   tool: {
-    processedClient: "Processed in your browser — files never uploaded",
+    processedClient: "Processed in your browser .. files are never uploaded to us",
+    adLabel: "Advertisement",
     faqHeading: "Frequently asked questions",
     relatedHeading: "Related tools",
     metaTitleSuffix: "— Free Online Tool",
@@ -35,7 +36,7 @@ const en = {
   },
   home: {
     hero: {
-      badge: "The best choice for PDF files for freelancers and professionals",
+      badge: "The best choice for managing PDF files for freelancers and professionals",
       title: "Compress PDF Now",
       dropLabel: "Drag & drop a PDF file here",
       uploadButton: "Upload",
@@ -103,7 +104,21 @@ const en = {
     privacyPolicy: {
       title: "Privacy Policy",
       intro:
-        "Our full privacy policy, explaining exactly how TAMPDF handles your files and data, is being finalized and will be published here shortly.",
+        "How TAMPDF handles your files and data: files are processed in your browser and never uploaded; what analytics, cookies and advertising collect; and your rights.",
+      body: [
+        "Last updated: 6 November 2026.",
+        "Overview. TAMPDF (tampdf.com) offers free browser-based tools for working with PDFs and images. This policy explains what information we do and do not collect when you use the website.",
+        "Your files stay on your device. All file processing happens locally in your browser. The PDFs, images and documents you open in our tools are never uploaded to, stored on, or shared with our servers or any third party. If you choose “Save to Google Drive” or “Save to Dropbox” after processing a file, your browser sends the result directly to the service you signed in to; we never receive it.",
+        "Information collected automatically. To understand how the site is used and to keep it working, we use Google Analytics and Microsoft Clarity, and we keep simple first-party counters on our own server. They may record the pages you visit, your approximate location (country or city derived from your IP address), device type, browser, operating system, language, the website that referred you, which tool you used, and whether it succeeded. We do not collect your name, your email address or the contents of your files.",
+        "Cookies and similar technologies. Analytics and advertising services may place cookies or use local storage on your device. Our Cookie Policy lists them and explains how to control them. The site also remembers your light/dark theme choice in your browser.",
+        "Your rights. Where data-protection laws such as the GDPR, the UK GDPR or the CCPA apply, you may ask to access, correct or delete personal data we hold about you, object to or restrict its processing, withdraw consent at any time, and complain to your local data-protection authority. Because we do not collect your name or email address, most requests can be answered by explaining what our analytics providers hold. To make a request, use the Contact page.",
+        "Data retention. Analytics data is kept only as long as needed for statistics and to improve the service, in line with each provider's retention settings.",
+        "Third-party services and links. The site may link to, or load services run by, other companies (for example Google, Microsoft and Dropbox). They have their own privacy policies and we are not responsible for their practices.",
+        "Children. TAMPDF is a general-audience tool and is not directed to children under 13 (or under 16 where local law requires). We do not knowingly collect personal information from children.",
+        "Security. Because files are processed in your browser and never sent to us, they are never exposed to our servers. The site is served over HTTPS.",
+        "Changes to this policy. We may update this policy from time to time. The “Last updated” date shows when it last changed, and continuing to use the site means you accept the updated policy.",
+        "Contact. Questions about this policy? Please reach us through the Contact page.",
+      ],
     },
     termsOfService: {
       title: "Terms of Service",
@@ -115,14 +130,34 @@ const en = {
         'Disclaimer of Warranties. TAMPDF\'s tools are provided "as is" and "as available," without warranties of any kind, whether express or implied, including warranties of accuracy, reliability, merchantability, or fitness for a particular purpose. We do not guarantee that the tools will be error-free, uninterrupted, or compatible with every file, browser, or device.',
         "Limitation of Liability. To the fullest extent permitted by law, TAMPDF and its owners shall not be liable for any indirect, incidental, special, or consequential damages — including but not limited to data loss, file corruption, or business interruption — arising from your use of, or inability to use, our tools.",
         "You are solely responsible for keeping backups of your original files and for verifying the accuracy and integrity of any converted or processed output before relying on it. Because all processing happens locally in your browser, TAMPDF has no access to your files and cannot recover lost or corrupted files on your behalf.",
+        "Acceptable use. You agree to use TAMPDF only for lawful purposes and only with files you have the right to process. Do not use the tools to infringe the rights of others, to remove watermarks or protection from content you are not authorized to modify, or to interfere with the operation of the website.",
+        "Third-party services and advertising. The site may display advertising and may link to or integrate third-party services (such as Google AdSense, Google Drive and Dropbox). We do not control those services, and your use of them is governed by their own terms and privacy policies.",
+        "Intellectual property. The TAMPDF name, logo, design, text and code belong to TAMPDF or its licensors. Your files remain yours: we claim no rights to them.",
         "We may update these Terms of Service from time to time. Continued use of TAMPDF after changes are posted constitutes acceptance of the revised terms.",
       ],
     },
     cookiePolicy: {
       title: "Cookie Policy",
       intro:
-        "Details about the cookies and similar technologies TAMPDF uses will be published here soon.",
+        "The cookies and similar technologies TAMPDF uses for preferences, analytics and advertising, and how to control them.",
+      body: [
+        "Last updated: 6 November 2026.",
+        "What are cookies? Cookies are small text files that a website stores on your device. Similar technologies, such as local storage and tracking pixels, work in comparable ways. This policy covers all of them.",
+        "Strictly necessary storage. TAMPDF remembers your light/dark theme choice in your browser's local storage so the site looks the way you left it. It contains no personal data and is never sent to us.",
+        "Analytics cookies. We use Google Analytics 4 (cookies such as _ga and _ga_*) and Microsoft Clarity (cookies such as _clck and _clsk) to measure traffic and understand how visitors use the site; Clarity may also create anonymized session recordings and heatmaps. These services receive technical information such as your browser, device, approximate location and the pages you visit.",
+        "How to control cookies. Most browsers let you block or delete cookies in their settings. Blocking them will not stop our tools from working, because your files are processed locally. You can opt out of Google Analytics with Google's browser add-on (https://tools.google.com/dlpage/gaoptout), manage Microsoft Clarity data in your Microsoft privacy dashboard (https://account.microsoft.com/privacy), and opt out of personalized advertising at https://adssettings.google.com or https://www.aboutads.info/choices (https://www.youronlinechoices.eu in Europe).",
+        "Changes. We may update this policy from time to time; the date above shows the latest version. Questions? Please use the Contact page.",
+      ],
     },
+    adsDisclosure: {
+      heading: "Advertising",
+      paragraphs: [
+        "We use Google AdSense to show ads on this website. Google and its partners are third-party vendors that use cookies, web beacons and similar technologies to serve ads based on your prior visits to this and other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the internet.",
+        "You can opt out of personalized advertising by visiting Google Ads Settings (https://adssettings.google.com), or opt out of some third-party vendors' use of cookies for personalized advertising at https://www.aboutads.info/choices. You can read how Google uses information from sites that use its services at https://policies.google.com/technologies/partner-sites.",
+        "In the European Economic Area, the United Kingdom and Switzerland, ads are personalized only with your consent, which you can give or withdraw through the consent message shown on the site.",
+      ],
+    },
+
   },
   dropzone: {
     browse: "or click to browse",
@@ -421,6 +456,8 @@ const en = {
     addWatermark: {
       dropLabel: "Drag & drop a PDF file here",
       previewLabel: "Preview (page 1) — applied to every page",
+      previewLabelImage: "Preview — applied to the image",
+      formatsNote: "Supported files: PDF, JPG, PNG and WebP",
       textLabel: "Watermark text",
       textPlaceholder: "e.g. CONFIDENTIAL",
       colorLabel: "Color",
@@ -443,13 +480,16 @@ const en = {
     removeWatermark: {
       dropLabel: "Drag & drop a PDF file here",
       intro:
-        "Removes watermarks added as watermark objects — by Adobe Acrobat, TAMPDF, and most PDF editors.",
+        "Removes watermarks added as watermark objects: in PDFs (by Adobe Acrobat, TAMPDF, and most editors) and in Word documents (Design ▸ Watermark). Watermarks baked into the pixels of an image can't be separated from the picture, so images aren't supported.",
+      formatsNote: "Supported files: PDF and Word (.docx)",
       button: "Remove watermark",
       buttonBusy: "Removing watermark…",
       removedOne: "Removed 1 watermark object.",
       removedCount: "Removed {count} watermark objects.",
       noneFound:
         "No removable watermark was found in this PDF. Watermarks that are part of a scanned image or merged into the page text can't be separated from the content.",
+      noneFoundWord:
+        "No Word watermark was found in this document. Only watermarks added with Word's own Watermark feature can be removed.",
       tryAnother: "Try another file",
       error: "Something went wrong while editing your PDF. Please try again.",
       resultSuffix: "-no-watermark.pdf",
@@ -620,7 +660,8 @@ const ar: typeof en = {
     home: "الرئيسية",
   },
   tool: {
-    processedClient: "تتم المعالجة داخل متصفحك — لا يتم رفع الملفات أبدًا",
+    processedClient: "تتم المعالجة داخل متصفحك .. لا يتم رفع الملفات لدينا أبدًا",
+    adLabel: "إعلان",
     faqHeading: "الأسئلة الشائعة",
     relatedHeading: "أدوات ذات صلة",
     metaTitleSuffix: "— أداة مجانية عبر الإنترنت",
@@ -648,7 +689,7 @@ const ar: typeof en = {
   },
   home: {
     hero: {
-      badge: "الخيار الأفضل لملفات PDF للعاملين المستقلين والمحترفين",
+      badge: "الخيار الأفضل لإدارة ملفات PDF للمستقلين والمحترفين",
       title: "اضغط PDF الآن",
       dropLabel: "اسحب وأفلت ملف PDF هنا",
       uploadButton: "تحميل",
@@ -714,7 +755,21 @@ const ar: typeof en = {
     privacyPolicy: {
       title: "سياسة الخصوصية",
       intro:
-        "سياسة الخصوصية الكاملة، التي توضح بالتفصيل كيفية تعامل TAMPDF مع ملفاتك وبياناتك، قيد الإعداد وستُنشر هنا قريبًا.",
+        "كيف يتعامل TAMPDF مع ملفاتك وبياناتك: تُعالَج الملفات داخل متصفحك ولا تُرفع أبدًا، وما تجمعه التحليلات والكوكيز والإعلانات، وحقوقك.",
+      body: [
+        "آخر تحديث: 6 نوفمبر 2026.",
+        "نظرة عامة: يقدّم موقع TAMPDF ‏(tampdf.com) أدوات مجانية تعمل داخل المتصفح للتعامل مع ملفات PDF والصور. توضح هذه السياسة ما نجمعه من معلومات وما لا نجمعه عند استخدامك الموقع.",
+        "ملفاتك تبقى على جهازك: تتم جميع عمليات معالجة الملفات محليًا داخل متصفحك. فملفات PDF والصور والمستندات التي تفتحها في أدواتنا لا تُرفع إلى خوادمنا ولا تُخزَّن لدينا ولا تُشارَك مع أي طرف ثالث. وإذا اخترت «الحفظ في Google Drive» أو «الحفظ في Dropbox» بعد معالجة ملف، فإن متصفحك يرسل النتيجة مباشرة إلى الخدمة التي سجّلت الدخول إليها، ولا نستلمها نحن.",
+        "المعلومات التي تُجمع تلقائيًا: لفهم كيفية استخدام الموقع والحفاظ على عمله نستخدم Google Analytics وMicrosoft Clarity، ونحتفظ بعدّادات بسيطة خاصة بنا على خادمنا. وقد تسجّل هذه الأدوات الصفحات التي تزورها وموقعك التقريبي (الدولة أو المدينة المستنتجة من عنوان IP) ونوع الجهاز والمتصفح ونظام التشغيل واللغة والموقع الذي أحالك إلينا والأداة التي استخدمتها ونجاح العملية من عدمه. نحن لا نجمع اسمك ولا بريدك الإلكتروني ولا محتوى ملفاتك.",
+        "ملفات تعريف الارتباط والتقنيات المشابهة: قد تضع خدمات التحليلات والإعلانات ملفات تعريف ارتباط (كوكيز) أو تستخدم التخزين المحلي على جهازك. تسرد سياسة الكوكيز لدينا هذه الملفات وتشرح كيفية التحكم بها. كما يتذكّر الموقع اختيارك للوضع الفاتح أو الداكن في متصفحك.",
+        "حقوقك: حيثما تنطبق قوانين حماية البيانات مثل GDPR أو GDPR البريطاني أو CCPA، يحق لك طلب الاطلاع على بياناتك الشخصية التي نحتفظ بها أو تصحيحها أو حذفها، والاعتراض على معالجتها أو تقييدها، وسحب موافقتك في أي وقت، وتقديم شكوى إلى جهة حماية البيانات في بلدك. ولأننا لا نجمع اسمك ولا بريدك الإلكتروني، يمكن الرد على معظم الطلبات بتوضيح ما تحتفظ به مزوّدات التحليلات. لتقديم طلب، استخدم صفحة «اتصل بنا».",
+        "مدة الاحتفاظ: تُحفظ بيانات التحليلات للمدة اللازمة فقط للإحصاءات ولتحسين الخدمة، وفق إعدادات الاحتفاظ لدى كل مزوّد.",
+        "الخدمات والروابط الخارجية: قد يتضمن الموقع روابط إلى شركات أخرى أو يحمّل خدمات تديرها (مثل Google وMicrosoft وDropbox). لكلٍّ منها سياسة خصوصية خاصة به، ولسنا مسؤولين عن ممارساتها.",
+        "الأطفال: TAMPDF أداة عامة وغير موجَّهة إلى الأطفال دون 13 عامًا (أو دون 16 حيث يشترط القانون المحلي ذلك). ولا نجمع عن قصد معلومات شخصية من الأطفال.",
+        "الأمان: بما أن الملفات تُعالَج داخل متصفحك ولا تُرسل إلينا، فهي لا تصل إلى خوادمنا أبدًا. ويُقدَّم الموقع عبر اتصال HTTPS.",
+        "التغييرات على هذه السياسة: قد نحدّث هذه السياسة من وقت لآخر. ويُظهر تاريخ «آخر تحديث» موعد آخر تعديل، واستمرارك في استخدام الموقع يعني موافقتك على السياسة المحدّثة.",
+        "التواصل: لأي استفسار عن هذه السياسة تواصل معنا عبر صفحة «اتصل بنا».",
+      ],
     },
     termsOfService: {
       title: "شروط الخدمة",
@@ -725,13 +780,33 @@ const ar: typeof en = {
         'إخلاء المسؤولية عن الضمانات: تُقدَّم أدوات TAMPDF "كما هي" و"كما هي متاحة"، دون أي ضمانات من أي نوع، صريحة كانت أو ضمنية، بما في ذلك ضمانات الدقة أو الموثوقية أو الملاءمة لغرض معين. لا نضمن أن تكون الأدوات خالية من الأخطاء، أو تعمل دون انقطاع، أو متوافقة مع كل ملف أو متصفح أو جهاز.',
         "تحديد المسؤولية: إلى أقصى حد يسمح به القانون، لا يتحمّل TAMPDF ومالكوه المسؤولية عن أي أضرار غير مباشرة أو عرضية أو تبعية — بما في ذلك على سبيل المثال لا الحصر فقدان البيانات أو تلف الملفات أو انقطاع الأعمال — الناشئة عن استخدامك لأدواتنا أو عدم قدرتك على استخدامها.",
         "أنت المسؤول الوحيد عن الاحتفاظ بنسخ احتياطية من ملفاتك الأصلية والتحقق من دقة وسلامة أي ملف تم تحويله أو معالجته قبل الاعتماد عليه. وبما أن جميع عمليات المعالجة تتم محليًا داخل متصفحك، فإن TAMPDF لا يملك أي وصول إلى ملفاتك ولا يمكنه استرجاع الملفات المفقودة أو التالفة نيابةً عنك.",
+        "الاستخدام المقبول: توافق على استخدام TAMPDF لأغراض مشروعة فقط ومع ملفات يحق لك معالجتها. لا تستخدم الأدوات للتعدي على حقوق الآخرين، أو لإزالة علامات مائية أو حماية من محتوى لا يحق لك تعديله، أو للتدخل في عمل الموقع.",
+        "الخدمات الخارجية والإعلانات: قد يعرض الموقع إعلانات وقد يرتبط بخدمات جهات خارجية أو يتكامل معها (مثل Google AdSense وGoogle Drive وDropbox). نحن لا نتحكم بهذه الخدمات، ويخضع استخدامك لها لشروطها وسياسات الخصوصية الخاصة بها.",
+        "الملكية الفكرية: اسم TAMPDF وشعاره وتصميمه ونصوصه وشيفرته مملوكة لـ TAMPDF أو لمرخِّصيه. أما ملفاتك فتبقى ملكًا لك ولا ندّعي أي حقوق عليها.",
         "قد نقوم بتحديث شروط الخدمة هذه من وقت لآخر. ويُعدّ استمرارك في استخدام TAMPDF بعد نشر أي تعديلات بمثابة قبول منك لهذه الشروط المُحدَّثة.",
       ],
     },
     cookiePolicy: {
       title: "سياسة الكوكيز",
-      intro: "سيتم نشر تفاصيل حول ملفات تعريف الارتباط والتقنيات المشابهة التي تستخدمها TAMPDF هنا قريبًا.",
+      intro: "ملفات تعريف الارتباط والتقنيات المشابهة التي يستخدمها TAMPDF للتفضيلات والتحليلات والإعلانات، وكيفية التحكم بها.",
+      body: [
+        "آخر تحديث: 6 نوفمبر 2026.",
+        "ما ملفات تعريف الارتباط؟ هي ملفات نصية صغيرة يخزّنها الموقع على جهازك. وتعمل تقنيات مشابهة، مثل التخزين المحلي وبكسلات التتبع، بطريقة مماثلة. وتشمل هذه السياسة كل ذلك.",
+        "التخزين الضروري: يتذكّر TAMPDF اختيارك للوضع الفاتح أو الداكن في التخزين المحلي لمتصفحك ليظهر الموقع كما تركته. لا يحتوي على بيانات شخصية ولا يُرسل إلينا أبدًا.",
+        "كوكيز التحليلات: نستخدم Google Analytics 4 ‏(كوكيز مثل ‎_ga و‎_ga_*‎) وMicrosoft Clarity ‏(كوكيز مثل ‎_clck و‎_clsk) لقياس الزيارات وفهم كيفية استخدام الزوار للموقع، وقد ينشئ Clarity أيضًا تسجيلات جلسات وخرائط حرارية مجهولة الهوية. وتتلقى هذه الخدمات معلومات تقنية مثل متصفحك وجهازك وموقعك التقريبي والصفحات التي تزورها.",
+        "كيف تتحكم بالكوكيز: تتيح لك معظم المتصفحات حظر الكوكيز أو حذفها من الإعدادات، ولن يوقف ذلك عمل أدواتنا لأن ملفاتك تُعالَج محليًا. ويمكنك إلغاء الاشتراك في Google Analytics عبر إضافة المتصفح من Google ‏(https://tools.google.com/dlpage/gaoptout)، وإدارة بيانات Microsoft Clarity من لوحة خصوصية Microsoft ‏(https://account.microsoft.com/privacy)، وإيقاف الإعلانات المخصّصة من https://adssettings.google.com أو https://www.aboutads.info/choices (و https://www.youronlinechoices.eu في أوروبا).",
+        "التغييرات: قد نحدّث هذه السياسة من وقت لآخر، ويُظهر التاريخ أعلاه آخر نسخة. لأي استفسار استخدم صفحة «اتصل بنا».",
+      ],
     },
+    adsDisclosure: {
+      heading: "الإعلانات",
+      paragraphs: [
+        "نستخدم Google AdSense لعرض الإعلانات على هذا الموقع. تُعدّ Google وشركاؤها جهات خارجية تستخدم ملفات تعريف الارتباط وإشارات الويب وتقنيات مشابهة لعرض إعلانات بناءً على زياراتك السابقة لهذا الموقع ومواقع أخرى. ويتيح استخدام Google لكوكيز الإعلانات لها ولشركائها عرض إعلانات لك بناءً على زيارتك لموقعنا و/أو مواقع أخرى على الإنترنت.",
+        "يمكنك إيقاف الإعلانات المخصّصة من خلال إعدادات إعلانات Google ‏(https://adssettings.google.com)، أو إيقاف استخدام بعض الجهات الخارجية للكوكيز في الإعلانات المخصّصة من https://www.aboutads.info/choices. ويمكنك الاطلاع على كيفية استخدام Google للمعلومات من المواقع التي تستخدم خدماتها عبر https://policies.google.com/technologies/partner-sites.",
+        "في المنطقة الاقتصادية الأوروبية والمملكة المتحدة وسويسرا، لا تُخصَّص الإعلانات إلا بموافقتك، ويمكنك منحها أو سحبها عبر رسالة الموافقة التي تظهر على الموقع.",
+      ],
+    },
+
   },
   dropzone: {
     browse: "أو انقر للاختيار",
@@ -1029,6 +1104,8 @@ const ar: typeof en = {
     addWatermark: {
       dropLabel: "اسحب وأفلت ملف PDF هنا",
       previewLabel: "معاينة (الصفحة 1) — تُطبَّق على كل صفحة",
+      previewLabelImage: "معاينة — تُطبَّق على الصورة",
+      formatsNote: "الملفات المدعومة: PDF وJPG وPNG وWebP",
       textLabel: "نص العلامة المائية",
       textPlaceholder: "مثال: سرّي",
       colorLabel: "اللون",
@@ -1051,13 +1128,16 @@ const ar: typeof en = {
     removeWatermark: {
       dropLabel: "اسحب وأفلت ملف PDF هنا",
       intro:
-        "تزيل العلامات المائية المضافة ككائنات علامة مائية — عبر Adobe Acrobat وTAMPDF ومعظم محررات PDF.",
+        "تزيل العلامات المائية المضافة ككائنات علامة مائية: في ملفات PDF (عبر Adobe Acrobat وTAMPDF ومعظم المحررات) وفي مستندات Word (تصميم ◂ علامة مائية). أما العلامات المدمجة في بكسلات الصورة فلا يمكن فصلها عنها، لذلك لا تُدعم الصور.",
+      formatsNote: "الملفات المدعومة: PDF وWord (‎.docx)",
       button: "إزالة العلامة المائية",
       buttonBusy: "جارٍ إزالة العلامة المائية…",
       removedOne: "تمت إزالة كائن علامة مائية واحد.",
       removedCount: "تمت إزالة {count} من كائنات العلامة المائية.",
       noneFound:
         "لم يُعثر على علامة مائية قابلة للإزالة في هذا الملف. العلامات المائية التي تكون جزءًا من صورة ممسوحة ضوئيًا أو مدمجة في نص الصفحة لا يمكن فصلها عن المحتوى.",
+      noneFoundWord:
+        "لم يُعثر على علامة مائية في هذا المستند. لا يمكن إزالة إلا العلامات المضافة عبر ميزة العلامة المائية في Word نفسه.",
       tryAnother: "جرّب ملفًا آخر",
       error: "حدث خطأ أثناء تعديل ملف PDF. حاول مرة أخرى.",
       resultSuffix: "-بدون-علامة-مائية.pdf",

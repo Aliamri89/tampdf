@@ -15,8 +15,38 @@ function detectLocale(request: NextRequest): Locale {
   return acceptLanguage.toLowerCase().startsWith("ar") ? "ar" : defaultLocale;
 }
 
+// The two analytics endpoints accept anonymous POSTs (the browser reports a
+// page view / tool run). Without a cap, a script could fill the database with
+// junk rows, so each client IP may send only a handful per minute. Counters
+// live in this server process's memory — enough for a single-instance host.
+const RATE_LIMITED_PATHS = new Set(["/api/page-visit-events", "/api/tool-usage-events"]);
+const RATE_LIMIT_PER_MINUTE = 60;
+const RATE_WINDOW_MS = 60_000;
+const hits = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(request: NextRequest, pathname: string): boolean {
+  if (request.method !== "POST" || !RATE_LIMITED_PATHS.has(pathname)) return false;
+  const now = Date.now();
+  if (hits.size > 5000) {
+    for (const [key, entry] of hits) if (entry.resetAt <= now) hits.delete(key);
+  }
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const key = `${ip}${pathname}`;
+  const entry = hits.get(key);
+  if (!entry || entry.resetAt <= now) {
+    hits.set(key, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_LIMIT_PER_MINUTE;
+}
+
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+
+  if (isRateLimited(request, pathname)) {
+    return new NextResponse("Too many requests", { status: 429, headers: { "Retry-After": "60" } });
+  }
 
   if (pathname.startsWith("/amriadmin") || pathname.startsWith("/api")) {
     const hasLanguageCookie = request.cookies.has(ADMIN_LANGUAGE_COOKIE);

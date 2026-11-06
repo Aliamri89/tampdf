@@ -674,16 +674,17 @@ export const tools: ToolDefinition[] = [
     slug: "add-watermark",
     name: "Add Watermark",
     actionLabel: "Add watermark",
-    shortDescription: "Stamp text such as CONFIDENTIAL or DRAFT across every page of a PDF.",
+    shortDescription:
+      "Stamp text such as CONFIDENTIAL or DRAFT across every page of a PDF, or onto a JPG, PNG or WebP image.",
     longDescription: [
-      "Add Watermark places your text on every page of a PDF — once in the center or repeated across the page. Choose the color, opacity, size, and angle, and see a live preview on your first page before you apply it.",
+      "Add Watermark places your text on every page of a PDF — or on a JPG, PNG or WebP image — once in the center or repeated across the page. Choose the color, opacity, size, and angle, and see a live preview before you apply it.",
       "Arabic and other scripts are fully supported. The watermark is saved as a standard watermark object, and everything happens in your browser, so your document is never uploaded.",
     ],
     category: "pdf",
     processing: "client",
     icon: "Stamp",
-    acceptedExtensions: [".pdf"],
-    acceptedMimeTypes: ["application/pdf"],
+    acceptedExtensions: [".pdf", ".jpg", ".jpeg", ".png", ".webp"],
+    acceptedMimeTypes: ["application/pdf", "image/jpeg", "image/png", "image/webp"],
     multipleFiles: false,
     outputExtension: ".pdf",
     faq: [
@@ -720,16 +721,20 @@ export const tools: ToolDefinition[] = [
     slug: "remove-watermark",
     name: "Remove Watermark",
     actionLabel: "Remove watermark",
-    shortDescription: "Remove watermarks that were added as watermark objects from a PDF.",
+    shortDescription:
+      "Remove watermarks that were added as watermark objects from a PDF or a Word (.docx) document.",
     longDescription: [
-      "Remove Watermark finds and deletes watermarks that were added as watermark objects — the kind Adobe Acrobat, TAMPDF, and most PDF editors create — along with watermark annotations and layers named “Watermark”. The rest of each page stays exactly as it was.",
-      "Watermarks that are part of a scanned image or merged into ordinary page text have no marker to tell them apart from real content, so they can't be removed automatically. Please only remove watermarks from documents you have the right to edit. Processing happens in your browser, so your file is never uploaded.",
+      "Remove Watermark finds and deletes watermarks that were added as watermark objects — the kind Adobe Acrobat, TAMPDF, and most PDF editors create — along with watermark annotations and layers named “Watermark”. It also removes the watermarks Word adds with Design ▸ Watermark from .docx documents. The rest of the file stays exactly as it was.",
+      "Watermarks that are part of a scanned image, merged into ordinary page text, or baked into the pixels of a picture have no marker to tell them apart from real content, so they can't be removed automatically — which is why image files aren't supported. Please only remove watermarks from documents you have the right to edit. Processing happens in your browser, so your file is never uploaded.",
     ],
     category: "pdf",
     processing: "client",
     icon: "Eraser",
-    acceptedExtensions: [".pdf"],
-    acceptedMimeTypes: ["application/pdf"],
+    acceptedExtensions: [".pdf", ".docx"],
+    acceptedMimeTypes: [
+      "application/pdf",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ],
     multipleFiles: false,
     outputExtension: ".pdf",
     faq: [

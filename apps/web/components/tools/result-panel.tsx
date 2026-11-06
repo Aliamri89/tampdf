@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckCircle2, Download, Loader2, RotateCcw, Share2, Trash2 } from "lucide-react";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { DropboxIcon, GoogleDriveIcon } from "@/components/tools/cloud-icons";
 import { Button } from "@/components/ui/button";
 import { useDictionary } from "@/i18n/locale-context";
@@ -50,11 +50,26 @@ export function ResultPanel({
   getBlob,
 }: ResultPanelProps) {
   const dict = useDictionary();
+  const rootRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState<Busy>(null);
   const [notice, setNotice] = useState<Notice>(null);
   const canShare = useSyncExternalStore(subscribeNothing, canShareFilesNow, () => false);
   const hasDrive = GOOGLE_CLIENT_ID !== "";
   const hasDropbox = DROPBOX_APP_KEY !== "";
+
+  // The tool's form is replaced by this panel, which shortens the page. If the
+  // visitor had scrolled down to the action button, the browser would keep that
+  // scroll offset and show content far below the result. Bring the panel into
+  // view (instantly, no smooth-scroll animation) only when it is off screen.
+  useLayoutEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 0;
+    const { top } = el.getBoundingClientRect();
+    if (top < headerHeight || top > window.innerHeight - 80) {
+      el.scrollIntoView({ block: "start", behavior: "instant" });
+    }
+  }, []);
 
   // Load Google's sign-in script ahead of time so the popup opens straight from the click.
   useEffect(() => {
@@ -93,7 +108,10 @@ export function ResultPanel({
   const showCloud = hasDrive || hasDropbox;
 
   return (
-    <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-surface-muted px-6 py-10 text-center">
+    <div
+      ref={rootRef}
+      className="flex scroll-mt-24 flex-col items-center gap-4 rounded-2xl border border-border bg-surface-muted px-6 py-10 text-center"
+    >
       <span className="flex h-14 w-14 items-center justify-center rounded-full bg-green-500/10 text-green-600">
         <CheckCircle2 size={28} />
       </span>

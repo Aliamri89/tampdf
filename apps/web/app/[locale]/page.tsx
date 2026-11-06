@@ -1,4 +1,4 @@
-import { getLocalizedTools, isValidLocale } from "@tampdf/config";
+import { getLocalizedCategories, getLocalizedTools, isValidLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { HeroUploader } from "@/components/home/hero-uploader";
 import { HighlightedText } from "@/components/home/highlighted-text";
@@ -28,20 +28,23 @@ export default async function HomePage({
     category: tool.category,
   }));
 
+  const imageLabel =
+    getLocalizedCategories(locale).find((category) => category.id === "image")?.name ?? "Image Tools";
+
   return (
     <>
       <PageBackdrop />
 
-      <Container maxWidth="3xl" className="pt-8 text-center sm:pt-12">
+      <Container maxWidth="3xl" className="pt-14 text-center sm:pt-20">
         <div className="flex items-center justify-center gap-3 sm:gap-4">
           <span aria-hidden className="h-px w-8 shrink-0 bg-brand-500 sm:w-16" />
-          <p className="text-base font-semibold leading-snug text-foreground/85 sm:text-xl">
+          <p className="text-lg font-semibold leading-snug text-foreground/85 sm:text-xl">
             <HighlightedText text={dict.home.hero.badge} highlight={highlight} />
           </p>
           <span aria-hidden className="h-px w-8 shrink-0 bg-brand-500 sm:w-16" />
         </div>
 
-        <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           <HighlightedText text={dict.home.hero.title} highlight={highlight} />
         </h1>
 
@@ -57,7 +60,7 @@ export default async function HomePage({
           <h2 className="mb-6 text-center text-2xl font-bold tracking-tight text-foreground sm:mb-8 sm:text-3xl">
             {dict.home.moreTools}
           </h2>
-          <ToolsGrid locale={locale} tools={tools} />
+          <ToolsGrid locale={locale} tools={tools} imageLabel={imageLabel} />
         </Container>
       </section>
     </>

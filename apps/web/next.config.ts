@@ -10,6 +10,9 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  // Keeps other sites from getting a handle on our window, while still allowing the
+  // popups we open ourselves for "Save to Google Drive / Dropbox" sign-in to talk back.
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
 ];
 
@@ -23,6 +26,8 @@ const nextConfig: NextConfig = {
   // required post-build copy of `public/` and `.next/static` -- standalone
   // output intentionally omits both, per Next.js's own docs.
   output: "standalone",
+  // Don't advertise the framework in an `X-Powered-By` header.
+  poweredByHeader: false,
   transpilePackages: ["@tampdf/config"],
   // Next's output file tracing (which decides what gets copied into
   // .next/standalone/.../node_modules for standalone builds) statically

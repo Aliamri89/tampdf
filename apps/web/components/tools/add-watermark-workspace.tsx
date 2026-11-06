@@ -17,7 +17,12 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
-import { downloadBytes } from "@/lib/download";
+import { downloadBlob } from "@/lib/download";
+import {
+  WATERMARK_IMAGE_EXTENSIONS,
+  addWatermarkToImage,
+  isWatermarkableImage,
+} from "@/lib/image/watermark";
 import {
   addImageWatermark,
   watermarkPlacements,
@@ -50,9 +55,22 @@ export function AddWatermarkWorkspace() {
   const [angle, setAngle] = useState<AngleKey>("diagonalUp");
   const [layout, setLayout] = useState<WatermarkLayout>("single");
   const [image, setImage] = useState<WatermarkImage | null>(null);
+  const [imageSource, setImageSource] = useState<{
+    file: File;
+    url: string;
+    width: number;
+    height: number;
+  } | null>(null);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
+  const [result, setResult] = useState<{ blob: Blob; name: string } | null>(null);
+
+  const imageUrl = imageSource?.url;
+  useEffect(() => {
+    return () => {
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+    };
+  }, [imageUrl]);
 
   const trimmed = text.trim();
 
@@ -72,8 +90,27 @@ export function AddWatermarkWorkspace() {
     };
   }, [trimmed, color]);
 
+  async function handleFileAdded(added: File) {
+    setError(null);
+    if (!isWatermarkableImage(added)) {
+      setImageSource(null);
+      void source.load(added);
+      return;
+    }
+    try {
+      const bitmap = await createImageBitmap(added);
+      const { width, height } = bitmap;
+      bitmap.close();
+      source.clear();
+      setImageSource({ file: added, url: URL.createObjectURL(added), width, height });
+    } catch {
+      setError(common.imageReadError);
+    }
+  }
+
   function reset() {
     source.clear();
+    setImageSource(null);
     setProcessing(false);
     setError(null);
     setResult(null);
@@ -85,18 +122,31 @@ export function AddWatermarkWorkspace() {
   }
 
   async function handleApply() {
-    const file = source.file;
+    const file = imageSource?.file ?? source.file;
     if (!file || !image || !trimmed) return;
     setProcessing(true);
     setError(null);
     try {
-      const bytes = await addImageWatermark(file, image, {
+      const options = {
         opacity: opacity / 100,
         angle: ANGLES[angle],
         size: size / 100,
         layout,
-      });
-      setResult({ bytes, name: file.name.replace(/\.pdf$/i, dict.resultSuffix) });
+      };
+      if (imageSource) {
+        const out = await addWatermarkToImage(file, image, options);
+        const suffix = dict.resultSuffix.replace(/\.pdf$/i, "");
+        setResult({
+          blob: out.blob,
+          name: `${file.name.replace(/\.[^.]+$/, "")}${suffix}${out.extension}`,
+        });
+      } else {
+        const bytes = await addImageWatermark(file, image, options);
+        setResult({
+          blob: new Blob([new Uint8Array(bytes)], { type: "application/pdf" }),
+          name: file.name.replace(/\.pdf$/i, dict.resultSuffix),
+        });
+      }
       trackToolUsage("add-watermark", true);
     } catch (err) {
       setError(dict.error);
@@ -111,17 +161,20 @@ export function AddWatermarkWorkspace() {
       <div>
         <ResultPanel
           filename={result.name}
-          size={result.bytes.byteLength}
-          onDownload={() => downloadBytes(result.bytes, result.name, "application/pdf")}
-          getBlob={() => new Blob([new Uint8Array(result.bytes)], { type: "application/pdf" })}
+          size={result.blob.size}
+          onDownload={() => downloadBlob(result.blob, result.name)}
+          getBlob={() => result.blob}
           onReset={reset}
         />
       </div>
     );
   }
 
-  const file = source.file;
-  const preview = source.preview;
+  const file = imageSource?.file ?? source.file;
+  const ready = imageSource !== null || source.ready;
+  const preview = imageSource
+    ? { dataUrl: imageSource.url, pageWidth: imageSource.width, pageHeight: imageSource.height }
+    : source.preview;
   const activeImage = trimmed ? image : null;
   const placements =
     preview && activeImage
@@ -134,17 +187,26 @@ export function AddWatermarkWorkspace() {
   return (
     <div>
       {!file && (
-        <FileDropzone
-          accept={[".pdf"]}
-          onFilesAdded={(added) => added[0] && void source.load(added[0])}
-          label={dict.dropLabel}
-        />
+        <>
+          <FileDropzone
+            accept={[".pdf", ...WATERMARK_IMAGE_EXTENSIONS]}
+            onFilesAdded={(added) => added[0] && void handleFileAdded(added[0])}
+            label={dict.dropLabel}
+          />
+          <p className="mt-3 text-center text-sm text-foreground/55">{dict.formatsNote}</p>
+        </>
       )}
 
       {file && (
         <SelectedFile
           file={file}
-          detail={source.pageCount ? t(common.pageCount, { count: source.pageCount }) : undefined}
+          detail={
+            imageSource
+              ? `${imageSource.width}×${imageSource.height}`
+              : source.pageCount
+                ? t(common.pageCount, { count: source.pageCount })
+                : undefined
+          }
           onRemove={reset}
         >
           {source.loading && <LoadingLine label={common.loadingDocument} />}
@@ -155,7 +217,9 @@ export function AddWatermarkWorkspace() {
           )}
           {preview && (
             <div className="mt-4">
-              <p className="text-sm text-foreground/60">{dict.previewLabel}</p>
+              <p className="text-sm text-foreground/60">
+                {imageSource ? dict.previewLabelImage : dict.previewLabel}
+              </p>
               <div className="mt-2 flex justify-center">
                 <div className="relative inline-block overflow-hidden rounded border border-border">
                   {/* eslint-disable-next-line @next/next/no-img-element -- local canvas-rendered data URL */}
@@ -185,7 +249,7 @@ export function AddWatermarkWorkspace() {
         </SelectedFile>
       )}
 
-      {source.ready && (
+      {ready && (
         <div className="mt-5 space-y-5">
           <label className="block">
             <span className="text-base font-medium text-foreground">{dict.textLabel}</span>
@@ -268,11 +332,11 @@ export function AddWatermarkWorkspace() {
       )}
 
       {error && <ErrorText>{error}</ErrorText>}
-      {source.ready && !trimmed && (
+      {ready && !trimmed && (
         <p className="mt-4 text-sm text-foreground/50">{dict.emptyText}</p>
       )}
 
-      {source.ready && (
+      {ready && (
         <Button
           className="mt-6 w-full"
           size="lg"

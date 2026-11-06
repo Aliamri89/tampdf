@@ -4,6 +4,7 @@ import { cache } from "react";
 import { ChevronRight } from "lucide-react";
 import { getLocalizedSiteConfig, isValidLocale, locales, toArticleLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
+import { AdSlot } from "@/components/ads/ad-slot";
 import { ArticleCta } from "@/components/article/article-cta";
 import { ArticleImage } from "@/components/article/article-image";
 import { ArticleMeta } from "@/components/article/article-meta";
@@ -219,6 +220,8 @@ export default async function BlogPostPage({
             </div>
           )}
         </article>
+
+        <AdSlot placement="blog" label={uiDict.tool.adLabel} inline />
 
         <div className="mt-12">
           <ArticlePagination

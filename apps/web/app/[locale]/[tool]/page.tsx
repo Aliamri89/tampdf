@@ -11,6 +11,7 @@ import {
   locales,
   tools,
 } from "@tampdf/config";
+import { AdSlot } from "@/components/ads/ad-slot";
 import { Icon } from "@/components/icon";
 import { PageBackdrop } from "@/components/page-backdrop";
 import { ToolCard } from "@/components/tools/tool-card";
@@ -160,6 +161,8 @@ export default async function ToolPage({
             ))}
           </div>
         </Container>
+
+        <AdSlot placement="tool" label={dict.tool.adLabel} />
 
         <Container maxWidth="3xl" className="pb-14">
           <h2 className="text-xl font-bold">{dict.tool.faqHeading}</h2>

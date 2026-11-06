@@ -120,6 +120,8 @@ export const ToolUsageEvents: CollectionConfig = {
     {
       name: "errorName",
       type: "text",
+      // Anonymous visitors can create these rows, so cap what they can store.
+      maxLength: 100,
       label: { en: "Error Type", ar: "نوع الخطأ" },
       admin: {
         description: {
@@ -131,6 +133,7 @@ export const ToolUsageEvents: CollectionConfig = {
     {
       name: "errorMessage",
       type: "text",
+      maxLength: 500,
       label: { en: "Error Message", ar: "رسالة الخطأ" },
       admin: {
         description: {
