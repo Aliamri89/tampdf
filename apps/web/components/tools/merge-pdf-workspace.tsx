@@ -5,6 +5,7 @@ import { Combine, Loader2 } from "lucide-react";
 import type { DragEvent } from "react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
+import { useTouchReorder } from "@/components/tools/use-touch-reorder";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
@@ -81,6 +82,8 @@ export function MergePdfWorkspace() {
       return next;
     });
   }
+
+  const touch = useTouchReorder(reorderByDrag);
 
   function handleDragStart(id: string) {
     return (e: DragEvent<HTMLLIElement>) => {
@@ -167,7 +170,10 @@ export function MergePdfWorkspace() {
                 onMoveUp={index > 0 ? () => moveEntry(index, -1) : undefined}
                 onMoveDown={index < entries.length - 1 ? () => moveEntry(index, 1) : undefined}
                 draggable
-                isDragOver={dragOverId === entry.id && draggedId !== entry.id}
+                isDragOver={(dragOverId === entry.id && draggedId !== entry.id) || touch.overId === entry.id}
+                isDragging={touch.draggedId === entry.id}
+                reorderId={entry.id}
+                gripProps={touch.handleProps(entry.id)}
                 onDragStart={handleDragStart(entry.id)}
                 onDragOver={handleDragOver(entry.id)}
                 onDrop={handleDrop(entry.id)}

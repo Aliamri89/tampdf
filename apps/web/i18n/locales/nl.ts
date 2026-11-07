@@ -7,7 +7,7 @@ export const nl: DeepPartial<Dictionary> = {
   breadcrumb: { home: "Home" },
   tool: {
     processedClient: "Verwerkt in je browser — bestanden worden nooit geüpload",
-    faqHeading: "Veelgestelde vragen",
+    faqHeading: "Hoe te gebruiken",
     relatedHeading: "Gerelateerde tools",
     metaTitleSuffix: "— Gratis online tool",
   },

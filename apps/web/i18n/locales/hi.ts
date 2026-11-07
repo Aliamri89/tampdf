@@ -7,7 +7,7 @@ export const hi: DeepPartial<Dictionary> = {
   breadcrumb: { home: "होम" },
   tool: {
     processedClient: "आपके ब्राउज़र में ही प्रोसेस होता है — फ़ाइलें कभी अपलोड नहीं होतीं",
-    faqHeading: "अक्सर पूछे जाने वाले सवाल",
+    faqHeading: "इस्तेमाल कैसे करें",
     relatedHeading: "संबंधित टूल",
     metaTitleSuffix: "— मुफ़्त ऑनलाइन टूल",
   },

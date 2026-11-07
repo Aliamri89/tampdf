@@ -164,7 +164,7 @@ export function DeletePdfPagesWorkspace() {
               {allSelected && (
                 <p className="mt-2 text-sm text-red-600">{dict.allSelectedError}</p>
               )}
-              <div className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
                 {thumbs.map((page) => {
                   const isSelected = selected.has(page.pageNumber);
                   return (

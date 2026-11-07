@@ -117,7 +117,7 @@ export function FlipImageWorkspace() {
             ]}
           />
 
-          <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
             {entries.map((entry) => (
               <div key={entry.id} className="relative">
                 <div className="flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-border bg-surface-muted">

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ImagePlus, Loader2 } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
+import { useTouchReorder } from "@/components/tools/use-touch-reorder";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
@@ -37,6 +38,19 @@ export function ImageToPdfWorkspace() {
       return next;
     });
   }
+
+  // Touch drag by the grip handle; the rows are identified by their position.
+  const touch = useTouchReorder((fromId, toId) => {
+    const from = Number(fromId);
+    const to = Number(toId);
+    setFiles((prev) => {
+      if (!(from in prev) || !(to in prev) || from === to) return prev;
+      const next = [...prev];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return next;
+    });
+  });
 
   async function handleConvert() {
     setStatus("processing");
@@ -87,6 +101,10 @@ export function ImageToPdfWorkspace() {
               <FileListItem
                 key={`${file.name}-${index}`}
                 file={file}
+                reorderId={String(index)}
+                gripProps={touch.handleProps(String(index))}
+                isDragging={touch.draggedId === String(index)}
+                isDragOver={touch.overId === String(index)}
                 onRemove={() => setFiles((prev) => prev.filter((_, i) => i !== index))}
                 onMoveUp={index > 0 ? () => moveFile(index, -1) : undefined}
                 onMoveDown={index < files.length - 1 ? () => moveFile(index, 1) : undefined}

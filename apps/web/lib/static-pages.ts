@@ -26,10 +26,11 @@ async function findStaticPage(key: StaticPageKey, locale: Locale): Promise<Stati
     });
     return (docs[0] as StaticPageDoc | undefined) ?? null;
   } catch (error) {
-    // Database unreachable or not yet migrated. Callers already treat a
-    // null doc as "no CMS content yet" and fall back to dictionary copy.
-    console.error(`findStaticPage(${key}) failed, falling back to dictionary content:`, error);
-    return null;
+    // A database error must NOT look like "no CMS content yet": the page is
+    // cached (ISR), so the dictionary fallback would be stored and shown until
+    // the next revalidation. Rethrowing keeps the last good page.
+    console.error(`findStaticPage(${key}) failed:`, error);
+    throw error;
   }
 }
 

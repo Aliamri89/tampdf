@@ -59,10 +59,11 @@ export default async function BlogPage({
       locale={locale}
       title={dict.staticPages.blog.title}
       isPlaceholder={posts.length === 0}
+      centerTitle
       contentMaxWidth="6xl"
     >
       {posts.length > 0 && (
-        <div className="not-prose grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="not-prose grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
           {posts.map((post) => (
             <BlogPostCard key={post.id} post={post} locale={locale} />
           ))}

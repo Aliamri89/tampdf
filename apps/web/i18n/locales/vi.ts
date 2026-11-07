@@ -7,7 +7,7 @@ export const vi: DeepPartial<Dictionary> = {
   breadcrumb: { home: "Trang chủ" },
   tool: {
     processedClient: "Được xử lý ngay trong trình duyệt của bạn — tệp không bao giờ được tải lên",
-    faqHeading: "Câu hỏi thường gặp",
+    faqHeading: "Cách sử dụng",
     relatedHeading: "Công cụ liên quan",
     metaTitleSuffix: "— Công cụ trực tuyến miễn phí",
   },

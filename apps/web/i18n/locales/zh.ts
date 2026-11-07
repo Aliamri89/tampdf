@@ -7,7 +7,7 @@ export const zh: DeepPartial<Dictionary> = {
   breadcrumb: { home: "首页" },
   tool: {
     processedClient: "在您的浏览器中处理 — 文件从不上传",
-    faqHeading: "常见问题",
+    faqHeading: "使用方法",
     relatedHeading: "相关工具",
     metaTitleSuffix: "— 免费在线工具",
   },

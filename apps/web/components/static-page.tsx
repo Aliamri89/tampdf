@@ -12,6 +12,7 @@ export function StaticPage({
   children,
   isPlaceholder = false,
   contentMaxWidth = "2xl",
+  centerTitle = false,
 }: {
   locale: Locale;
   title: string;
@@ -20,6 +21,8 @@ export function StaticPage({
   isPlaceholder?: boolean;
   /** Widen the content area for pages that need more than prose width (e.g. the blog's card grid). */
   contentMaxWidth?: ComponentProps<typeof Container>["maxWidth"];
+  /** Centre the page heading (used by the blog list). */
+  centerTitle?: boolean;
 }) {
   const dict = getDictionary(locale);
 
@@ -40,8 +43,8 @@ export function StaticPage({
       </Container>
 
       <Container maxWidth={contentMaxWidth} className="py-10">
-        <h1 className="break-words text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
-        <div className="mt-6 space-y-4 leading-relaxed text-foreground/70">{children}</div>
+        <h1 className={`break-words text-3xl font-semibold tracking-tight sm:text-4xl${centerTitle ? " text-center" : ""}`}>{title}</h1>
+        <div className="mt-6 space-y-4 leading-relaxed text-foreground/70 md:text-lg md:leading-8">{children}</div>
         {isPlaceholder && (
           <p className="mt-8 rounded-xl border border-dashed border-border bg-surface-muted px-4 py-3 text-sm text-foreground/50">
             {dict.staticPages.note}

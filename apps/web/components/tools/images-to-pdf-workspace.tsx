@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState, type DragEvent } from "react";
-import { ChevronLeft, ChevronRight, FileStack, Loader2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, FileStack, GripVertical, Loader2, X } from "lucide-react";
+import { useTouchReorder } from "@/components/tools/use-touch-reorder";
 import { ErrorText, OptionGroup } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
@@ -72,12 +73,10 @@ export function ImagesToPdfWorkspace() {
     });
   }
 
-  function dropOn(targetId: string) {
-    const fromId = draggedIdRef.current;
-    draggedIdRef.current = null;
-    setDraggedId(null);
-    setDragOverId(null);
-    if (!fromId || fromId === targetId) return;
+  const touch = useTouchReorder(reorderTo);
+
+  function reorderTo(fromId: string, targetId: string) {
+    if (fromId === targetId) return;
     setEntries((prev) => {
       const fromIndex = prev.findIndex((entry) => entry.id === fromId);
       const toIndex = prev.findIndex((entry) => entry.id === targetId);
@@ -87,6 +86,14 @@ export function ImagesToPdfWorkspace() {
       next.splice(toIndex, 0, moved);
       return next;
     });
+  }
+
+  function dropOn(targetId: string) {
+    const fromId = draggedIdRef.current;
+    draggedIdRef.current = null;
+    setDraggedId(null);
+    setDragOverId(null);
+    if (fromId) reorderTo(fromId, targetId);
   }
 
   async function handleConvert() {
@@ -137,11 +144,12 @@ export function ImagesToPdfWorkspace() {
       {entries.length > 0 && (
         <>
           <p className="mt-5 text-sm text-foreground/60">{dict.reorderHint}</p>
-          <ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
             {entries.map((entry, index) => (
               <li
                 key={entry.id}
-                draggable
+                draggable={touch.draggedId === null}
+                data-reorder-id={entry.id}
                 onDragStart={(e: DragEvent<HTMLLIElement>) => {
                   draggedIdRef.current = entry.id;
                   setDraggedId(entry.id);
@@ -162,10 +170,10 @@ export function ImagesToPdfWorkspace() {
                 }}
                 className={cn(
                   "relative rounded-lg border-2 p-1 transition-colors",
-                  dragOverId === entry.id && draggedId !== entry.id
+                  (dragOverId === entry.id && draggedId !== entry.id) || touch.overId === entry.id
                     ? "border-brand-400 bg-brand-50 dark:bg-brand-500/10"
                     : "border-border",
-                  draggedId === entry.id && "opacity-40",
+                  (draggedId === entry.id || touch.draggedId === entry.id) && "opacity-40",
                 )}
               >
                 <span className="absolute start-1.5 top-1.5 z-10 flex h-5 min-w-5 items-center justify-center rounded-full bg-foreground/75 px-1 text-[11px] font-semibold text-background">
@@ -193,6 +201,12 @@ export function ImagesToPdfWorkspace() {
                   >
                     <ChevronLeft size={16} />
                   </button>
+                  <span
+                    {...touch.handleProps(entry.id)}
+                    className="flex cursor-grab touch-none select-none items-center rounded px-2.5 py-1.5 text-foreground/40 hover:text-foreground"
+                  >
+                    <GripVertical size={15} aria-hidden="true" />
+                  </span>
                   <button
                     type="button"
                     onClick={() => move(index, 1)}

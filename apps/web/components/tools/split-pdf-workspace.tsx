@@ -171,7 +171,7 @@ export function SplitPdfWorkspace() {
           )}
 
           {pageCount > 0 && (
-            <div className="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
+            <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-6 md:grid-cols-8">
               {thumbs.map((page) => (
                 <div key={page.pageNumber} className="text-center">
                   <div className="flex aspect-square items-center justify-center overflow-hidden rounded border border-border bg-surface-muted">

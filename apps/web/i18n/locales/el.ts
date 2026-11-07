@@ -7,7 +7,7 @@ export const el: DeepPartial<Dictionary> = {
   breadcrumb: { home: "Αρχική" },
   tool: {
     processedClient: "Επεξεργάζεται στο πρόγραμμα περιήγησής σας — τα αρχεία δεν μεταφορτώνονται ποτέ",
-    faqHeading: "Συχνές ερωτήσεις",
+    faqHeading: "Πώς να το χρησιμοποιήσετε",
     relatedHeading: "Σχετικά εργαλεία",
     metaTitleSuffix: "— Δωρεάν διαδικτυακό εργαλείο",
   },

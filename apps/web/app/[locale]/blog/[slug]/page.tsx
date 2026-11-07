@@ -48,12 +48,32 @@ const getPost = cache(async (slug: string, locale: "en" | "ar"): Promise<Post | 
     });
     return (docs[0] as Post | undefined) ?? null;
   } catch (error) {
-    // Database unreachable or not yet migrated — treat as not-found rather
-    // than failing the page.
-    console.error(`getPost(${slug}) failed, treating as not found:`, error);
-    return null;
+    // Not "not found": a database error must not be cached (ISR) as a 404.
+    console.error(`getPost(${slug}) failed:`, error);
+    throw error;
   }
 });
+
+// Prerender the published articles (en + ar come from the layout) so opening
+// one is an instant static page instead of a server render with database
+// queries. New or other-language articles render on demand and are cached.
+export async function generateStaticParams() {
+  try {
+    const payload = await getPayloadClient();
+    const { docs } = await payload.find({
+      collection: "posts",
+      where: { status: { equals: "published" } },
+      depth: 0,
+      limit: 200,
+      pagination: false,
+      select: { slug: true },
+    });
+    return docs.map((doc) => ({ slug: (doc as { slug: string }).slug }));
+  } catch (error) {
+    console.error("generateStaticParams(blog/[slug]) failed, articles render on demand:", error);
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,

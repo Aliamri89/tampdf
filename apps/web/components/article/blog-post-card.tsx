@@ -16,7 +16,7 @@ export function BlogPostCard({ post, locale }: { post: Post; locale: Locale }) {
   return (
     <Link
       href={`/${locale}/blog/${post.slug}`}
-      className="group overflow-hidden rounded-2xl border border-white/80 bg-white/80 shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg dark:border-border dark:bg-surface/80"
+      className="group overflow-hidden rounded-2xl border border-white/80 bg-white/80 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.22)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_18px_40px_-10px_rgba(0,0,0,0.32)] dark:shadow-[0_10px_30px_-8px_rgba(0,0,0,0.6)] dark:border-border dark:bg-surface/80"
     >
       <div className="aspect-[16/10] w-full overflow-hidden bg-surface-muted">
         {image && (

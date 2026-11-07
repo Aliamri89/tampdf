@@ -14,7 +14,7 @@ const en = {
   tool: {
     processedClient: "Processed in your browser .. files are never uploaded to us",
     adLabel: "Advertisement",
-    faqHeading: "Frequently asked questions",
+    faqHeading: "How to use",
     relatedHeading: "Related tools",
     metaTitleSuffix: "— Free Online Tool",
   },
@@ -748,7 +748,7 @@ const ar: typeof en = {
   tool: {
     processedClient: "تتم المعالجة داخل متصفحك .. لا يتم رفع الملفات لدينا أبدًا",
     adLabel: "إعلان",
-    faqHeading: "الأسئلة الشائعة",
+    faqHeading: "كيفية الاستخدام",
     relatedHeading: "أدوات ذات صلة",
     metaTitleSuffix: "— أداة مجانية عبر الإنترنت",
   },

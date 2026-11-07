@@ -22,7 +22,7 @@ interface Fallback {
   sections?: { heading: string; text: string }[];
 }
 
-const SECTION_HEADING_CLASS = "mt-6 text-xl font-semibold text-foreground";
+const SECTION_HEADING_CLASS = "mt-6 text-xl font-semibold text-foreground md:text-2xl";
 
 /**
  * Builds the `generateMetadata` + default-export page pair for one of the
@@ -97,7 +97,7 @@ export function createStaticCmsPage(
     if (!doc) {
       const paragraphs = fallback.body ?? [fallback.intro];
       return (
-        <StaticPage locale={locale} title={fallback.title} isPlaceholder={!fallback.body}>
+        <StaticPage locale={locale} title={fallback.title} isPlaceholder={false}>
           {paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -113,7 +113,7 @@ export function createStaticCmsPage(
     const headingCount = html.split("<h2").length - 1;
     const splitAt = appendix && headingCount >= 2 ? html.lastIndexOf("<h2") : html.length;
     const proseClassName =
-      "[&_a]:text-brand-600 [&_a]:underline [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:mt-5 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-foreground [&_li]:ms-5 [&_ol]:list-decimal [&_ul]:list-disc";
+      "[&_a]:text-brand-600 [&_a]:underline [&_h2]:mt-6 [&_h2]:text-xl md:[&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:mt-5 [&_h3]:text-lg md:[&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-foreground [&_li]:ms-5 [&_ol]:list-decimal [&_ul]:list-disc";
 
     return (
       <StaticPage locale={locale} title={doc.title}>

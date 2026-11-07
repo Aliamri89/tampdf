@@ -7,7 +7,7 @@ export const fi: DeepPartial<Dictionary> = {
   breadcrumb: { home: "Etusivu" },
   tool: {
     processedClient: "Käsitellään selaimessasi — tiedostoja ei koskaan ladata palvelimelle",
-    faqHeading: "Usein kysytyt kysymykset",
+    faqHeading: "Käyttöohje",
     relatedHeading: "Vastaavat työkalut",
     metaTitleSuffix: "— Ilmainen verkkotyökalu",
   },

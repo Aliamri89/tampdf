@@ -7,7 +7,7 @@ export const cs: DeepPartial<Dictionary> = {
   breadcrumb: { home: "Domů" },
   tool: {
     processedClient: "Zpracováno ve vašem prohlížeči — soubory se nikdy nenahrávají",
-    faqHeading: "Časté dotazy",
+    faqHeading: "Jak používat",
     relatedHeading: "Související nástroje",
     metaTitleSuffix: "— bezplatný online nástroj",
   },

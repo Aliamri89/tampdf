@@ -7,7 +7,7 @@ export const ko: DeepPartial<Dictionary> = {
   breadcrumb: { home: "홈" },
   tool: {
     processedClient: "브라우저 내에서 처리됩니다 — 파일이 업로드되지 않습니다",
-    faqHeading: "자주 묻는 질문",
+    faqHeading: "사용 방법",
     relatedHeading: "관련 도구",
     metaTitleSuffix: "— 무료 온라인 도구",
   },

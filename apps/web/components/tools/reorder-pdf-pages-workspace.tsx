@@ -2,7 +2,8 @@
 
 import { useRef, useState } from "react";
 import type { DragEvent } from "react";
-import { ArrowUpDown, ChevronLeft, ChevronRight, Loader2, X } from "lucide-react";
+import { ArrowUpDown, ChevronLeft, ChevronRight, GripVertical, Loader2, X } from "lucide-react";
+import { useTouchReorder } from "@/components/tools/use-touch-reorder";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
 import { Button } from "@/components/ui/button";
@@ -98,6 +99,8 @@ export function ReorderPdfPagesWorkspace() {
       return next;
     });
   }
+
+  const touch = useTouchReorder(reorderByDrag);
 
   function handleDragStart(id: string) {
     return (e: DragEvent<HTMLLIElement>) => {
@@ -202,21 +205,22 @@ export function ReorderPdfPagesWorkspace() {
           {items.length > 0 && (
             <>
               <p className="mt-4 text-sm text-foreground/60">{dict.reorderHint}</p>
-              <ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+              <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
                 {items.map((item, index) => (
                   <li
                     key={item.id}
-                    draggable
+                    draggable={touch.draggedId === null}
+                    data-reorder-id={item.id}
                     onDragStart={handleDragStart(item.id)}
                     onDragOver={handleDragOver(item.id)}
                     onDrop={handleDrop(item.id)}
                     onDragEnd={handleDragEnd}
                     className={cn(
                       "rounded-lg border-2 p-1 transition-colors",
-                      dragOverId === item.id && draggedId !== item.id
+                      (dragOverId === item.id && draggedId !== item.id) || touch.overId === item.id
                         ? "border-brand-400 bg-brand-50 dark:bg-brand-500/10"
                         : "border-border",
-                      draggedId === item.id && "opacity-40",
+                      (draggedId === item.id || touch.draggedId === item.id) && "opacity-40",
                     )}
                   >
                     <div className="flex aspect-square cursor-grab items-center justify-center overflow-hidden rounded bg-surface-muted active:cursor-grabbing">
@@ -237,7 +241,13 @@ export function ReorderPdfPagesWorkspace() {
                       >
                         <ChevronLeft size={15} />
                       </button>
-                      <span className="text-xs text-foreground/50">{item.pageNumber}</span>
+                      <span
+                        {...touch.handleProps(item.id)}
+                        className="flex cursor-grab touch-none select-none items-center gap-0.5 rounded px-2 py-1.5 text-xs text-foreground/50 hover:text-foreground"
+                      >
+                        <GripVertical size={14} aria-hidden="true" />
+                        {item.pageNumber}
+                      </span>
                       <button
                         type="button"
                         onClick={() => move(index, 1)}

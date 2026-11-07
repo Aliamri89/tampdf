@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDown, ChevronUp, FileText, GripVertical, X } from "lucide-react";
-import type { DragEvent } from "react";
+import type { DragEvent, HTMLAttributes } from "react";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { useFileThumbnail } from "@/components/tools/use-file-thumbnail";
@@ -16,6 +16,12 @@ interface FileListItemProps {
   thumbnail?: string;
   draggable?: boolean;
   isDragOver?: boolean;
+  /** Lets touch dragging find this row (see use-touch-reorder). */
+  reorderId?: string;
+  /** Pointer handlers for the grab handle (touch drag); shows the handle even without mouse drag. */
+  gripProps?: HTMLAttributes<HTMLElement>;
+  /** True while this row is being dragged by touch. */
+  isDragging?: boolean;
   onDragStart?: (e: DragEvent<HTMLLIElement>) => void;
   onDragOver?: (e: DragEvent<HTMLLIElement>) => void;
   onDragLeave?: (e: DragEvent<HTMLLIElement>) => void;
@@ -31,6 +37,9 @@ export function FileListItem({
   thumbnail,
   draggable,
   isDragOver,
+  reorderId,
+  gripProps,
+  isDragging,
   onDragStart,
   onDragOver,
   onDragLeave,
@@ -42,7 +51,8 @@ export function FileListItem({
   const preview = thumbnail ?? autoThumbnail;
   return (
     <li
-      draggable={draggable}
+      draggable={draggable && !isDragging}
+      data-reorder-id={reorderId}
       onDragStart={onDragStart}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
@@ -52,9 +62,17 @@ export function FileListItem({
         "flex items-center gap-3 rounded-xl border bg-surface px-3.5 py-2.5 transition-colors",
         isDragOver ? "border-brand-400 bg-brand-50 dark:bg-brand-500/10" : "border-border",
         draggable && "cursor-grab active:cursor-grabbing",
+        isDragging && "opacity-40",
       )}
     >
-      {draggable && <GripVertical size={16} className="shrink-0 text-foreground/30" />}
+      {(draggable || gripProps) && (
+        <span
+          {...gripProps}
+          className={cn("-m-1.5 shrink-0 select-none p-1.5 text-foreground/30", gripProps && "touch-none")}
+        >
+          <GripVertical size={18} />
+        </span>
+      )}
       {preview ? (
         // eslint-disable-next-line @next/next/no-img-element -- local blob/data URL thumbnail, not a static asset
         <img

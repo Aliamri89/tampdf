@@ -7,7 +7,7 @@ export const tr: DeepPartial<Dictionary> = {
   breadcrumb: { home: "Ana Sayfa" },
   tool: {
     processedClient: "Tarayıcınızda işlenir — dosyalar asla yüklenmez",
-    faqHeading: "Sıkça sorulan sorular",
+    faqHeading: "Nasıl kullanılır",
     relatedHeading: "İlgili araçlar",
     metaTitleSuffix: "— Ücretsiz Çevrimiçi Araç",
   },

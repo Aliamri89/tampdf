@@ -7,7 +7,7 @@ export const ru: DeepPartial<Dictionary> = {
   breadcrumb: { home: "Главная" },
   tool: {
     processedClient: "Обрабатывается в вашем браузере — файлы никогда не загружаются",
-    faqHeading: "Часто задаваемые вопросы",
+    faqHeading: "Как пользоваться",
     relatedHeading: "Похожие инструменты",
     metaTitleSuffix: "— бесплатный онлайн-инструмент",
   },

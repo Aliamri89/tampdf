@@ -201,7 +201,7 @@ export interface PageThumbnail {
 /** Renders a small JPEG thumbnail data URL for every page of a PDF. */
 export async function renderAllPageThumbnails(
   file: File,
-  maxDimension = 140,
+  maxDimension = 280,
 ): Promise<PageThumbnail[]> {
   const pdf = await loadPdfDocument(file);
   try {

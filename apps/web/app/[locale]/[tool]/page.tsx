@@ -152,23 +152,13 @@ export default async function ToolPage({
           <ToolWorkspace slug={tool.slug} />
         </Container>
 
-        <Container maxWidth="3xl" className="pb-14">
-          <div className="space-y-4 rounded-xl border border-border bg-surface p-6 text-lg text-foreground/75 sm:p-8">
-            {tool.longDescription.map((paragraph, i) => (
-              <p key={i} className="leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </Container>
-
         <AdSlot placement="tool" label={dict.tool.adLabel} />
 
         <Container maxWidth="3xl" className="pb-14">
           <h2 className="text-xl font-bold">{dict.tool.faqHeading}</h2>
           <div className="mt-5 space-y-3">
-            {tool.faq.map((item, i) => (
-              <AccordionItem key={item.question} question={item.question} defaultOpen={i === 0}>
+            {tool.faq.map((item) => (
+              <AccordionItem key={item.question} question={item.question}>
                 {item.answer}
               </AccordionItem>
             ))}
