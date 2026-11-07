@@ -37,23 +37,22 @@ export default async function BlogPage({
   // English, the site's own chrome around them stays fully translated.
   const articleLocale = toArticleLocale(locale);
 
-  let posts: Post[] = [];
-  try {
-    const payload = await getPayloadClient();
-    const result = await payload.find({
-      collection: "posts",
-      where: { status: { equals: "published" } },
-      sort: "-publishedDate",
-      locale: articleLocale,
-      depth: 1,
-      limit: 50,
-    });
-    posts = result.docs as Post[];
-  } catch (error) {
-    // Database unreachable or not yet migrated — fall back to the empty
-    // state below rather than failing the page.
-    console.error("BlogPage failed to load posts, falling back to empty list:", error);
-  }
+  // A failed query must NOT turn into an empty list: this page is prerendered
+  // and cached (ISR), so an empty result caused by a database error would be
+  // stored and shown as "this page is temporary" until the next revalidation.
+  // Letting the error propagate makes Next.js keep serving the last good page
+  // and retry on the next revalidation. The placeholder below is therefore
+  // shown only when the query succeeded and there really are no articles.
+  const payload = await getPayloadClient();
+  const result = await payload.find({
+    collection: "posts",
+    where: { status: { equals: "published" } },
+    sort: "-publishedDate",
+    locale: articleLocale,
+    depth: 1,
+    limit: 50,
+  });
+  const posts = result.docs as Post[];
 
   return (
     <StaticPage

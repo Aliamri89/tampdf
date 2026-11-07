@@ -1,5 +1,19 @@
+import { revalidatePath } from "next/cache";
 import type { CollectionConfig } from "payload";
 import { TOOL_SLUGS, TOOL_SLUG_LABELS } from "./ToolUsageEvents";
+
+/**
+ * Make an article that was created, edited, published, unpublished or deleted
+ * show up now instead of after the 60 s page cache (blog list, article pages,
+ * related-post cards and the sitemap all read posts).
+ */
+function revalidateSite(): void {
+  try {
+    revalidatePath("/", "layout");
+  } catch {
+    // Outside a Next.js request (scripts, seeding): the 60 s revalidation still applies.
+  }
+}
 
 function slugify(value: string): string {
   return value
@@ -18,6 +32,20 @@ export const Posts: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "status", "publishedDate"],
+  },
+  hooks: {
+    afterChange: [
+      ({ doc }) => {
+        revalidateSite();
+        return doc;
+      },
+    ],
+    afterDelete: [
+      ({ doc }) => {
+        revalidateSite();
+        return doc;
+      },
+    ],
   },
   access: {
     // Admins (any authenticated user — there is only ever one) see everything;
