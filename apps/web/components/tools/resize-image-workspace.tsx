@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
+import { mapWithConcurrency } from "@/lib/concurrency";
+import { MAX_MULTI_FILES } from "@/lib/tool-limits";
 import { downloadBlob } from "@/lib/download";
 import { IMAGE_EXTENSION, renameFile } from "@/lib/image/canvas";
 import { readImageSize, resizeImage } from "@/lib/image/transform";
@@ -51,9 +53,10 @@ export function ResizeImageWorkspace() {
   async function addFiles(added: File[]) {
     setError(null);
     try {
-      const measured = await Promise.all(
-        added.map(async (file) => ({ file, ...(await readImageSize(file)) })),
-      );
+      const measured = await mapWithConcurrency(added, 4, async (file) => ({
+        file,
+        ...(await readImageSize(file)),
+      }));
       if (entries.length === 0 && measured[0]) {
         setWidth(measured[0].width);
         setHeight(measured[0].height);
@@ -138,7 +141,7 @@ export function ResizeImageWorkspace() {
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
         maxSizeBytes={30 * 1024 * 1024}
-        maxFiles={20}
+        maxFiles={MAX_MULTI_FILES}
         currentCount={entries.length}
         disabled={processing}
         onFilesAdded={(added) => void addFiles(added)}

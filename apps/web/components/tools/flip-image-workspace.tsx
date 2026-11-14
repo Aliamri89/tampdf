@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
+import { MAX_MULTI_FILES } from "@/lib/tool-limits";
 import { downloadBlob } from "@/lib/download";
 import { IMAGE_EXTENSION, renameFile } from "@/lib/image/canvas";
 import { flipImage, type ImageFlip } from "@/lib/image/transform";
@@ -92,7 +93,7 @@ export function FlipImageWorkspace() {
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
         maxSizeBytes={30 * 1024 * 1024}
-        maxFiles={20}
+        maxFiles={MAX_MULTI_FILES}
         currentCount={entries.length}
         disabled={processing}
         onFilesAdded={(added) =>

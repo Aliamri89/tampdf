@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
+import { MAX_MULTI_FILES } from "@/lib/tool-limits";
 import { downloadBytes } from "@/lib/download";
 import { imagesToPdf } from "@/lib/image/toPdf";
 
@@ -87,7 +88,7 @@ export function ImageToPdfWorkspace() {
         accept={[".jpg", ".jpeg", ".png"]}
         multiple
         maxSizeBytes={25 * 1024 * 1024}
-        maxFiles={20}
+        maxFiles={MAX_MULTI_FILES}
         currentCount={files.length}
         disabled={status === "processing"}
         onFilesAdded={(added) => setFiles((prev) => [...prev, ...added])}

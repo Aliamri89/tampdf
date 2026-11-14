@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
+import { MAX_MULTI_FILES } from "@/lib/tool-limits";
 import { downloadBytes } from "@/lib/download";
 import { mergePdfs } from "@/lib/pdf/merge";
 import { renderPdfThumbnail } from "@/lib/pdf/render";
@@ -151,7 +152,7 @@ export function MergePdfWorkspace() {
       <FileDropzone
         accept={[".pdf"]}
         multiple
-        maxFiles={20}
+        maxFiles={MAX_MULTI_FILES}
         currentCount={entries.length}
         disabled={status === "processing"}
         onFilesAdded={handleFilesAdded}

@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
+import { mapWithConcurrency } from "@/lib/concurrency";
+import { MAX_MULTI_FILES } from "@/lib/tool-limits";
 import { downloadBlob } from "@/lib/download";
 import { rotateImage } from "@/lib/image/rotate";
 import { formatBytes } from "@/lib/utils";
@@ -75,13 +77,12 @@ export function RotateImagesWorkspace() {
     setStatus("processing");
     setError(null);
     try {
-      const outputs = await Promise.all(
-        entries.map(async (entry) => {
-          const blob =
-            entry.rotation === 0 ? entry.file : await rotateImage(entry.file, entry.rotation);
-          return { name: entry.file.name, blob };
-        }),
-      );
+      // A few at a time: decoding up to 50 large images together could exhaust memory.
+      const outputs = await mapWithConcurrency(entries, 4, async (entry) => {
+        const blob =
+          entry.rotation === 0 ? entry.file : await rotateImage(entry.file, entry.rotation);
+        return { name: entry.file.name, blob };
+      });
 
       if (outputs.length === 1) {
         setResult({ blob: outputs[0].blob, filename: outputs[0].name });
@@ -119,7 +120,7 @@ export function RotateImagesWorkspace() {
       <FileDropzone
         accept={[".jpg", ".jpeg", ".png", ".webp"]}
         multiple
-        maxFiles={20}
+        maxFiles={MAX_MULTI_FILES}
         currentCount={entries.length}
         disabled={status === "processing"}
         onFilesAdded={handleFilesAdded}
