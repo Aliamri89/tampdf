@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
+import { MAX_PDF_RENDER_FILES } from "@/lib/tool-limits";
 import { downloadBlob } from "@/lib/download";
 import {
   PageImageEncodingError,
@@ -31,7 +32,7 @@ const FORMATS: Record<Format, { type: PageImageType; extension: string }> = {
 /** Render scale relative to 72 dpi. */
 const SCALES: Record<Resolution, number> = { standard: 1.5, high: 2, max: 3 };
 
-const MAX_FILES = 10;
+const MAX_FILES = MAX_PDF_RENDER_FILES;
 
 export function PdfToImagesWorkspace() {
   const dict = useDictionary().workspace.pdfToImages;

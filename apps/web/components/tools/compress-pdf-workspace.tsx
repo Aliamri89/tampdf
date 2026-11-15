@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
+import { MAX_PDF_RENDER_FILES } from "@/lib/tool-limits";
 import { trackToolUsage } from "@/lib/analytics";
 import { downloadBlob } from "@/lib/download";
 import { compressPdf, isEncryptedPdfError, type CompressionLevel } from "@/lib/pdf/compress";
@@ -16,7 +17,7 @@ import { zipFiles } from "@/lib/zip";
 
 type Status = "idle" | "processing" | "done" | "error";
 
-const MAX_FILES = 10;
+const MAX_FILES = MAX_PDF_RENDER_FILES;
 
 export function CompressPdfWorkspace() {
   const fullDict = useDictionary();

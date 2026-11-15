@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
+import { MAX_PDF_RENDER_FILES } from "@/lib/tool-limits";
 import { downloadBlob } from "@/lib/download";
 import { isPdfPasswordError, renderPdfToJpegs } from "@/lib/pdf/render";
 import { zipFiles } from "@/lib/zip";
@@ -22,7 +23,7 @@ const LEVEL_SETTINGS: Record<Level, { scale: number; quality: number }> = {
   high: { scale: 2, quality: 0.92 },
 };
 
-const MAX_FILES = 10;
+const MAX_FILES = MAX_PDF_RENDER_FILES;
 
 export function PdfToJpgWorkspace() {
   const dict = useDictionary().workspace.pdfToJpg;
