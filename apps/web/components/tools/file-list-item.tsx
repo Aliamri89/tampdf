@@ -76,6 +76,8 @@ export function FileListItem({
       {preview ? (
         // eslint-disable-next-line @next/next/no-img-element -- local blob/data URL thumbnail, not a static asset
         <img
+          loading="lazy"
+          decoding="async"
           src={preview}
           alt=""
           className="h-12 w-12 shrink-0 rounded-md border border-border bg-surface-muted object-cover"

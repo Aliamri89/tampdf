@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Δεν ήταν δυνατή η ανάγνωση αυτού του PDF. Μπορεί να είναι κατεστραμμένο ή σε μη υποστηριζόμενη μορφή.";
-const passwordError = "Αυτό το PDF προστατεύεται με κωδικό πρόσβασης. Αφαιρέστε τον κωδικό και δοκιμάστε ξανά.";
+const readError = "Δεν είναι δυνατό το άνοιγμα αυτού του PDF. Ίσως είναι κατεστραμμένο.";
+const passwordError = "Αυτό το PDF προστατεύεται με κωδικό. Αφαιρέστε πρώτα τον κωδικό.";
 const dropPdf = "Σύρετε και αφήστε εδώ ένα αρχείο PDF";
 const dropPdfs = "Σύρετε και αφήστε εδώ αρχεία PDF";
 const dropImages = "Σύρετε και αφήστε εδώ εικόνες";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Συγχώνευση {count} PDF",
     buttonBusy: "Συγχώνευση…",
     hint: "Προσθέστε τουλάχιστον ένα ακόμη PDF για συγχώνευση.",
-    error: "Παρουσιάστηκε σφάλμα κατά τη συγχώνευση των PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Μετατροπή αρχείου {currentFile} από {totalFiles}, σελίδα {current} από {total}…",
     buttonBusyStart: "Έναρξη…",
     removeFileLabel: "Αφαίρεση {name}",
-    error: "Παρουσιάστηκε σφάλμα κατά τη μετατροπή των PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Συμπίεση 1 PDF",
     buttonPlural: "Συμπίεση {count} PDF",
     buttonBusy: "Συμπίεση…",
-    error: "Παρουσιάστηκε σφάλμα κατά τη συμπίεση των PDF. Δοκιμάστε ξανά.",
-    encryptedError: "Το {name} προστατεύεται με κωδικό ή είναι κρυπτογραφημένο. Αφαιρέστε πρώτα την προστασία και μετά συμπιέστε το.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
+    encryptedError: "Το {name} προστατεύεται με κωδικό. Αφαιρέστε πρώτα τον κωδικό.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Συμπίεση 1 εικόνας",
     buttonPlural: "Συμπίεση {count} εικόνων",
     buttonBusy: "Συμπίεση…",
-    error: "Παρουσιάστηκε σφάλμα κατά τη συμπίεση των εικόνων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Μετατροπή 1 εικόνας σε PDF",
     buttonPlural: "Μετατροπή {count} εικόνων σε PDF",
     buttonBusy: "Μετατροπή…",
-    error: "Παρουσιάστηκε σφάλμα κατά τη μετατροπή των εικόνων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Αφαίρεση {name}",
     button: "Περιστροφή PDF",
     buttonBusy: "Περιστροφή…",
-    error: "Παρουσιάστηκε σφάλμα κατά την περιστροφή των PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Περιστροφή 1 εικόνας",
     buttonPlural: "Περιστροφή {count} εικόνων",
     buttonBusy: "Περιστροφή…",
-    error: "Παρουσιάστηκε σφάλμα κατά την περιστροφή των εικόνων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Διαχωρισμός PDF",
     buttonBusy: "Διαχωρισμός…",
     invalidRanges: "Εισαγάγετε έγκυρα εύρη σελίδων από 1 έως {total}.",
-    error: "Παρουσιάστηκε σφάλμα κατά τον διαχωρισμό του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Διαγραφή {count} σελίδων",
     buttonOne: "Διαγραφή 1 σελίδας",
     buttonBusy: "Διαγραφή σελίδων…",
-    allSelectedError: "Δεν μπορείτε να διαγράψετε όλες τις σελίδες — κρατήστε τουλάχιστον μία.",
-    error: "Παρουσιάστηκε σφάλμα κατά την επεξεργασία του PDF. Δοκιμάστε ξανά.",
+    allSelectedError: "Κρατήστε τουλάχιστον μία σελίδα.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Αποθήκευση νέας σειράς",
     buttonBusy: "Αποθήκευση…",
     notChanged: "Μετακινήστε τουλάχιστον μία σελίδα για να αλλάξει η σειρά.",
-    error: "Παρουσιάστηκε σφάλμα κατά την αναδιάταξη του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Περικοπή PDF",
     buttonBusy: "Περικοπή…",
     noMargins: "Ορίστε τουλάχιστον ένα περιθώριο πάνω από 0%.",
-    error: "Παρουσιάστηκε σφάλμα κατά την περικοπή του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Κλίμακα",
     button: "Αλλαγή μεγέθους PDF",
     buttonBusy: "Αλλαγή μεγέθους…",
-    error: "Παρουσιάστηκε σφάλμα κατά την αλλαγή μεγέθους του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Μετατροπή 1 PNG σε PDF",
     buttonPlural: "Μετατροπή {count} PNG σε PDF",
     buttonBusy: "Μετατροπή…",
-    error: "Παρουσιάστηκε σφάλμα κατά τη μετατροπή των εικόνων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   common: {
     loadingPages: "Φόρτωση σελίδων…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} σελίδες",
     readError,
     passwordError,
-    imageReadError: "Δεν ήταν δυνατή η ανάγνωση αυτής της εικόνας. Μπορεί να είναι κατεστραμμένη ή σε μη υποστηριζόμενη μορφή.",
+    imageReadError: "Δεν είναι δυνατό το άνοιγμα της εικόνας. Ίσως είναι κατεστραμμένη.",
     webpUnsupported:
-      "Το πρόγραμμα περιήγησής σας δεν μπορεί να δημιουργήσει εικόνες WebP. Δοκιμάστε την τελευταία έκδοση του Chrome, Edge ή Firefox ή επιλέξτε άλλη μορφή.",
+      "Ο περιηγητής σας δεν μπορεί να αποθηκεύσει WebP. Επιλέξτε άλλη μορφή.",
     selectAll: "Επιλογή όλων",
     clearSelection: "Καθαρισμός",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Εξαγωγή 1 σελίδας",
     buttonPlural: "Εξαγωγή {count} σελίδων",
     buttonBusy: "Εξαγωγή…",
-    error: "Παρουσιάστηκε σφάλμα κατά την εξαγωγή σελίδων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Χωρίς αριθμό στην πρώτη σελίδα (εξώφυλλο)",
     button: "Προσθήκη αριθμών σελίδας",
     buttonBusy: "Προσθήκη αριθμών…",
-    error: "Παρουσιάστηκε σφάλμα κατά την αρίθμηση του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Πληκτρολογήστε το κείμενο που θέλετε να αποτυπωθεί σε κάθε σελίδα.",
     button: "Προσθήκη υδατογραφήματος",
     buttonBusy: "Προσθήκη υδατογραφήματος…",
-    error: "Παρουσιάστηκε σφάλμα κατά την προσθήκη υδατογραφήματος. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "Αφαιρέθηκε 1 αντικείμενο υδατογραφήματος.",
     removedCount: "Αφαιρέθηκαν {count} αντικείμενα υδατογραφήματος.",
     noneFound:
-      "Δεν βρέθηκε αφαιρούμενο υδατογράφημα σε αυτό το PDF. Υδατογραφήματα που αποτελούν μέρος σαρωμένης εικόνας ή έχουν συγχωνευτεί με το κείμενο της σελίδας δεν μπορούν να διαχωριστούν από το περιεχόμενο.",
+      "Δεν βρέθηκε υδατογράφημα που να αφαιρείται. Όσα είναι μέρος σάρωσης ή του κειμένου της σελίδας δεν αφαιρούνται.",
+    protectedPdf: "Αυτό το PDF είναι προστατευμένο, οπότε οι σελίδες του δεν ελέγχονται. Αφαιρέστε πρώτα την προστασία.",
+    scannedPdf: "Αυτό το PDF αποτελείται από σαρωμένες εικόνες. Υδατογράφημα μέσα σε εικόνα δεν αφαιρείται.",
+    uncheckedPages: "Ορισμένες σελίδες δεν διαβάστηκαν, οπότε δεν αφαιρέθηκε υδατογράφημα.",
     tryAnother: "Δοκιμάστε άλλο αρχείο",
-    error: "Παρουσιάστηκε σφάλμα κατά την επεξεργασία του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Χωρίστε τις λέξεις-κλειδιά με κόμματα.",
     button: "Αποθήκευση αλλαγών",
     buttonBusy: "Αποθήκευση…",
-    error: "Παρουσιάστηκε σφάλμα κατά την αποθήκευση του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Δεν έχουν οριστεί ιδιότητες εγγράφου — το αρχείο θα καθαριστεί πάντως από κρυφά μεταδεδομένα XMP.",
     button: "Αφαίρεση μεταδεδομένων",
     buttonBusy: "Καθαρισμός…",
-    error: "Παρουσιάστηκε σφάλμα κατά τον καθαρισμό του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Κατοπτρισμός πάνω ↕ κάτω",
     button: "Αναστροφή PDF",
     buttonBusy: "Αναστροφή…",
-    error: "Παρουσιάστηκε σφάλμα κατά την αναστροφή του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Δημιουργία PDF από 1 εικόνα",
     buttonPlural: "Δημιουργία PDF από {count} εικόνες",
     buttonBusy: "Δημιουργία PDF…",
-    error: "Παρουσιάστηκε σφάλμα κατά τη δημιουργία του PDF. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   imageConvert: {
     dropLabel: "Σύρετε και αφήστε εδώ εικόνες {from}",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Μετατροπή 1 εικόνας σε {to}",
     buttonPlural: "Μετατροπή {count} εικόνων σε {to}",
     buttonBusy: "Μετατροπή…",
-    error: "Παρουσιάστηκε σφάλμα κατά τη μετατροπή των εικόνων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Αλλαγή μεγέθους 1 εικόνας",
     buttonPlural: "Αλλαγή μεγέθους {count} εικόνων",
     buttonBusy: "Αλλαγή μεγέθους…",
-    error: "Παρουσιάστηκε σφάλμα κατά την αλλαγή μεγέθους των εικόνων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Αναστροφή 1 εικόνας",
     buttonPlural: "Αναστροφή {count} εικόνων",
     buttonBusy: "Αναστροφή…",
-    error: "Παρουσιάστηκε σφάλμα κατά την αναστροφή των εικόνων. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
   cropImage: {
     dropLabel: "Σύρετε και αφήστε εδώ μια εικόνα",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Μετακινήστε το πλαίσιο για να επιλέξετε την περιοχή που θα κρατήσετε.",
     button: "Περικοπή εικόνας",
     buttonBusy: "Περικοπή…",
-    error: "Παρουσιάστηκε σφάλμα κατά την περικοπή της εικόνας. Δοκιμάστε ξανά.",
+    error: "Η επεξεργασία απέτυχε. Δοκιμάστε ξανά.",
   },
 };

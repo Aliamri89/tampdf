@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Loader2, Stamp } from "lucide-react";
 import {
   ErrorText,
@@ -47,29 +48,32 @@ const MAX_TEXT = 60;
 export function AddWatermarkWorkspace() {
   const dict = useDictionary().workspace.addWatermark;
   const common = useDictionary().workspace.common;
-  const source = usePdfSource("preview");
-  const [text, setText] = useState("");
-  const [color, setColor] = useState<ColorKey>("gray");
-  const [opacity, setOpacity] = useState(30);
-  const [size, setSize] = useState(60);
-  const [angle, setAngle] = useState<AngleKey>("diagonalUp");
-  const [layout, setLayout] = useState<WatermarkLayout>("single");
-  const [image, setImage] = useState<WatermarkImage | null>(null);
-  const [imageSource, setImageSource] = useState<{
+  const source = usePdfSource("preview", "add-watermark");
+  const [text, setText] = useToolState("add-watermark:text", "");
+  const [color, setColor] = useToolState<ColorKey>("add-watermark:color", "gray");
+  const [opacity, setOpacity] = useToolState("add-watermark:opacity", 30);
+  const [size, setSize] = useToolState("add-watermark:size", 60);
+  const [angle, setAngle] = useToolState<AngleKey>("add-watermark:angle", "diagonalUp");
+  const [layout, setLayout] = useToolState<WatermarkLayout>("add-watermark:layout", "single");
+  const [image, setImage] = useToolState<WatermarkImage | null>("add-watermark:image", null);
+  const [imageSource, setImageSource] = useToolState<{
     file: File;
     url: string;
     width: number;
     height: number;
-  } | null>(null);
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; name: string } | null>(null);
+  } | null>("add-watermark:imageSource", null);
+  const [processing, setProcessing] = useToolState("add-watermark:processing", false);
+  const [error, setError] = useToolState<string | null>("add-watermark:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; name: string } | null>("add-watermark:result", null);
 
+  // Free the previous preview URL when the picture is replaced or removed. Not
+  // on unmount: the picture is kept for when the visitor comes back (use-tool-state).
   const imageUrl = imageSource?.url;
+  const previousImageUrl = useRef(imageUrl);
   useEffect(() => {
-    return () => {
-      if (imageUrl) URL.revokeObjectURL(imageUrl);
-    };
+    const previous = previousImageUrl.current;
+    if (previous && previous !== imageUrl) URL.revokeObjectURL(previous);
+    previousImageUrl.current = imageUrl;
   }, [imageUrl]);
 
   const trimmed = text.trim();
@@ -88,7 +92,7 @@ export function AddWatermarkWorkspace() {
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, [trimmed, color]);
+  }, [trimmed, color, setImage]);
 
   async function handleFileAdded(added: File) {
     setError(null);

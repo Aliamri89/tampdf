@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { FlipHorizontal, Loader2, X } from "lucide-react";
 import { ErrorText, OptionGroup } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -28,11 +28,11 @@ function createId() {
 export function FlipImageWorkspace() {
   const dict = useDictionary().workspace.flipImage;
   const fileListDict = useDictionary().fileList;
-  const [entries, setEntries] = useState<Entry[]>([]);
-  const [direction, setDirection] = useState<ImageFlip>("horizontal");
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; filename: string } | null>(null);
+  const [entries, setEntries] = useToolState<Entry[]>("flip-image:entries", []);
+  const [direction, setDirection] = useToolState<ImageFlip>("flip-image:direction", "horizontal");
+  const [processing, setProcessing] = useToolState("flip-image:processing", false);
+  const [error, setError] = useToolState<string | null>("flip-image:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; filename: string } | null>("flip-image:result", null);
 
   function reset() {
     entries.forEach((entry) => URL.revokeObjectURL(entry.url));
@@ -118,12 +118,14 @@ export function FlipImageWorkspace() {
             ]}
           />
 
-          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
             {entries.map((entry) => (
               <div key={entry.id} className="relative">
                 <div className="flex aspect-square items-center justify-center overflow-hidden rounded-lg border border-border bg-surface-muted">
                   {/* eslint-disable-next-line @next/next/no-img-element -- local object URL, not a static asset */}
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={entry.url}
                     alt=""
                     className="max-h-[85%] max-w-[85%] object-contain transition-transform duration-500 ease-out"

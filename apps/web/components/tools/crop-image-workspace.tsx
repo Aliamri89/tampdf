@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, type PointerEvent } from "react";
+import { useRef, type PointerEvent } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Crop, Loader2, RotateCcw } from "lucide-react";
 import { ErrorText, SelectedFile } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -35,13 +36,13 @@ const HANDLES: { mode: Exclude<DragMode, "move">; className: string }[] = [
 export function CropImageWorkspace() {
   const dict = useDictionary().workspace.cropImage;
   const common = useDictionary().workspace.common;
-  const [file, setFile] = useState<File | null>(null);
-  const [url, setUrl] = useState<string | null>(null);
-  const [natural, setNatural] = useState<{ width: number; height: number } | null>(null);
-  const [margins, setMargins] = useState<Margins>(NO_MARGINS);
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; filename: string } | null>(null);
+  const [file, setFile] = useToolState<File | null>("crop-image:file", null);
+  const [url, setUrl] = useToolState<string | null>("crop-image:url", null);
+  const [natural, setNatural] = useToolState<{ width: number; height: number } | null>("crop-image:natural", null);
+  const [margins, setMargins] = useToolState<Margins>("crop-image:margins", NO_MARGINS);
+  const [processing, setProcessing] = useToolState("crop-image:processing", false);
+  const [error, setError] = useToolState<string | null>("crop-image:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; filename: string } | null>("crop-image:result", null);
   const frameRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ mode: DragMode; x: number; y: number; start: Margins } | null>(null);
 

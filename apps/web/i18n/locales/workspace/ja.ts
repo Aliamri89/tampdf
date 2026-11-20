@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "このPDFを読み込めませんでした。ファイルが破損しているか、対応していない形式の可能性があります。";
-const passwordError = "このPDFはパスワードで保護されています。パスワードを解除してからもう一度お試しください。";
+const readError = "このPDFを開けません。ファイルが破損している可能性があります。";
+const passwordError = "このPDFはパスワードで保護されています。先にパスワードを解除してください。";
 const dropPdf = "PDFファイルをここにドラッグ＆ドロップ";
 const dropPdfs = "PDFファイルをここにドラッグ＆ドロップ";
 const dropImages = "画像をここにドラッグ＆ドロップ";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count}件のPDFを結合",
     buttonBusy: "結合中…",
     hint: "結合するには、PDFをもう1件以上追加してください。",
-    error: "PDFの結合中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "ファイル {currentFile}/{totalFiles}、{current}/{total}ページを変換中…",
     buttonBusyStart: "開始しています…",
     removeFileLabel: "{name}を削除",
-    error: "PDFの変換中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1件のPDFを圧縮",
     buttonPlural: "{count}件のPDFを圧縮",
     buttonBusy: "圧縮中…",
-    error: "PDFの圧縮中に問題が発生しました。もう一度お試しください。",
-    encryptedError: "{name}はパスワードで保護されているか暗号化されています。保護を解除してから圧縮してください。",
+    error: "処理に失敗しました。もう一度お試しください。",
+    encryptedError: "{name} はパスワードで保護されています。先にパスワードを解除してください。",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1枚の画像を圧縮",
     buttonPlural: "{count}枚の画像を圧縮",
     buttonBusy: "圧縮中…",
-    error: "画像の圧縮中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "1枚の画像をPDFに変換",
     buttonPlural: "{count}枚の画像をPDFに変換",
     buttonBusy: "変換中…",
-    error: "画像の変換中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "{name}を削除",
     button: "PDFを回転",
     buttonBusy: "回転中…",
-    error: "PDFの回転中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1枚の画像を回転",
     buttonPlural: "{count}枚の画像を回転",
     buttonBusy: "回転中…",
-    error: "画像の回転中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDFを分割",
     buttonBusy: "分割中…",
     invalidRanges: "1〜{total}の範囲で有効なページ範囲を入力してください。",
-    error: "PDFの分割中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count}ページを削除",
     buttonOne: "1ページを削除",
     buttonBusy: "ページを削除中…",
-    allSelectedError: "すべてのページは削除できません。少なくとも1ページ残してください。",
-    error: "PDFの編集中に問題が発生しました。もう一度お試しください。",
+    allSelectedError: "少なくとも1ページは残してください。",
+    error: "処理に失敗しました。もう一度お試しください。",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "新しい順序を保存",
     buttonBusy: "保存中…",
     notChanged: "順序を変えるには、少なくとも1ページを移動してください。",
-    error: "PDFの並べ替え中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDFをトリミング",
     buttonBusy: "トリミング中…",
     noMargins: "少なくとも1つの余白を0%より大きく設定してください。",
-    error: "PDFのトリミング中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "拡大縮小",
     button: "PDFのサイズを変更",
     buttonBusy: "サイズを変更中…",
-    error: "PDFのサイズ変更中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1枚のPNGをPDFに変換",
     buttonPlural: "{count}枚のPNGをPDFに変換",
     buttonBusy: "変換中…",
-    error: "画像の変換中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   common: {
     loadingPages: "ページを読み込み中…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count}ページ",
     readError,
     passwordError,
-    imageReadError: "この画像を読み込めませんでした。ファイルが破損しているか、対応していない形式の可能性があります。",
+    imageReadError: "この画像を開けません。ファイルが破損している可能性があります。",
     webpUnsupported:
-      "お使いのブラウザはWebP画像を作成できません。最新のChrome、Edge、Firefoxをお試しいただくか、別の形式を選んでください。",
+      "お使いのブラウザはWebPで保存できません。別の形式を選んでください。",
     selectAll: "すべて選択",
     clearSelection: "解除",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "1ページを抽出",
     buttonPlural: "{count}ページを抽出",
     buttonBusy: "抽出中…",
-    error: "ページの抽出中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "最初のページ（表紙）には番号を付けない",
     button: "ページ番号を追加",
     buttonBusy: "番号を追加中…",
-    error: "ページ番号の追加中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "各ページに入れる文字を入力してください。",
     button: "透かしを追加",
     buttonBusy: "透かしを追加中…",
-    error: "透かしの追加中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "透かしオブジェクトを1件削除しました。",
     removedCount: "透かしオブジェクトを{count}件削除しました。",
     noneFound:
-      "このPDFには削除可能な透かしが見つかりませんでした。スキャン画像の一部になっている透かしや、ページの文字と一体化した透かしは内容から分離できません。",
+      "削除できる透かしが見つかりませんでした。スキャン画像やページの文字に含まれる透かしは削除できません。",
+    protectedPdf: "このPDFは保護されているため、ページを確認できません。先に保護を解除してください。",
+    scannedPdf: "このPDFはスキャン画像でできています。画像の中の透かしは削除できません。",
+    uncheckedPages: "一部のページを読み取れなかったため、透かしは削除していません。",
     tryAnother: "別のファイルを試す",
-    error: "PDFの編集中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "キーワードはカンマで区切ってください。",
     button: "変更を保存",
     buttonBusy: "保存中…",
-    error: "PDFの保存中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "ドキュメントのプロパティは設定されていません。隠れたXMPメタデータは削除されます。",
     button: "メタデータを削除",
     buttonBusy: "クリーンアップ中…",
-    error: "PDFのクリーンアップ中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "上下 ↕ に反転",
     button: "PDFを反転",
     buttonBusy: "反転中…",
-    error: "PDFの反転中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1枚の画像からPDFを作成",
     buttonPlural: "{count}枚の画像からPDFを作成",
     buttonBusy: "PDFを作成中…",
-    error: "PDFの作成中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   imageConvert: {
     dropLabel: "{from}画像をここにドラッグ＆ドロップ",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1枚の画像を{to}に変換",
     buttonPlural: "{count}枚の画像を{to}に変換",
     buttonBusy: "変換中…",
-    error: "画像の変換中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1枚の画像のサイズを変更",
     buttonPlural: "{count}枚の画像のサイズを変更",
     buttonBusy: "サイズを変更中…",
-    error: "画像のサイズ変更中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1枚の画像を反転",
     buttonPlural: "{count}枚の画像を反転",
     buttonBusy: "反転中…",
-    error: "画像の反転中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
   cropImage: {
     dropLabel: "画像をここにドラッグ＆ドロップ",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "枠を動かして、残したい範囲を選んでください。",
     button: "画像を切り抜く",
     buttonBusy: "切り抜き中…",
-    error: "画像の切り抜き中に問題が発生しました。もう一度お試しください。",
+    error: "処理に失敗しました。もう一度お試しください。",
   },
 };

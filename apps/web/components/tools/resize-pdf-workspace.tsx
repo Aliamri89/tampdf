@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Loader2, Scaling, X } from "lucide-react";
 import { PDFDocument } from "pdf-lib";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -21,16 +21,16 @@ type Mode = "preset" | "scale";
 export function ResizePdfWorkspace() {
   const dict = useDictionary().workspace.resizePdf;
   const fileListDict = useDictionary().fileList;
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useToolState<File | null>("resize-pdf:file", null);
   const preview = useFileThumbnail(file);
-  const [pageCount, setPageCount] = useState(0);
-  const [mode, setMode] = useState<Mode>("preset");
-  const [preset, setPreset] = useState<ResizePreset>("a4-portrait");
-  const [scale, setScale] = useState(100);
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [readError, setReadError] = useState(false);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
+  const [pageCount, setPageCount] = useToolState("resize-pdf:pageCount", 0);
+  const [mode, setMode] = useToolState<Mode>("resize-pdf:mode", "preset");
+  const [preset, setPreset] = useToolState<ResizePreset>("resize-pdf:preset", "a4-portrait");
+  const [scale, setScale] = useToolState("resize-pdf:scale", 100);
+  const [status, setStatus] = useToolState<Status>("resize-pdf:status", "idle");
+  const [error, setError] = useToolState<string | null>("resize-pdf:error", null);
+  const [readError, setReadError] = useToolState("resize-pdf:readError", false);
+  const [result, setResult] = useToolState<{ bytes: Uint8Array; name: string } | null>("resize-pdf:result", null);
 
   const presets: { id: ResizePreset; label: string }[] = [
     { id: "a4-portrait", label: dict.a4Portrait },

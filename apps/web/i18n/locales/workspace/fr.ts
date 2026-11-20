@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Impossible de lire ce PDF. Il est peut-être endommagé ou dans un format non pris en charge.";
-const passwordError = "Ce PDF est protégé par un mot de passe. Supprimez le mot de passe puis réessayez.";
+const readError = "Impossible d'ouvrir ce PDF. Il est peut-être endommagé.";
+const passwordError = "Ce PDF est protégé par mot de passe. Retirez d'abord le mot de passe.";
 const dropPdf = "Glissez-déposez un fichier PDF ici";
 const dropPdfs = "Glissez-déposez des fichiers PDF ici";
 const dropImages = "Glissez-déposez des images ici";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Fusionner {count} PDF",
     buttonBusy: "Fusion en cours…",
     hint: "Ajoutez au moins un autre PDF à fusionner.",
-    error: "Une erreur s'est produite lors de la fusion de vos PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Conversion du fichier {currentFile} sur {totalFiles}, page {current} sur {total}…",
     buttonBusyStart: "Démarrage…",
     removeFileLabel: "Retirer {name}",
-    error: "Une erreur s'est produite lors de la conversion de vos PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Compresser 1 PDF",
     buttonPlural: "Compresser {count} PDF",
     buttonBusy: "Compression en cours…",
-    error: "Une erreur s'est produite lors de la compression de vos PDF. Veuillez réessayer.",
-    encryptedError: "{name} est protégé par un mot de passe ou chiffré. Supprimez d'abord la protection, puis compressez-le.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
+    encryptedError: "{name} est protégé par mot de passe. Retirez d'abord le mot de passe.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Compresser 1 image",
     buttonPlural: "Compresser {count} images",
     buttonBusy: "Compression en cours…",
-    error: "Une erreur s'est produite lors de la compression de vos images. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Convertir 1 image en PDF",
     buttonPlural: "Convertir {count} images en PDF",
     buttonBusy: "Conversion en cours…",
-    error: "Une erreur s'est produite lors de la conversion de vos images. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Retirer {name}",
     button: "Faire pivoter le PDF",
     buttonBusy: "Rotation en cours…",
-    error: "Une erreur s'est produite lors de la rotation de vos PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Faire pivoter 1 image",
     buttonPlural: "Faire pivoter {count} images",
     buttonBusy: "Rotation en cours…",
-    error: "Une erreur s'est produite lors de la rotation de vos images. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Diviser le PDF",
     buttonBusy: "Division en cours…",
     invalidRanges: "Saisissez des plages de pages valides entre 1 et {total}.",
-    error: "Une erreur s'est produite lors de la division de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Supprimer {count} pages",
     buttonOne: "Supprimer 1 page",
     buttonBusy: "Suppression des pages…",
-    allSelectedError: "Vous ne pouvez pas supprimer toutes les pages — gardez-en au moins une.",
-    error: "Une erreur s'est produite lors de la modification de votre PDF. Veuillez réessayer.",
+    allSelectedError: "Gardez au moins une page.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Enregistrer le nouvel ordre",
     buttonBusy: "Enregistrement…",
     notChanged: "Déplacez au moins une page pour changer l'ordre.",
-    error: "Une erreur s'est produite lors de la réorganisation de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Rogner le PDF",
     buttonBusy: "Rognage en cours…",
     noMargins: "Définissez au moins une marge supérieure à 0 %.",
-    error: "Une erreur s'est produite lors du rognage de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Échelle",
     button: "Redimensionner le PDF",
     buttonBusy: "Redimensionnement…",
-    error: "Une erreur s'est produite lors du redimensionnement de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Convertir 1 PNG en PDF",
     buttonPlural: "Convertir {count} PNG en PDF",
     buttonBusy: "Conversion en cours…",
-    error: "Une erreur s'est produite lors de la conversion de vos images. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   common: {
     loadingPages: "Chargement des pages…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} pages",
     readError,
     passwordError,
-    imageReadError: "Impossible de lire cette image. Elle est peut-être endommagée ou dans un format non pris en charge.",
+    imageReadError: "Impossible d'ouvrir cette image. Elle est peut-être endommagée.",
     webpUnsupported:
-      "Votre navigateur ne peut pas créer d'images WebP. Essayez la dernière version de Chrome, Edge ou Firefox, ou choisissez un autre format.",
+      "Votre navigateur ne peut pas enregistrer en WebP. Choisissez un autre format.",
     selectAll: "Tout sélectionner",
     clearSelection: "Effacer",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Extraire 1 page",
     buttonPlural: "Extraire {count} pages",
     buttonBusy: "Extraction en cours…",
-    error: "Une erreur s'est produite lors de l'extraction des pages. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Ne pas numéroter la première page (couverture)",
     button: "Ajouter les numéros de page",
     buttonBusy: "Ajout des numéros…",
-    error: "Une erreur s'est produite lors de la numérotation de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Saisissez le texte à apposer sur chaque page.",
     button: "Ajouter le filigrane",
     buttonBusy: "Ajout du filigrane…",
-    error: "Une erreur s'est produite lors de l'ajout du filigrane. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "1 objet filigrane supprimé.",
     removedCount: "{count} objets filigrane supprimés.",
     noneFound:
-      "Aucun filigrane amovible n'a été trouvé dans ce PDF. Un filigrane intégré à une image numérisée ou fusionné au texte de la page ne peut pas être séparé du contenu.",
+      "Aucun filigrane amovible trouvé. Les filigranes intégrés à un scan ou au texte de la page ne peuvent pas être retirés.",
+    protectedPdf: "Ce PDF est protégé : ses pages ne peuvent pas être vérifiées. Retirez d'abord la protection.",
+    scannedPdf: "Ce PDF est composé d'images scannées. Un filigrane intégré à une image ne peut pas être retiré.",
+    uncheckedPages: "Certaines pages n'ont pas pu être lues : aucun filigrane n'a été retiré.",
     tryAnother: "Essayer un autre fichier",
-    error: "Une erreur s'est produite lors de la modification de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Séparez les mots-clés par des virgules.",
     button: "Enregistrer les modifications",
     buttonBusy: "Enregistrement…",
-    error: "Une erreur s'est produite lors de l'enregistrement de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Aucune propriété de document n'est définie — le fichier sera tout de même nettoyé de toute métadonnée XMP cachée.",
     button: "Supprimer les métadonnées",
     buttonBusy: "Nettoyage…",
-    error: "Une erreur s'est produite lors du nettoyage de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Miroir haut ↕ bas",
     button: "Retourner le PDF",
     buttonBusy: "Retournement…",
-    error: "Une erreur s'est produite lors du retournement de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Créer un PDF à partir d'1 image",
     buttonPlural: "Créer un PDF à partir de {count} images",
     buttonBusy: "Création du PDF…",
-    error: "Une erreur s'est produite lors de la création de votre PDF. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   imageConvert: {
     dropLabel: "Glissez-déposez des images {from} ici",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Convertir 1 image en {to}",
     buttonPlural: "Convertir {count} images en {to}",
     buttonBusy: "Conversion en cours…",
-    error: "Une erreur s'est produite lors de la conversion de vos images. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Redimensionner 1 image",
     buttonPlural: "Redimensionner {count} images",
     buttonBusy: "Redimensionnement…",
-    error: "Une erreur s'est produite lors du redimensionnement de vos images. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Retourner 1 image",
     buttonPlural: "Retourner {count} images",
     buttonBusy: "Retournement…",
-    error: "Une erreur s'est produite lors du retournement de vos images. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
   cropImage: {
     dropLabel: "Glissez-déposez une image ici",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Déplacez le cadre pour choisir la zone à conserver.",
     button: "Rogner l'image",
     buttonBusy: "Rognage en cours…",
-    error: "Une erreur s'est produite lors du rognage de votre image. Veuillez réessayer.",
+    error: "Le traitement a échoué. Veuillez réessayer.",
   },
 };

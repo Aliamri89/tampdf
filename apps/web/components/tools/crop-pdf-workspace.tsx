@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Crop, Loader2, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
@@ -24,18 +24,18 @@ const PREVIEW_MAX = 520;
 export function CropPdfWorkspace() {
   const dict = useDictionary().workspace.cropPdf;
   const fileListDict = useDictionary().fileList;
-  const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const [percent, setPercent] = useState<Record<Edge, number>>({
+  const [file, setFile] = useToolState<File | null>("crop-pdf:file", null);
+  const [preview, setPreview] = useToolState<string | null>("crop-pdf:preview", null);
+  const [percent, setPercent] = useToolState<Record<Edge, number>>("crop-pdf:percent", {
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
   });
-  const [status, setStatus] = useState<Status>("idle");
-  const [readError, setReadError] = useState<ReadError>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
+  const [status, setStatus] = useToolState<Status>("crop-pdf:status", "idle");
+  const [readError, setReadError] = useToolState<ReadError>("crop-pdf:readError", null);
+  const [error, setError] = useToolState<string | null>("crop-pdf:error", null);
+  const [result, setResult] = useToolState<{ bytes: Uint8Array; name: string } | null>("crop-pdf:result", null);
 
   function reset() {
     setFile(null);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Loader2, Scissors, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
@@ -26,15 +26,15 @@ interface Thumb {
 export function SplitPdfWorkspace() {
   const dict = useDictionary().workspace.splitPdf;
   const fileListDict = useDictionary().fileList;
-  const [file, setFile] = useState<File | null>(null);
-  const [thumbs, setThumbs] = useState<Thumb[]>([]);
-  const [mode, setMode] = useState<Mode>("ranges");
-  const [ranges, setRanges] = useState("");
-  const [everyN, setEveryN] = useState(1);
-  const [status, setStatus] = useState<Status>("idle");
-  const [readError, setReadError] = useState<ReadError>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; name: string } | null>(null);
+  const [file, setFile] = useToolState<File | null>("split-pdf:file", null);
+  const [thumbs, setThumbs] = useToolState<Thumb[]>("split-pdf:thumbs", []);
+  const [mode, setMode] = useToolState<Mode>("split-pdf:mode", "ranges");
+  const [ranges, setRanges] = useToolState("split-pdf:ranges", "");
+  const [everyN, setEveryN] = useToolState("split-pdf:everyN", 1);
+  const [status, setStatus] = useToolState<Status>("split-pdf:status", "idle");
+  const [readError, setReadError] = useToolState<ReadError>("split-pdf:readError", null);
+  const [error, setError] = useToolState<string | null>("split-pdf:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; name: string } | null>("split-pdf:result", null);
 
   const pageCount = thumbs.length;
 

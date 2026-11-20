@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Check, FileOutput, Loader2 } from "lucide-react";
 import { ErrorText, LoadingLine, OptionGroup, SelectedFile } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -20,12 +20,12 @@ type Output = "single" | "separate";
 export function ExtractPdfPagesWorkspace() {
   const dict = useDictionary().workspace.extractPdfPages;
   const common = useDictionary().workspace.common;
-  const source = usePdfSource("thumbnails");
-  const [selected, setSelected] = useState<Set<number>>(new Set());
-  const [output, setOutput] = useState<Output>("single");
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; name: string } | null>(null);
+  const source = usePdfSource("thumbnails", "extract-pdf-pages");
+  const [selected, setSelected] = useToolState<Set<number>>("extract-pdf-pages:selected", new Set());
+  const [output, setOutput] = useToolState<Output>("extract-pdf-pages:output", "single");
+  const [processing, setProcessing] = useToolState("extract-pdf-pages:processing", false);
+  const [error, setError] = useToolState<string | null>("extract-pdf-pages:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; name: string } | null>("extract-pdf-pages:result", null);
 
   function reset() {
     source.clear();
@@ -142,7 +142,7 @@ export function ExtractPdfPagesWorkspace() {
                   {allSelected ? common.clearSelection : common.selectAll}
                 </button>
               </div>
-              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
                 {source.thumbs.map((page) => {
                   const isSelected = selected.has(page.pageNumber);
                   return (

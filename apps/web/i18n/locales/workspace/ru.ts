@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Не удалось прочитать этот PDF. Возможно, файл повреждён или имеет неподдерживаемый формат.";
-const passwordError = "Этот PDF защищён паролем. Снимите пароль и повторите попытку.";
+const readError = "Не удаётся открыть этот PDF. Возможно, файл повреждён.";
+const passwordError = "Этот PDF защищён паролем. Сначала снимите пароль.";
 const dropPdf = "Перетащите сюда PDF-файл";
 const dropPdfs = "Перетащите сюда PDF-файлы";
 const dropImages = "Перетащите сюда изображения";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Объединить PDF ({count})",
     buttonBusy: "Объединение…",
     hint: "Добавьте ещё хотя бы один PDF для объединения.",
-    error: "При объединении PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Конвертация файла {currentFile} из {totalFiles}, страница {current} из {total}…",
     buttonBusyStart: "Запуск…",
     removeFileLabel: "Удалить {name}",
-    error: "При конвертации PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Сжать 1 PDF",
     buttonPlural: "Сжать PDF ({count})",
     buttonBusy: "Сжатие…",
-    error: "При сжатии PDF произошла ошибка. Попробуйте ещё раз.",
-    encryptedError: "Файл {name} защищён паролем или зашифрован. Сначала снимите защиту, затем сожмите его.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
+    encryptedError: "{name} защищён паролем. Сначала снимите пароль.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Сжать 1 изображение",
     buttonPlural: "Сжать изображения ({count})",
     buttonBusy: "Сжатие…",
-    error: "При сжатии изображений произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Конвертировать 1 изображение в PDF",
     buttonPlural: "Конвертировать изображения в PDF ({count})",
     buttonBusy: "Конвертация…",
-    error: "При конвертации изображений произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Удалить {name}",
     button: "Повернуть PDF",
     buttonBusy: "Поворот…",
-    error: "При повороте PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Повернуть 1 изображение",
     buttonPlural: "Повернуть изображения ({count})",
     buttonBusy: "Поворот…",
-    error: "При повороте изображений произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Разделить PDF",
     buttonBusy: "Разделение…",
     invalidRanges: "Укажите корректные диапазоны страниц от 1 до {total}.",
-    error: "При разделении PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Удалить страницы ({count})",
     buttonOne: "Удалить 1 страницу",
     buttonBusy: "Удаление страниц…",
-    allSelectedError: "Нельзя удалить все страницы — оставьте хотя бы одну.",
-    error: "При редактировании PDF произошла ошибка. Попробуйте ещё раз.",
+    allSelectedError: "Оставьте хотя бы одну страницу.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Сохранить новый порядок",
     buttonBusy: "Сохранение…",
     notChanged: "Переместите хотя бы одну страницу, чтобы изменить порядок.",
-    error: "При изменении порядка страниц произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Обрезать PDF",
     buttonBusy: "Обрезка…",
     noMargins: "Задайте хотя бы одно поле больше 0%.",
-    error: "При обрезке PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Масштаб",
     button: "Изменить размер PDF",
     buttonBusy: "Изменение размера…",
-    error: "При изменении размера PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Конвертировать 1 PNG в PDF",
     buttonPlural: "Конвертировать PNG в PDF ({count})",
     buttonBusy: "Конвертация…",
-    error: "При конвертации изображений произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   common: {
     loadingPages: "Загрузка страниц…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "Страниц: {count}",
     readError,
     passwordError,
-    imageReadError: "Не удалось прочитать это изображение. Возможно, файл повреждён или имеет неподдерживаемый формат.",
+    imageReadError: "Не удаётся открыть это изображение. Возможно, файл повреждён.",
     webpUnsupported:
-      "Ваш браузер не умеет создавать изображения WebP. Используйте последнюю версию Chrome, Edge или Firefox либо выберите другой формат.",
+      "Ваш браузер не умеет сохранять WebP. Выберите другой формат.",
     selectAll: "Выбрать все",
     clearSelection: "Сбросить",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Извлечь 1 страницу",
     buttonPlural: "Извлечь страницы ({count})",
     buttonBusy: "Извлечение…",
-    error: "При извлечении страниц произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Не нумеровать первую страницу (обложку)",
     button: "Добавить номера страниц",
     buttonBusy: "Добавление номеров…",
-    error: "При нумерации PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Введите текст, который нужно нанести на каждую страницу.",
     button: "Добавить водяной знак",
     buttonBusy: "Добавление водяного знака…",
-    error: "При добавлении водяного знака произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "Удалён 1 объект водяного знака.",
     removedCount: "Удалено объектов водяного знака: {count}.",
     noneFound:
-      "В этом PDF не найдено удаляемых водяных знаков. Знаки, которые являются частью отсканированного изображения или слиты с текстом страницы, нельзя отделить от содержимого.",
+      "Удаляемый водяной знак не найден. Знаки, которые являются частью скана или текста страницы, удалить нельзя.",
+    protectedPdf: "Этот PDF защищён, поэтому страницы нельзя проверить. Сначала снимите защиту.",
+    scannedPdf: "Этот PDF состоит из отсканированных изображений. Водяной знак внутри изображения удалить нельзя.",
+    uncheckedPages: "Некоторые страницы не удалось прочитать, поэтому водяной знак не удалён.",
     tryAnother: "Попробовать другой файл",
-    error: "При редактировании PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Разделяйте ключевые слова запятыми.",
     button: "Сохранить изменения",
     buttonBusy: "Сохранение…",
-    error: "При сохранении PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Свойства документа не заданы — скрытые метаданные XMP всё равно будут удалены.",
     button: "Удалить метаданные",
     buttonBusy: "Очистка…",
-    error: "При очистке PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Отразить сверху ↕ вниз",
     button: "Отразить PDF",
     buttonBusy: "Отражение…",
-    error: "При отражении PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Создать PDF из 1 изображения",
     buttonPlural: "Создать PDF из изображений ({count})",
     buttonBusy: "Создание PDF…",
-    error: "При создании PDF произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   imageConvert: {
     dropLabel: "Перетащите сюда изображения {from}",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Конвертировать 1 изображение в {to}",
     buttonPlural: "Конвертировать изображения в {to} ({count})",
     buttonBusy: "Конвертация…",
-    error: "При конвертации изображений произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Изменить размер 1 изображения",
     buttonPlural: "Изменить размер изображений ({count})",
     buttonBusy: "Изменение размера…",
-    error: "При изменении размера изображений произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Отразить 1 изображение",
     buttonPlural: "Отразить изображения ({count})",
     buttonBusy: "Отражение…",
-    error: "При отражении изображений произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
   cropImage: {
     dropLabel: "Перетащите сюда изображение",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Переместите рамку, чтобы выбрать область, которую нужно оставить.",
     button: "Обрезать изображение",
     buttonBusy: "Обрезка…",
-    error: "При обрезке изображения произошла ошибка. Попробуйте ещё раз.",
+    error: "Не удалось выполнить обработку. Попробуйте ещё раз.",
   },
 };

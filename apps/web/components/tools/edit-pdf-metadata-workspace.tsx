@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useToolRef, useToolState } from "@/components/tools/use-tool-state";
 import { FilePen, Loader2 } from "lucide-react";
 import { ErrorText, LoadingLine, SelectedFile, inputClass } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -20,16 +20,16 @@ import { cn } from "@/lib/utils";
 export function EditPdfMetadataWorkspace() {
   const dict = useDictionary().workspace.editPdfMetadata;
   const common = useDictionary().workspace.common;
-  const [file, setFile] = useState<File | null>(null);
-  const [values, setValues] = useState<PdfMetadata | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
-  const token = useRef(0);
+  const [file, setFile] = useToolState<File | null>("edit-pdf-metadata:file", null);
+  const [values, setValues] = useToolState<PdfMetadata | null>("edit-pdf-metadata:values", null);
+  const [loading, setLoading] = useToolState("edit-pdf-metadata:loading", false);
+  const [processing, setProcessing] = useToolState("edit-pdf-metadata:processing", false);
+  const [error, setError] = useToolState<string | null>("edit-pdf-metadata:error", null);
+  const [result, setResult] = useToolState<{ bytes: Uint8Array; name: string } | null>("edit-pdf-metadata:result", null);
+  const tokenRef = useToolRef("edit-pdf-metadata:token", 0);
 
   function reset() {
-    token.current++;
+    tokenRef.current++;
     setFile(null);
     setValues(null);
     setLoading(false);
@@ -41,18 +41,18 @@ export function EditPdfMetadataWorkspace() {
   async function handleFile(added: File[]) {
     const next = added[0];
     if (!next) return;
-    const current = ++token.current;
+    const current = ++tokenRef.current;
     setFile(next);
     setValues(null);
     setError(null);
     setLoading(true);
     try {
       const metadata = await readPdfMetadata(next);
-      if (current === token.current) setValues(metadata);
+      if (current === tokenRef.current) setValues(metadata);
     } catch {
-      if (current === token.current) setError(common.readError);
+      if (current === tokenRef.current) setError(common.readError);
     } finally {
-      if (current === token.current) setLoading(false);
+      if (current === tokenRef.current) setLoading(false);
     }
   }
 

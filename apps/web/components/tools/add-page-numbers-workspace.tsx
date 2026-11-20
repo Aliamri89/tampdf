@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { ListOrdered, Loader2 } from "lucide-react";
 import {
   ErrorText,
@@ -40,15 +40,15 @@ type FontSize = keyof typeof FONT_SIZES;
 export function AddPageNumbersWorkspace() {
   const dict = useDictionary().workspace.addPageNumbers;
   const common = useDictionary().workspace.common;
-  const source = usePdfSource("count");
-  const [position, setPosition] = useState<PageNumberPosition>("bottom-center");
-  const [format, setFormat] = useState<PageNumberFormat>("n");
-  const [fontSize, setFontSize] = useState<FontSize>("medium");
-  const [startAt, setStartAt] = useState(1);
-  const [skipFirst, setSkipFirst] = useState(false);
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
+  const source = usePdfSource("count", "add-page-numbers");
+  const [position, setPosition] = useToolState<PageNumberPosition>("add-page-numbers:position", "bottom-center");
+  const [format, setFormat] = useToolState<PageNumberFormat>("add-page-numbers:format", "n");
+  const [fontSize, setFontSize] = useToolState<FontSize>("add-page-numbers:fontSize", "medium");
+  const [startAt, setStartAt] = useToolState("add-page-numbers:startAt", 1);
+  const [skipFirst, setSkipFirst] = useToolState("add-page-numbers:skipFirst", false);
+  const [processing, setProcessing] = useToolState("add-page-numbers:processing", false);
+  const [error, setError] = useToolState<string | null>("add-page-numbers:error", null);
+  const [result, setResult] = useToolState<{ bytes: Uint8Array; name: string } | null>("add-page-numbers:result", null);
 
   function reset() {
     source.clear();

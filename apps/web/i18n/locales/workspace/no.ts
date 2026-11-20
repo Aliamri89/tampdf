@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Denne PDF-en kunne ikke leses. Filen kan være skadet eller ha et format som ikke støttes.";
-const passwordError = "Denne PDF-en er passordbeskyttet. Fjern passordet og prøv igjen.";
+const readError = "Denne PDF-en kan ikke åpnes. Den kan være skadet.";
+const passwordError = "Denne PDF-en er passordbeskyttet. Fjern passordet først.";
 const dropPdf = "Dra og slipp en PDF-fil her";
 const dropPdfs = "Dra og slipp PDF-filer her";
 const dropImages = "Dra og slipp bilder her";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Slå sammen {count} PDF-er",
     buttonBusy: "Slår sammen…",
     hint: "Legg til minst én PDF til for å slå sammen.",
-    error: "Noe gikk galt under sammenslåingen av PDF-ene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Konverterer fil {currentFile} av {totalFiles}, side {current} av {total}…",
     buttonBusyStart: "Starter…",
     removeFileLabel: "Fjern {name}",
-    error: "Noe gikk galt under konverteringen av PDF-ene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Komprimer 1 PDF",
     buttonPlural: "Komprimer {count} PDF-er",
     buttonBusy: "Komprimerer…",
-    error: "Noe gikk galt under komprimeringen av PDF-ene. Prøv igjen.",
-    encryptedError: "{name} er passordbeskyttet eller kryptert. Fjern beskyttelsen først, og komprimer den deretter.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
+    encryptedError: "{name} er passordbeskyttet. Fjern passordet først.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Komprimer 1 bilde",
     buttonPlural: "Komprimer {count} bilder",
     buttonBusy: "Komprimerer…",
-    error: "Noe gikk galt under komprimeringen av bildene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Konverter 1 bilde til PDF",
     buttonPlural: "Konverter {count} bilder til PDF",
     buttonBusy: "Konverterer…",
-    error: "Noe gikk galt under konverteringen av bildene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Fjern {name}",
     button: "Roter PDF",
     buttonBusy: "Roterer…",
-    error: "Noe gikk galt under roteringen av PDF-ene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Roter 1 bilde",
     buttonPlural: "Roter {count} bilder",
     buttonBusy: "Roterer…",
-    error: "Noe gikk galt under roteringen av bildene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Del opp PDF",
     buttonBusy: "Deler opp…",
     invalidRanges: "Skriv inn gyldige sideintervaller mellom 1 og {total}.",
-    error: "Noe gikk galt under oppdelingen av PDF-en. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Slett {count} sider",
     buttonOne: "Slett 1 side",
     buttonBusy: "Sletter sider…",
-    allSelectedError: "Du kan ikke slette alle sidene — behold minst én.",
-    error: "Noe gikk galt under redigeringen av PDF-en. Prøv igjen.",
+    allSelectedError: "Behold minst én side.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Lagre ny rekkefølge",
     buttonBusy: "Lagrer…",
     notChanged: "Flytt minst én side for å endre rekkefølgen.",
-    error: "Noe gikk galt under endringen av siderekkefølgen. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Beskjær PDF",
     buttonBusy: "Beskjærer…",
     noMargins: "Angi minst én marg over 0 %.",
-    error: "Noe gikk galt under beskjæringen av PDF-en. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Skala",
     button: "Endre størrelse på PDF",
     buttonBusy: "Endrer størrelse…",
-    error: "Noe gikk galt under endringen av PDF-ens størrelse. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Konverter 1 PNG til PDF",
     buttonPlural: "Konverter {count} PNG til PDF",
     buttonBusy: "Konverterer…",
-    error: "Noe gikk galt under konverteringen av bildene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   common: {
     loadingPages: "Laster inn sider…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} sider",
     readError,
     passwordError,
-    imageReadError: "Bildet kunne ikke leses. Filen kan være skadet eller ha et format som ikke støttes.",
+    imageReadError: "Bildet kan ikke åpnes. Det kan være skadet.",
     webpUnsupported:
-      "Nettleseren din kan ikke lage WebP-bilder. Prøv nyeste Chrome, Edge eller Firefox, eller velg et annet format.",
+      "Nettleseren din kan ikke lagre WebP. Velg et annet format.",
     selectAll: "Velg alle",
     clearSelection: "Fjern",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Hent ut 1 side",
     buttonPlural: "Hent ut {count} sider",
     buttonBusy: "Henter ut…",
-    error: "Noe gikk galt under uthentingen av sidene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Ikke nummerer første side (forside)",
     button: "Legg til sidetall",
     buttonBusy: "Legger til numre…",
-    error: "Noe gikk galt under nummereringen av PDF-en. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Skriv teksten som skal stemples på hver side.",
     button: "Legg til vannmerke",
     buttonBusy: "Legger til vannmerke…",
-    error: "Noe gikk galt da vannmerket skulle legges til. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "1 vannmerkeobjekt ble fjernet.",
     removedCount: "{count} vannmerkeobjekter ble fjernet.",
     noneFound:
-      "Fant ikke noe vannmerke som kan fjernes i denne PDF-en. Vannmerker som er en del av et skannet bilde eller slått sammen med sideteksten kan ikke skilles fra innholdet.",
+      "Fant ikke noe vannmerke som kan fjernes. Vannmerker i en skanning eller i sideteksten kan ikke fjernes.",
+    protectedPdf: "Denne PDF-en er beskyttet, så sidene kan ikke kontrolleres. Fjern beskyttelsen først.",
+    scannedPdf: "Denne PDF-en består av skannede bilder. Et vannmerke i et bilde kan ikke fjernes.",
+    uncheckedPages: "Noen sider kunne ikke leses, så ingen vannmerker ble fjernet.",
     tryAnother: "Prøv en annen fil",
-    error: "Noe gikk galt under redigeringen av PDF-en. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Skill nøkkelord med komma.",
     button: "Lagre endringer",
     buttonBusy: "Lagrer…",
-    error: "Noe gikk galt under lagringen av PDF-en. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Ingen dokumentegenskaper er angitt — filen blir likevel renset for skjulte XMP-metadata.",
     button: "Fjern metadata",
     buttonBusy: "Renser…",
-    error: "Noe gikk galt under rensingen av PDF-en. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Speilvend topp ↕ bunn",
     button: "Vend PDF",
     buttonBusy: "Vender…",
-    error: "Noe gikk galt under vendingen av PDF-en. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Lag PDF av 1 bilde",
     buttonPlural: "Lag PDF av {count} bilder",
     buttonBusy: "Lager PDF…",
-    error: "Noe gikk galt da PDF-en skulle lages. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   imageConvert: {
     dropLabel: "Dra og slipp {from}-bilder her",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Konverter 1 bilde til {to}",
     buttonPlural: "Konverter {count} bilder til {to}",
     buttonBusy: "Konverterer…",
-    error: "Noe gikk galt under konverteringen av bildene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Endre størrelse på 1 bilde",
     buttonPlural: "Endre størrelse på {count} bilder",
     buttonBusy: "Endrer størrelse…",
-    error: "Noe gikk galt under endringen av bildestørrelsen. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Vend 1 bilde",
     buttonPlural: "Vend {count} bilder",
     buttonBusy: "Vender…",
-    error: "Noe gikk galt under vendingen av bildene. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
   cropImage: {
     dropLabel: "Dra og slipp et bilde her",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Flytt rammen for å velge området som skal beholdes.",
     button: "Beskjær bilde",
     buttonBusy: "Beskjærer…",
-    error: "Noe gikk galt under beskjæringen av bildet. Prøv igjen.",
+    error: "Behandlingen mislyktes. Prøv igjen.",
   },
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Loader2, Minimize2 } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
@@ -28,15 +28,15 @@ export function CompressPdfWorkspace() {
     { id: "medium", label: dict.levelMedium, hint: dict.levelMediumHint },
     { id: "high", label: dict.levelHigh, hint: dict.levelHighHint },
   ];
-  const [files, setFiles] = useState<File[]>([]);
-  const [level, setLevel] = useState<CompressionLevel>("medium");
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{
+  const [files, setFiles] = useToolState<File[]>("compress-pdf:files", []);
+  const [level, setLevel] = useToolState<CompressionLevel>("compress-pdf:level", "medium");
+  const [status, setStatus] = useToolState<Status>("compress-pdf:status", "idle");
+  const [error, setError] = useToolState<string | null>("compress-pdf:error", null);
+  const [result, setResult] = useToolState<{
     blob: Blob;
     filename: string;
     originalSize: number;
-  } | null>(null);
+  } | null>("compress-pdf:result", null);
 
   const resultName = (name: string) => name.replace(/\.pdf$/i, dict.resultSuffix);
 

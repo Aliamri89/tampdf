@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Combine, Loader2 } from "lucide-react";
 import type { DragEvent } from "react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -28,10 +29,10 @@ function createId() {
 
 export function MergePdfWorkspace() {
   const dict = useDictionary().workspace.mergePdf;
-  const [entries, setEntries] = useState<FileEntry[]>([]);
-  const [status, setStatus] = useState<"idle" | "processing" | "done" | "error">("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<Uint8Array | null>(null);
+  const [entries, setEntries] = useToolState<FileEntry[]>("merge-pdf:entries", []);
+  const [status, setStatus] = useToolState<"idle" | "processing" | "done" | "error">("merge-pdf:status", "idle");
+  const [error, setError] = useToolState<string | null>("merge-pdf:error", null);
+  const [result, setResult] = useToolState<Uint8Array | null>("merge-pdf:result", null);
   // A ref (not state) so the drop handler always reads the id that was just
   // dragged, even if it fires before React re-renders with the new state.
   // draggedId (state) mirrors it for use during render, since refs can't be

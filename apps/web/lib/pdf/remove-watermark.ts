@@ -5,9 +5,12 @@ import {
   PDFHexString,
   PDFName,
   PDFRawStream,
+  PDFRef,
   PDFStream,
   PDFString,
   decodePDFRawStream,
+  type PDFContext,
+  type PDFObject,
   type PDFPage,
 } from "pdf-lib";
 import { removeUnreachableObjects } from "@/lib/pdf/gc";
@@ -16,43 +19,219 @@ export interface RemoveWatermarkResult {
   bytes: Uint8Array;
   /** Watermark objects removed across the whole document. */
   removed: number;
+  /**
+   * Why nothing was removed, when that is the case:
+   * - "encrypted": the PDF is encrypted, so its pages can't be read or checked;
+   * - "scanned": every page is only a picture (a scan): a mark inside it is part of the image;
+   * - "unreadable": some pages use data this tool can't read, so they couldn't be checked;
+   * - "none": every page was checked and no removable watermark exists.
+   */
+  reason: "encrypted" | "scanned" | "unreadable" | "none" | null;
+}
+
+/** Layer (optional content) names used for watermarks, in the languages editors commonly use. */
+const WATERMARK_LAYER =
+  /watermark|wasserzeichen|filigran|filigrane|filigrana|marca d['’]?\s?[aá]gua|marca de agua|watermerk|vattenst[äa]mpel|vandm[æa]rke|vannmerke|vesileima|znak wodny|vodoznak|водян|υδατογράφ|水印|浮水印|透かし|워터마크|علامة مائية|ลายน้ำ|hình mờ|tanda air/i;
+
+interface Scope {
+  /** Resource names (under /Properties) whose marked content is a watermark. */
+  watermarkProperties: Set<string>;
+  /** Resource names (under /Properties) of watermark layers. */
+  watermarkLayers: Set<string>;
+  /** XObject names that are watermarks themselves (by layer or Acrobat's watermark tag). */
+  watermarkXObjects: Set<string>;
+  /** XObject names that are pictures (used to recognise scanned pages). */
+  imageXObjects: Set<string>;
+}
+
+interface Totals {
+  removed: number;
+  unreadable: number;
 }
 
 /**
  * Removes watermarks that were added as *watermark objects*, which covers
- * Acrobat, TAMPDF's own Add Watermark tool, and most editors:
+ * Acrobat, Word/Office exports, TAMPDF's own Add Watermark tool and most editors:
  *
- * - `/Artifact <</Subtype /Watermark …>> BDC … EMC` marked-content blocks,
- * - optional-content blocks (`/OC /name BDC … EMC`) whose layer is named
- *   "Watermark",
- * - annotations with `/Subtype /Watermark`.
+ * - marked content tagged as a watermark: `/Artifact <</Subtype /Watermark>> BDC … EMC`
+ *   (also via a named property), `/Watermark BMC … EMC`;
+ * - content in an optional-content layer named "Watermark" (in several languages),
+ *   whether marked with `/OC … BDC` or set on the drawn object itself;
+ * - Acrobat watermark objects (`/PieceInfo … /Private /Watermark`) drawn with `Do`;
+ * - annotations with `/Subtype /Watermark` (or a watermark layer / name).
  *
- * A watermark flattened into a scanned image or merged into ordinary page
- * text has no such marker and cannot be told apart from real content.
+ * Content inside form XObjects is checked too, since some PDFs wrap every
+ * page in one. A watermark flattened into a scanned image or merged into the
+ * ordinary page text has no such marker and cannot be told apart from real
+ * content; `reason` tells the caller which case applies.
  */
 export async function removeWatermarks(file: File): Promise<RemoveWatermarkResult> {
-  const pdf = await PDFDocument.load(await file.arrayBuffer(), { ignoreEncryption: true });
-  let removed = 0;
+  const pdf = await PDFDocument.load(await file.arrayBuffer(), {
+    ignoreEncryption: true,
+    throwOnInvalidObject: false,
+  });
+  if (pdf.isEncrypted) {
+    return { bytes: new Uint8Array(), removed: 0, reason: "encrypted" };
+  }
 
-  for (const page of pdf.getPages()) {
-    removed += removeWatermarkAnnotations(page);
+  const totals: Totals = { removed: 0, unreadable: 0 };
+  const visitedForms = new Set<string>();
+  let scannedPages = 0;
+  const pages = pdf.getPages();
+
+  for (const page of pages) {
+    totals.removed += removeWatermarkAnnotations(page);
+
+    const resources = page.node.Resources();
+    const scope = scopeFor(pdf.context, resources);
+    processForms(pdf.context, resources, totals, visitedForms);
 
     const content = readPageContent(page);
+    if (content === "unreadable") {
+      totals.unreadable++;
+      continue;
+    }
     if (!content) continue;
-    const { output, count } = stripWatermarkBlocks(content, watermarkLayerNames(page));
+    const { output, count, drawsText, drawsImage } = stripWatermarkBlocks(content, scope);
+    if (!drawsText && drawsImage) scannedPages++;
     if (count > 0) {
       const stream = pdf.context.flateStream(output);
       page.node.set(PDFName.of("Contents"), pdf.context.register(stream));
-      removed += count;
+      totals.removed += count;
     }
   }
 
-  if (removed > 0) {
-    dropUnusedXObjects(pdf.getPages());
-    // The watermark's image and the replaced content streams are now orphans.
-    removeUnreachableObjects(pdf);
+  if (totals.removed === 0) {
+    const reason =
+      totals.unreadable > 0
+        ? "unreadable"
+        : pages.length > 0 && scannedPages === pages.length
+          ? "scanned"
+          : "none";
+    return { bytes: new Uint8Array(), removed: 0, reason };
   }
-  return { bytes: await pdf.save({ useObjectStreams: true }), removed };
+
+  dropUnusedXObjects(pages);
+  // The watermark's image and the replaced content streams are now orphans.
+  removeUnreachableObjects(pdf);
+  return { bytes: await pdf.save({ useObjectStreams: true }), removed: totals.removed, reason: null };
+}
+
+function textOf(value: PDFObject | undefined): string {
+  if (value instanceof PDFString || value instanceof PDFHexString) return value.decodeText();
+  if (value instanceof PDFName) return value.decodeText();
+  return "";
+}
+
+/** True when an /OC value (an optional-content group or membership dictionary) is a watermark layer. */
+function isWatermarkLayer(context: PDFContext, value: PDFObject | undefined): boolean {
+  const dict = value instanceof PDFRef ? context.lookup(value) : value;
+  if (!(dict instanceof PDFDict)) return false;
+  if (WATERMARK_LAYER.test(textOf(dict.lookup(PDFName.of("Name"))))) return true;
+  // Membership dictionary: watermark if any of its groups is.
+  const groups = dict.lookup(PDFName.of("OCGs"));
+  if (groups instanceof PDFArray) {
+    return groups.asArray().some((group) => isWatermarkLayer(context, group));
+  }
+  return groups instanceof PDFDict ? isWatermarkLayer(context, groups) : false;
+}
+
+/** Marked-content properties that say "this is a watermark". */
+function isWatermarkProperties(dict: PDFDict): boolean {
+  const subtype = textOf(dict.lookup(PDFName.of("Subtype")));
+  const type = textOf(dict.lookup(PDFName.of("Type")));
+  return /^watermark$/i.test(subtype) || /^watermark$/i.test(type);
+}
+
+/** Acrobat tags its watermark objects with `/PieceInfo << /ADBE_CompoundType << /Private /Watermark >> >>`. */
+function hasAcrobatWatermarkTag(dict: PDFDict): boolean {
+  const pieceInfo = dict.lookup(PDFName.of("PieceInfo"));
+  if (!(pieceInfo instanceof PDFDict)) return false;
+  for (const [, entry] of pieceInfo.entries()) {
+    const app = entry instanceof PDFRef ? dict.context.lookup(entry) : entry;
+    if (app instanceof PDFDict && /^watermark$/i.test(textOf(app.lookup(PDFName.of("Private"))))) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function scopeFor(context: PDFContext, resources: PDFDict | undefined): Scope {
+  const scope: Scope = {
+    watermarkProperties: new Set(),
+    watermarkLayers: new Set(),
+    watermarkXObjects: new Set(),
+    imageXObjects: new Set(),
+  };
+  if (!resources) return scope;
+
+  const properties = resources.lookup(PDFName.of("Properties"));
+  if (properties instanceof PDFDict) {
+    for (const [key, value] of properties.entries()) {
+      const name = key.decodeText();
+      const dict = context.lookup(value);
+      if (!(dict instanceof PDFDict)) continue;
+      if (isWatermarkLayer(context, dict)) scope.watermarkLayers.add(name);
+      if (isWatermarkProperties(dict)) scope.watermarkProperties.add(name);
+    }
+  }
+
+  const xobjects = resources.lookup(PDFName.of("XObject"));
+  if (xobjects instanceof PDFDict) {
+    for (const [key, value] of xobjects.entries()) {
+      const name = key.decodeText();
+      const stream = context.lookup(value);
+      if (!(stream instanceof PDFStream)) continue;
+      const dict = stream.dict;
+      const isImage = textOf(dict.lookup(PDFName.of("Subtype"))) === "Image";
+      if (isImage) scope.imageXObjects.add(name);
+      if (isWatermarkLayer(context, dict.get(PDFName.of("OC"))) || hasAcrobatWatermarkTag(dict)) {
+        scope.watermarkXObjects.add(name);
+      }
+    }
+  }
+  return scope;
+}
+
+/** Strips watermark content inside the form XObjects a page (or form) uses, recursively. */
+function processForms(
+  context: PDFContext,
+  resources: PDFDict | undefined,
+  totals: Totals,
+  visited: Set<string>,
+): void {
+  const xobjects = resources?.lookup(PDFName.of("XObject"));
+  if (!(xobjects instanceof PDFDict)) return;
+  for (const [, value] of xobjects.entries()) {
+    if (!(value instanceof PDFRef) || visited.has(value.toString())) continue;
+    visited.add(value.toString());
+    const form = context.lookup(value);
+    if (!(form instanceof PDFStream)) continue;
+    if (textOf(form.dict.lookup(PDFName.of("Subtype"))) !== "Form") continue;
+
+    const formResources = form.dict.lookup(PDFName.of("Resources"));
+    const ownResources = formResources instanceof PDFDict ? formResources : resources;
+    processForms(context, ownResources, totals, visited);
+
+    let data: Uint8Array;
+    try {
+      data = decodeStream(form);
+    } catch {
+      totals.unreadable++;
+      continue;
+    }
+    const { output, count } = stripWatermarkBlocks(data, scopeFor(context, ownResources));
+    if (count === 0) continue;
+    // Same dictionary (BBox, Matrix, Resources, …), new content, re-compressed.
+    const replacement = context.flateStream(output);
+    for (const [key, entry] of form.dict.entries()) {
+      const name = key.decodeText();
+      if (name === "Length" || name === "Filter" || name === "DecodeParms") continue;
+      replacement.dict.set(key, entry);
+    }
+    context.assign(value, replacement);
+    totals.removed += count;
+  }
 }
 
 /**
@@ -67,7 +246,7 @@ function dropUnusedXObjects(pages: PDFPage[]): void {
     if (!(xobjects instanceof PDFDict)) continue;
     const content = readPageContent(page);
     const texts = usage.get(xobjects) ?? [];
-    texts.push(content ? new TextDecoder("latin1").decode(content) : null);
+    texts.push(content instanceof Uint8Array ? new TextDecoder("latin1").decode(content) : null);
     usage.set(xobjects, texts);
   }
   for (const [xobjects, texts] of usage) {
@@ -83,10 +262,16 @@ function dropUnusedXObjects(pages: PDFPage[]): void {
 function removeWatermarkAnnotations(page: PDFPage): number {
   const annots = page.node.Annots();
   if (!annots) return 0;
+  const context = page.doc.context;
   let removed = 0;
   for (let index = annots.size() - 1; index >= 0; index--) {
     const annot = annots.lookup(index);
-    if (annot instanceof PDFDict && annot.get(PDFName.of("Subtype")) === PDFName.of("Watermark")) {
+    if (!(annot instanceof PDFDict)) continue;
+    const isWatermark =
+      textOf(annot.lookup(PDFName.of("Subtype"))) === "Watermark" ||
+      isWatermarkLayer(context, annot.get(PDFName.of("OC"))) ||
+      /^watermark/i.test(textOf(annot.lookup(PDFName.of("NM"))));
+    if (isWatermark) {
       annots.remove(index);
       removed++;
     }
@@ -100,8 +285,8 @@ function decodeStream(stream: PDFStream): Uint8Array {
   return maybe.getUnencodedContents ? maybe.getUnencodedContents() : stream.getContents();
 }
 
-/** The page's content streams decoded and joined into one buffer (null if unreadable). */
-function readPageContent(page: PDFPage): Uint8Array | null {
+/** The page's content streams decoded and joined into one buffer (null if none, "unreadable" if they can't be decoded). */
+function readPageContent(page: PDFPage): Uint8Array | null | "unreadable" {
   const contents = page.node.Contents();
   const streams: PDFStream[] = [];
   if (contents instanceof PDFArray) {
@@ -127,24 +312,8 @@ function readPageContent(page: PDFPage): Uint8Array | null {
     return joined;
   } catch {
     // An unsupported stream filter — leave the page untouched.
-    return null;
+    return "unreadable";
   }
-}
-
-/** Resource names (under /Properties) of optional-content layers named like "Watermark". */
-function watermarkLayerNames(page: PDFPage): Set<string> {
-  const names = new Set<string>();
-  const properties = page.node.Resources()?.lookup(PDFName.of("Properties"));
-  if (!(properties instanceof PDFDict)) return names;
-  for (const [key, value] of properties.entries()) {
-    const layer = page.doc.context.lookup(value);
-    if (!(layer instanceof PDFDict)) continue;
-    const label = layer.lookup(PDFName.of("Name"));
-    const text =
-      label instanceof PDFString || label instanceof PDFHexString ? label.decodeText() : "";
-    if (/watermark/i.test(text)) names.add(key.asString().replace(/^\//, ""));
-  }
-  return names;
 }
 
 // ---- Minimal content-stream tokenizer -------------------------------------
@@ -270,30 +439,48 @@ interface Operand {
   text: string;
 }
 
-function isWatermarkBlock(operands: Operand[], layerNames: Set<string>): boolean {
+const EMPTY_SCOPE: Scope = {
+  watermarkProperties: new Set(),
+  watermarkLayers: new Set(),
+  watermarkXObjects: new Set(),
+  imageXObjects: new Set(),
+};
+
+function isWatermarkBlock(operator: string, operands: Operand[], scope: Scope): boolean {
+  if (operator === "BMC") {
+    const tag = operands[operands.length - 1];
+    return tag?.kind === "name" && /^watermark$/i.test(tag.text);
+  }
   const [tag, properties] = operands.slice(-2);
   if (!tag || tag.kind !== "name" || !properties) return false;
-  if (tag.text === "Artifact" && properties.kind === "dict") {
-    return /\/Subtype\s*\/Watermark\b/.test(properties.text);
+  if (/^watermark$/i.test(tag.text)) return true;
+  if (tag.text === "OC") {
+    return properties.kind === "name" && scope.watermarkLayers.has(properties.text);
   }
-  if (tag.text === "OC" && properties.kind === "name") {
-    return layerNames.has(properties.text);
+  if (properties.kind === "dict") {
+    return /\/(Sub)?[Tt]ype\s*\/Watermark\b/.test(properties.text);
   }
-  return false;
+  return properties.kind === "name" && scope.watermarkProperties.has(properties.text);
 }
 
 /**
- * Cuts every watermark marked-content block (see `removeWatermarks`) out of
- * a decoded content stream. Only the outermost matching block is cut, and
- * each cut is replaced with a newline so neighbouring tokens never merge.
+ * Cuts every watermark (see `removeWatermarks`) out of a decoded content
+ * stream: marked-content blocks (only the outermost matching block) and
+ * `Do` calls that draw a watermark object. Each cut is replaced with a
+ * newline so neighbouring tokens never merge. Also reports whether the
+ * content draws text or pictures, to recognise scanned pages.
  */
 export function stripWatermarkBlocks(
   data: Uint8Array,
-  layerNames: Set<string> = new Set(),
-): { output: Uint8Array; count: number } {
+  scope: Scope | Set<string> = EMPTY_SCOPE,
+): { output: Uint8Array; count: number; drawsText: boolean; drawsImage: boolean } {
+  const resolved: Scope =
+    scope instanceof Set ? { ...EMPTY_SCOPE, watermarkLayers: scope } : scope;
   const cuts: [number, number][] = [];
   const open: { start: number; remove: boolean }[] = [];
   let operands: Operand[] = [];
+  let drawsText = false;
+  let drawsImage = false;
   let i = 0;
 
   while (i < data.length) {
@@ -346,25 +533,35 @@ export function stripWatermarkBlocks(
     }
 
     const operatorStart = operands.length > 0 ? operands[0].start : start;
+    const insideRemoved = open.some((block) => block.remove);
     if (word === "BI") {
       i = skipInlineImage(data, i);
+      if (!insideRemoved) drawsImage = true;
     } else if (word === "BDC" || word === "BMC") {
-      open.push({
-        start: operatorStart,
-        remove: word === "BDC" && isWatermarkBlock(operands, layerNames),
-      });
+      open.push({ start: operatorStart, remove: isWatermarkBlock(word, operands, resolved) });
     } else if (word === "EMC") {
       const block = open.pop();
       if (block?.remove && !open.some((outer) => outer.remove)) cuts.push([block.start, i]);
+    } else if (word === "Do" && !insideRemoved) {
+      const target = operands[operands.length - 1];
+      if (target?.kind === "name" && resolved.watermarkXObjects.has(target.text)) {
+        cuts.push([operatorStart, i]);
+      } else if (target?.kind === "name" && resolved.imageXObjects.has(target.text)) {
+        drawsImage = true;
+      }
+    } else if ((word === "Tj" || word === "TJ" || word === "'" || word === '"') && !insideRemoved) {
+      drawsText = true;
     }
     operands = [];
   }
 
-  if (cuts.length === 0) return { output: data, count: 0 };
+  if (cuts.length === 0) return { output: data, count: 0, drawsText, drawsImage };
 
+  cuts.sort((a, b) => a[0] - b[0]);
   const kept: Uint8Array[] = [];
   let cursor = 0;
   for (const [from, to] of cuts) {
+    if (from < cursor) continue;
     kept.push(data.subarray(cursor, from), new Uint8Array([0x0a]));
     cursor = to;
   }
@@ -375,5 +572,5 @@ export function stripWatermarkBlocks(
     output.set(part, offset);
     offset += part.length;
   }
-  return { output, count: cuts.length };
+  return { output, count: cuts.length, drawsText, drawsImage };
 }

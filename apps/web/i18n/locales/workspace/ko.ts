@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "이 PDF를 읽을 수 없습니다. 파일이 손상되었거나 지원되지 않는 형식일 수 있습니다.";
-const passwordError = "이 PDF는 비밀번호로 보호되어 있습니다. 비밀번호를 해제한 후 다시 시도하세요.";
+const readError = "이 PDF를 열 수 없습니다. 파일이 손상되었을 수 있습니다.";
+const passwordError = "이 PDF는 비밀번호로 보호되어 있습니다. 먼저 비밀번호를 해제하세요.";
 const dropPdf = "PDF 파일을 여기에 끌어다 놓으세요";
 const dropPdfs = "PDF 파일을 여기에 끌어다 놓으세요";
 const dropImages = "이미지를 여기에 끌어다 놓으세요";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF {count}개 병합",
     buttonBusy: "병합 중…",
     hint: "병합하려면 PDF를 하나 이상 더 추가하세요.",
-    error: "PDF를 병합하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "파일 {currentFile}/{totalFiles}, {current}/{total}페이지 변환 중…",
     buttonBusyStart: "시작하는 중…",
     removeFileLabel: "{name} 제거",
-    error: "PDF를 변환하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "PDF 1개 압축",
     buttonPlural: "PDF {count}개 압축",
     buttonBusy: "압축 중…",
-    error: "PDF를 압축하는 중 문제가 발생했습니다. 다시 시도하세요.",
-    encryptedError: "{name} 파일은 비밀번호로 보호되었거나 암호화되어 있습니다. 먼저 보호를 해제한 후 압축하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
+    encryptedError: "{name}은(는) 비밀번호로 보호되어 있습니다. 먼저 비밀번호를 해제하세요.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "이미지 1개 압축",
     buttonPlural: "이미지 {count}개 압축",
     buttonBusy: "압축 중…",
-    error: "이미지를 압축하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "이미지 1개를 PDF로 변환",
     buttonPlural: "이미지 {count}개를 PDF로 변환",
     buttonBusy: "변환 중…",
-    error: "이미지를 변환하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "{name} 제거",
     button: "PDF 회전",
     buttonBusy: "회전 중…",
-    error: "PDF를 회전하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "이미지 1개 회전",
     buttonPlural: "이미지 {count}개 회전",
     buttonBusy: "회전 중…",
-    error: "이미지를 회전하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF 분할",
     buttonBusy: "분할 중…",
     invalidRanges: "1–{total} 사이의 올바른 페이지 범위를 입력하세요.",
-    error: "PDF를 분할하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count}페이지 삭제",
     buttonOne: "1페이지 삭제",
     buttonBusy: "페이지 삭제 중…",
-    allSelectedError: "모든 페이지를 삭제할 수는 없습니다. 최소 한 페이지는 남겨 두세요.",
-    error: "PDF를 편집하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    allSelectedError: "최소 한 페이지는 남겨 두세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "새 순서 저장",
     buttonBusy: "저장 중…",
     notChanged: "순서를 바꾸려면 최소 한 페이지를 이동하세요.",
-    error: "PDF 순서를 바꾸는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF 자르기",
     buttonBusy: "자르는 중…",
     noMargins: "여백을 하나 이상 0%보다 크게 설정하세요.",
-    error: "PDF를 자르는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "배율",
     button: "PDF 크기 조정",
     buttonBusy: "크기 조정 중…",
-    error: "PDF 크기를 조정하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "PNG 1개를 PDF로 변환",
     buttonPlural: "PNG {count}개를 PDF로 변환",
     buttonBusy: "변환 중…",
-    error: "이미지를 변환하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   common: {
     loadingPages: "페이지 불러오는 중…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count}페이지",
     readError,
     passwordError,
-    imageReadError: "이 이미지를 읽을 수 없습니다. 파일이 손상되었거나 지원되지 않는 형식일 수 있습니다.",
+    imageReadError: "이 이미지를 열 수 없습니다. 파일이 손상되었을 수 있습니다.",
     webpUnsupported:
-      "사용 중인 브라우저에서는 WebP 이미지를 만들 수 없습니다. 최신 Chrome, Edge 또는 Firefox를 사용하거나 다른 형식을 선택하세요.",
+      "브라우저에서 WebP로 저장할 수 없습니다. 다른 형식을 선택하세요.",
     selectAll: "모두 선택",
     clearSelection: "해제",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "1페이지 추출",
     buttonPlural: "{count}페이지 추출",
     buttonBusy: "추출 중…",
-    error: "페이지를 추출하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "첫 페이지(표지)에는 번호를 넣지 않기",
     button: "페이지 번호 추가",
     buttonBusy: "번호 추가 중…",
-    error: "페이지 번호를 추가하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "모든 페이지에 찍을 문구를 입력하세요.",
     button: "워터마크 추가",
     buttonBusy: "워터마크 추가 중…",
-    error: "워터마크를 추가하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "워터마크 객체 1개를 제거했습니다.",
     removedCount: "워터마크 객체 {count}개를 제거했습니다.",
     noneFound:
-      "이 PDF에서 제거할 수 있는 워터마크를 찾지 못했습니다. 스캔 이미지의 일부이거나 페이지 텍스트와 합쳐진 워터마크는 내용과 분리할 수 없습니다.",
+      "제거할 수 있는 워터마크를 찾지 못했습니다. 스캔 이미지나 페이지 텍스트에 포함된 워터마크는 제거할 수 없습니다.",
+    protectedPdf: "이 PDF는 보호되어 있어 페이지를 확인할 수 없습니다. 먼저 보호를 해제하세요.",
+    scannedPdf: "이 PDF는 스캔한 이미지로 되어 있습니다. 이미지 안의 워터마크는 제거할 수 없습니다.",
+    uncheckedPages: "일부 페이지를 읽을 수 없어 워터마크를 제거하지 않았습니다.",
     tryAnother: "다른 파일 시도",
-    error: "PDF를 편집하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "키워드는 쉼표로 구분하세요.",
     button: "변경 사항 저장",
     buttonBusy: "저장 중…",
-    error: "PDF를 저장하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "설정된 문서 속성이 없습니다. 숨겨진 XMP 메타데이터는 그래도 제거됩니다.",
     button: "메타데이터 제거",
     buttonBusy: "정리 중…",
-    error: "PDF를 정리하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "위 ↕ 아래 반전",
     button: "PDF 뒤집기",
     buttonBusy: "뒤집는 중…",
-    error: "PDF를 뒤집는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "이미지 1개로 PDF 만들기",
     buttonPlural: "이미지 {count}개로 PDF 만들기",
     buttonBusy: "PDF 만드는 중…",
-    error: "PDF를 만드는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   imageConvert: {
     dropLabel: "{from} 이미지를 여기에 끌어다 놓으세요",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "이미지 1개를 {to}(으)로 변환",
     buttonPlural: "이미지 {count}개를 {to}(으)로 변환",
     buttonBusy: "변환 중…",
-    error: "이미지를 변환하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "이미지 1개 크기 조정",
     buttonPlural: "이미지 {count}개 크기 조정",
     buttonBusy: "크기 조정 중…",
-    error: "이미지 크기를 조정하는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "이미지 1개 뒤집기",
     buttonPlural: "이미지 {count}개 뒤집기",
     buttonBusy: "뒤집는 중…",
-    error: "이미지를 뒤집는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
   cropImage: {
     dropLabel: "이미지를 여기에 끌어다 놓으세요",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "틀을 움직여 남길 영역을 선택하세요.",
     button: "이미지 자르기",
     buttonBusy: "자르는 중…",
-    error: "이미지를 자르는 중 문제가 발생했습니다. 다시 시도하세요.",
+    error: "처리에 실패했습니다. 다시 시도해 주세요.",
   },
 };

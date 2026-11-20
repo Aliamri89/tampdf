@@ -1,5 +1,6 @@
 import { PDFDocument, PageSizes, rgb } from "pdf-lib";
 import { convertImage } from "@/lib/image/convert";
+import { canWriteImagePdf, writeImagesPdf } from "@/lib/image/pdf-writer";
 
 export type ImagePdfPageSize = "image" | "a4" | "letter";
 
@@ -77,4 +78,18 @@ export async function imagesToPdf(
   }
 
   return pdfDoc.save();
+}
+
+/**
+ * Builds the PDF as a Blob. Uses the low-memory writer (lib/image/pdf-writer)
+ * wherever the browser supports native compression, and the pdf-lib path
+ * above only as a fallback for very old browsers.
+ */
+export async function imagesToPdfBlob(
+  files: File[],
+  options: ImagesToPdfOptions = {},
+): Promise<Blob> {
+  if (canWriteImagePdf()) return writeImagesPdf(files, options);
+  const bytes = await imagesToPdf(files, options);
+  return new Blob([new Uint8Array(bytes)], { type: "application/pdf" });
 }

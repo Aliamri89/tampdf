@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "PDF ini tidak dapat dibaca. File mungkin rusak atau formatnya tidak didukung.";
-const passwordError = "PDF ini dilindungi kata sandi. Hapus kata sandinya lalu coba lagi.";
+const readError = "PDF ini tidak bisa dibuka. Mungkin file rusak.";
+const passwordError = "PDF ini dilindungi kata sandi. Hapus kata sandinya dulu.";
 const dropPdf = "Seret dan lepas file PDF di sini";
 const dropPdfs = "Seret dan lepas file PDF di sini";
 const dropImages = "Seret dan lepas gambar di sini";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Gabungkan {count} PDF",
     buttonBusy: "Menggabungkan…",
     hint: "Tambahkan setidaknya satu PDF lagi untuk digabungkan.",
-    error: "Terjadi kesalahan saat menggabungkan PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Mengonversi file {currentFile} dari {totalFiles}, halaman {current} dari {total}…",
     buttonBusyStart: "Memulai…",
     removeFileLabel: "Hapus {name}",
-    error: "Terjadi kesalahan saat mengonversi PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Kompres 1 PDF",
     buttonPlural: "Kompres {count} PDF",
     buttonBusy: "Mengompres…",
-    error: "Terjadi kesalahan saat mengompres PDF Anda. Silakan coba lagi.",
-    encryptedError: "{name} dilindungi kata sandi atau dienkripsi. Hapus perlindungannya terlebih dahulu, lalu kompres.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
+    encryptedError: "{name} dilindungi kata sandi. Hapus kata sandinya dulu.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Kompres 1 gambar",
     buttonPlural: "Kompres {count} gambar",
     buttonBusy: "Mengompres…",
-    error: "Terjadi kesalahan saat mengompres gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Ubah 1 gambar ke PDF",
     buttonPlural: "Ubah {count} gambar ke PDF",
     buttonBusy: "Mengonversi…",
-    error: "Terjadi kesalahan saat mengonversi gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Hapus {name}",
     button: "Putar PDF",
     buttonBusy: "Memutar…",
-    error: "Terjadi kesalahan saat memutar PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Putar 1 gambar",
     buttonPlural: "Putar {count} gambar",
     buttonBusy: "Memutar…",
-    error: "Terjadi kesalahan saat memutar gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Pisahkan PDF",
     buttonBusy: "Memisahkan…",
     invalidRanges: "Masukkan rentang halaman yang valid antara 1–{total}.",
-    error: "Terjadi kesalahan saat memisahkan PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Hapus {count} halaman",
     buttonOne: "Hapus 1 halaman",
     buttonBusy: "Menghapus halaman…",
-    allSelectedError: "Anda tidak dapat menghapus semua halaman — sisakan setidaknya satu.",
-    error: "Terjadi kesalahan saat mengedit PDF Anda. Silakan coba lagi.",
+    allSelectedError: "Sisakan minimal satu halaman.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Simpan urutan baru",
     buttonBusy: "Menyimpan…",
     notChanged: "Pindahkan setidaknya satu halaman untuk mengubah urutan.",
-    error: "Terjadi kesalahan saat menyusun ulang PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Pangkas PDF",
     buttonBusy: "Memangkas…",
     noMargins: "Atur setidaknya satu margin di atas 0%.",
-    error: "Terjadi kesalahan saat memangkas PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Skala",
     button: "Ubah ukuran PDF",
     buttonBusy: "Mengubah ukuran…",
-    error: "Terjadi kesalahan saat mengubah ukuran PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Ubah 1 PNG ke PDF",
     buttonPlural: "Ubah {count} PNG ke PDF",
     buttonBusy: "Mengonversi…",
-    error: "Terjadi kesalahan saat mengonversi gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   common: {
     loadingPages: "Memuat halaman…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} halaman",
     readError,
     passwordError,
-    imageReadError: "Gambar ini tidak dapat dibaca. File mungkin rusak atau formatnya tidak didukung.",
+    imageReadError: "Gambar ini tidak bisa dibuka. Mungkin file rusak.",
     webpUnsupported:
-      "Browser Anda tidak dapat membuat gambar WebP. Coba Chrome, Edge, atau Firefox versi terbaru, atau pilih format lain.",
+      "Browser Anda tidak bisa menyimpan WebP. Pilih format lain.",
     selectAll: "Pilih semua",
     clearSelection: "Hapus",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Ekstrak 1 halaman",
     buttonPlural: "Ekstrak {count} halaman",
     buttonBusy: "Mengekstrak…",
-    error: "Terjadi kesalahan saat mengekstrak halaman. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Jangan beri nomor pada halaman pertama (sampul)",
     button: "Tambah nomor halaman",
     buttonBusy: "Menambahkan nomor…",
-    error: "Terjadi kesalahan saat menomori PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Ketik teks yang ingin dicap di setiap halaman.",
     button: "Tambah watermark",
     buttonBusy: "Menambahkan watermark…",
-    error: "Terjadi kesalahan saat menambahkan watermark. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "1 objek watermark dihapus.",
     removedCount: "{count} objek watermark dihapus.",
     noneFound:
-      "Tidak ditemukan watermark yang dapat dihapus di PDF ini. Watermark yang menjadi bagian gambar hasil pindai atau menyatu dengan teks halaman tidak dapat dipisahkan dari konten.",
+      "Tidak ditemukan watermark yang bisa dihapus. Watermark yang menjadi bagian dari hasil pindaian atau teks halaman tidak bisa dihapus.",
+    protectedPdf: "PDF ini dilindungi, jadi halamannya tidak bisa diperiksa. Hapus perlindungannya dulu.",
+    scannedPdf: "PDF ini terdiri dari gambar hasil pindaian. Watermark di dalam gambar tidak bisa dihapus.",
+    uncheckedPages: "Beberapa halaman tidak bisa dibaca, jadi tidak ada watermark yang dihapus.",
     tryAnother: "Coba file lain",
-    error: "Terjadi kesalahan saat mengedit PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Pisahkan kata kunci dengan koma.",
     button: "Simpan perubahan",
     buttonBusy: "Menyimpan…",
-    error: "Terjadi kesalahan saat menyimpan PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Tidak ada properti dokumen yang diatur — metadata XMP tersembunyi tetap akan dibersihkan.",
     button: "Hapus metadata",
     buttonBusy: "Membersihkan…",
-    error: "Terjadi kesalahan saat membersihkan PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Cermin atas ↕ bawah",
     button: "Balik PDF",
     buttonBusy: "Membalik…",
-    error: "Terjadi kesalahan saat membalik PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Buat PDF dari 1 gambar",
     buttonPlural: "Buat PDF dari {count} gambar",
     buttonBusy: "Membuat PDF…",
-    error: "Terjadi kesalahan saat membuat PDF Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   imageConvert: {
     dropLabel: "Seret dan lepas gambar {from} di sini",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Ubah 1 gambar ke {to}",
     buttonPlural: "Ubah {count} gambar ke {to}",
     buttonBusy: "Mengonversi…",
-    error: "Terjadi kesalahan saat mengonversi gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Ubah ukuran 1 gambar",
     buttonPlural: "Ubah ukuran {count} gambar",
     buttonBusy: "Mengubah ukuran…",
-    error: "Terjadi kesalahan saat mengubah ukuran gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Balik 1 gambar",
     buttonPlural: "Balik {count} gambar",
     buttonBusy: "Membalik…",
-    error: "Terjadi kesalahan saat membalik gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
   cropImage: {
     dropLabel: "Seret dan lepas gambar di sini",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Geser bingkai untuk memilih area yang ingin disimpan.",
     button: "Pangkas gambar",
     buttonBusy: "Memangkas…",
-    error: "Terjadi kesalahan saat memangkas gambar Anda. Silakan coba lagi.",
+    error: "Pemrosesan gagal. Silakan coba lagi.",
   },
 };

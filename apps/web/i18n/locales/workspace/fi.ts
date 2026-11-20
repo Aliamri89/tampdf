@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Tätä PDF-tiedostoa ei voitu lukea. Tiedosto voi olla vioittunut tai sen muotoa ei tueta.";
-const passwordError = "Tämä PDF on suojattu salasanalla. Poista salasana ja yritä uudelleen.";
+const readError = "Tätä PDF-tiedostoa ei voi avata. Se voi olla vioittunut.";
+const passwordError = "PDF on suojattu salasanalla. Poista salasana ensin.";
 const dropPdf = "Vedä ja pudota PDF-tiedosto tähän";
 const dropPdfs = "Vedä ja pudota PDF-tiedostot tähän";
 const dropImages = "Vedä ja pudota kuvat tähän";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Yhdistä {count} PDF-tiedostoa",
     buttonBusy: "Yhdistetään…",
     hint: "Lisää vähintään yksi PDF lisää yhdistettäväksi.",
-    error: "PDF-tiedostojen yhdistämisessä tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Muunnetaan tiedostoa {currentFile}/{totalFiles}, sivu {current}/{total}…",
     buttonBusyStart: "Aloitetaan…",
     removeFileLabel: "Poista {name}",
-    error: "PDF-tiedostojen muuntamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Pakkaa 1 PDF",
     buttonPlural: "Pakkaa {count} PDF-tiedostoa",
     buttonBusy: "Pakataan…",
-    error: "PDF-tiedostojen pakkaamisessa tapahtui virhe. Yritä uudelleen.",
-    encryptedError: "{name} on suojattu salasanalla tai salattu. Poista suojaus ensin ja pakkaa sitten.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
+    encryptedError: "{name} on suojattu salasanalla. Poista salasana ensin.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Pakkaa 1 kuva",
     buttonPlural: "Pakkaa {count} kuvaa",
     buttonBusy: "Pakataan…",
-    error: "Kuvien pakkaamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Muunna 1 kuva PDF:ksi",
     buttonPlural: "Muunna {count} kuvaa PDF:ksi",
     buttonBusy: "Muunnetaan…",
-    error: "Kuvien muuntamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Poista {name}",
     button: "Käännä PDF",
     buttonBusy: "Käännetään…",
-    error: "PDF-tiedostojen kääntämisessä tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Käännä 1 kuva",
     buttonPlural: "Käännä {count} kuvaa",
     buttonBusy: "Käännetään…",
-    error: "Kuvien kääntämisessä tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Jaa PDF",
     buttonBusy: "Jaetaan…",
     invalidRanges: "Anna kelvolliset sivualueet väliltä 1–{total}.",
-    error: "PDF-tiedoston jakamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Poista {count} sivua",
     buttonOne: "Poista 1 sivu",
     buttonBusy: "Poistetaan sivuja…",
-    allSelectedError: "Kaikkia sivuja ei voi poistaa — jätä vähintään yksi.",
-    error: "PDF-tiedoston muokkaamisessa tapahtui virhe. Yritä uudelleen.",
+    allSelectedError: "Jätä vähintään yksi sivu.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Tallenna uusi järjestys",
     buttonBusy: "Tallennetaan…",
     notChanged: "Siirrä vähintään yhtä sivua muuttaaksesi järjestystä.",
-    error: "Sivujärjestyksen muuttamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Rajaa PDF",
     buttonBusy: "Rajataan…",
     noMargins: "Aseta vähintään yksi marginaali yli 0 %:n.",
-    error: "PDF-tiedoston rajaamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Skaalaus",
     button: "Muuta PDF:n kokoa",
     buttonBusy: "Muutetaan kokoa…",
-    error: "PDF-tiedoston koon muuttamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Muunna 1 PNG PDF:ksi",
     buttonPlural: "Muunna {count} PNG-kuvaa PDF:ksi",
     buttonBusy: "Muunnetaan…",
-    error: "Kuvien muuntamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   common: {
     loadingPages: "Ladataan sivuja…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} sivua",
     readError,
     passwordError,
-    imageReadError: "Kuvaa ei voitu lukea. Tiedosto voi olla vioittunut tai sen muotoa ei tueta.",
+    imageReadError: "Kuvaa ei voi avata. Se voi olla vioittunut.",
     webpUnsupported:
-      "Selaimesi ei pysty luomaan WebP-kuvia. Kokeile uusinta Chromea, Edgeä tai Firefoxia tai valitse toinen muoto.",
+      "Selaimesi ei voi tallentaa WebP-muotoa. Valitse toinen muoto.",
     selectAll: "Valitse kaikki",
     clearSelection: "Tyhjennä",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Poimi 1 sivu",
     buttonPlural: "Poimi {count} sivua",
     buttonBusy: "Poimitaan…",
-    error: "Sivujen poimimisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Älä numeroi ensimmäistä sivua (kansilehti)",
     button: "Lisää sivunumerot",
     buttonBusy: "Lisätään numeroita…",
-    error: "PDF-tiedoston numeroinnissa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Kirjoita teksti, joka leimataan jokaiselle sivulle.",
     button: "Lisää vesileima",
     buttonBusy: "Lisätään vesileimaa…",
-    error: "Vesileiman lisäämisessä tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "Poistettiin 1 vesileimaobjekti.",
     removedCount: "Poistettiin {count} vesileimaobjektia.",
     noneFound:
-      "Tästä PDF-tiedostosta ei löytynyt poistettavaa vesileimaa. Skannatun kuvan osana olevia tai sivun tekstiin sulautuneita vesileimoja ei voi erottaa sisällöstä.",
+      "Poistettavaa vesileimaa ei löytynyt. Skannattuun kuvaan tai sivun tekstiin kuuluvia vesileimoja ei voi poistaa.",
+    protectedPdf: "PDF on suojattu, joten sen sivuja ei voi tarkistaa. Poista suojaus ensin.",
+    scannedPdf: "PDF koostuu skannatuista kuvista. Kuvan sisällä olevaa vesileimaa ei voi poistaa.",
+    uncheckedPages: "Joitakin sivuja ei voitu lukea, joten vesileimaa ei poistettu.",
     tryAnother: "Kokeile toista tiedostoa",
-    error: "PDF-tiedoston muokkaamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Erota avainsanat pilkuilla.",
     button: "Tallenna muutokset",
     buttonBusy: "Tallennetaan…",
-    error: "PDF-tiedoston tallentamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Asiakirjan ominaisuuksia ei ole asetettu — tiedosto puhdistetaan silti piilotetuista XMP-metatiedoista.",
     button: "Poista metatiedot",
     buttonBusy: "Puhdistetaan…",
-    error: "PDF-tiedoston puhdistamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Peilaa ylä ↕ ala",
     button: "Peilaa PDF",
     buttonBusy: "Peilataan…",
-    error: "PDF-tiedoston peilaamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Luo PDF 1 kuvasta",
     buttonPlural: "Luo PDF {count} kuvasta",
     buttonBusy: "Luodaan PDF:ää…",
-    error: "PDF-tiedoston luomisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   imageConvert: {
     dropLabel: "Vedä ja pudota {from}-kuvat tähän",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Muunna 1 kuva muotoon {to}",
     buttonPlural: "Muunna {count} kuvaa muotoon {to}",
     buttonBusy: "Muunnetaan…",
-    error: "Kuvien muuntamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Muuta 1 kuvan kokoa",
     buttonPlural: "Muuta {count} kuvan kokoa",
     buttonBusy: "Muutetaan kokoa…",
-    error: "Kuvien koon muuttamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Peilaa 1 kuva",
     buttonPlural: "Peilaa {count} kuvaa",
     buttonBusy: "Peilataan…",
-    error: "Kuvien peilaamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
   cropImage: {
     dropLabel: "Vedä ja pudota kuva tähän",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Siirrä kehystä valitaksesi säilytettävän alueen.",
     button: "Rajaa kuva",
     buttonBusy: "Rajataan…",
-    error: "Kuvan rajaamisessa tapahtui virhe. Yritä uudelleen.",
+    error: "Käsittely epäonnistui. Yritä uudelleen.",
   },
 };

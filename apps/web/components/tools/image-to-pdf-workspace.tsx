@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { ImagePlus, Loader2 } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
@@ -11,17 +11,19 @@ import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { MAX_MULTI_FILES } from "@/lib/tool-limits";
-import { downloadBytes } from "@/lib/download";
-import { imagesToPdf } from "@/lib/image/toPdf";
+import { downloadBlob } from "@/lib/download";
+import { ImageReadError } from "@/lib/image/pdf-writer";
+import { imagesToPdfBlob } from "@/lib/image/toPdf";
 
 type Status = "idle" | "processing" | "done" | "error";
 
 export function ImageToPdfWorkspace() {
   const dict = useDictionary().workspace.imageToPdf;
-  const [files, setFiles] = useState<File[]>([]);
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<Uint8Array | null>(null);
+  const common = useDictionary().workspace.common;
+  const [files, setFiles] = useToolState<File[]>("image-to-pdf:files", []);
+  const [status, setStatus] = useToolState<Status>("image-to-pdf:status", "idle");
+  const [error, setError] = useToolState<string | null>("image-to-pdf:error", null);
+  const [result, setResult] = useToolState<Blob | null>("image-to-pdf:result", null);
 
   function reset() {
     setFiles([]);
@@ -57,12 +59,11 @@ export function ImageToPdfWorkspace() {
     setStatus("processing");
     setError(null);
     try {
-      const bytes = await imagesToPdf(files);
-      setResult(bytes);
+      setResult(await imagesToPdfBlob(files));
       setStatus("done");
       trackToolUsage("image-to-pdf", true);
     } catch (err) {
-      setError(dict.error);
+      setError(err instanceof ImageReadError ? common.imageReadError : dict.error);
       setStatus("error");
       trackToolUsage("image-to-pdf", false, err);
     }
@@ -73,9 +74,9 @@ export function ImageToPdfWorkspace() {
       <div>
         <ResultPanel
           filename={dict.resultName}
-          size={result.byteLength}
-          onDownload={() => downloadBytes(result, dict.resultName, "application/pdf")}
-          getBlob={() => new Blob([new Uint8Array(result)], { type: "application/pdf" })}
+          size={result.size}
+          onDownload={() => downloadBlob(result, dict.resultName)}
+          getBlob={() => result}
           onReset={reset}
         />
       </div>

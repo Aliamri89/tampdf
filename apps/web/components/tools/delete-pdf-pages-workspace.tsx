@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Loader2, Trash2, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
@@ -24,13 +24,13 @@ interface Thumb {
 export function DeletePdfPagesWorkspace() {
   const dict = useDictionary().workspace.deletePdfPages;
   const fileListDict = useDictionary().fileList;
-  const [file, setFile] = useState<File | null>(null);
-  const [thumbs, setThumbs] = useState<Thumb[]>([]);
-  const [selected, setSelected] = useState<Set<number>>(new Set());
-  const [status, setStatus] = useState<Status>("idle");
-  const [readError, setReadError] = useState<ReadError>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
+  const [file, setFile] = useToolState<File | null>("delete-pdf-pages:file", null);
+  const [thumbs, setThumbs] = useToolState<Thumb[]>("delete-pdf-pages:thumbs", []);
+  const [selected, setSelected] = useToolState<Set<number>>("delete-pdf-pages:selected", new Set());
+  const [status, setStatus] = useToolState<Status>("delete-pdf-pages:status", "idle");
+  const [readError, setReadError] = useToolState<ReadError>("delete-pdf-pages:readError", null);
+  const [error, setError] = useToolState<string | null>("delete-pdf-pages:error", null);
+  const [result, setResult] = useToolState<{ bytes: Uint8Array; name: string } | null>("delete-pdf-pages:result", null);
 
   function reset() {
     setFile(null);
@@ -164,7 +164,7 @@ export function DeletePdfPagesWorkspace() {
               {allSelected && (
                 <p className="mt-2 text-sm text-red-600">{dict.allSelectedError}</p>
               )}
-              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
                 {thumbs.map((page) => {
                   const isSelected = selected.has(page.pageNumber);
                   return (

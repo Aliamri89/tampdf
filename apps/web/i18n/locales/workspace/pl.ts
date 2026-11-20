@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Nie udało się odczytać tego pliku PDF. Może być uszkodzony lub mieć nieobsługiwany format.";
-const passwordError = "Ten PDF jest chroniony hasłem. Usuń hasło i spróbuj ponownie.";
+const readError = "Nie można otworzyć tego pliku PDF. Może być uszkodzony.";
+const passwordError = "Ten plik PDF jest chroniony hasłem. Najpierw usuń hasło.";
 const dropPdf = "Przeciągnij i upuść tutaj plik PDF";
 const dropPdfs = "Przeciągnij i upuść tutaj pliki PDF";
 const dropImages = "Przeciągnij i upuść tutaj obrazy";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Połącz pliki PDF ({count})",
     buttonBusy: "Łączenie…",
     hint: "Dodaj co najmniej jeden PDF, aby je połączyć.",
-    error: "Podczas łączenia plików PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Konwersja pliku {currentFile} z {totalFiles}, strona {current} z {total}…",
     buttonBusyStart: "Rozpoczynanie…",
     removeFileLabel: "Usuń {name}",
-    error: "Podczas konwersji plików PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Kompresuj 1 PDF",
     buttonPlural: "Kompresuj pliki PDF ({count})",
     buttonBusy: "Kompresowanie…",
-    error: "Podczas kompresji plików PDF wystąpił błąd. Spróbuj ponownie.",
-    encryptedError: "Plik {name} jest chroniony hasłem lub zaszyfrowany. Najpierw usuń zabezpieczenie, a potem go skompresuj.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
+    encryptedError: "{name} jest chroniony hasłem. Najpierw usuń hasło.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Kompresuj 1 obraz",
     buttonPlural: "Kompresuj obrazy ({count})",
     buttonBusy: "Kompresowanie…",
-    error: "Podczas kompresji obrazów wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Konwertuj 1 obraz na PDF",
     buttonPlural: "Konwertuj obrazy na PDF ({count})",
     buttonBusy: "Konwertowanie…",
-    error: "Podczas konwersji obrazów wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Usuń {name}",
     button: "Obróć PDF",
     buttonBusy: "Obracanie…",
-    error: "Podczas obracania plików PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Obróć 1 obraz",
     buttonPlural: "Obróć obrazy ({count})",
     buttonBusy: "Obracanie…",
-    error: "Podczas obracania obrazów wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Podziel PDF",
     buttonBusy: "Dzielenie…",
     invalidRanges: "Wpisz prawidłowe zakresy stron od 1 do {total}.",
-    error: "Podczas dzielenia pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Usuń strony ({count})",
     buttonOne: "Usuń 1 stronę",
     buttonBusy: "Usuwanie stron…",
-    allSelectedError: "Nie można usunąć wszystkich stron — zostaw co najmniej jedną.",
-    error: "Podczas edycji pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    allSelectedError: "Zostaw co najmniej jedną stronę.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Zapisz nową kolejność",
     buttonBusy: "Zapisywanie…",
     notChanged: "Przenieś co najmniej jedną stronę, aby zmienić kolejność.",
-    error: "Podczas zmiany kolejności stron wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Przytnij PDF",
     buttonBusy: "Przycinanie…",
     noMargins: "Ustaw co najmniej jeden margines większy niż 0%.",
-    error: "Podczas przycinania pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Skala",
     button: "Zmień rozmiar PDF",
     buttonBusy: "Zmiana rozmiaru…",
-    error: "Podczas zmiany rozmiaru pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Konwertuj 1 PNG na PDF",
     buttonPlural: "Konwertuj pliki PNG na PDF ({count})",
     buttonBusy: "Konwertowanie…",
-    error: "Podczas konwersji obrazów wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   common: {
     loadingPages: "Wczytywanie stron…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "Strony: {count}",
     readError,
     passwordError,
-    imageReadError: "Nie udało się odczytać tego obrazu. Może być uszkodzony lub mieć nieobsługiwany format.",
+    imageReadError: "Nie można otworzyć tego obrazu. Może być uszkodzony.",
     webpUnsupported:
-      "Twoja przeglądarka nie potrafi tworzyć obrazów WebP. Użyj najnowszej wersji Chrome, Edge lub Firefox albo wybierz inny format.",
+      "Twoja przeglądarka nie zapisuje WebP. Wybierz inny format.",
     selectAll: "Zaznacz wszystko",
     clearSelection: "Wyczyść",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Wyodrębnij 1 stronę",
     buttonPlural: "Wyodrębnij strony ({count})",
     buttonBusy: "Wyodrębnianie…",
-    error: "Podczas wyodrębniania stron wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Nie numeruj pierwszej strony (okładki)",
     button: "Dodaj numery stron",
     buttonBusy: "Dodawanie numerów…",
-    error: "Podczas numerowania pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Wpisz tekst, który ma się pojawić na każdej stronie.",
     button: "Dodaj znak wodny",
     buttonBusy: "Dodawanie znaku wodnego…",
-    error: "Podczas dodawania znaku wodnego wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "Usunięto 1 obiekt znaku wodnego.",
     removedCount: "Usunięte obiekty znaku wodnego: {count}.",
     noneFound:
-      "W tym pliku PDF nie znaleziono usuwalnego znaku wodnego. Znaków wodnych będących częścią zeskanowanego obrazu lub scalonych z tekstem strony nie da się oddzielić od treści.",
+      "Nie znaleziono znaku wodnego do usunięcia. Znaków wodnych w skanie lub tekście strony nie da się usunąć.",
+    protectedPdf: "Ten plik PDF jest zabezpieczony, więc nie można sprawdzić jego stron. Najpierw usuń zabezpieczenie.",
+    scannedPdf: "Ten plik PDF składa się ze skanów. Znaku wodnego wewnątrz obrazu nie da się usunąć.",
+    uncheckedPages: "Nie udało się odczytać niektórych stron, więc nie usunięto żadnego znaku wodnego.",
     tryAnother: "Spróbuj inny plik",
-    error: "Podczas edycji pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Oddziel słowa kluczowe przecinkami.",
     button: "Zapisz zmiany",
     buttonBusy: "Zapisywanie…",
-    error: "Podczas zapisywania pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Nie ustawiono żadnych właściwości — plik i tak zostanie oczyszczony z ukrytych metadanych XMP.",
     button: "Usuń metadane",
     buttonBusy: "Czyszczenie…",
-    error: "Podczas czyszczenia pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Odbicie góra ↕ dół",
     button: "Odbij PDF",
     buttonBusy: "Odbijanie…",
-    error: "Podczas odbijania pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Utwórz PDF z 1 obrazu",
     buttonPlural: "Utwórz PDF z obrazów ({count})",
     buttonBusy: "Tworzenie PDF…",
-    error: "Podczas tworzenia pliku PDF wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   imageConvert: {
     dropLabel: "Przeciągnij i upuść tutaj obrazy {from}",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Konwertuj 1 obraz na {to}",
     buttonPlural: "Konwertuj obrazy na {to} ({count})",
     buttonBusy: "Konwertowanie…",
-    error: "Podczas konwersji obrazów wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Zmień rozmiar 1 obrazu",
     buttonPlural: "Zmień rozmiar obrazów ({count})",
     buttonBusy: "Zmiana rozmiaru…",
-    error: "Podczas zmiany rozmiaru obrazów wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Odbij 1 obraz",
     buttonPlural: "Odbij obrazy ({count})",
     buttonBusy: "Odbijanie…",
-    error: "Podczas odbijania obrazów wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
   cropImage: {
     dropLabel: "Przeciągnij i upuść tutaj obraz",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Przesuń ramkę, aby wybrać obszar do zachowania.",
     button: "Przytnij obraz",
     buttonBusy: "Przycinanie…",
-    error: "Podczas przycinania obrazu wystąpił błąd. Spróbuj ponownie.",
+    error: "Przetwarzanie nie powiodło się. Spróbuj ponownie.",
   },
 };

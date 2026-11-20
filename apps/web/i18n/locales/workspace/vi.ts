@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Không thể đọc tệp PDF này. Tệp có thể bị hỏng hoặc ở định dạng không được hỗ trợ.";
-const passwordError = "Tệp PDF này được bảo vệ bằng mật khẩu. Hãy gỡ mật khẩu rồi thử lại.";
+const readError = "Không thể mở tệp PDF này. Tệp có thể bị hỏng.";
+const passwordError = "PDF này được bảo vệ bằng mật khẩu. Hãy gỡ mật khẩu trước.";
 const dropPdf = "Kéo và thả tệp PDF vào đây";
 const dropPdfs = "Kéo và thả các tệp PDF vào đây";
 const dropImages = "Kéo và thả ảnh vào đây";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Gộp {count} tệp PDF",
     buttonBusy: "Đang gộp…",
     hint: "Hãy thêm ít nhất một tệp PDF nữa để gộp.",
-    error: "Đã xảy ra lỗi khi gộp các tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Đang chuyển tệp {currentFile}/{totalFiles}, trang {current}/{total}…",
     buttonBusyStart: "Đang bắt đầu…",
     removeFileLabel: "Xóa {name}",
-    error: "Đã xảy ra lỗi khi chuyển đổi các tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Nén 1 PDF",
     buttonPlural: "Nén {count} PDF",
     buttonBusy: "Đang nén…",
-    error: "Đã xảy ra lỗi khi nén các tệp PDF. Vui lòng thử lại.",
-    encryptedError: "{name} được bảo vệ bằng mật khẩu hoặc đã mã hóa. Hãy gỡ bảo vệ trước rồi nén lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
+    encryptedError: "{name} được bảo vệ bằng mật khẩu. Hãy gỡ mật khẩu trước.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Nén 1 ảnh",
     buttonPlural: "Nén {count} ảnh",
     buttonBusy: "Đang nén…",
-    error: "Đã xảy ra lỗi khi nén ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Chuyển 1 ảnh sang PDF",
     buttonPlural: "Chuyển {count} ảnh sang PDF",
     buttonBusy: "Đang chuyển đổi…",
-    error: "Đã xảy ra lỗi khi chuyển đổi ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Xóa {name}",
     button: "Xoay PDF",
     buttonBusy: "Đang xoay…",
-    error: "Đã xảy ra lỗi khi xoay các tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Xoay 1 ảnh",
     buttonPlural: "Xoay {count} ảnh",
     buttonBusy: "Đang xoay…",
-    error: "Đã xảy ra lỗi khi xoay ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Tách PDF",
     buttonBusy: "Đang tách…",
     invalidRanges: "Hãy nhập khoảng trang hợp lệ trong phạm vi 1–{total}.",
-    error: "Đã xảy ra lỗi khi tách tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Xóa {count} trang",
     buttonOne: "Xóa 1 trang",
     buttonBusy: "Đang xóa trang…",
-    allSelectedError: "Bạn không thể xóa tất cả các trang — hãy giữ lại ít nhất một trang.",
-    error: "Đã xảy ra lỗi khi chỉnh sửa tệp PDF. Vui lòng thử lại.",
+    allSelectedError: "Hãy giữ lại ít nhất một trang.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Lưu thứ tự mới",
     buttonBusy: "Đang lưu…",
     notChanged: "Hãy di chuyển ít nhất một trang để thay đổi thứ tự.",
-    error: "Đã xảy ra lỗi khi sắp xếp lại tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Cắt PDF",
     buttonBusy: "Đang cắt…",
     noMargins: "Hãy đặt ít nhất một lề lớn hơn 0%.",
-    error: "Đã xảy ra lỗi khi cắt tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Tỷ lệ",
     button: "Đổi kích thước PDF",
     buttonBusy: "Đang đổi kích thước…",
-    error: "Đã xảy ra lỗi khi đổi kích thước tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Chuyển 1 PNG sang PDF",
     buttonPlural: "Chuyển {count} PNG sang PDF",
     buttonBusy: "Đang chuyển đổi…",
-    error: "Đã xảy ra lỗi khi chuyển đổi ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   common: {
     loadingPages: "Đang tải trang…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} trang",
     readError,
     passwordError,
-    imageReadError: "Không thể đọc ảnh này. Tệp có thể bị hỏng hoặc ở định dạng không được hỗ trợ.",
+    imageReadError: "Không thể mở hình ảnh này. Tệp có thể bị hỏng.",
     webpUnsupported:
-      "Trình duyệt của bạn không tạo được ảnh WebP. Hãy dùng Chrome, Edge hoặc Firefox bản mới nhất, hoặc chọn định dạng khác.",
+      "Trình duyệt của bạn không lưu được WebP. Hãy chọn định dạng khác.",
     selectAll: "Chọn tất cả",
     clearSelection: "Bỏ chọn",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Trích xuất 1 trang",
     buttonPlural: "Trích xuất {count} trang",
     buttonBusy: "Đang trích xuất…",
-    error: "Đã xảy ra lỗi khi trích xuất trang. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Không đánh số trang đầu (bìa)",
     button: "Thêm số trang",
     buttonBusy: "Đang thêm số trang…",
-    error: "Đã xảy ra lỗi khi đánh số trang PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Nhập nội dung bạn muốn đóng lên mọi trang.",
     button: "Thêm hình mờ",
     buttonBusy: "Đang thêm hình mờ…",
-    error: "Đã xảy ra lỗi khi thêm hình mờ. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "Đã xóa 1 đối tượng hình mờ.",
     removedCount: "Đã xóa {count} đối tượng hình mờ.",
     noneFound:
-      "Không tìm thấy hình mờ có thể xóa trong tệp PDF này. Hình mờ là một phần của ảnh quét hoặc đã hòa vào văn bản trang thì không thể tách khỏi nội dung.",
+      "Không tìm thấy hình mờ có thể xóa. Hình mờ nằm trong bản quét hoặc văn bản của trang không thể xóa.",
+    protectedPdf: "PDF này được bảo vệ nên không thể kiểm tra các trang. Hãy gỡ bảo vệ trước.",
+    scannedPdf: "PDF này gồm các hình ảnh quét. Không thể xóa hình mờ nằm trong hình ảnh.",
+    uncheckedPages: "Không đọc được một số trang nên chưa xóa hình mờ nào.",
     tryAnother: "Thử tệp khác",
-    error: "Đã xảy ra lỗi khi chỉnh sửa tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Phân tách từ khóa bằng dấu phẩy.",
     button: "Lưu thay đổi",
     buttonBusy: "Đang lưu…",
-    error: "Đã xảy ra lỗi khi lưu tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Không có thuộc tính tài liệu nào — tệp vẫn sẽ được xóa siêu dữ liệu XMP ẩn.",
     button: "Xóa siêu dữ liệu",
     buttonBusy: "Đang làm sạch…",
-    error: "Đã xảy ra lỗi khi làm sạch tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Lật gương trên ↕ dưới",
     button: "Lật PDF",
     buttonBusy: "Đang lật…",
-    error: "Đã xảy ra lỗi khi lật tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Tạo PDF từ 1 ảnh",
     buttonPlural: "Tạo PDF từ {count} ảnh",
     buttonBusy: "Đang tạo PDF…",
-    error: "Đã xảy ra lỗi khi tạo tệp PDF. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   imageConvert: {
     dropLabel: "Kéo và thả ảnh {from} vào đây",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Chuyển 1 ảnh sang {to}",
     buttonPlural: "Chuyển {count} ảnh sang {to}",
     buttonBusy: "Đang chuyển đổi…",
-    error: "Đã xảy ra lỗi khi chuyển đổi ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Đổi kích thước 1 ảnh",
     buttonPlural: "Đổi kích thước {count} ảnh",
     buttonBusy: "Đang đổi kích thước…",
-    error: "Đã xảy ra lỗi khi đổi kích thước ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Lật 1 ảnh",
     buttonPlural: "Lật {count} ảnh",
     buttonBusy: "Đang lật…",
-    error: "Đã xảy ra lỗi khi lật ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
   cropImage: {
     dropLabel: "Kéo và thả một ảnh vào đây",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Di chuyển khung để chọn vùng muốn giữ lại.",
     button: "Cắt ảnh",
     buttonBusy: "Đang cắt…",
-    error: "Đã xảy ra lỗi khi cắt ảnh. Vui lòng thử lại.",
+    error: "Xử lý không thành công. Vui lòng thử lại.",
   },
 };

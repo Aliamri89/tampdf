@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "यह PDF पढ़ा नहीं जा सका। फ़ाइल खराब हो सकती है या उसका फ़ॉर्मैट समर्थित नहीं है।";
-const passwordError = "यह PDF पासवर्ड से सुरक्षित है। पासवर्ड हटाकर फिर से कोशिश करें।";
+const readError = "यह PDF नहीं खुल रहा। फ़ाइल खराब हो सकती है।";
+const passwordError = "यह PDF पासवर्ड से सुरक्षित है। पहले पासवर्ड हटाएँ।";
 const dropPdf = "PDF फ़ाइल यहाँ खींचकर छोड़ें";
 const dropPdfs = "PDF फ़ाइलें यहाँ खींचकर छोड़ें";
 const dropImages = "इमेज यहाँ खींचकर छोड़ें";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count} PDF मर्ज करें",
     buttonBusy: "मर्ज हो रहा है…",
     hint: "मर्ज करने के लिए कम से कम एक और PDF जोड़ें।",
-    error: "PDF मर्ज करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "फ़ाइल {currentFile}/{totalFiles}, पेज {current}/{total} बदला जा रहा है…",
     buttonBusyStart: "शुरू हो रहा है…",
     removeFileLabel: "{name} हटाएँ",
-    error: "PDF बदलते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 PDF कम्प्रेस करें",
     buttonPlural: "{count} PDF कम्प्रेस करें",
     buttonBusy: "कम्प्रेस हो रहा है…",
-    error: "PDF कम्प्रेस करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
-    encryptedError: "{name} पासवर्ड से सुरक्षित या एन्क्रिप्टेड है। पहले सुरक्षा हटाएँ, फिर कम्प्रेस करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
+    encryptedError: "{name} पासवर्ड से सुरक्षित है। पहले पासवर्ड हटाएँ।",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 इमेज कम्प्रेस करें",
     buttonPlural: "{count} इमेज कम्प्रेस करें",
     buttonBusy: "कम्प्रेस हो रहा है…",
-    error: "इमेज कम्प्रेस करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "1 इमेज को PDF में बदलें",
     buttonPlural: "{count} इमेज को PDF में बदलें",
     buttonBusy: "बदला जा रहा है…",
-    error: "इमेज बदलते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "{name} हटाएँ",
     button: "PDF घुमाएँ",
     buttonBusy: "घुमाया जा रहा है…",
-    error: "PDF घुमाते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 इमेज घुमाएँ",
     buttonPlural: "{count} इमेज घुमाएँ",
     buttonBusy: "घुमाया जा रहा है…",
-    error: "इमेज घुमाते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF बाँटें",
     buttonBusy: "बाँटा जा रहा है…",
     invalidRanges: "1 से {total} के बीच सही पेज रेंज डालें।",
-    error: "PDF बाँटते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count} पेज हटाएँ",
     buttonOne: "1 पेज हटाएँ",
     buttonBusy: "पेज हटाए जा रहे हैं…",
-    allSelectedError: "आप सभी पेज नहीं हटा सकते — कम से कम एक पेज रखें।",
-    error: "PDF एडिट करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    allSelectedError: "कम से कम एक पेज रखें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "नया क्रम सेव करें",
     buttonBusy: "सेव हो रहा है…",
     notChanged: "क्रम बदलने के लिए कम से कम एक पेज खिसकाएँ।",
-    error: "PDF का क्रम बदलते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF क्रॉप करें",
     buttonBusy: "क्रॉप हो रहा है…",
     noMargins: "कम से कम एक मार्जिन 0% से ज़्यादा रखें।",
-    error: "PDF क्रॉप करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "स्केल",
     button: "PDF का साइज़ बदलें",
     buttonBusy: "साइज़ बदला जा रहा है…",
-    error: "PDF का साइज़ बदलते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 PNG को PDF में बदलें",
     buttonPlural: "{count} PNG को PDF में बदलें",
     buttonBusy: "बदला जा रहा है…",
-    error: "इमेज बदलते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   common: {
     loadingPages: "पेज लोड हो रहे हैं…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} पेज",
     readError,
     passwordError,
-    imageReadError: "यह इमेज पढ़ी नहीं जा सकी। फ़ाइल खराब हो सकती है या उसका फ़ॉर्मैट समर्थित नहीं है।",
+    imageReadError: "यह इमेज नहीं खुल रही। फ़ाइल खराब हो सकती है।",
     webpUnsupported:
-      "आपका ब्राउज़र WebP इमेज नहीं बना सकता। Chrome, Edge या Firefox का नया वर्शन आज़माएँ, या कोई दूसरा फ़ॉर्मैट चुनें।",
+      "आपका ब्राउज़र WebP सेव नहीं कर सकता। कोई दूसरा फ़ॉर्मैट चुनें।",
     selectAll: "सभी चुनें",
     clearSelection: "हटाएँ",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "1 पेज निकालें",
     buttonPlural: "{count} पेज निकालें",
     buttonBusy: "निकाले जा रहे हैं…",
-    error: "पेज निकालते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "पहले पेज (कवर) पर नंबर न लगाएँ",
     button: "पेज नंबर जोड़ें",
     buttonBusy: "नंबर जोड़े जा रहे हैं…",
-    error: "PDF में नंबर जोड़ते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "हर पेज पर लगाने के लिए टेक्स्ट लिखें।",
     button: "वॉटरमार्क जोड़ें",
     buttonBusy: "वॉटरमार्क जोड़ा जा रहा है…",
-    error: "वॉटरमार्क जोड़ते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "1 वॉटरमार्क ऑब्जेक्ट हटाया गया।",
     removedCount: "{count} वॉटरमार्क ऑब्जेक्ट हटाए गए।",
     noneFound:
-      "इस PDF में हटाने योग्य कोई वॉटरमार्क नहीं मिला। स्कैन की गई इमेज का हिस्सा बने या पेज के टेक्स्ट में मिले हुए वॉटरमार्क सामग्री से अलग नहीं किए जा सकते।",
+      "हटाने योग्य कोई वॉटरमार्क नहीं मिला। स्कैन या पेज के टेक्स्ट का हिस्सा बने वॉटरमार्क नहीं हटाए जा सकते।",
+    protectedPdf: "यह PDF सुरक्षित है, इसलिए इसके पेज जाँचे नहीं जा सकते। पहले सुरक्षा हटाएँ।",
+    scannedPdf: "यह PDF स्कैन की गई इमेज से बना है। इमेज के अंदर का वॉटरमार्क हटाया नहीं जा सकता।",
+    uncheckedPages: "कुछ पेज पढ़े नहीं जा सके, इसलिए कोई वॉटरमार्क नहीं हटाया गया।",
     tryAnother: "दूसरी फ़ाइल आज़माएँ",
-    error: "PDF एडिट करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "कीवर्ड को कॉमा से अलग करें।",
     button: "बदलाव सेव करें",
     buttonBusy: "सेव हो रहा है…",
-    error: "PDF सेव करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "कोई डॉक्यूमेंट प्रॉपर्टी सेट नहीं है — फिर भी फ़ाइल से छिपा हुआ XMP मेटाडेटा हटा दिया जाएगा।",
     button: "मेटाडेटा हटाएँ",
     buttonBusy: "साफ़ किया जा रहा है…",
-    error: "PDF साफ़ करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "ऊपर ↕ नीचे उल्टा",
     button: "PDF पलटें",
     buttonBusy: "पलटा जा रहा है…",
-    error: "PDF पलटते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 इमेज से PDF बनाएँ",
     buttonPlural: "{count} इमेज से PDF बनाएँ",
     buttonBusy: "PDF बन रहा है…",
-    error: "PDF बनाते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   imageConvert: {
     dropLabel: "{from} इमेज यहाँ खींचकर छोड़ें",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 इमेज को {to} में बदलें",
     buttonPlural: "{count} इमेज को {to} में बदलें",
     buttonBusy: "बदला जा रहा है…",
-    error: "इमेज बदलते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 इमेज का साइज़ बदलें",
     buttonPlural: "{count} इमेज का साइज़ बदलें",
     buttonBusy: "साइज़ बदला जा रहा है…",
-    error: "इमेज का साइज़ बदलते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 इमेज पलटें",
     buttonPlural: "{count} इमेज पलटें",
     buttonBusy: "पलटा जा रहा है…",
-    error: "इमेज पलटते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
   cropImage: {
     dropLabel: "इमेज यहाँ खींचकर छोड़ें",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "जो हिस्सा रखना है उसे चुनने के लिए फ़्रेम खिसकाएँ।",
     button: "इमेज क्रॉप करें",
     buttonBusy: "क्रॉप हो रहा है…",
-    error: "इमेज क्रॉप करते समय कुछ गड़बड़ हुई। कृपया फिर से कोशिश करें।",
+    error: "प्रोसेसिंग विफल रही। कृपया फिर से कोशिश करें।",
   },
 };

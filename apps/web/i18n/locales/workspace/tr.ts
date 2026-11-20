@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Bu PDF okunamadı. Dosya bozuk olabilir veya desteklenmeyen bir biçimde olabilir.";
-const passwordError = "Bu PDF parola korumalı. Parolayı kaldırıp tekrar deneyin.";
+const readError = "Bu PDF açılamıyor. Dosya bozuk olabilir.";
+const passwordError = "Bu PDF parola korumalı. Önce parolayı kaldırın.";
 const dropPdf = "PDF dosyasını buraya sürükleyip bırakın";
 const dropPdfs = "PDF dosyalarını buraya sürükleyip bırakın";
 const dropImages = "Görselleri buraya sürükleyip bırakın";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count} PDF'yi birleştir",
     buttonBusy: "Birleştiriliyor…",
     hint: "Birleştirmek için en az bir PDF daha ekleyin.",
-    error: "PDF'leriniz birleştirilirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "{totalFiles} dosyadan {currentFile}. dosya dönüştürülüyor, sayfa {current}/{total}…",
     buttonBusyStart: "Başlatılıyor…",
     removeFileLabel: "{name} dosyasını kaldır",
-    error: "PDF'leriniz dönüştürülürken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 PDF'yi sıkıştır",
     buttonPlural: "{count} PDF'yi sıkıştır",
     buttonBusy: "Sıkıştırılıyor…",
-    error: "PDF'leriniz sıkıştırılırken bir hata oluştu. Lütfen tekrar deneyin.",
-    encryptedError: "{name} parola korumalı veya şifreli. Önce korumayı kaldırın, ardından sıkıştırın.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
+    encryptedError: "{name} parola korumalı. Önce parolayı kaldırın.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 görseli sıkıştır",
     buttonPlural: "{count} görseli sıkıştır",
     buttonBusy: "Sıkıştırılıyor…",
-    error: "Görselleriniz sıkıştırılırken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "1 görseli PDF'ye dönüştür",
     buttonPlural: "{count} görseli PDF'ye dönüştür",
     buttonBusy: "Dönüştürülüyor…",
-    error: "Görselleriniz dönüştürülürken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "{name} dosyasını kaldır",
     button: "PDF'yi döndür",
     buttonBusy: "Döndürülüyor…",
-    error: "PDF'leriniz döndürülürken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 görseli döndür",
     buttonPlural: "{count} görseli döndür",
     buttonBusy: "Döndürülüyor…",
-    error: "Görselleriniz döndürülürken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF'yi böl",
     buttonBusy: "Bölünüyor…",
     invalidRanges: "1 ile {total} arasında geçerli sayfa aralıkları girin.",
-    error: "PDF'niz bölünürken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count} sayfayı sil",
     buttonOne: "1 sayfayı sil",
     buttonBusy: "Sayfalar siliniyor…",
-    allSelectedError: "Tüm sayfaları silemezsiniz — en az birini bırakın.",
-    error: "PDF'niz düzenlenirken bir hata oluştu. Lütfen tekrar deneyin.",
+    allSelectedError: "En az bir sayfa bırakın.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Yeni sırayı kaydet",
     buttonBusy: "Kaydediliyor…",
     notChanged: "Sırayı değiştirmek için en az bir sayfayı taşıyın.",
-    error: "PDF'nizin sırası değiştirilirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF'yi kırp",
     buttonBusy: "Kırpılıyor…",
     noMargins: "En az bir kenar boşluğunu %0'ın üzerine ayarlayın.",
-    error: "PDF'niz kırpılırken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Ölçek",
     button: "PDF'yi yeniden boyutlandır",
     buttonBusy: "Yeniden boyutlandırılıyor…",
-    error: "PDF'niz yeniden boyutlandırılırken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 PNG'yi PDF'ye dönüştür",
     buttonPlural: "{count} PNG'yi PDF'ye dönüştür",
     buttonBusy: "Dönüştürülüyor…",
-    error: "Görselleriniz dönüştürülürken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   common: {
     loadingPages: "Sayfalar yükleniyor…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} sayfa",
     readError,
     passwordError,
-    imageReadError: "Bu görsel okunamadı. Dosya bozuk olabilir veya desteklenmeyen bir biçimde olabilir.",
+    imageReadError: "Bu görsel açılamıyor. Dosya bozuk olabilir.",
     webpUnsupported:
-      "Tarayıcınız WebP görseli oluşturamıyor. Chrome, Edge veya Firefox'un en yeni sürümünü deneyin ya da başka bir biçim seçin.",
+      "Tarayıcınız WebP kaydedemiyor. Başka bir biçim seçin.",
     selectAll: "Tümünü seç",
     clearSelection: "Temizle",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "1 sayfayı çıkar",
     buttonPlural: "{count} sayfayı çıkar",
     buttonBusy: "Çıkarılıyor…",
-    error: "Sayfalar çıkarılırken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "İlk sayfayı (kapak) numaralandırma",
     button: "Sayfa numarası ekle",
     buttonBusy: "Numaralar ekleniyor…",
-    error: "PDF'niz numaralandırılırken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Her sayfaya basmak istediğiniz metni yazın.",
     button: "Filigran ekle",
     buttonBusy: "Filigran ekleniyor…",
-    error: "Filigran eklenirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "1 filigran nesnesi kaldırıldı.",
     removedCount: "{count} filigran nesnesi kaldırıldı.",
     noneFound:
-      "Bu PDF'de kaldırılabilir bir filigran bulunamadı. Taranmış bir görselin parçası olan veya sayfa metniyle birleşmiş filigranlar içerikten ayrılamaz.",
+      "Kaldırılabilir filigran bulunamadı. Taranmış görüntünün veya sayfa metninin parçası olan filigranlar kaldırılamaz.",
+    protectedPdf: "Bu PDF korumalı olduğu için sayfaları kontrol edilemiyor. Önce korumayı kaldırın.",
+    scannedPdf: "Bu PDF taranmış görüntülerden oluşuyor. Görüntünün içindeki filigran kaldırılamaz.",
+    uncheckedPages: "Bazı sayfalar okunamadı, bu yüzden filigran kaldırılmadı.",
     tryAnother: "Başka bir dosya deneyin",
-    error: "PDF'niz düzenlenirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Anahtar kelimeleri virgülle ayırın.",
     button: "Değişiklikleri kaydet",
     buttonBusy: "Kaydediliyor…",
-    error: "PDF'niz kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Ayarlanmış belge özelliği yok — dosya yine de gizli XMP meta verilerinden temizlenecek.",
     button: "Meta verileri kaldır",
     buttonBusy: "Temizleniyor…",
-    error: "PDF'niz temizlenirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Üst ↕ alt ayna",
     button: "PDF'yi çevir",
     buttonBusy: "Çevriliyor…",
-    error: "PDF'niz çevrilirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 görselden PDF oluştur",
     buttonPlural: "{count} görselden PDF oluştur",
     buttonBusy: "PDF oluşturuluyor…",
-    error: "PDF'niz oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   imageConvert: {
     dropLabel: "{from} görsellerini buraya sürükleyip bırakın",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 görseli {to} biçimine dönüştür",
     buttonPlural: "{count} görseli {to} biçimine dönüştür",
     buttonBusy: "Dönüştürülüyor…",
-    error: "Görselleriniz dönüştürülürken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 görseli yeniden boyutlandır",
     buttonPlural: "{count} görseli yeniden boyutlandır",
     buttonBusy: "Yeniden boyutlandırılıyor…",
-    error: "Görselleriniz yeniden boyutlandırılırken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 görseli çevir",
     buttonPlural: "{count} görseli çevir",
     buttonBusy: "Çevriliyor…",
-    error: "Görselleriniz çevrilirken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
   cropImage: {
     dropLabel: "Bir görseli buraya sürükleyip bırakın",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Korumak istediğiniz alanı seçmek için çerçeveyi taşıyın.",
     button: "Görseli kırp",
     buttonBusy: "Kırpılıyor…",
-    error: "Görseliniz kırpılırken bir hata oluştu. Lütfen tekrar deneyin.",
+    error: "İşlem başarısız oldu. Lütfen tekrar deneyin.",
   },
 };

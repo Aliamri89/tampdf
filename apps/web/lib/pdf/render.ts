@@ -1,4 +1,5 @@
 import type { PDFDocumentProxy } from "pdfjs-dist";
+import { createLimiter } from "@/lib/concurrency";
 import { MAX_CANVAS_PIXELS, releaseCanvas } from "@/lib/canvas-limits";
 import { installMapUpsertPolyfill } from "@/lib/pdf/map-upsert-polyfill";
 
@@ -145,7 +146,14 @@ function canvasToBlob(canvas: HTMLCanvasElement, type: string, quality?: number)
 }
 
 /** Renders the first page of a PDF to a small JPEG thumbnail data URL. */
+// File-list previews: two PDFs at a time, so adding dozens of files stays responsive.
+const thumbnailSlot = createLimiter(2);
+
 export async function renderPdfThumbnail(file: File, maxDimension = 160): Promise<string> {
+  return thumbnailSlot(() => renderPdfThumbnailNow(file, maxDimension));
+}
+
+async function renderPdfThumbnailNow(file: File, maxDimension: number): Promise<string> {
   const pdf = await loadPdfDocument(file);
   try {
     const page = await pdf.getPage(1);
@@ -201,7 +209,7 @@ export interface PageThumbnail {
 /** Renders a small JPEG thumbnail data URL for every page of a PDF. */
 export async function renderAllPageThumbnails(
   file: File,
-  maxDimension = 280,
+  maxDimension = 360,
 ): Promise<PageThumbnail[]> {
   const pdf = await loadPdfDocument(file);
   try {

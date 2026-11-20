@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "无法读取该 PDF。文件可能已损坏或格式不受支持。";
-const passwordError = "此 PDF 受密码保护。请移除密码后重试。";
+const readError = "无法打开此 PDF，文件可能已损坏。";
+const passwordError = "此 PDF 受密码保护，请先移除密码。";
 const dropPdf = "将 PDF 文件拖放到此处";
 const dropPdfs = "将 PDF 文件拖放到此处";
 const dropImages = "将图片拖放到此处";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "合并 {count} 个 PDF",
     buttonBusy: "正在合并…",
     hint: "请至少再添加一个 PDF 才能合并。",
-    error: "合并 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "正在转换第 {currentFile}/{totalFiles} 个文件，第 {current}/{total} 页…",
     buttonBusyStart: "正在启动…",
     removeFileLabel: "移除 {name}",
-    error: "转换 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "压缩 1 个 PDF",
     buttonPlural: "压缩 {count} 个 PDF",
     buttonBusy: "正在压缩…",
-    error: "压缩 PDF 时出错，请重试。",
-    encryptedError: "{name} 受密码保护或已加密。请先移除保护，再进行压缩。",
+    error: "处理失败，请重试。",
+    encryptedError: "{name} 受密码保护，请先移除密码。",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "压缩 1 张图片",
     buttonPlural: "压缩 {count} 张图片",
     buttonBusy: "正在压缩…",
-    error: "压缩图片时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "将 1 张图片转换为 PDF",
     buttonPlural: "将 {count} 张图片转换为 PDF",
     buttonBusy: "正在转换…",
-    error: "转换图片时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "移除 {name}",
     button: "旋转 PDF",
     buttonBusy: "正在旋转…",
-    error: "旋转 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "旋转 1 张图片",
     buttonPlural: "旋转 {count} 张图片",
     buttonBusy: "正在旋转…",
-    error: "旋转图片时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "拆分 PDF",
     buttonBusy: "正在拆分…",
     invalidRanges: "请输入 1–{total} 之间的有效页面范围。",
-    error: "拆分 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "删除 {count} 页",
     buttonOne: "删除 1 页",
     buttonBusy: "正在删除页面…",
-    allSelectedError: "不能删除所有页面——请至少保留一页。",
-    error: "编辑 PDF 时出错，请重试。",
+    allSelectedError: "请至少保留一页。",
+    error: "处理失败，请重试。",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "保存新顺序",
     buttonBusy: "正在保存…",
     notChanged: "请至少移动一页以改变顺序。",
-    error: "调整 PDF 页面顺序时出错，请重试。",
+    error: "处理失败，请重试。",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "裁剪 PDF",
     buttonBusy: "正在裁剪…",
     noMargins: "请至少设置一个大于 0% 的边距。",
-    error: "裁剪 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "缩放",
     button: "调整 PDF 尺寸",
     buttonBusy: "正在调整尺寸…",
-    error: "调整 PDF 尺寸时出错，请重试。",
+    error: "处理失败，请重试。",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "将 1 张 PNG 转换为 PDF",
     buttonPlural: "将 {count} 张 PNG 转换为 PDF",
     buttonBusy: "正在转换…",
-    error: "转换图片时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   common: {
     loadingPages: "正在加载页面…",
@@ -190,8 +190,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} 页",
     readError,
     passwordError,
-    imageReadError: "无法读取该图片。文件可能已损坏或格式不受支持。",
-    webpUnsupported: "您的浏览器无法生成 WebP 图片。请使用最新版 Chrome、Edge 或 Firefox，或选择其他格式。",
+    imageReadError: "无法打开此图片，文件可能已损坏。",
+    webpUnsupported: "您的浏览器无法保存 WebP，请选择其他格式。",
     selectAll: "全选",
     clearSelection: "清除",
     metadataFields: {
@@ -216,7 +216,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "提取 1 页",
     buttonPlural: "提取 {count} 页",
     buttonBusy: "正在提取…",
-    error: "提取页面时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -239,7 +239,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "首页（封面）不编号",
     button: "添加页码",
     buttonBusy: "正在添加页码…",
-    error: "为 PDF 添加页码时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -260,7 +260,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "请输入要加在每一页上的文字。",
     button: "添加水印",
     buttonBusy: "正在添加水印…",
-    error: "添加水印时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -269,9 +269,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "正在移除水印…",
     removedOne: "已移除 1 个水印对象。",
     removedCount: "已移除 {count} 个水印对象。",
-    noneFound: "此 PDF 中未找到可移除的水印。属于扫描图像一部分或已与页面文字合并的水印，无法与内容分离。",
+    noneFound: "未找到可移除的水印。属于扫描图像或页面文字的水印无法移除。",
+    protectedPdf: "此 PDF 受保护，无法检查其页面。请先移除保护。",
+    scannedPdf: "此 PDF 由扫描图像组成。图像中的水印无法移除。",
+    uncheckedPages: "部分页面无法读取，因此未移除任何水印。",
     tryAnother: "换一个文件",
-    error: "编辑 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -300,7 +303,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "关键词之间用逗号分隔。",
     button: "保存更改",
     buttonBusy: "正在保存…",
-    error: "保存 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -309,7 +312,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "文档未设置任何属性——但仍会清除其中隐藏的 XMP 元数据。",
     button: "移除元数据",
     buttonBusy: "正在清理…",
-    error: "清理 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -321,7 +324,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "上 ↕ 下镜像",
     button: "翻转 PDF",
     buttonBusy: "正在翻转…",
-    error: "翻转 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -354,7 +357,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "用 1 张图片创建 PDF",
     buttonPlural: "用 {count} 张图片创建 PDF",
     buttonBusy: "正在创建 PDF…",
-    error: "创建 PDF 时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   imageConvert: {
     dropLabel: "将 {from} 图片拖放到此处",
@@ -363,7 +366,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "将 1 张图片转换为 {to}",
     buttonPlural: "将 {count} 张图片转换为 {to}",
     buttonBusy: "正在转换…",
-    error: "转换图片时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -381,7 +384,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "调整 1 张图片的尺寸",
     buttonPlural: "调整 {count} 张图片的尺寸",
     buttonBusy: "正在调整尺寸…",
-    error: "调整图片尺寸时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -393,7 +396,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "翻转 1 张图片",
     buttonPlural: "翻转 {count} 张图片",
     buttonBusy: "正在翻转…",
-    error: "翻转图片时出错，请重试。",
+    error: "处理失败，请重试。",
   },
   cropImage: {
     dropLabel: "将图片拖放到此处",
@@ -408,6 +411,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "移动裁剪框以选择要保留的区域。",
     button: "裁剪图片",
     buttonBusy: "正在裁剪…",
-    error: "裁剪图片时出错，请重试。",
+    error: "处理失败，请重试。",
   },
 };

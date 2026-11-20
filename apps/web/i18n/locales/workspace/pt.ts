@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Não foi possível ler este PDF. Ele pode estar corrompido ou em um formato não suportado.";
-const passwordError = "Este PDF está protegido por senha. Remova a senha e tente novamente.";
+const readError = "Não é possível abrir este PDF. Ele pode estar danificado.";
+const passwordError = "Este PDF está protegido por senha. Remova a senha primeiro.";
 const dropPdf = "Arraste e solte um arquivo PDF aqui";
 const dropPdfs = "Arraste e solte arquivos PDF aqui";
 const dropImages = "Arraste e solte imagens aqui";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Juntar {count} PDFs",
     buttonBusy: "Juntando…",
     hint: "Adicione pelo menos mais um PDF para juntar.",
-    error: "Algo deu errado ao juntar seus PDFs. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Convertendo arquivo {currentFile} de {totalFiles}, página {current} de {total}…",
     buttonBusyStart: "Iniciando…",
     removeFileLabel: "Remover {name}",
-    error: "Algo deu errado ao converter seus PDFs. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Comprimir 1 PDF",
     buttonPlural: "Comprimir {count} PDFs",
     buttonBusy: "Comprimindo…",
-    error: "Algo deu errado ao comprimir seus PDFs. Tente novamente.",
-    encryptedError: "{name} está protegido por senha ou criptografado. Remova a proteção primeiro e depois comprima.",
+    error: "Não foi possível concluir. Tente novamente.",
+    encryptedError: "{name} está protegido por senha. Remova a senha primeiro.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Comprimir 1 imagem",
     buttonPlural: "Comprimir {count} imagens",
     buttonBusy: "Comprimindo…",
-    error: "Algo deu errado ao comprimir suas imagens. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Converter 1 imagem em PDF",
     buttonPlural: "Converter {count} imagens em PDF",
     buttonBusy: "Convertendo…",
-    error: "Algo deu errado ao converter suas imagens. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Remover {name}",
     button: "Girar PDF",
     buttonBusy: "Girando…",
-    error: "Algo deu errado ao girar seus PDFs. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Girar 1 imagem",
     buttonPlural: "Girar {count} imagens",
     buttonBusy: "Girando…",
-    error: "Algo deu errado ao girar suas imagens. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Dividir PDF",
     buttonBusy: "Dividindo…",
     invalidRanges: "Digite intervalos de páginas válidos entre 1 e {total}.",
-    error: "Algo deu errado ao dividir seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Excluir {count} páginas",
     buttonOne: "Excluir 1 página",
     buttonBusy: "Removendo páginas…",
-    allSelectedError: "Não é possível excluir todas as páginas — mantenha pelo menos uma.",
-    error: "Algo deu errado ao editar seu PDF. Tente novamente.",
+    allSelectedError: "Mantenha pelo menos uma página.",
+    error: "Não foi possível concluir. Tente novamente.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Salvar nova ordem",
     buttonBusy: "Salvando…",
     notChanged: "Mova pelo menos uma página para mudar a ordem.",
-    error: "Algo deu errado ao reorganizar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Cortar PDF",
     buttonBusy: "Cortando…",
     noMargins: "Defina pelo menos uma margem acima de 0%.",
-    error: "Algo deu errado ao cortar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Escala",
     button: "Redimensionar PDF",
     buttonBusy: "Redimensionando…",
-    error: "Algo deu errado ao redimensionar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Converter 1 PNG em PDF",
     buttonPlural: "Converter {count} PNGs em PDF",
     buttonBusy: "Convertendo…",
-    error: "Algo deu errado ao converter suas imagens. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   common: {
     loadingPages: "Carregando páginas…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} páginas",
     readError,
     passwordError,
-    imageReadError: "Não foi possível ler esta imagem. Ela pode estar corrompida ou em um formato não suportado.",
+    imageReadError: "Não é possível abrir esta imagem. Ela pode estar danificada.",
     webpUnsupported:
-      "Seu navegador não consegue criar imagens WebP. Use a versão mais recente do Chrome, Edge ou Firefox, ou escolha outro formato.",
+      "Seu navegador não consegue salvar WebP. Escolha outro formato.",
     selectAll: "Selecionar tudo",
     clearSelection: "Limpar",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Extrair 1 página",
     buttonPlural: "Extrair {count} páginas",
     buttonBusy: "Extraindo…",
-    error: "Algo deu errado ao extrair as páginas. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Não numerar a primeira página (capa)",
     button: "Adicionar números de página",
     buttonBusy: "Adicionando números…",
-    error: "Algo deu errado ao numerar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Digite o texto que deseja aplicar em todas as páginas.",
     button: "Adicionar marca d'água",
     buttonBusy: "Adicionando marca d'água…",
-    error: "Algo deu errado ao adicionar a marca d'água. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "1 objeto de marca d'água removido.",
     removedCount: "{count} objetos de marca d'água removidos.",
     noneFound:
-      "Nenhuma marca d'água removível foi encontrada neste PDF. Marcas que fazem parte de uma imagem digitalizada ou estão mescladas ao texto da página não podem ser separadas do conteúdo.",
+      "Nenhuma marca d'água removível encontrada. Marcas que fazem parte de uma digitalização ou do texto da página não podem ser removidas.",
+    protectedPdf: "Este PDF está protegido, então suas páginas não podem ser verificadas. Remova a proteção primeiro.",
+    scannedPdf: "Este PDF é formado por imagens digitalizadas. Uma marca d'água dentro de uma imagem não pode ser removida.",
+    uncheckedPages: "Algumas páginas não puderam ser lidas, então nenhuma marca d'água foi removida.",
     tryAnother: "Tentar outro arquivo",
-    error: "Algo deu errado ao editar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Separe as palavras-chave com vírgulas.",
     button: "Salvar alterações",
     buttonBusy: "Salvando…",
-    error: "Algo deu errado ao salvar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Nenhuma propriedade definida — o arquivo ainda será limpo de qualquer metadado XMP oculto.",
     button: "Remover metadados",
     buttonBusy: "Limpando…",
-    error: "Algo deu errado ao limpar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Espelhar cima ↕ baixo",
     button: "Espelhar PDF",
     buttonBusy: "Espelhando…",
-    error: "Algo deu errado ao espelhar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Criar PDF com 1 imagem",
     buttonPlural: "Criar PDF com {count} imagens",
     buttonBusy: "Criando PDF…",
-    error: "Algo deu errado ao criar seu PDF. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   imageConvert: {
     dropLabel: "Arraste e solte imagens {from} aqui",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Converter 1 imagem em {to}",
     buttonPlural: "Converter {count} imagens em {to}",
     buttonBusy: "Convertendo…",
-    error: "Algo deu errado ao converter suas imagens. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Redimensionar 1 imagem",
     buttonPlural: "Redimensionar {count} imagens",
     buttonBusy: "Redimensionando…",
-    error: "Algo deu errado ao redimensionar suas imagens. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Espelhar 1 imagem",
     buttonPlural: "Espelhar {count} imagens",
     buttonBusy: "Espelhando…",
-    error: "Algo deu errado ao espelhar suas imagens. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
   cropImage: {
     dropLabel: "Arraste e solte uma imagem aqui",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Mova o quadro para escolher a área a manter.",
     button: "Cortar imagem",
     buttonBusy: "Cortando…",
-    error: "Algo deu errado ao cortar sua imagem. Tente novamente.",
+    error: "Não foi possível concluir. Tente novamente.",
   },
 };

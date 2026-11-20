@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { GalleryHorizontalEnd, Loader2 } from "lucide-react";
 import { ErrorText, OptionGroup } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -37,18 +37,18 @@ const MAX_FILES = MAX_PDF_RENDER_FILES;
 export function PdfToImagesWorkspace() {
   const dict = useDictionary().workspace.pdfToImages;
   const common = useDictionary().workspace.common;
-  const [files, setFiles] = useState<File[]>([]);
-  const [format, setFormat] = useState<Format>("png");
-  const [resolution, setResolution] = useState<Resolution>("high");
-  const [processing, setProcessing] = useState(false);
-  const [progress, setProgress] = useState<{
+  const [files, setFiles] = useToolState<File[]>("pdf-to-images:files", []);
+  const [format, setFormat] = useToolState<Format>("pdf-to-images:format", "png");
+  const [resolution, setResolution] = useToolState<Resolution>("pdf-to-images:resolution", "high");
+  const [processing, setProcessing] = useToolState("pdf-to-images:processing", false);
+  const [progress, setProgress] = useToolState<{
     currentFile: number;
     totalFiles: number;
     current: number;
     total: number;
-  } | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; filename: string } | null>(null);
+  } | null>("pdf-to-images:progress", null);
+  const [error, setError] = useToolState<string | null>("pdf-to-images:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; filename: string } | null>("pdf-to-images:result", null);
 
   function reset() {
     setFiles([]);

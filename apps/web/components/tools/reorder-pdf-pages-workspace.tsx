@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import type { DragEvent } from "react";
 import { ArrowUpDown, ChevronLeft, ChevronRight, GripVertical, Loader2, X } from "lucide-react";
 import { useTouchReorder } from "@/components/tools/use-touch-reorder";
@@ -32,12 +33,12 @@ function createId() {
 export function ReorderPdfPagesWorkspace() {
   const dict = useDictionary().workspace.reorderPdfPages;
   const fileListDict = useDictionary().fileList;
-  const [file, setFile] = useState<File | null>(null);
-  const [items, setItems] = useState<PageItem[]>([]);
-  const [status, setStatus] = useState<Status>("idle");
-  const [readError, setReadError] = useState<ReadError>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
+  const [file, setFile] = useToolState<File | null>("reorder-pdf-pages:file", null);
+  const [items, setItems] = useToolState<PageItem[]>("reorder-pdf-pages:items", []);
+  const [status, setStatus] = useToolState<Status>("reorder-pdf-pages:status", "idle");
+  const [readError, setReadError] = useToolState<ReadError>("reorder-pdf-pages:readError", null);
+  const [error, setError] = useToolState<string | null>("reorder-pdf-pages:error", null);
+  const [result, setResult] = useToolState<{ bytes: Uint8Array; name: string } | null>("reorder-pdf-pages:result", null);
   const draggedIdRef = useRef<string | null>(null);
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [dragOverId, setDragOverId] = useState<string | null>(null);
@@ -205,7 +206,7 @@ export function ReorderPdfPagesWorkspace() {
           {items.length > 0 && (
             <>
               <p className="mt-4 text-sm text-foreground/60">{dict.reorderHint}</p>
-              <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
+              <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
                 {items.map((item, index) => (
                   <li
                     key={item.id}

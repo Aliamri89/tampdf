@@ -78,7 +78,7 @@ export function HeaderMenu({ locale, groups }: { locale: string; groups: MenuGro
         aria-haspopup="true"
         aria-expanded={open}
         aria-controls={panelId}
-        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-foreground/75 transition-colors hover:border-brand-400 hover:text-foreground"
+        className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-foreground/75 transition-colors hover:bg-surface-muted hover:text-foreground"
       >
         <Menu size={20} />
       </button>

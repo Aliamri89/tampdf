@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Loader2, RotateCw, X } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { ResultPanel } from "@/components/tools/result-panel";
@@ -40,10 +40,10 @@ const BULK_ANGLES = [90, 180, 270] as const;
 
 export function RotatePdfWorkspace() {
   const dict = useDictionary().workspace.rotatePdf;
-  const [entries, setEntries] = useState<FileEntry[]>([]);
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; filename: string } | null>(null);
+  const [entries, setEntries] = useToolState<FileEntry[]>("rotate-pdf:entries", []);
+  const [status, setStatus] = useToolState<Status>("rotate-pdf:status", "idle");
+  const [error, setError] = useToolState<string | null>("rotate-pdf:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; filename: string } | null>("rotate-pdf:result", null);
 
   function reset() {
     setEntries([]);

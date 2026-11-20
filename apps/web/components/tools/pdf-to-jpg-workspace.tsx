@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { FileImage, Loader2 } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
@@ -27,17 +27,17 @@ const MAX_FILES = MAX_PDF_RENDER_FILES;
 
 export function PdfToJpgWorkspace() {
   const dict = useDictionary().workspace.pdfToJpg;
-  const [files, setFiles] = useState<File[]>([]);
-  const [level, setLevel] = useState<Level>("medium");
-  const [status, setStatus] = useState<Status>("idle");
-  const [progress, setProgress] = useState<{
+  const [files, setFiles] = useToolState<File[]>("pdf-to-jpg:files", []);
+  const [level, setLevel] = useToolState<Level>("pdf-to-jpg:level", "medium");
+  const [status, setStatus] = useToolState<Status>("pdf-to-jpg:status", "idle");
+  const [progress, setProgress] = useToolState<{
     currentFile: number;
     totalFiles: number;
     current: number;
     total: number;
-  } | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; filename: string } | null>(null);
+  } | null>("pdf-to-jpg:progress", null);
+  const [error, setError] = useToolState<string | null>("pdf-to-jpg:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; filename: string } | null>("pdf-to-jpg:result", null);
 
   const levels: { id: Level; label: string; hint: string }[] = [
     { id: "low", label: dict.levelLow, hint: dict.levelLowHint },

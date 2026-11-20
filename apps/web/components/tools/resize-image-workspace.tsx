@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Expand, Loader2 } from "lucide-react";
 import { ErrorText, OptionGroup, RangeField, inputClass } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -31,15 +31,15 @@ const MAX_SIDE = 10000;
 export function ResizeImageWorkspace() {
   const dict = useDictionary().workspace.resizeImage;
   const common = useDictionary().workspace.common;
-  const [entries, setEntries] = useState<Entry[]>([]);
-  const [mode, setMode] = useState<Mode>("percent");
-  const [percent, setPercent] = useState(50);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
-  const [keepRatio, setKeepRatio] = useState(true);
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; filename: string } | null>(null);
+  const [entries, setEntries] = useToolState<Entry[]>("resize-image:entries", []);
+  const [mode, setMode] = useToolState<Mode>("resize-image:mode", "percent");
+  const [percent, setPercent] = useToolState("resize-image:percent", 50);
+  const [width, setWidth] = useToolState("resize-image:width", 0);
+  const [height, setHeight] = useToolState("resize-image:height", 0);
+  const [keepRatio, setKeepRatio] = useToolState("resize-image:keepRatio", true);
+  const [processing, setProcessing] = useToolState("resize-image:processing", false);
+  const [error, setError] = useToolState<string | null>("resize-image:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; filename: string } | null>("resize-image:result", null);
 
   const first = entries[0];
 

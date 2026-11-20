@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { ImageDown, Loader2 } from "lucide-react";
 import { FileDropzone } from "@/components/tools/file-dropzone";
 import { FileListItem } from "@/components/tools/file-list-item";
@@ -18,15 +18,15 @@ type Status = "idle" | "processing" | "done" | "error";
 
 export function CompressImageWorkspace() {
   const dict = useDictionary().workspace.compressImage;
-  const [files, setFiles] = useState<File[]>([]);
-  const [level, setLevel] = useState<CompressionLevel>("medium");
-  const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{
+  const [files, setFiles] = useToolState<File[]>("compress-image:files", []);
+  const [level, setLevel] = useToolState<CompressionLevel>("compress-image:level", "medium");
+  const [status, setStatus] = useToolState<Status>("compress-image:status", "idle");
+  const [error, setError] = useToolState<string | null>("compress-image:error", null);
+  const [result, setResult] = useToolState<{
     blob: Blob;
     filename: string;
     originalSize: number;
-  } | null>(null);
+  } | null>("compress-image:result", null);
 
   const levels: { id: CompressionLevel; label: string; hint: string }[] = [
     { id: "low", label: dict.levelLow, hint: dict.levelLowHint },

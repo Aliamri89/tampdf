@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "ไม่สามารถอ่าน PDF นี้ได้ ไฟล์อาจเสียหายหรือเป็นรูปแบบที่ไม่รองรับ";
-const passwordError = "PDF นี้ป้องกันด้วยรหัสผ่าน โปรดลบรหัสผ่านแล้วลองอีกครั้ง";
+const readError = "เปิด PDF นี้ไม่ได้ ไฟล์อาจเสียหาย";
+const passwordError = "PDF นี้มีรหัสผ่าน โปรดลบรหัสผ่านก่อน";
 const dropPdf = "ลากและวางไฟล์ PDF ที่นี่";
 const dropPdfs = "ลากและวางไฟล์ PDF ที่นี่";
 const dropImages = "ลากและวางรูปภาพที่นี่";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "รวม PDF {count} ไฟล์",
     buttonBusy: "กำลังรวม…",
     hint: "เพิ่ม PDF อีกอย่างน้อยหนึ่งไฟล์เพื่อรวม",
-    error: "เกิดข้อผิดพลาดขณะรวม PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "กำลังแปลงไฟล์ {currentFile}/{totalFiles} หน้า {current}/{total}…",
     buttonBusyStart: "กำลังเริ่ม…",
     removeFileLabel: "ลบ {name}",
-    error: "เกิดข้อผิดพลาดขณะแปลง PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "บีบอัด PDF 1 ไฟล์",
     buttonPlural: "บีบอัด PDF {count} ไฟล์",
     buttonBusy: "กำลังบีบอัด…",
-    error: "เกิดข้อผิดพลาดขณะบีบอัด PDF โปรดลองอีกครั้ง",
-    encryptedError: "{name} ป้องกันด้วยรหัสผ่านหรือถูกเข้ารหัส โปรดลบการป้องกันก่อน แล้วจึงบีบอัด",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
+    encryptedError: "{name} มีรหัสผ่าน โปรดลบรหัสผ่านก่อน",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "บีบอัดรูปภาพ 1 รูป",
     buttonPlural: "บีบอัดรูปภาพ {count} รูป",
     buttonBusy: "กำลังบีบอัด…",
-    error: "เกิดข้อผิดพลาดขณะบีบอัดรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "แปลงรูปภาพ 1 รูปเป็น PDF",
     buttonPlural: "แปลงรูปภาพ {count} รูปเป็น PDF",
     buttonBusy: "กำลังแปลง…",
-    error: "เกิดข้อผิดพลาดขณะแปลงรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "ลบ {name}",
     button: "หมุน PDF",
     buttonBusy: "กำลังหมุน…",
-    error: "เกิดข้อผิดพลาดขณะหมุน PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "หมุนรูปภาพ 1 รูป",
     buttonPlural: "หมุนรูปภาพ {count} รูป",
     buttonBusy: "กำลังหมุน…",
-    error: "เกิดข้อผิดพลาดขณะหมุนรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "แยก PDF",
     buttonBusy: "กำลังแยก…",
     invalidRanges: "ใส่ช่วงหน้าที่ถูกต้องระหว่าง 1–{total}",
-    error: "เกิดข้อผิดพลาดขณะแยก PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "ลบ {count} หน้า",
     buttonOne: "ลบ 1 หน้า",
     buttonBusy: "กำลังลบหน้า…",
-    allSelectedError: "ไม่สามารถลบทุกหน้าได้ — โปรดเก็บไว้อย่างน้อยหนึ่งหน้า",
-    error: "เกิดข้อผิดพลาดขณะแก้ไข PDF โปรดลองอีกครั้ง",
+    allSelectedError: "ต้องเหลืออย่างน้อยหนึ่งหน้า",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "บันทึกลำดับใหม่",
     buttonBusy: "กำลังบันทึก…",
     notChanged: "ย้ายอย่างน้อยหนึ่งหน้าเพื่อเปลี่ยนลำดับ",
-    error: "เกิดข้อผิดพลาดขณะจัดลำดับ PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "ครอบตัด PDF",
     buttonBusy: "กำลังครอบตัด…",
     noMargins: "ตั้งค่าขอบอย่างน้อยหนึ่งด้านให้มากกว่า 0%",
-    error: "เกิดข้อผิดพลาดขณะครอบตัด PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "สเกล",
     button: "ปรับขนาด PDF",
     buttonBusy: "กำลังปรับขนาด…",
-    error: "เกิดข้อผิดพลาดขณะปรับขนาด PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "แปลง PNG 1 รูปเป็น PDF",
     buttonPlural: "แปลง PNG {count} รูปเป็น PDF",
     buttonBusy: "กำลังแปลง…",
-    error: "เกิดข้อผิดพลาดขณะแปลงรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   common: {
     loadingPages: "กำลังโหลดหน้า…",
@@ -190,8 +190,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} หน้า",
     readError,
     passwordError,
-    imageReadError: "ไม่สามารถอ่านรูปภาพนี้ได้ ไฟล์อาจเสียหายหรือเป็นรูปแบบที่ไม่รองรับ",
-    webpUnsupported: "เบราว์เซอร์ของคุณสร้างรูป WebP ไม่ได้ ลองใช้ Chrome, Edge หรือ Firefox เวอร์ชันล่าสุด หรือเลือกรูปแบบอื่น",
+    imageReadError: "เปิดรูปภาพนี้ไม่ได้ ไฟล์อาจเสียหาย",
+    webpUnsupported: "เบราว์เซอร์ของคุณบันทึก WebP ไม่ได้ โปรดเลือกรูปแบบอื่น",
     selectAll: "เลือกทั้งหมด",
     clearSelection: "ล้าง",
     metadataFields: {
@@ -216,7 +216,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "แยก 1 หน้า",
     buttonPlural: "แยก {count} หน้า",
     buttonBusy: "กำลังแยก…",
-    error: "เกิดข้อผิดพลาดขณะแยกหน้า โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -239,7 +239,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "ไม่ใส่เลขหน้าแรก (หน้าปก)",
     button: "เพิ่มเลขหน้า",
     buttonBusy: "กำลังเพิ่มเลขหน้า…",
-    error: "เกิดข้อผิดพลาดขณะใส่เลขหน้า PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -260,7 +260,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "พิมพ์ข้อความที่ต้องการประทับลงบนทุกหน้า",
     button: "เพิ่มลายน้ำ",
     buttonBusy: "กำลังเพิ่มลายน้ำ…",
-    error: "เกิดข้อผิดพลาดขณะเพิ่มลายน้ำ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -270,9 +270,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "ลบออบเจกต์ลายน้ำแล้ว 1 รายการ",
     removedCount: "ลบออบเจกต์ลายน้ำแล้ว {count} รายการ",
     noneFound:
-      "ไม่พบลายน้ำที่ลบได้ใน PDF นี้ ลายน้ำที่เป็นส่วนหนึ่งของภาพสแกนหรือรวมอยู่กับข้อความในหน้าไม่สามารถแยกออกจากเนื้อหาได้",
+      "ไม่พบลายน้ำที่ลบได้ ลายน้ำที่เป็นส่วนหนึ่งของภาพสแกนหรือข้อความในหน้าจะลบไม่ได้",
+    protectedPdf: "PDF นี้ถูกป้องกัน จึงตรวจสอบหน้าไม่ได้ โปรดลบการป้องกันก่อน",
+    scannedPdf: "PDF นี้ประกอบด้วยภาพสแกน ลายน้ำที่อยู่ในภาพจะลบไม่ได้",
+    uncheckedPages: "อ่านบางหน้าไม่ได้ จึงไม่ได้ลบลายน้ำใด ๆ",
     tryAnother: "ลองไฟล์อื่น",
-    error: "เกิดข้อผิดพลาดขณะแก้ไข PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -301,7 +304,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "คั่นคำสำคัญด้วยเครื่องหมายจุลภาค",
     button: "บันทึกการเปลี่ยนแปลง",
     buttonBusy: "กำลังบันทึก…",
-    error: "เกิดข้อผิดพลาดขณะบันทึก PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -310,7 +313,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "ไม่มีการตั้งค่าคุณสมบัติเอกสาร — แต่ไฟล์จะยังคงถูกล้างเมทาดาทา XMP ที่ซ่อนอยู่",
     button: "ลบเมทาดาทา",
     buttonBusy: "กำลังล้างข้อมูล…",
-    error: "เกิดข้อผิดพลาดขณะล้างข้อมูล PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -322,7 +325,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "สะท้อนบน ↕ ล่าง",
     button: "พลิก PDF",
     buttonBusy: "กำลังพลิก…",
-    error: "เกิดข้อผิดพลาดขณะพลิก PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -355,7 +358,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "สร้าง PDF จากรูปภาพ 1 รูป",
     buttonPlural: "สร้าง PDF จากรูปภาพ {count} รูป",
     buttonBusy: "กำลังสร้าง PDF…",
-    error: "เกิดข้อผิดพลาดขณะสร้าง PDF โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   imageConvert: {
     dropLabel: "ลากและวางรูปภาพ {from} ที่นี่",
@@ -364,7 +367,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "แปลงรูปภาพ 1 รูปเป็น {to}",
     buttonPlural: "แปลงรูปภาพ {count} รูปเป็น {to}",
     buttonBusy: "กำลังแปลง…",
-    error: "เกิดข้อผิดพลาดขณะแปลงรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -382,7 +385,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "ปรับขนาดรูปภาพ 1 รูป",
     buttonPlural: "ปรับขนาดรูปภาพ {count} รูป",
     buttonBusy: "กำลังปรับขนาด…",
-    error: "เกิดข้อผิดพลาดขณะปรับขนาดรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -394,7 +397,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "พลิกรูปภาพ 1 รูป",
     buttonPlural: "พลิกรูปภาพ {count} รูป",
     buttonBusy: "กำลังพลิก…",
-    error: "เกิดข้อผิดพลาดขณะพลิกรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
   cropImage: {
     dropLabel: "ลากและวางรูปภาพที่นี่",
@@ -409,6 +412,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "เลื่อนกรอบเพื่อเลือกพื้นที่ที่ต้องการเก็บไว้",
     button: "ครอบตัดรูปภาพ",
     buttonBusy: "กำลังครอบตัด…",
-    error: "เกิดข้อผิดพลาดขณะครอบตัดรูปภาพ โปรดลองอีกครั้ง",
+    error: "ประมวลผลไม่สำเร็จ โปรดลองอีกครั้ง",
   },
 };

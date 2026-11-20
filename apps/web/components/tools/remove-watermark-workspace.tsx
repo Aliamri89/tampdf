@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Eraser, Info, Loader2, SearchX } from "lucide-react";
 import { ErrorText, LoadingLine, SelectedFile } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -12,21 +12,25 @@ import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { isDocx, removeDocxWatermarks } from "@/lib/docx/remove-watermark";
 import { downloadBlob } from "@/lib/download";
-import { removeWatermarks } from "@/lib/pdf/remove-watermark";
+import { removeWatermarks, type RemoveWatermarkResult } from "@/lib/pdf/remove-watermark";
+
+type NoneReason = NonNullable<RemoveWatermarkResult["reason"]> | "word";
 
 export function RemoveWatermarkWorkspace() {
   const dict = useDictionary().workspace.removeWatermark;
   const common = useDictionary().workspace.common;
-  const source = usePdfSource("count");
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [noneFound, setNoneFound] = useState(false);
-  const [docxFile, setDocxFile] = useState<File | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; name: string; removed: number } | null>(null);
+  const source = usePdfSource("count", "remove-watermark");
+  const [processing, setProcessing] = useToolState("remove-watermark:processing", false);
+  const [error, setError] = useToolState<string | null>("remove-watermark:error", null);
+  // Why nothing was removed — set only after the whole file was actually checked.
+  const [noneReason, setNoneReason] = useToolState<NoneReason | null>("remove-watermark:noneReason", null);
+  const noneFound = noneReason !== null;
+  const [docxFile, setDocxFile] = useToolState<File | null>("remove-watermark:docxFile", null);
+  const [result, setResult] = useToolState<{ blob: Blob; name: string; removed: number } | null>("remove-watermark:result", null);
 
   function handleFileAdded(added: File) {
     setError(null);
-    setNoneFound(false);
+    setNoneReason(null);
     if (isDocx(added)) {
       source.clear();
       setDocxFile(added);
@@ -41,7 +45,7 @@ export function RemoveWatermarkWorkspace() {
     setDocxFile(null);
     setProcessing(false);
     setError(null);
-    setNoneFound(false);
+    setNoneReason(null);
     setResult(null);
   }
 
@@ -50,16 +54,16 @@ export function RemoveWatermarkWorkspace() {
     if (!file) return;
     setProcessing(true);
     setError(null);
-    setNoneFound(false);
+    setNoneReason(null);
     try {
       if (docxFile) {
         const { blob, removed } = await removeDocxWatermarks(docxFile);
         const suffix = dict.resultSuffix.replace(/\.pdf$/i, "");
-        if (removed === 0) setNoneFound(true);
+        if (removed === 0) setNoneReason("word");
         else setResult({ blob, removed, name: docxFile.name.replace(/\.docx$/i, `${suffix}.docx`) });
       } else {
-        const { bytes, removed } = await removeWatermarks(file);
-        if (removed === 0) setNoneFound(true);
+        const { bytes, removed, reason } = await removeWatermarks(file);
+        if (removed === 0) setNoneReason(reason ?? "none");
         else {
           setResult({
             blob: new Blob([new Uint8Array(bytes)], { type: "application/pdf" }),
@@ -134,7 +138,16 @@ export function RemoveWatermarkWorkspace() {
       {noneFound && (
         <div className="mt-5 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-base text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-200">
           <SearchX size={18} className="mt-0.5 shrink-0" />
-          <p>{docxFile ? dict.noneFoundWord : dict.noneFound}</p>
+          <p>
+            {noneReason &&
+              {
+                word: dict.noneFoundWord,
+                encrypted: dict.protectedPdf,
+                scanned: dict.scannedPdf,
+                unreadable: dict.uncheckedPages,
+                none: dict.noneFound,
+              }[noneReason]}
+          </p>
         </div>
       )}
 

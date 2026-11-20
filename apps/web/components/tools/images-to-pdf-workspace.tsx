@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type DragEvent } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { ChevronLeft, ChevronRight, FileStack, GripVertical, Loader2, X } from "lucide-react";
 import { useTouchReorder } from "@/components/tools/use-touch-reorder";
 import { ErrorText, OptionGroup } from "@/components/tools/controls";
@@ -11,8 +12,9 @@ import { t } from "@/i18n/format";
 import { useDictionary } from "@/i18n/locale-context";
 import { trackToolUsage } from "@/lib/analytics";
 import { MAX_MULTI_FILES } from "@/lib/tool-limits";
-import { downloadBytes } from "@/lib/download";
-import { imagesToPdf, type ImagePdfPageSize } from "@/lib/image/toPdf";
+import { downloadBlob } from "@/lib/download";
+import { ImageReadError } from "@/lib/image/pdf-writer";
+import { imagesToPdfBlob, type ImagePdfPageSize } from "@/lib/image/toPdf";
 import { cn } from "@/lib/utils";
 
 type Margin = "none" | "small" | "large";
@@ -30,13 +32,14 @@ function createId() {
 
 export function ImagesToPdfWorkspace() {
   const dict = useDictionary().workspace.imagesToPdf;
+  const common = useDictionary().workspace.common;
   const fileListDict = useDictionary().fileList;
-  const [entries, setEntries] = useState<ImageEntry[]>([]);
-  const [pageSize, setPageSize] = useState<ImagePdfPageSize>("a4");
-  const [margin, setMargin] = useState<Margin>("small");
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<Uint8Array | null>(null);
+  const [entries, setEntries] = useToolState<ImageEntry[]>("images-to-pdf:entries", []);
+  const [pageSize, setPageSize] = useToolState<ImagePdfPageSize>("images-to-pdf:pageSize", "a4");
+  const [margin, setMargin] = useToolState<Margin>("images-to-pdf:margin", "small");
+  const [processing, setProcessing] = useToolState("images-to-pdf:processing", false);
+  const [error, setError] = useToolState<string | null>("images-to-pdf:error", null);
+  const [result, setResult] = useToolState<Blob | null>("images-to-pdf:result", null);
   const draggedIdRef = useRef<string | null>(null);
   const [draggedId, setDraggedId] = useState<string | null>(null);
   const [dragOverId, setDragOverId] = useState<string | null>(null);
@@ -101,14 +104,14 @@ export function ImagesToPdfWorkspace() {
     setProcessing(true);
     setError(null);
     try {
-      const bytes = await imagesToPdf(
+      const blob = await imagesToPdfBlob(
         entries.map((entry) => entry.file),
         { whiteBackground: true, pageSize, margin: MARGINS[margin] },
       );
-      setResult(bytes);
+      setResult(blob);
       trackToolUsage("images-to-pdf", true);
     } catch (err) {
-      setError(dict.error);
+      setError(err instanceof ImageReadError ? common.imageReadError : dict.error);
       trackToolUsage("images-to-pdf", false, err);
     } finally {
       setProcessing(false);
@@ -120,9 +123,9 @@ export function ImagesToPdfWorkspace() {
       <div>
         <ResultPanel
           filename={dict.resultName}
-          size={result.byteLength}
-          onDownload={() => downloadBytes(result, dict.resultName, "application/pdf")}
-          getBlob={() => new Blob([new Uint8Array(result)], { type: "application/pdf" })}
+          size={result.size}
+          onDownload={() => downloadBlob(result, dict.resultName)}
+          getBlob={() => result}
           onReset={reset}
         />
       </div>
@@ -145,7 +148,7 @@ export function ImagesToPdfWorkspace() {
       {entries.length > 0 && (
         <>
           <p className="mt-5 text-sm text-foreground/60">{dict.reorderHint}</p>
-          <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
             {entries.map((entry, index) => (
               <li
                 key={entry.id}
@@ -190,7 +193,7 @@ export function ImagesToPdfWorkspace() {
                 </button>
                 <div className="flex aspect-square cursor-grab items-center justify-center overflow-hidden rounded bg-surface-muted active:cursor-grabbing">
                   {/* eslint-disable-next-line @next/next/no-img-element -- local object URL, not a static asset */}
-                  <img src={entry.url} alt="" className="max-h-[88%] max-w-[88%] object-contain" />
+                  <img src={entry.url} alt="" loading="lazy" decoding="async" className="max-h-[88%] max-w-[88%] object-contain" />
                 </div>
                 <div className="mt-1 flex items-center justify-between px-0.5">
                   <button

@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Deze PDF kon niet worden gelezen. Het bestand is mogelijk beschadigd of heeft een niet-ondersteund formaat.";
-const passwordError = "Deze PDF is beveiligd met een wachtwoord. Verwijder het wachtwoord en probeer het opnieuw.";
+const readError = "Deze pdf kan niet worden geopend. Mogelijk is hij beschadigd.";
+const passwordError = "Deze pdf is beveiligd met een wachtwoord. Verwijder eerst het wachtwoord.";
 const dropPdf = "Sleep een PDF-bestand hierheen";
 const dropPdfs = "Sleep PDF-bestanden hierheen";
 const dropImages = "Sleep afbeeldingen hierheen";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count} PDF's samenvoegen",
     buttonBusy: "Bezig met samenvoegen…",
     hint: "Voeg minstens nog één PDF toe om samen te voegen.",
-    error: "Er ging iets mis bij het samenvoegen van je PDF's. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Bestand {currentFile} van {totalFiles} converteren, pagina {current} van {total}…",
     buttonBusyStart: "Starten…",
     removeFileLabel: "{name} verwijderen",
-    error: "Er ging iets mis bij het converteren van je PDF's. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 PDF comprimeren",
     buttonPlural: "{count} PDF's comprimeren",
     buttonBusy: "Bezig met comprimeren…",
-    error: "Er ging iets mis bij het comprimeren van je PDF's. Probeer het opnieuw.",
-    encryptedError: "{name} is beveiligd met een wachtwoord of versleuteld. Verwijder eerst de beveiliging en comprimeer het daarna.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
+    encryptedError: "{name} is beveiligd met een wachtwoord. Verwijder eerst het wachtwoord.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 afbeelding comprimeren",
     buttonPlural: "{count} afbeeldingen comprimeren",
     buttonBusy: "Bezig met comprimeren…",
-    error: "Er ging iets mis bij het comprimeren van je afbeeldingen. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "1 afbeelding naar PDF converteren",
     buttonPlural: "{count} afbeeldingen naar PDF converteren",
     buttonBusy: "Bezig met converteren…",
-    error: "Er ging iets mis bij het converteren van je afbeeldingen. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "{name} verwijderen",
     button: "PDF draaien",
     buttonBusy: "Bezig met draaien…",
-    error: "Er ging iets mis bij het draaien van je PDF's. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 afbeelding draaien",
     buttonPlural: "{count} afbeeldingen draaien",
     buttonBusy: "Bezig met draaien…",
-    error: "Er ging iets mis bij het draaien van je afbeeldingen. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF splitsen",
     buttonBusy: "Bezig met splitsen…",
     invalidRanges: "Voer geldige paginabereiken in tussen 1 en {total}.",
-    error: "Er ging iets mis bij het splitsen van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "{count} pagina's verwijderen",
     buttonOne: "1 pagina verwijderen",
     buttonBusy: "Pagina's verwijderen…",
-    allSelectedError: "Je kunt niet alle pagina's verwijderen — houd er minstens één over.",
-    error: "Er ging iets mis bij het bewerken van je PDF. Probeer het opnieuw.",
+    allSelectedError: "Houd minstens één pagina over.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Nieuwe volgorde opslaan",
     buttonBusy: "Bezig met opslaan…",
     notChanged: "Verplaats minstens één pagina om de volgorde te wijzigen.",
-    error: "Er ging iets mis bij het herschikken van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "PDF bijsnijden",
     buttonBusy: "Bezig met bijsnijden…",
     noMargins: "Stel minstens één marge boven 0% in.",
-    error: "Er ging iets mis bij het bijsnijden van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Schaal",
     button: "PDF-formaat wijzigen",
     buttonBusy: "Formaat wijzigen…",
-    error: "Er ging iets mis bij het wijzigen van het formaat van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 PNG naar PDF converteren",
     buttonPlural: "{count} PNG's naar PDF converteren",
     buttonBusy: "Bezig met converteren…",
-    error: "Er ging iets mis bij het converteren van je afbeeldingen. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   common: {
     loadingPages: "Pagina's laden…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "{count} pagina's",
     readError,
     passwordError,
-    imageReadError: "Deze afbeelding kon niet worden gelezen. Het bestand is mogelijk beschadigd of heeft een niet-ondersteund formaat.",
+    imageReadError: "Deze afbeelding kan niet worden geopend. Mogelijk is ze beschadigd.",
     webpUnsupported:
-      "Je browser kan geen WebP-afbeeldingen maken. Probeer de nieuwste versie van Chrome, Edge of Firefox, of kies een ander formaat.",
+      "Je browser kan geen WebP opslaan. Kies een ander formaat.",
     selectAll: "Alles selecteren",
     clearSelection: "Wissen",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "1 pagina uitpakken",
     buttonPlural: "{count} pagina's uitpakken",
     buttonBusy: "Bezig met uitpakken…",
-    error: "Er ging iets mis bij het uitpakken van pagina's. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Eerste pagina (voorblad) niet nummeren",
     button: "Paginanummers toevoegen",
     buttonBusy: "Nummers toevoegen…",
-    error: "Er ging iets mis bij het nummeren van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Typ de tekst die je op elke pagina wilt stempelen.",
     button: "Watermerk toevoegen",
     buttonBusy: "Watermerk toevoegen…",
-    error: "Er ging iets mis bij het toevoegen van het watermerk. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "1 watermerkobject verwijderd.",
     removedCount: "{count} watermerkobjecten verwijderd.",
     noneFound:
-      "Er is geen verwijderbaar watermerk in deze PDF gevonden. Watermerken die deel uitmaken van een gescande afbeelding of samengevoegd zijn met de paginatekst kunnen niet van de inhoud worden gescheiden.",
+      "Geen verwijderbaar watermerk gevonden. Watermerken in een scan of in de paginatekst kunnen niet worden verwijderd.",
+    protectedPdf: "Deze pdf is beveiligd, dus de pagina's kunnen niet worden gecontroleerd. Verwijder eerst de beveiliging.",
+    scannedPdf: "Deze pdf bestaat uit gescande afbeeldingen. Een watermerk in een afbeelding kan niet worden verwijderd.",
+    uncheckedPages: "Sommige pagina's konden niet worden gelezen, dus er is geen watermerk verwijderd.",
     tryAnother: "Ander bestand proberen",
-    error: "Er ging iets mis bij het bewerken van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Scheid trefwoorden met komma's.",
     button: "Wijzigingen opslaan",
     buttonBusy: "Bezig met opslaan…",
-    error: "Er ging iets mis bij het opslaan van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Er zijn geen documenteigenschappen ingesteld — verborgen XMP-metadata worden toch verwijderd.",
     button: "Metadata verwijderen",
     buttonBusy: "Bezig met opschonen…",
-    error: "Er ging iets mis bij het opschonen van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Boven ↕ onder spiegelen",
     button: "PDF spiegelen",
     buttonBusy: "Bezig met spiegelen…",
-    error: "Er ging iets mis bij het spiegelen van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "PDF maken van 1 afbeelding",
     buttonPlural: "PDF maken van {count} afbeeldingen",
     buttonBusy: "PDF maken…",
-    error: "Er ging iets mis bij het maken van je PDF. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   imageConvert: {
     dropLabel: "Sleep {from}-afbeeldingen hierheen",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 afbeelding naar {to} converteren",
     buttonPlural: "{count} afbeeldingen naar {to} converteren",
     buttonBusy: "Bezig met converteren…",
-    error: "Er ging iets mis bij het converteren van je afbeeldingen. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Formaat van 1 afbeelding wijzigen",
     buttonPlural: "Formaat van {count} afbeeldingen wijzigen",
     buttonBusy: "Formaat wijzigen…",
-    error: "Er ging iets mis bij het wijzigen van het formaat van je afbeeldingen. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "1 afbeelding spiegelen",
     buttonPlural: "{count} afbeeldingen spiegelen",
     buttonBusy: "Bezig met spiegelen…",
-    error: "Er ging iets mis bij het spiegelen van je afbeeldingen. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
   cropImage: {
     dropLabel: "Sleep een afbeelding hierheen",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Verplaats het kader om het gebied te kiezen dat je wilt behouden.",
     button: "Afbeelding bijsnijden",
     buttonBusy: "Bezig met bijsnijden…",
-    error: "Er ging iets mis bij het bijsnijden van je afbeelding. Probeer het opnieuw.",
+    error: "Verwerken mislukt. Probeer het opnieuw.",
   },
 };

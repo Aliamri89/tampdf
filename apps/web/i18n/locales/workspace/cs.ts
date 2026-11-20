@@ -1,8 +1,8 @@
 import type { Dictionary } from "../../dictionaries";
 import type { DeepPartial } from "../../merge";
 
-const readError = "Tento PDF se nepodařilo načíst. Soubor může být poškozený nebo v nepodporovaném formátu.";
-const passwordError = "Tento PDF je chráněný heslem. Odstraňte heslo a zkuste to znovu.";
+const readError = "Tento soubor PDF nelze otevřít. Může být poškozený.";
+const passwordError = "Toto PDF je chráněné heslem. Nejprve heslo odstraňte.";
 const dropPdf = "Přetáhněte sem soubor PDF";
 const dropPdfs = "Přetáhněte sem soubory PDF";
 const dropImages = "Přetáhněte sem obrázky";
@@ -14,7 +14,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Sloučit soubory PDF ({count})",
     buttonBusy: "Slučování…",
     hint: "Přidejte alespoň jeden další PDF ke sloučení.",
-    error: "Při slučování souborů PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   pdfToJpg: {
     dropLabel: dropPdfs,
@@ -30,7 +30,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonBusy: "Převádí se soubor {currentFile} z {totalFiles}, strana {current} z {total}…",
     buttonBusyStart: "Spouštění…",
     removeFileLabel: "Odebrat {name}",
-    error: "Při převodu souborů PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
     readError,
     passwordError,
   },
@@ -46,8 +46,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Komprimovat 1 PDF",
     buttonPlural: "Komprimovat soubory PDF ({count})",
     buttonBusy: "Komprimace…",
-    error: "Při komprimaci souborů PDF došlo k chybě. Zkuste to znovu.",
-    encryptedError: "Soubor {name} je chráněný heslem nebo šifrovaný. Nejprve odstraňte ochranu a poté jej komprimujte.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
+    encryptedError: "{name} je chráněný heslem. Nejprve heslo odstraňte.",
   },
   compressImage: {
     dropLabel: dropImages,
@@ -61,14 +61,14 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Komprimovat 1 obrázek",
     buttonPlural: "Komprimovat obrázky ({count})",
     buttonBusy: "Komprimace…",
-    error: "Při komprimaci obrázků došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   imageToPdf: {
     dropLabel: dropImages,
     buttonSingular: "Převést 1 obrázek na PDF",
     buttonPlural: "Převést obrázky na PDF ({count})",
     buttonBusy: "Převádění…",
-    error: "Při převodu obrázků došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   rotatePdf: {
     dropLabel: dropPdfs,
@@ -79,7 +79,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removeFileLabel: "Odebrat {name}",
     button: "Otočit PDF",
     buttonBusy: "Otáčení…",
-    error: "Při otáčení souborů PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
     readError,
     passwordError,
   },
@@ -91,7 +91,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Otočit 1 obrázek",
     buttonPlural: "Otočit obrázky ({count})",
     buttonBusy: "Otáčení…",
-    error: "Při otáčení obrázků došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   splitPdf: {
     dropLabel: dropPdf,
@@ -107,7 +107,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Rozdělit PDF",
     buttonBusy: "Rozdělování…",
     invalidRanges: "Zadejte platné rozsahy stran od 1 do {total}.",
-    error: "Při rozdělování PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
     readError,
     passwordError,
   },
@@ -121,8 +121,8 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Odstranit strany ({count})",
     buttonOne: "Odstranit 1 stranu",
     buttonBusy: "Odstraňování stran…",
-    allSelectedError: "Nelze odstranit všechny strany — ponechte alespoň jednu.",
-    error: "Při úpravě PDF došlo k chybě. Zkuste to znovu.",
+    allSelectedError: "Ponechte alespoň jednu stránku.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
     readError,
     passwordError,
   },
@@ -136,7 +136,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Uložit nové pořadí",
     buttonBusy: "Ukládání…",
     notChanged: "Přesuňte alespoň jednu stranu, abyste změnili pořadí.",
-    error: "Při změně pořadí stran došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
     readError,
     passwordError,
   },
@@ -152,7 +152,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     button: "Oříznout PDF",
     buttonBusy: "Ořezávání…",
     noMargins: "Nastavte alespoň jeden okraj větší než 0 %.",
-    error: "Při ořezávání PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
     readError,
     passwordError,
   },
@@ -173,7 +173,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     scaleLabel: "Měřítko",
     button: "Změnit velikost PDF",
     buttonBusy: "Změna velikosti…",
-    error: "Při změně velikosti PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
     readError,
     passwordError,
   },
@@ -182,7 +182,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Převést 1 PNG na PDF",
     buttonPlural: "Převést PNG na PDF ({count})",
     buttonBusy: "Převádění…",
-    error: "Při převodu obrázků došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   common: {
     loadingPages: "Načítání stran…",
@@ -190,9 +190,9 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     pageCount: "Počet stran: {count}",
     readError,
     passwordError,
-    imageReadError: "Tento obrázek se nepodařilo načíst. Soubor může být poškozený nebo v nepodporovaném formátu.",
+    imageReadError: "Tento obrázek nelze otevřít. Může být poškozený.",
     webpUnsupported:
-      "Váš prohlížeč neumí vytvářet obrázky WebP. Zkuste nejnovější Chrome, Edge nebo Firefox, nebo zvolte jiný formát.",
+      "Váš prohlížeč neumí uložit WebP. Zvolte jiný formát.",
     selectAll: "Vybrat vše",
     clearSelection: "Zrušit",
     metadataFields: {
@@ -217,7 +217,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonOne: "Extrahovat 1 stranu",
     buttonPlural: "Extrahovat strany ({count})",
     buttonBusy: "Extrahování…",
-    error: "Při extrahování stran došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   addPageNumbers: {
     dropLabel: dropPdf,
@@ -240,7 +240,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     skipFirst: "Nečíslovat první stranu (obálku)",
     button: "Přidat čísla stránek",
     buttonBusy: "Přidávání čísel…",
-    error: "Při číslování PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   addWatermark: {
     dropLabel: dropPdf,
@@ -261,7 +261,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     emptyText: "Napište text, který se má vyrazit na každou stranu.",
     button: "Přidat vodoznak",
     buttonBusy: "Přidávání vodoznaku…",
-    error: "Při přidávání vodoznaku došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   removeWatermark: {
     dropLabel: dropPdf,
@@ -271,9 +271,12 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     removedOne: "Odstraněn 1 objekt vodoznaku.",
     removedCount: "Odstraněné objekty vodoznaku: {count}.",
     noneFound:
-      "V tomto PDF nebyl nalezen žádný odstranitelný vodoznak. Vodoznaky, které jsou součástí naskenovaného obrázku nebo sloučené s textem stránky, nelze oddělit od obsahu.",
+      "Nebyl nalezen žádný odstranitelný vodoznak. Vodoznaky ve skenu nebo v textu stránky odstranit nelze.",
+    protectedPdf: "Toto PDF je zabezpečené, takže jeho stránky nelze zkontrolovat. Nejprve odstraňte zabezpečení.",
+    scannedPdf: "Toto PDF tvoří naskenované obrázky. Vodoznak uvnitř obrázku odstranit nelze.",
+    uncheckedPages: "Některé stránky nešlo přečíst, proto nebyl odstraněn žádný vodoznak.",
     tryAnother: "Zkusit jiný soubor",
-    error: "Při úpravě PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   pdfInfo: {
     dropLabel: dropPdf,
@@ -302,7 +305,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     keywordsHint: "Klíčová slova oddělte čárkami.",
     button: "Uložit změny",
     buttonBusy: "Ukládání…",
-    error: "Při ukládání PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   removePdfMetadata: {
     dropLabel: dropPdf,
@@ -311,7 +314,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noneFound: "Nejsou nastaveny žádné vlastnosti dokumentu — soubor bude přesto vyčištěn od skrytých metadat XMP.",
     button: "Odstranit metadata",
     buttonBusy: "Čištění…",
-    error: "Při čištění PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   flipPdf: {
     dropLabel: dropPdf,
@@ -323,7 +326,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     verticalHint: "Zrcadlit nahoře ↕ dole",
     button: "Převrátit PDF",
     buttonBusy: "Převracení…",
-    error: "Při převracení PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   pdfToImages: {
     dropLabel: dropPdfs,
@@ -356,7 +359,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Vytvořit PDF z 1 obrázku",
     buttonPlural: "Vytvořit PDF z obrázků ({count})",
     buttonBusy: "Vytváření PDF…",
-    error: "Při vytváření PDF došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   imageConvert: {
     dropLabel: "Přetáhněte sem obrázky {from}",
@@ -365,7 +368,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Převést 1 obrázek na {to}",
     buttonPlural: "Převést obrázky na {to} ({count})",
     buttonBusy: "Převádění…",
-    error: "Při převodu obrázků došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   resizeImage: {
     dropLabel: dropImages,
@@ -383,7 +386,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Změnit velikost 1 obrázku",
     buttonPlural: "Změnit velikost obrázků ({count})",
     buttonBusy: "Změna velikosti…",
-    error: "Při změně velikosti obrázků došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   flipImage: {
     dropLabel: dropImages,
@@ -395,7 +398,7 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     buttonSingular: "Převrátit 1 obrázek",
     buttonPlural: "Převrátit obrázky ({count})",
     buttonBusy: "Převracení…",
-    error: "Při převracení obrázků došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
   cropImage: {
     dropLabel: "Přetáhněte sem obrázek",
@@ -410,6 +413,6 @@ export const workspace: DeepPartial<Dictionary["workspace"]> = {
     noCrop: "Posuňte rámeček a vyberte oblast, kterou chcete zachovat.",
     button: "Oříznout obrázek",
     buttonBusy: "Ořezávání…",
-    error: "Při ořezávání obrázku došlo k chybě. Zkuste to znovu.",
+    error: "Zpracování se nezdařilo. Zkuste to znovu.",
   },
 };

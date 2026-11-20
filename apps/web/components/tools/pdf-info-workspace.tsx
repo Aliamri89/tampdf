@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useToolRef, useToolState } from "@/components/tools/use-tool-state";
 import { FileSearch, RotateCcw } from "lucide-react";
 import { ErrorText, LoadingLine } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -36,14 +36,14 @@ export function PdfInfoWorkspace() {
   const dict = useDictionary().workspace.pdfInfo;
   const common = useDictionary().workspace.common;
   const locale = useLocale();
-  const [file, setFile] = useState<File | null>(null);
-  const [info, setInfo] = useState<PdfInfo | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const token = useRef(0);
+  const [file, setFile] = useToolState<File | null>("pdf-info:file", null);
+  const [info, setInfo] = useToolState<PdfInfo | null>("pdf-info:info", null);
+  const [loading, setLoading] = useToolState("pdf-info:loading", false);
+  const [error, setError] = useToolState<string | null>("pdf-info:error", null);
+  const tokenRef = useToolRef("pdf-info:token", 0);
 
   function reset() {
-    token.current++;
+    tokenRef.current++;
     setFile(null);
     setInfo(null);
     setLoading(false);
@@ -53,22 +53,22 @@ export function PdfInfoWorkspace() {
   async function handleFile(added: File[]) {
     const next = added[0];
     if (!next) return;
-    const current = ++token.current;
+    const current = ++tokenRef.current;
     setFile(next);
     setInfo(null);
     setError(null);
     setLoading(true);
     try {
       const result = await getPdfInfo(next);
-      if (current !== token.current) return;
+      if (current !== tokenRef.current) return;
       setInfo(result);
       trackToolUsage("pdf-info", true);
     } catch (err) {
-      if (current !== token.current) return;
+      if (current !== tokenRef.current) return;
       setError(isPdfPasswordError(err) ? common.passwordError : common.readError);
       trackToolUsage("pdf-info", false, err);
     } finally {
-      if (current === token.current) setLoading(false);
+      if (current === tokenRef.current) setLoading(false);
     }
   }
 

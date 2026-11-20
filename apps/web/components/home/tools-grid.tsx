@@ -70,8 +70,8 @@ export function ToolsGrid({
                     ? "border-[#2563eb] bg-[#2563eb] text-white"
                     : "border-brand-500 bg-brand-500 text-white"
                   : isImageChip
-                    ? "border-home-border bg-home-card text-foreground/70 hover:border-[#2563eb] hover:text-foreground"
-                    : "border-home-border bg-home-card text-foreground/70 hover:border-brand-400 hover:text-foreground",
+                    ? "border-home-border bg-home-card text-foreground/70 hover:text-foreground"
+                    : "border-home-border bg-home-card text-foreground/70 hover:text-foreground",
               )}
             >
               {id === "image" ? imageLabel : dict.groups[id]}
@@ -89,9 +89,8 @@ export function ToolsGrid({
               href={`/${locale}/${tool.slug}`}
               className={cn(
                 "group flex aspect-square flex-col items-center justify-center gap-3 rounded-xl border border-home-border bg-home-card p-3 text-center shadow-sm outline-none transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl focus-visible:-translate-y-1.5 focus-visible:shadow-xl",
-                isImageTool
-                  ? "hover:border-[#2563eb] hover:bg-[#2563eb]/10 hover:shadow-[#2563eb]/25 focus-visible:border-[#2563eb]"
-                  : "hover:border-[#ed0a0a] hover:bg-[#ed0a0a]/10 hover:shadow-[#ed0a0a]/25 focus-visible:border-[#ed0a0a]",
+                // Hover only lifts the card; the coloured border stays for keyboard focus.
+                isImageTool ? "focus-visible:border-[#2563eb]" : "focus-visible:border-[#ed0a0a]",
               )}
             >
               <span

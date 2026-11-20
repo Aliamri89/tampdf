@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { Info, Loader2, RefreshCw } from "lucide-react";
 import { ErrorText, RangeField } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -41,11 +41,11 @@ export function ImageConvertWorkspace({
   const common = useDictionary().workspace.common;
   const source = FORMATS[from];
   const target = FORMATS[to];
-  const [files, setFiles] = useState<File[]>([]);
-  const [quality, setQuality] = useState(92);
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ blob: Blob; filename: string; originalSize: number } | null>(
+  const [files, setFiles] = useToolState<File[]>("image-convert:files", []);
+  const [quality, setQuality] = useToolState("image-convert:quality", 92);
+  const [processing, setProcessing] = useToolState("image-convert:processing", false);
+  const [error, setError] = useToolState<string | null>("image-convert:error", null);
+  const [result, setResult] = useToolState<{ blob: Blob; filename: string; originalSize: number } | null>("image-convert:result", 
     null,
   );
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useToolRef, useToolState } from "@/components/tools/use-tool-state";
 import {
   countPdfPages,
   isPdfPasswordError,
@@ -17,17 +17,18 @@ export type PdfReadError = "password" | "generic" | null;
  * `mode`, a thumbnail per page or a page-1 preview. A newer load (or a
  * reset) always wins over one still in flight.
  */
-export function usePdfSource(mode: "count" | "thumbnails" | "preview") {
-  const [file, setFile] = useState<File | null>(null);
-  const [pageCount, setPageCount] = useState(0);
-  const [thumbs, setThumbs] = useState<PageThumbnail[]>([]);
-  const [preview, setPreview] = useState<PagePreview | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [readError, setReadError] = useState<PdfReadError>(null);
-  const token = useRef(0);
+/** `scope` names the tool, so its loaded PDF is kept when the visitor leaves and comes back (see use-tool-state). */
+export function usePdfSource(mode: "count" | "thumbnails" | "preview", scope: string) {
+  const [file, setFile] = useToolState<File | null>(`${scope}:file`, null);
+  const [pageCount, setPageCount] = useToolState(`${scope}:pageCount`, 0);
+  const [thumbs, setThumbs] = useToolState<PageThumbnail[]>(`${scope}:thumbs`, []);
+  const [preview, setPreview] = useToolState<PagePreview | null>(`${scope}:preview`, null);
+  const [loading, setLoading] = useToolState(`${scope}:loading`, false);
+  const [readError, setReadError] = useToolState<PdfReadError>(`${scope}:readError`, null);
+  const tokenRef = useToolRef(`${scope}:token`, 0);
 
   async function load(next: File) {
-    const current = ++token.current;
+    const current = ++tokenRef.current;
     setFile(next);
     setPageCount(0);
     setThumbs([]);
@@ -37,29 +38,29 @@ export function usePdfSource(mode: "count" | "thumbnails" | "preview") {
     try {
       if (mode === "thumbnails") {
         const pages = await renderAllPageThumbnails(next);
-        if (current !== token.current) return;
+        if (current !== tokenRef.current) return;
         setThumbs(pages);
         setPageCount(pages.length);
       } else if (mode === "preview") {
         const result = await renderFirstPagePreview(next);
-        if (current !== token.current) return;
+        if (current !== tokenRef.current) return;
         setPreview(result);
         setPageCount(result.pageCount);
       } else {
         const count = await countPdfPages(next);
-        if (current !== token.current) return;
+        if (current !== tokenRef.current) return;
         setPageCount(count);
       }
     } catch (err) {
-      if (current !== token.current) return;
+      if (current !== tokenRef.current) return;
       setReadError(isPdfPasswordError(err) ? "password" : "generic");
     } finally {
-      if (current === token.current) setLoading(false);
+      if (current === tokenRef.current) setLoading(false);
     }
   }
 
   function clear() {
-    token.current++;
+    tokenRef.current++;
     setFile(null);
     setPageCount(0);
     setThumbs([]);

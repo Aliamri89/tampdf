@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useToolState } from "@/components/tools/use-tool-state";
 import { FlipHorizontal2, Loader2 } from "lucide-react";
 import { ErrorText, LoadingLine, OptionGroup, SelectedFile } from "@/components/tools/controls";
 import { FileDropzone } from "@/components/tools/file-dropzone";
@@ -16,11 +16,11 @@ import { flipPdf, type FlipDirection } from "@/lib/pdf/flip";
 export function FlipPdfWorkspace() {
   const dict = useDictionary().workspace.flipPdf;
   const common = useDictionary().workspace.common;
-  const source = usePdfSource("preview");
-  const [direction, setDirection] = useState<FlipDirection>("horizontal");
-  const [processing, setProcessing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<{ bytes: Uint8Array; name: string } | null>(null);
+  const source = usePdfSource("preview", "flip-pdf");
+  const [direction, setDirection] = useToolState<FlipDirection>("flip-pdf:direction", "horizontal");
+  const [processing, setProcessing] = useToolState("flip-pdf:processing", false);
+  const [error, setError] = useToolState<string | null>("flip-pdf:error", null);
+  const [result, setResult] = useToolState<{ bytes: Uint8Array; name: string } | null>("flip-pdf:result", null);
 
   function reset() {
     source.clear();
