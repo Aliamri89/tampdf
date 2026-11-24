@@ -1,6 +1,6 @@
 import type { ToolDefinition } from "./types";
 
-export const tools: ToolDefinition[] = [
+const allTools: ToolDefinition[] = [
   {
     slug: "compress-pdf",
     name: "Compress PDF",
@@ -1446,3 +1446,15 @@ export const tools: ToolDefinition[] = [
     ],
   },
 ];
+
+/**
+ * Tools that are built but switched off. They disappear everywhere at once —
+ * home page, menus, sitemap, related-tool lists, and their own page (404) —
+ * because every list in the site is built from `tools`. To bring one back,
+ * remove its slug here; its definition, translations and workspace stay intact.
+ */
+export const HIDDEN_TOOL_SLUGS: readonly string[] = ["remove-watermark"];
+
+export const tools: ToolDefinition[] = allTools.filter(
+  (tool) => !HIDDEN_TOOL_SLUGS.includes(tool.slug),
+);
