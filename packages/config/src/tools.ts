@@ -105,7 +105,7 @@ const allTools: ToolDefinition[] = [
       {
         question: "Is there a limit to how many PDFs I can merge?",
         answer:
-          "No hard limit. Since merging happens in your browser, the practical limit is your device's memory rather than a server quota.",
+          "You can merge up to 50 PDFs at a time. Merging happens in your browser, so very large files depend on your device's memory.",
       },
       {
         question: "Can I change the order of the pages before merging?",
@@ -192,12 +192,12 @@ const allTools: ToolDefinition[] = [
       {
         question: "Can I compress multiple images at once?",
         answer:
-          "Yes. Add as many images as you like and they'll each be compressed and bundled into a single .zip for download, or download individually.",
+          "Yes. Add up to 50 images; they're compressed one by one and downloaded together as a .zip. A single image downloads on its own.",
       },
       {
         question: "How much can I shrink an image without losing quality?",
         answer:
-          "The default quality setting typically reduces file size by 60-80% with no visible difference. You can adjust the quality slider for a different trade-off.",
+          "It depends on the photo. Choose Low, Medium (recommended) or High: stronger levels give smaller files. Photos often shrink a lot at Medium with little visible difference.",
       },
       {
         question: "Are my photos uploaded to a server?",
@@ -547,7 +547,7 @@ const allTools: ToolDefinition[] = [
       {
         question: "Can I combine several PNGs into one PDF?",
         answer:
-          "Yes. Add as many PNG images as you like and each becomes a page in the resulting PDF, in the order you arrange them.",
+          "Yes. Add up to 50 PNG images and each becomes a page in the resulting PDF, in the order you arrange them.",
       },
       {
         question: "What page size is used?",
@@ -1071,7 +1071,7 @@ const allTools: ToolDefinition[] = [
       {
         question: "Can I resize several images at once?",
         answer:
-          "Yes. Add up to 20 images; with the aspect ratio locked, each one keeps its own proportions at the width you set.",
+          "Yes. Add up to 50 images; with the aspect ratio locked, each one keeps its own proportions at the width you set.",
       },
       {
         question: "What format is the resized image?",
@@ -1155,7 +1155,7 @@ const allTools: ToolDefinition[] = [
       {
         question: "Can I flip several images at once?",
         answer:
-          "Yes. Add up to 20 images and they're all flipped the same way, then downloaded together as a .zip.",
+          "Yes. Add up to 50 images and they're all flipped the same way, then downloaded together as a .zip.",
       },
       {
         question: "Does flipping reduce quality?",
@@ -1204,7 +1204,7 @@ const allTools: ToolDefinition[] = [
       },
       {
         question: "Can I convert many PNGs at once?",
-        answer: "Yes. Add up to 30 images; they're converted together and downloaded as a .zip.",
+        answer: "Yes. Add up to 50 images; they're converted together and downloaded as a .zip.",
       },
       {
         question: "Are my images uploaded?",
@@ -1249,7 +1249,7 @@ const allTools: ToolDefinition[] = [
       },
       {
         question: "Can I convert several JPGs at once?",
-        answer: "Yes. Add up to 30 images and download them as a .zip.",
+        answer: "Yes. Add up to 50 images and download them as a .zip.",
       },
       {
         question: "Are my images uploaded?",
@@ -1294,7 +1294,7 @@ const allTools: ToolDefinition[] = [
       },
       {
         question: "Can I convert several WEBP images at once?",
-        answer: "Yes. Add up to 30 images and download them as a .zip.",
+        answer: "Yes. Add up to 50 images and download them as a .zip.",
       },
       {
         question: "Are my images uploaded?",
@@ -1340,7 +1340,7 @@ const allTools: ToolDefinition[] = [
       },
       {
         question: "Can I convert several JPGs at once?",
-        answer: "Yes. Add up to 30 images and download them as a .zip.",
+        answer: "Yes. Add up to 50 images and download them as a .zip.",
       },
       {
         question: "Are my images uploaded?",
@@ -1385,7 +1385,7 @@ const allTools: ToolDefinition[] = [
       },
       {
         question: "Can I convert several WEBP files at once?",
-        answer: "Yes. Add up to 30 images and download them as a .zip.",
+        answer: "Yes. Add up to 50 images and download them as a .zip.",
       },
       {
         question: "Are my images uploaded?",
@@ -1429,7 +1429,7 @@ const allTools: ToolDefinition[] = [
       },
       {
         question: "Can I convert several PNGs at once?",
-        answer: "Yes. Add up to 30 images and download them as a .zip.",
+        answer: "Yes. Add up to 50 images and download them as a .zip.",
       },
       {
         question: "Are my images uploaded?",

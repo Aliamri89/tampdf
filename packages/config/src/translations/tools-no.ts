@@ -40,7 +40,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
       "Alt kjører lokalt i nettleseren din, så filene blir aldri lastet opp til en server. Det betyr at det fungerer selv med sensitive kontrakter, rapporter eller personlige dokumenter.",
     ],
     faq: [
-      { question: "Er det en grense for hvor mange PDF-er jeg kan slå sammen?", answer: "Det er ingen fast grense. Siden sammenslåingen skjer i nettleseren din, er den praktiske begrensningen enhetens minne, ikke en servergrense." },
+      { question: "Er det en grense for hvor mange PDF-er jeg kan slå sammen?", answer: "Du kan slå sammen opptil 50 PDF-er om gangen. Det skjer i nettleseren, så svært store filer avhenger av minnet på enheten." },
       { question: "Kan jeg endre siderekkefølgen før sammenslåing?", answer: "Ja. Når filene er lagt til, drar du dem i rekkefølgen du vil at det endelige dokumentet skal ha før du slår sammen." },
       { question: "Blir filene mine lastet opp til TAMPDFs servere?", answer: "Nei. Slå sammen PDF behandler filer helt i nettleseren din med klientsideteknologi, så dokumentene forlater aldri enheten din." },
       { question: "Påvirker sammenslåing kvaliteten på PDF-ene mine?", answer: "Nei. Sidene kombineres uendret, uten omkomprimering, så tekst, bilder og formatering forblir nøyaktig som originalene." },
@@ -71,8 +71,8 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Hvilke bildeformater støttes?", answer: "JPG-, PNG- og WebP-bilder støttes som både inndata og utdata." },
-      { question: "Kan jeg komprimere flere bilder på én gang?", answer: "Ja. Legg til så mange bilder du vil, og hver komprimeres og pakkes i en enkelt .zip-fil for nedlasting eller lastes ned individuelt." },
-      { question: "Hvor mye kan jeg krympe et bilde uten kvalitetstap?", answer: "Standard kvalitetsinnstilling reduserer vanligvis filstørrelsen med 60-80% uten synlig forskjell. Du kan justere kvalitetsglideren for en annen avveining." },
+      { question: "Kan jeg komprimere flere bilder på én gang?", answer: "Ja. Legg til opptil 50 bilder; de komprimeres ett og ett og lastes ned samlet som .zip. Ett enkelt bilde lastes ned for seg." },
+      { question: "Hvor mye kan jeg krympe et bilde uten kvalitetstap?", answer: "Det kommer an på bildet. Velg Lav, Middels (anbefalt) eller Høy: høyere nivåer gir mindre filer. På Middels blir bilder ofte mye mindre med knapt synlig forskjell." },
       { question: "Blir bildene mine lastet opp til en server?", answer: "Nei. Komprimeringen kjører lokalt i nettleseren din med canvas-API-et, så bildene sendes aldri noe sted." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
       "Flott for å gjøre skjermbilder, diagrammer eller eksportert grafikk om til en delbar PDF. Konverteringen skjer helt i nettleseren din, så bildene blir aldri lastet opp. Gjennomsiktige områder plasseres på en hvit bakgrunn.",
     ],
     faq: [
-      { question: "Kan jeg kombinere flere PNG-filer til én PDF?", answer: "Ja. Legg til et hvilket som helst antall PNG-bilder, og hvert blir en side i den resulterende PDF-en, i rekkefølgen du ordner dem." },
+      { question: "Kan jeg kombinere flere PNG-filer til én PDF?", answer: "Ja. Legg til opptil 50 PNG-bilder, og hvert blir en side i PDF-en i rekkefølgen du velger." },
       { question: "Hvilken sidestørrelse brukes?", answer: "Hver side samsvarer med kildebildets pikseldimensjoner, så bildene beskjæres eller strekkes ikke." },
       { question: "Hva skjer med gjennomsiktige deler av bildet?", answer: "Gjennomsiktighet flates ut til en hvit bakgrunn, slik at siden ser lik ut i alle PDF-visere." },
       { question: "Blir bildene mine lastet opp til en server?", answer: "Nei. Konverteringen skjer helt i nettleseren din, og bildene forblir på enheten din." },
@@ -356,7 +356,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Blir bildet mitt uskarpt av størrelsesendring?", answer: "Å krympe et bilde bevarer skarpheten. Å forstørre utover den opprinnelige størrelsen kan ikke legge til detaljer, så store forstørrelser kan se myke ut." },
-      { question: "Kan jeg endre størrelse på flere bilder på én gang?", answer: "Ja. Legg til opptil 20 bilder; med låst bildeforhold beholder hvert sine egne proporsjoner ved bredden du angir." },
+      { question: "Kan jeg endre størrelse på flere bilder på én gang?", answer: "Ja. Legg til opptil 50 bilder; med låst bildeforhold beholder hvert sine egne proporsjoner ved bredden du angir." },
       { question: "Hvilket format blir det størrelsesendrede bildet?", answer: "Det samme som originalen — JPG forblir JPG, PNG forblir PNG, og WEBP forblir WEBP der nettleseren din støtter det." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Størrelsesendringen skjer lokalt i nettleseren din." },
     ],
@@ -386,7 +386,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Hva er forskjellen mellom å vende og rotere?", answer: "Rotasjon dreier et bilde i trinn på 90°. Vending speilvender det, som å se i et speil." },
-      { question: "Kan jeg vende flere bilder på én gang?", answer: "Ja. Legg til opptil 20 bilder, og alle vendes på samme måte, og lastes deretter ned sammen som en .zip." },
+      { question: "Kan jeg vende flere bilder på én gang?", answer: "Ja. Legg til opptil 50 bilder, og alle vendes på samme måte, og lastes deretter ned sammen som en .zip." },
       { question: "Reduserer vending kvaliteten?", answer: "Ingen merkbar kvalitetsreduksjon — PNG forblir tapsfri, og JPG og WEBP lagres i høy kvalitet." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Vendingen skjer lokalt i nettleseren din." },
     ],
@@ -402,7 +402,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Hvorfor konvertere PNG til JPG?", answer: "JPG-filer er vanligvis mye mindre enn PNG for bilder og godtas nesten overalt, fra e-post til nettskjemaer." },
       { question: "Hva skjer med en gjennomsiktig bakgrunn?", answer: "JPG har ingen gjennomsiktighet, så gjennomsiktige områder fylles med hvitt." },
-      { question: "Kan jeg konvertere flere PNG-filer på én gang?", answer: "Ja. Legg til opptil 30 bilder; de konverteres sammen og lastes ned som en .zip." },
+      { question: "Kan jeg konvertere flere PNG-filer på én gang?", answer: "Ja. Legg til opptil 50 bilder; de konverteres sammen og lastes ned som en .zip." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Konverteringen skjer lokalt i nettleseren din." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Forbedrer konvertering av JPG til PNG kvaliteten?", answer: "Nei — detaljer som allerede er tapt i JPG, kan ikke gjenopprettes. Men PNG forhindrer ytterligere tap når du redigerer og lagrer på nytt." },
       { question: "Hvorfor er PNG større enn JPG?", answer: "PNG lagrer hver piksel uten tapskomprimering, så bilder blir vanligvis større. Det er en avveining for tapsfri kvalitet." },
-      { question: "Kan jeg konvertere flere JPG-filer på én gang?", answer: "Ja. Legg til opptil 30 bilder, og last ned som en .zip." },
+      { question: "Kan jeg konvertere flere JPG-filer på én gang?", answer: "Ja. Legg til opptil 50 bilder, og last ned som en .zip." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Konverteringen skjer lokalt i nettleseren din." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Hvorfor konvertere WEBP til JPG?", answer: "Noen eldre apper, redigerere og opplastingsskjemaer godtar ikke WEBP. JPG fungerer nesten overalt." },
       { question: "Mister jeg kvalitet?", answer: "Ved standardkvalitet er forskjellen vanskelig å se. Øk kvalitetsglideren for det skarpeste resultatet." },
-      { question: "Kan jeg konvertere flere WEBP-bilder på én gang?", answer: "Ja. Legg til opptil 30 bilder, og last ned som en .zip." },
+      { question: "Kan jeg konvertere flere WEBP-bilder på én gang?", answer: "Ja. Legg til opptil 50 bilder, og last ned som en .zip." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Konverteringen skjer lokalt i nettleseren din." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Er WEBP mindre enn JPG?", answer: "Vanligvis ja — WEBP sparer ofte en betydelig mengde plass ved lignende kvalitet, noe som hjelper nettsteder å laste raskere." },
       { question: "Støtter alle nettlesere WEBP?", answer: "Alle moderne nettlesere kan vise WEBP. Å lage WEBP-filer her krever en nyere versjon av Chrome, Edge eller Firefox." },
-      { question: "Kan jeg konvertere flere JPG-filer på én gang?", answer: "Ja. Legg til opptil 30 bilder, og last ned som en .zip." },
+      { question: "Kan jeg konvertere flere JPG-filer på én gang?", answer: "Ja. Legg til opptil 50 bilder, og last ned som en .zip." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Konverteringen skjer lokalt i nettleseren din." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Bevares gjennomsiktighet?", answer: "Ja. PNG støtter gjennomsiktighet, så gjennomsiktige områder i WEBP-bildet ditt forblir gjennomsiktige." },
       { question: "Hvorfor konvertere WEBP til PNG?", answer: "PNG åpnes i alle redigerings- og designverktøy, og mister ikke kvalitet ved ytterligere redigering og lagring." },
-      { question: "Kan jeg konvertere flere WEBP-filer på én gang?", answer: "Ja. Legg til opptil 30 bilder, og last ned som en .zip." },
+      { question: "Kan jeg konvertere flere WEBP-filer på én gang?", answer: "Ja. Legg til opptil 50 bilder, og last ned som en .zip." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Konverteringen skjer lokalt i nettleseren din." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsNo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Beholder WEBP gjennomsiktighet?", answer: "Ja. WEBP støtter gjennomsiktighet, så gjennomsiktige områder i PNG-en din forblir gjennomsiktige." },
       { question: "Hvor mye mindre blir bildene mine?", answer: "Det varierer, men WEBP-filer er ofte betydelig mindre enn det samme bildet lagret som PNG." },
-      { question: "Kan jeg konvertere flere PNG-filer på én gang?", answer: "Ja. Legg til opptil 30 bilder, og last ned som en .zip." },
+      { question: "Kan jeg konvertere flere PNG-filer på én gang?", answer: "Ja. Legg til opptil 50 bilder, og last ned som en .zip." },
       { question: "Blir bildene mine lastet opp?", answer: "Nei. Konverteringen skjer lokalt i nettleseren din." },
     ],
   },

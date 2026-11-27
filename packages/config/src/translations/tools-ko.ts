@@ -40,7 +40,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
       "모든 작업이 브라우저에서 로컬로 이루어지므로 파일이 서버에 업로드되지 않습니다. 즉, 민감한 계약서, 보고서, 개인 문서에도 안전하게 사용할 수 있습니다.",
     ],
     faq: [
-      { question: "병합할 수 있는 PDF 수에 제한이 있나요?", answer: "고정된 제한은 없습니다. 병합이 브라우저에서 이루어지므로 실질적인 한계는 서버 용량이 아니라 기기의 메모리입니다." },
+      { question: "병합할 수 있는 PDF 수에 제한이 있나요?", answer: "한 번에 최대 50개의 PDF를 병합할 수 있습니다. 병합은 브라우저에서 이루어지므로 아주 큰 파일은 기기 메모리에 따라 달라집니다." },
       { question: "병합 전에 페이지 순서를 바꿀 수 있나요?", answer: "네. 파일을 추가한 후, 병합하기 전에 최종 문서가 따를 순서대로 드래그하세요." },
       { question: "제 파일이 TAMPDF 서버에 업로드되나요?", answer: "아니요. PDF 병합은 클라이언트 측 기술을 사용해 브라우저에서 완전히 파일을 처리하므로 문서가 기기를 떠나지 않습니다." },
       { question: "병합하면 PDF 품질에 영향이 있나요?", answer: "없습니다. 페이지는 재압축 없이 그대로 결합되므로 텍스트, 이미지, 서식이 원본과 정확히 동일하게 유지됩니다." },
@@ -71,8 +71,8 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "어떤 이미지 형식을 지원하나요?", answer: "JPG, PNG, WebP 이미지가 입력과 출력 모두에서 지원됩니다." },
-      { question: "한 번에 여러 이미지를 압축할 수 있나요?", answer: "네. 원하는 만큼 이미지를 추가하면 각각 압축되어 다운로드를 위한 .zip으로 묶이거나 개별적으로 다운로드됩니다." },
-      { question: "화질 손실 없이 이미지를 얼마나 줄일 수 있나요?", answer: "기본 품질 설정은 보통 눈에 띄는 차이 없이 파일 크기를 60~80% 줄입니다. 다른 균형을 원하면 품질 슬라이더를 조정할 수 있습니다." },
+      { question: "한 번에 여러 이미지를 압축할 수 있나요?", answer: "네. 최대 50장까지 추가하면 하나씩 압축되어 .zip으로 함께 다운로드됩니다. 한 장만 있으면 그대로 다운로드됩니다." },
+      { question: "화질 손실 없이 이미지를 얼마나 줄일 수 있나요?", answer: "사진에 따라 다릅니다. 낮음, 보통(권장), 높음 중에서 선택하세요. 높은 단계일수록 파일이 작아집니다. 보통 단계에서도 눈에 띄는 차이 없이 크게 줄어드는 경우가 많습니다." },
       { question: "제 사진이 서버에 업로드되나요?", answer: "아니요. 압축은 canvas API를 사용해 브라우저에서 로컬로 이루어지므로 이미지가 어디로도 전송되지 않습니다." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
       "스크린샷, 다이어그램, 내보낸 그래픽을 공유하기 쉬운 PDF로 만들기에 훌륭합니다. 변환이 브라우저에서 완전히 이루어지므로 이미지가 업로드되지 않습니다. 투명한 부분은 흰색 배경에 배치됩니다.",
     ],
     faq: [
-      { question: "여러 PNG를 하나의 PDF로 합칠 수 있나요?", answer: "네. 원하는 만큼 PNG 이미지를 추가하면 각각 정렬한 순서대로 결과 PDF의 한 페이지가 됩니다." },
+      { question: "여러 PNG를 하나의 PDF로 합칠 수 있나요?", answer: "네. 최대 50장의 PNG 이미지를 추가하면 정한 순서대로 PDF의 한 페이지씩 됩니다." },
       { question: "어떤 페이지 크기가 사용되나요?", answer: "각 페이지는 원본 이미지의 픽셀 크기와 일치하므로 이미지가 잘리거나 늘어나지 않습니다." },
       { question: "이미지의 투명한 부분은 어떻게 되나요?", answer: "투명도가 흰색 배경으로 평면화되어 어떤 PDF 뷰어에서도 페이지가 동일하게 보입니다." },
       { question: "제 이미지가 서버에 업로드되나요?", answer: "아니요. 변환이 브라우저에서 완전히 이루어지며 이미지가 기기에 남아 있습니다." },
@@ -356,7 +356,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "크기 조정을 하면 이미지가 흐려지나요?", answer: "이미지를 축소하면 선명하게 유지됩니다. 원본 크기를 넘어 확대하면 세부 정보를 추가할 수 없으므로 크게 확대하면 흐릿해 보일 수 있습니다." },
-      { question: "한 번에 여러 이미지의 크기를 조정할 수 있나요?", answer: "네. 최대 20개까지 이미지를 추가할 수 있으며, 종횡비를 고정하면 각각 설정한 너비에서 자신의 비율을 유지합니다." },
+      { question: "한 번에 여러 이미지의 크기를 조정할 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가할 수 있으며, 종횡비를 고정하면 각각 설정한 너비에서 자신의 비율을 유지합니다." },
       { question: "크기가 조정된 이미지는 어떤 형식인가요?", answer: "원본과 동일합니다 — JPG는 JPG로, PNG는 PNG로, 브라우저가 지원하는 경우 WEBP는 WEBP로 유지됩니다." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 크기 조정은 브라우저에서 로컬로 이루어집니다." },
     ],
@@ -386,7 +386,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "뒤집기와 회전의 차이는 무엇인가요?", answer: "회전은 이미지를 90° 단위로 돌립니다. 뒤집기는 거울을 보는 것처럼 반전시킵니다." },
-      { question: "한 번에 여러 이미지를 뒤집을 수 있나요?", answer: "네. 최대 20개까지 이미지를 추가할 수 있으며 모두 같은 방식으로 뒤집힌 다음 .zip으로 함께 다운로드됩니다." },
+      { question: "한 번에 여러 이미지를 뒤집을 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가할 수 있으며 모두 같은 방식으로 뒤집힌 다음 .zip으로 함께 다운로드됩니다." },
       { question: "뒤집기가 품질을 떨어뜨리나요?", answer: "눈에 띄는 손실은 없습니다 — PNG는 여전히 무손실이며 JPG와 WEBP는 고품질로 저장됩니다." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 뒤집기는 브라우저에서 로컬로 이루어집니다." },
     ],
@@ -402,7 +402,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "왜 PNG를 JPG로 변환하나요?", answer: "사진의 경우 JPG 파일은 보통 PNG보다 훨씬 작으며 이메일부터 온라인 양식까지 거의 모든 곳에서 허용됩니다." },
       { question: "투명한 배경은 어떻게 되나요?", answer: "JPG에는 투명도가 없으므로 투명한 부분은 흰색으로 채워집니다." },
-      { question: "많은 PNG를 한 번에 변환할 수 있나요?", answer: "네. 최대 30개까지 이미지를 추가할 수 있으며 함께 변환되어 .zip으로 다운로드됩니다." },
+      { question: "많은 PNG를 한 번에 변환할 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가할 수 있으며 함께 변환되어 .zip으로 다운로드됩니다." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 변환은 브라우저에서 로컬로 이루어집니다." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "JPG를 PNG로 변환하면 품질이 향상되나요?", answer: "아니요 — JPG에서 이미 손실된 세부 정보는 복원할 수 없습니다. 하지만 PNG는 다시 편집하고 저장할 때 추가적인 손실을 방지합니다." },
       { question: "왜 PNG가 JPG보다 큰가요?", answer: "PNG는 손실 압축 없이 모든 픽셀을 저장하므로 사진이 보통 더 커집니다. 이는 무손실 품질을 위한 트레이드오프입니다." },
-      { question: "한 번에 여러 JPG를 변환할 수 있나요?", answer: "네. 최대 30개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
+      { question: "한 번에 여러 JPG를 변환할 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 변환은 브라우저에서 로컬로 이루어집니다." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "왜 WEBP를 JPG로 변환하나요?", answer: "일부 오래된 앱, 편집기, 업로드 양식은 WEBP를 지원하지 않습니다. JPG는 거의 모든 곳에서 작동합니다." },
       { question: "품질을 잃게 되나요?", answer: "기본 품질에서는 차이를 구별하기 어렵습니다. 가장 선명한 결과를 위해 품질 슬라이더를 높이세요." },
-      { question: "한 번에 여러 WEBP 이미지를 변환할 수 있나요?", answer: "네. 최대 30개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
+      { question: "한 번에 여러 WEBP 이미지를 변환할 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 변환은 브라우저에서 로컬로 이루어집니다." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP가 JPG보다 작나요?", answer: "보통 그렇습니다 — WEBP는 비슷한 품질에서 상당한 공간을 절약하는 경우가 많아 페이지가 더 빠르게 로드되는 데 도움이 됩니다." },
       { question: "모든 브라우저가 WEBP를 지원하나요?", answer: "모든 최신 브라우저는 WEBP를 표시할 수 있습니다. 여기서 WEBP 파일을 만들려면 최신 버전의 Chrome, Edge 또는 Firefox가 필요합니다." },
-      { question: "한 번에 여러 JPG를 변환할 수 있나요?", answer: "네. 최대 30개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
+      { question: "한 번에 여러 JPG를 변환할 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 변환은 브라우저에서 로컬로 이루어집니다." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "투명도가 유지되나요?", answer: "네. PNG는 투명도를 지원하므로 WEBP 이미지의 투명한 부분이 투명하게 유지됩니다." },
       { question: "왜 WEBP를 PNG로 변환하나요?", answer: "PNG는 모든 편집기와 디자인 도구에서 열리며 다시 편집하고 저장할 때 품질을 잃지 않습니다." },
-      { question: "한 번에 여러 WEBP 파일을 변환할 수 있나요?", answer: "네. 최대 30개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
+      { question: "한 번에 여러 WEBP 파일을 변환할 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 변환은 브라우저에서 로컬로 이루어집니다." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsKo: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP가 투명도를 유지하나요?", answer: "네. WEBP는 투명도를 지원하므로 투명한 PNG 영역이 투명하게 유지됩니다." },
       { question: "제 이미지가 얼마나 작아지나요?", answer: "이미지마다 다르지만 WEBP 파일은 같은 이미지를 PNG로 저장했을 때보다 훨씬 작은 경우가 많습니다." },
-      { question: "한 번에 여러 PNG를 변환할 수 있나요?", answer: "네. 최대 30개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
+      { question: "한 번에 여러 PNG를 변환할 수 있나요?", answer: "네. 최대 50개까지 이미지를 추가하고 .zip으로 다운로드하세요." },
       { question: "제 이미지가 업로드되나요?", answer: "아니요. 변환은 브라우저에서 로컬로 이루어집니다." },
     ],
   },

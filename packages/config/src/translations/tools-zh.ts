@@ -40,7 +40,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
       "一切都在您的浏览器中本地完成，您的文件绝不会上传到服务器。这意味着即使是敏感的合同、报告或个人文档也能安全使用。",
     ],
     faq: [
-      { question: "合并的 PDF 数量有限制吗？", answer: "没有固定限制。由于合并在您的浏览器中进行，实际限制取决于设备内存，而不是服务器配额。" },
+      { question: "合并的 PDF 数量有限制吗？", answer: "每次最多可合并 50 个 PDF。合并在浏览器中完成，因此超大文件取决于设备内存。" },
       { question: "合并前可以调整页面顺序吗？", answer: "可以。添加文件后，合并前可以将它们拖动到最终文档所需的顺序。" },
       { question: "我的文件会上传到 TAMPDF 的服务器吗？", answer: "不会。合并 PDF 使用客户端技术在浏览器中完全处理文件，您的文档绝不会离开您的设备。" },
       { question: "合并会影响我 PDF 的质量吗？", answer: "不会。页面按原样合并，不会重新压缩，因此文本、图像和格式与原始文件完全一致。" },
@@ -71,8 +71,8 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "支持哪些图片格式？", answer: "JPG、PNG 和 WebP 图片均支持作为输入和输出格式。" },
-      { question: "我可以同时压缩多张图片吗？", answer: "可以。添加任意数量的图片，每张都会被压缩并打包成一个 .zip 供下载，也可以单独下载。" },
-      { question: "在不损失质量的情况下能缩小多少？", answer: "默认质量设置通常能在没有明显差异的情况下将文件大小缩小 60-80%。您可以调整质量滑块以获得不同的平衡。" },
+      { question: "我可以同时压缩多张图片吗？", answer: "可以。最多添加 50 张图片，逐张压缩后打包为 .zip 一起下载。只有一张时直接下载该图片。" },
+      { question: "在不损失质量的情况下能缩小多少？", answer: "取决于照片。可选择低、中（推荐）或高三个级别，级别越高文件越小。中级别通常能明显缩小体积，肉眼几乎看不出差别。" },
       { question: "我的照片会上传到服务器吗？", answer: "不会。压缩通过 canvas API 在您的浏览器中本地完成，您的图片绝不会被发送到任何地方。" },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
       "非常适合将截图、图表或导出的图形转换为便于分享的 PDF。转换完全在您的浏览器中进行，您的图片绝不会被上传。透明区域会以白色背景显示。",
     ],
     faq: [
-      { question: "我可以将多张 PNG 合并成一个 PDF 吗？", answer: "可以。添加任意数量的 PNG 图片，每张都会按您排列的顺序成为生成的 PDF 中的一页。" },
+      { question: "我可以将多张 PNG 合并成一个 PDF 吗？", answer: "可以。最多添加 50 张 PNG 图片，按您排列的顺序每张成为 PDF 中的一页。" },
       { question: "使用什么页面尺寸？", answer: "每一页都匹配源图像的像素尺寸，因此图片不会被裁剪或拉伸。" },
       { question: "图片的透明部分会怎样？", answer: "透明度会被平铺到白色背景上，以便页面在任何 PDF 查看器中看起来一致。" },
       { question: "我的图片会上传到服务器吗？", answer: "不会。转换完全在您的浏览器中进行，您的图片会保留在您的设备上。" },
@@ -356,7 +356,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "调整大小会让我的图片模糊吗？", answer: "缩小图片会保持其清晰度。放大超过原始尺寸无法增加细节，因此大幅放大可能会显得柔和模糊。" },
-      { question: "我可以同时调整多张图片的大小吗？", answer: "可以。最多添加 20 张图片；锁定长宽比后，每张图片会在您设定的宽度下保持各自的比例。" },
+      { question: "我可以同时调整多张图片的大小吗？", answer: "可以。最多添加 50 张图片；锁定长宽比后，每张图片会在您设定的宽度下保持各自的比例。" },
       { question: "调整大小后的图片会是什么格式？", answer: "与原图相同——JPG 仍为 JPG，PNG 仍为 PNG，在您浏览器支持的情况下 WEBP 仍为 WEBP。" },
       { question: "我的图片会被上传吗？", answer: "不会。调整大小在您的浏览器中本地进行。" },
     ],
@@ -386,7 +386,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "翻转和旋转有什么区别？", answer: "旋转以 90° 为步长转动图片。翻转则将其镜像，如同照镜子一样。" },
-      { question: "我可以同时翻转多张图片吗？", answer: "可以。最多添加 20 张图片，它们都会以相同方式翻转，然后一起打包为 .zip 下载。" },
+      { question: "我可以同时翻转多张图片吗？", answer: "可以。最多添加 50 张图片，它们都会以相同方式翻转，然后一起打包为 .zip 下载。" },
       { question: "翻转会降低质量吗？", answer: "不会有明显损失——PNG 依然无损，JPG 和 WEBP 会以高质量保存。" },
       { question: "我的图片会被上传吗？", answer: "不会。翻转在您的浏览器中本地进行。" },
     ],
@@ -402,7 +402,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "为什么要将 PNG 转换为 JPG？", answer: "对于照片而言，JPG 文件通常比 PNG 小得多，并且几乎在所有地方都能被接受，从邮件到在线表单。" },
       { question: "透明背景会怎样？", answer: "JPG 没有透明度，因此透明区域会填充为白色。" },
-      { question: "我可以一次转换很多张 PNG 吗？", answer: "可以。最多添加 30 张图片；它们会一起转换并以 .zip 形式下载。" },
+      { question: "我可以一次转换很多张 PNG 吗？", answer: "可以。最多添加 50 张图片；它们会一起转换并以 .zip 形式下载。" },
       { question: "我的图片会被上传吗？", answer: "不会。转换在您的浏览器中本地进行。" },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "将 JPG 转换为 PNG 会提升质量吗？", answer: "不会——JPG 中已经损失的细节无法恢复。但 PNG 可以防止您再次编辑和保存时产生进一步的损失。" },
       { question: "为什么 PNG 比 JPG 大？", answer: "PNG 会存储每个像素而不进行有损压缩，因此照片通常会变得更大。这是为了换取无损质量所做的取舍。" },
-      { question: "我可以一次转换多张 JPG 吗？", answer: "可以。最多添加 30 张图片，并以 .zip 形式下载。" },
+      { question: "我可以一次转换多张 JPG 吗？", answer: "可以。最多添加 50 张图片，并以 .zip 形式下载。" },
       { question: "我的图片会被上传吗？", answer: "不会。转换在您的浏览器中本地进行。" },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "为什么要将 WEBP 转换为 JPG？", answer: "一些较旧的应用、编辑器和上传表单不接受 WEBP。JPG 几乎在任何地方都能使用。" },
       { question: "我会损失质量吗？", answer: "在默认质量下，差异很难察觉。提高质量滑块可获得最清晰的结果。" },
-      { question: "我可以一次转换多张 WEBP 图片吗？", answer: "可以。最多添加 30 张图片，并以 .zip 形式下载。" },
+      { question: "我可以一次转换多张 WEBP 图片吗？", answer: "可以。最多添加 50 张图片，并以 .zip 形式下载。" },
       { question: "我的图片会被上传吗？", answer: "不会。转换在您的浏览器中本地进行。" },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP 比 JPG 小吗？", answer: "通常是的——在相似质量下，WEBP 通常能节省可观的空间，这有助于页面更快加载。" },
       { question: "所有浏览器都支持 WEBP 吗？", answer: "所有现代浏览器都能显示 WEBP。在此创建 WEBP 文件需要较新版本的 Chrome、Edge 或 Firefox。" },
-      { question: "我可以一次转换多张 JPG 吗？", answer: "可以。最多添加 30 张图片，并以 .zip 形式下载。" },
+      { question: "我可以一次转换多张 JPG 吗？", answer: "可以。最多添加 50 张图片，并以 .zip 形式下载。" },
       { question: "我的图片会被上传吗？", answer: "不会。转换在您的浏览器中本地进行。" },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "透明度会被保留吗？", answer: "会。PNG 支持透明度，因此您 WEBP 图片中的透明区域会保持透明。" },
       { question: "为什么要将 WEBP 转换为 PNG？", answer: "PNG 可以在任何编辑器和设计工具中打开，并且在您再次编辑和保存时不会损失质量。" },
-      { question: "我可以一次转换多个 WEBP 文件吗？", answer: "可以。最多添加 30 张图片，并以 .zip 形式下载。" },
+      { question: "我可以一次转换多个 WEBP 文件吗？", answer: "可以。最多添加 50 张图片，并以 .zip 形式下载。" },
       { question: "我的图片会被上传吗？", answer: "不会。转换在您的浏览器中本地进行。" },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsZh: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP 会保留透明度吗？", answer: "会。WEBP 支持透明度，因此透明的 PNG 区域会保持透明。" },
       { question: "我的图片会缩小多少？", answer: "这因图片而异，但 WEBP 文件通常比保存为 PNG 的同一图片明显更小。" },
-      { question: "我可以一次转换多张 PNG 吗？", answer: "可以。最多添加 30 张图片，并以 .zip 形式下载。" },
+      { question: "我可以一次转换多张 PNG 吗？", answer: "可以。最多添加 50 张图片，并以 .zip 形式下载。" },
       { question: "我的图片会被上传吗？", answer: "不会。转换在您的浏览器中本地进行。" },
     ],
   },

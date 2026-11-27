@@ -40,7 +40,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
       "Wszystko działa lokalnie w przeglądarce, więc pliki nigdy nie są przesyłane na serwer. Oznacza to, że działa to nawet z poufnymi umowami, raportami czy dokumentami osobistymi.",
     ],
     faq: [
-      { question: "Czy istnieje limit liczby plików PDF, które mogę połączyć?", answer: "Nie ma stałego limitu. Ponieważ łączenie odbywa się w przeglądarce, praktycznym ograniczeniem jest pamięć urządzenia, a nie limit serwera." },
+      { question: "Czy istnieje limit liczby plików PDF, które mogę połączyć?", answer: "Możesz połączyć do 50 plików PDF naraz. Łączenie odbywa się w przeglądarce, więc przy bardzo dużych plikach liczy się pamięć urządzenia." },
       { question: "Czy mogę zmienić kolejność stron przed połączeniem?", answer: "Tak. Po dodaniu plików przeciągnij je w kolejności, w jakiej ma być końcowy dokument, przed połączeniem." },
       { question: "Czy moje pliki są przesyłane na serwery TAMPDF?", answer: "Nie. Połącz PDF przetwarza pliki całkowicie w przeglądarce za pomocą technologii po stronie klienta, więc dokumenty nigdy nie opuszczają urządzenia." },
       { question: "Czy łączenie wpłynie na jakość moich plików PDF?", answer: "Nie. Strony są łączone bez zmian, bez ponownej kompresji, więc tekst, obrazy i formatowanie pozostają dokładnie takie same jak w oryginałach." },
@@ -71,8 +71,8 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Jakie formaty obrazów są obsługiwane?", answer: "Obrazy JPG, PNG i WebP są obsługiwane zarówno jako wejście, jak i wyjście." },
-      { question: "Czy mogę skompresować wiele obrazów naraz?", answer: "Tak. Dodaj tyle obrazów, ile chcesz, a każdy zostanie skompresowany i spakowany w jeden plik .zip do pobrania lub pobrany indywidualnie." },
-      { question: "O ile mogę zmniejszyć obraz bez utraty jakości?", answer: "Domyślne ustawienie jakości zwykle zmniejsza rozmiar pliku o 60-80% bez widocznej różnicy. Możesz dostosować suwak jakości dla innego kompromisu." },
+      { question: "Czy mogę skompresować wiele obrazów naraz?", answer: "Tak. Dodaj do 50 obrazów; są kompresowane po kolei i pobierane razem jako .zip. Pojedynczy obraz pobiera się osobno." },
+      { question: "O ile mogę zmniejszyć obraz bez utraty jakości?", answer: "To zależy od zdjęcia. Wybierz poziom niski, średni (zalecany) lub wysoki: wyższe dają mniejsze pliki. Na średnim zdjęcia często mocno się zmniejszają przy niemal niewidocznej różnicy." },
       { question: "Czy moje zdjęcia są przesyłane na serwer?", answer: "Nie. Kompresja działa lokalnie w przeglądarce przy użyciu API canvas, więc obrazy nigdy nie są nigdzie wysyłane." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
       "Świetne do zamiany zrzutów ekranu, diagramów lub wyeksportowanej grafiki w łatwy do udostępnienia plik PDF. Konwersja odbywa się całkowicie w przeglądarce, więc obrazy nigdy nie są przesyłane. Przezroczyste obszary są umieszczane na białym tle.",
     ],
     faq: [
-      { question: "Czy mogę połączyć kilka plików PNG w jeden PDF?", answer: "Tak. Dodaj dowolną liczbę obrazów PNG, a każdy stanie się stroną w wynikowym pliku PDF, w kolejności, w jakiej je uporządkujesz." },
+      { question: "Czy mogę połączyć kilka plików PNG w jeden PDF?", answer: "Tak. Dodaj do 50 obrazów PNG, a każdy stanie się stroną PDF w ustawionej przez Ciebie kolejności." },
       { question: "Jaki rozmiar strony jest używany?", answer: "Każda strona odpowiada wymiarom pikselowym obrazu źródłowego, więc obrazy nie są przycinane ani rozciągane." },
       { question: "Co dzieje się z przezroczystymi częściami obrazu?", answer: "Przezroczystość jest spłaszczana do białego tła, aby strona wyglądała tak samo w każdej przeglądarce PDF." },
       { question: "Czy moje obrazy są przesyłane na serwer?", answer: "Nie. Konwersja odbywa się całkowicie w przeglądarce, a obrazy pozostają na Twoim urządzeniu." },
@@ -356,7 +356,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Czy zmiana rozmiaru sprawi, że mój obraz będzie rozmyty?", answer: "Zmniejszenie obrazu zachowuje jego ostrość. Powiększenie ponad oryginalny rozmiar nie może dodać szczegółów, więc duże powiększenia mogą wyglądać miękko." },
-      { question: "Czy mogę zmienić rozmiar wielu obrazów naraz?", answer: "Tak. Dodaj do 20 obrazów; przy zablokowanych proporcjach każdy zachowuje własne proporcje przy ustawionej przez Ciebie szerokości." },
+      { question: "Czy mogę zmienić rozmiar wielu obrazów naraz?", answer: "Tak. Dodaj do 50 obrazów; przy zablokowanych proporcjach każdy zachowuje własne proporcje przy ustawionej przez Ciebie szerokości." },
       { question: "W jakim formacie będzie obraz o zmienionym rozmiarze?", answer: "Tym samym co oryginał — JPG pozostaje JPG, PNG pozostaje PNG, a WEBP pozostaje WEBP tam, gdzie obsługuje to Twoja przeglądarka." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Zmiana rozmiaru odbywa się lokalnie w przeglądarce." },
     ],
@@ -386,7 +386,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Jaka jest różnica między odbiciem a obrotem?", answer: "Obrót obraca obraz w krokach po 90°. Odbicie odbija go lustrzanie, jak spojrzenie w lustro." },
-      { question: "Czy mogę odbić wiele obrazów naraz?", answer: "Tak. Dodaj do 20 obrazów, a wszystkie zostaną odbite w ten sam sposób, a następnie pobrane razem jako .zip." },
+      { question: "Czy mogę odbić wiele obrazów naraz?", answer: "Tak. Dodaj do 50 obrazów, a wszystkie zostaną odbite w ten sam sposób, a następnie pobrane razem jako .zip." },
       { question: "Czy odbicie zmniejsza jakość?", answer: "Brak zauważalnej utraty jakości — PNG pozostaje bezstratny, a JPG i WEBP są zapisywane w wysokiej jakości." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Odbicie odbywa się lokalnie w przeglądarce." },
     ],
@@ -402,7 +402,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Dlaczego konwertować PNG na JPG?", answer: "Pliki JPG są zwykle znacznie mniejsze niż PNG dla zdjęć i są akceptowane prawie wszędzie, od e-maili po formularze online." },
       { question: "Co dzieje się z przezroczystym tłem?", answer: "JPG nie ma przezroczystości, więc przezroczyste obszary są wypełniane bielą." },
-      { question: "Czy mogę przekonwertować wiele plików PNG naraz?", answer: "Tak. Dodaj do 30 obrazów; są konwertowane razem i pobierane jako .zip." },
+      { question: "Czy mogę przekonwertować wiele plików PNG naraz?", answer: "Tak. Dodaj do 50 obrazów; są konwertowane razem i pobierane jako .zip." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Konwersja odbywa się lokalnie w przeglądarce." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Czy konwersja JPG na PNG poprawi jakość?", answer: "Nie — szczegóły już utracone w JPG nie mogą zostać przywrócone. Ale PNG zapobiega dalszej utracie podczas kolejnej edycji i zapisywania." },
       { question: "Dlaczego PNG jest większy niż JPG?", answer: "PNG przechowuje każdy piksel bez kompresji stratnej, więc zdjęcia zwykle stają się większe. To kompromis za jakość bezstratną." },
-      { question: "Czy mogę przekonwertować kilka plików JPG naraz?", answer: "Tak. Dodaj do 30 obrazów i pobierz jako .zip." },
+      { question: "Czy mogę przekonwertować kilka plików JPG naraz?", answer: "Tak. Dodaj do 50 obrazów i pobierz jako .zip." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Konwersja odbywa się lokalnie w przeglądarce." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Dlaczego konwertować WEBP na JPG?", answer: "Niektóre starsze aplikacje, edytory i formularze przesyłania nie akceptują WEBP. JPG działa prawie wszędzie." },
       { question: "Czy stracę na jakości?", answer: "Przy domyślnej jakości różnicę trudno dostrzec. Zwiększ suwak jakości, aby uzyskać najostrzejszy wynik." },
-      { question: "Czy mogę przekonwertować kilka obrazów WEBP naraz?", answer: "Tak. Dodaj do 30 obrazów i pobierz jako .zip." },
+      { question: "Czy mogę przekonwertować kilka obrazów WEBP naraz?", answer: "Tak. Dodaj do 50 obrazów i pobierz jako .zip." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Konwersja odbywa się lokalnie w przeglądarce." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Czy WEBP jest mniejszy niż JPG?", answer: "Zwykle tak — WEBP często oszczędza znaczną ilość miejsca przy podobnej jakości, co pomaga stronom ładować się szybciej." },
       { question: "Czy wszystkie przeglądarki obsługują WEBP?", answer: "Wszystkie nowoczesne przeglądarki mogą wyświetlać WEBP. Tworzenie plików WEBP tutaj wymaga najnowszej wersji Chrome, Edge lub Firefox." },
-      { question: "Czy mogę przekonwertować kilka plików JPG naraz?", answer: "Tak. Dodaj do 30 obrazów i pobierz jako .zip." },
+      { question: "Czy mogę przekonwertować kilka plików JPG naraz?", answer: "Tak. Dodaj do 50 obrazów i pobierz jako .zip." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Konwersja odbywa się lokalnie w przeglądarce." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Czy przezroczystość jest zachowana?", answer: "Tak. PNG obsługuje przezroczystość, więc przezroczyste obszary w Twoim obrazie WEBP pozostają przezroczyste." },
       { question: "Dlaczego konwertować WEBP na PNG?", answer: "PNG otwiera się w każdym edytorze i narzędziu projektowym i nie straci jakości podczas kolejnej edycji i zapisywania." },
-      { question: "Czy mogę przekonwertować kilka plików WEBP naraz?", answer: "Tak. Dodaj do 30 obrazów i pobierz jako .zip." },
+      { question: "Czy mogę przekonwertować kilka plików WEBP naraz?", answer: "Tak. Dodaj do 50 obrazów i pobierz jako .zip." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Konwersja odbywa się lokalnie w przeglądarce." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsPl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Czy WEBP zachowuje przezroczystość?", answer: "Tak. WEBP obsługuje przezroczystość, więc przezroczyste obszary PNG pozostają przezroczyste." },
       { question: "O ile zmniejszą się moje obrazy?", answer: "To zależy, ale pliki WEBP są często znacznie mniejsze niż ten sam obraz zapisany jako PNG." },
-      { question: "Czy mogę przekonwertować kilka plików PNG naraz?", answer: "Tak. Dodaj do 30 obrazów i pobierz jako .zip." },
+      { question: "Czy mogę przekonwertować kilka plików PNG naraz?", answer: "Tak. Dodaj do 50 obrazów i pobierz jako .zip." },
       { question: "Czy moje obrazy są przesyłane?", answer: "Nie. Konwersja odbywa się lokalnie w przeglądarce." },
     ],
   },

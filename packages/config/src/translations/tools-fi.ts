@@ -40,7 +40,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
       "Kaikki toimii paikallisesti selaimessasi, joten tiedostoja ei koskaan ladata palvelimelle. Tämä tarkoittaa, että se toimii jopa arkaluontoisten sopimusten, raporttien tai henkilökohtaisten asiakirjojen kanssa.",
     ],
     faq: [
-      { question: "Onko yhdistettävien PDF-tiedostojen määrälle rajaa?", answer: "Kiinteää rajaa ei ole. Koska yhdistäminen tapahtuu selaimessasi, käytännön rajoitus on laitteen muisti, ei palvelinraja." },
+      { question: "Onko yhdistettävien PDF-tiedostojen määrälle rajaa?", answer: "Voit yhdistää kerralla enintään 50 PDF-tiedostoa. Yhdistäminen tapahtuu selaimessa, joten hyvin suuret tiedostot riippuvat laitteesi muistista." },
       { question: "Voinko muuttaa sivujärjestystä ennen yhdistämistä?", answer: "Kyllä. Kun tiedostot on lisätty, vedä ne haluamaasi lopulliseen järjestykseen ennen yhdistämistä." },
       { question: "Ladataanko tiedostoni TAMPDFin palvelimille?", answer: "Ei. Yhdistä PDF käsittelee tiedostot kokonaan selaimessasi käyttäen asiakaspuolen teknologiaa, joten asiakirjat eivät koskaan poistu laitteeltasi." },
       { question: "Vaikuttaako yhdistäminen PDF-tiedostojeni laatuun?", answer: "Ei. Sivut yhdistetään muuttumattomina, ilman uudelleenpakkausta, joten teksti, kuvat ja muotoilu pysyvät täsmälleen alkuperäisinä." },
@@ -71,8 +71,8 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Mitkä kuvamuodot ovat tuettuja?", answer: "JPG-, PNG- ja WebP-kuvat ovat tuettuja sekä syötteenä että tulosteena." },
-      { question: "Voinko pakata useita kuvia kerralla?", answer: "Kyllä. Lisää niin monta kuvaa kuin haluat, ja jokainen pakataan ja pakataan yhteen .zip-tiedostoon ladattavaksi tai ladataan yksitellen." },
-      { question: "Kuinka paljon voin pienentää kuvaa laadun heikkenemättä?", answer: "Oletuslaatuasetus pienentää yleensä tiedostokokoa 60-80% ilman havaittavaa eroa. Voit säätää laatuliukusäädintä eri kompromissia varten." },
+      { question: "Voinko pakata useita kuvia kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa; ne pakataan yksitellen ja ladataan yhdessä .zip-tiedostona. Yksittäinen kuva ladataan sellaisenaan." },
+      { question: "Kuinka paljon voin pienentää kuvaa laadun heikkenemättä?", answer: "Riippuu kuvasta. Valitse Matala, Keskitaso (suositus) tai Korkea: vahvemmat tasot tuottavat pienempiä tiedostoja. Keskitasolla kuvat pienenevät usein paljon lähes näkymättömällä erolla." },
       { question: "Ladataanko valokuvani palvelimelle?", answer: "Ei. Pakkaus toimii paikallisesti selaimessasi canvas-API:n avulla, joten kuvia ei koskaan lähetetä minnekään." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
       "Loistava kuvakaappausten, kaavioiden tai vietyjen grafiikoiden muuttamiseen jaettavaksi PDF-tiedostoksi. Muunnos tapahtuu kokonaan selaimessasi, joten kuvia ei koskaan ladata. Läpinäkyvät alueet sijoitetaan valkoiselle taustalle.",
     ],
     faq: [
-      { question: "Voinko yhdistää useita PNG-tiedostoja yhdeksi PDF-tiedostoksi?", answer: "Kyllä. Lisää mikä tahansa määrä PNG-kuvia, ja jokaisesta tulee sivu syntyvässä PDF-tiedostossa, järjestyksessä jonka valitset." },
+      { question: "Voinko yhdistää useita PNG-tiedostoja yhdeksi PDF-tiedostoksi?", answer: "Kyllä. Lisää enintään 50 PNG-kuvaa, ja jokaisesta tulee sivu valmiiseen PDF:ään valitsemassasi järjestyksessä." },
       { question: "Mitä sivukokoa käytetään?", answer: "Jokainen sivu vastaa lähdekuvan pikselimittoja, joten kuvia ei rajata tai venytetä." },
       { question: "Mitä kuvan läpinäkyville osille tapahtuu?", answer: "Läpinäkyvyys litistetään valkoiselle taustalle, jotta sivu näyttää samalta kaikissa PDF-katseluohjelmissa." },
       { question: "Ladataanko kuvani palvelimelle?", answer: "Ei. Muunnos tapahtuu kokonaan selaimessasi, ja kuvat pysyvät laitteellasi." },
@@ -356,7 +356,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Muuttuuko kuvani sumeaksi koon muuttamisesta?", answer: "Kuvan pienentäminen säilyttää sen terävyyden. Alkuperäistä kokoa suuremmaksi suurentaminen ei voi lisätä yksityiskohtia, joten suuret suurennokset voivat näyttää pehmeiltä." },
-      { question: "Voinko muuttaa useiden kuvien kokoa kerralla?", answer: "Kyllä. Lisää enintään 20 kuvaa; lukitulla kuvasuhteella jokainen säilyttää omat mittasuhteensa asettamallasi leveydellä." },
+      { question: "Voinko muuttaa useiden kuvien kokoa kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa; lukitulla kuvasuhteella jokainen säilyttää omat mittasuhteensa asettamallasi leveydellä." },
       { question: "Missä muodossa kokoa muutettu kuva on?", answer: "Sama kuin alkuperäinen — JPG pysyy JPG:nä, PNG pysyy PNG:nä ja WEBP pysyy WEBP:nä, jos selaimesi tukee sitä." },
       { question: "Ladataanko kuvani?", answer: "Ei. Koon muuttaminen tapahtuu paikallisesti selaimessasi." },
     ],
@@ -386,7 +386,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Mikä on ero peilaamisen ja kääntämisen välillä?", answer: "Kääntö kiertää kuvaa 90° askelin. Peilaus peilaa sen, kuin katsoisit peiliin." },
-      { question: "Voinko peilata useita kuvia kerralla?", answer: "Kyllä. Lisää enintään 20 kuvaa, ja kaikki peilataan samalla tavalla, ja ladataan sitten yhdessä .zip-tiedostona." },
+      { question: "Voinko peilata useita kuvia kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa, ja kaikki peilataan samalla tavalla, ja ladataan sitten yhdessä .zip-tiedostona." },
       { question: "Heikentääkö peilaus laatua?", answer: "Ei havaittavaa laadun heikkenemistä — PNG pysyy häviöttömänä, ja JPG ja WEBP tallennetaan korkealla laadulla." },
       { question: "Ladataanko kuvani?", answer: "Ei. Peilaus tapahtuu paikallisesti selaimessasi." },
     ],
@@ -402,7 +402,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Miksi muuntaa PNG JPG:ksi?", answer: "JPG-tiedostot ovat tyypillisesti paljon pienempiä kuin PNG valokuville ja hyväksytään lähes kaikkialla, sähköpostista verkkolomakkeisiin." },
       { question: "Mitä läpinäkyvälle taustalle tapahtuu?", answer: "JPG:ssä ei ole läpinäkyvyyttä, joten läpinäkyvät alueet täytetään valkoisella." },
-      { question: "Voinko muuntaa useita PNG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 30 kuvaa; ne muunnetaan yhdessä ja ladataan .zip-tiedostona." },
+      { question: "Voinko muuntaa useita PNG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa; ne muunnetaan yhdessä ja ladataan .zip-tiedostona." },
       { question: "Ladataanko kuvani?", answer: "Ei. Muunnos tapahtuu paikallisesti selaimessasi." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Parantaako JPG:n muuntaminen PNG:ksi laatua?", answer: "Ei — JPG:ssä jo menetettyjä yksityiskohtia ei voida palauttaa. Mutta PNG estää lisämenetyksen, kun muokkaat ja tallennat uudelleen." },
       { question: "Miksi PNG on suurempi kuin JPG?", answer: "PNG tallentaa jokaisen pikselin ilman häviöllistä pakkausta, joten valokuvista tulee tyypillisesti suurempia. Se on kompromissi häviöttömän laadun saavuttamiseksi." },
-      { question: "Voinko muuntaa useita JPG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 30 kuvaa ja lataa .zip-tiedostona." },
+      { question: "Voinko muuntaa useita JPG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa ja lataa .zip-tiedostona." },
       { question: "Ladataanko kuvani?", answer: "Ei. Muunnos tapahtuu paikallisesti selaimessasi." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Miksi muuntaa WEBP JPG:ksi?", answer: "Jotkin vanhemmat sovellukset, editorit ja latauslomakkeet eivät hyväksy WEBP:tä. JPG toimii lähes kaikkialla." },
       { question: "Menetänkö laatua?", answer: "Vakiolaadulla eroa on vaikea nähdä. Nosta laatuliukusäädintä terävimmän tuloksen saavuttamiseksi." },
-      { question: "Voinko muuntaa useita WEBP-kuvia kerralla?", answer: "Kyllä. Lisää enintään 30 kuvaa ja lataa .zip-tiedostona." },
+      { question: "Voinko muuntaa useita WEBP-kuvia kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa ja lataa .zip-tiedostona." },
       { question: "Ladataanko kuvani?", answer: "Ei. Muunnos tapahtuu paikallisesti selaimessasi." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Onko WEBP pienempi kuin JPG?", answer: "Tyypillisesti kyllä — WEBP säästää usein merkittävän määrän tilaa samankaltaisella laadulla, mikä auttaa sivustoja latautumaan nopeammin." },
       { question: "Tukevatko kaikki selaimet WEBP:tä?", answer: "Kaikki modernit selaimet voivat näyttää WEBP:tä. WEBP-tiedostojen luominen täällä vaatii uudemman version Chromesta, Edgestä tai Firefoxista." },
-      { question: "Voinko muuntaa useita JPG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 30 kuvaa ja lataa .zip-tiedostona." },
+      { question: "Voinko muuntaa useita JPG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa ja lataa .zip-tiedostona." },
       { question: "Ladataanko kuvani?", answer: "Ei. Muunnos tapahtuu paikallisesti selaimessasi." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Säilyykö läpinäkyvyys?", answer: "Kyllä. PNG tukee läpinäkyvyyttä, joten WEBP-kuvasi läpinäkyvät alueet pysyvät läpinäkyvinä." },
       { question: "Miksi muuntaa WEBP PNG:ksi?", answer: "PNG avautuu jokaisessa muokkaus- ja suunnittelutyökalussa eikä menetä laatua lisämuokkauksessa ja tallennuksessa." },
-      { question: "Voinko muuntaa useita WEBP-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 30 kuvaa ja lataa .zip-tiedostona." },
+      { question: "Voinko muuntaa useita WEBP-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa ja lataa .zip-tiedostona." },
       { question: "Ladataanko kuvani?", answer: "Ei. Muunnos tapahtuu paikallisesti selaimessasi." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsFi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Säilyttääkö WEBP läpinäkyvyyden?", answer: "Kyllä. WEBP tukee läpinäkyvyyttä, joten PNG-kuvasi läpinäkyvät alueet pysyvät läpinäkyvinä." },
       { question: "Kuinka paljon pienempiä kuvistani tulee?", answer: "Se vaihtelee, mutta WEBP-tiedostot ovat usein merkittävästi pienempiä kuin sama kuva PNG:nä tallennettuna." },
-      { question: "Voinko muuntaa useita PNG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 30 kuvaa ja lataa .zip-tiedostona." },
+      { question: "Voinko muuntaa useita PNG-tiedostoja kerralla?", answer: "Kyllä. Lisää enintään 50 kuvaa ja lataa .zip-tiedostona." },
       { question: "Ladataanko kuvani?", answer: "Ei. Muunnos tapahtuu paikallisesti selaimessasi." },
     ],
   },

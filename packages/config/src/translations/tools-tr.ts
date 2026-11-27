@@ -40,7 +40,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
       "Her şey tarayıcınızda yerel olarak çalışır, dolayısıyla dosyalarınız bir sunucuya asla yüklenmez. Bu, hassas sözleşmeler, raporlar veya kişisel belgelerle bile çalıştığı anlamına gelir.",
     ],
     faq: [
-      { question: "Kaç PDF birleştirebileceğime dair bir sınır var mı?", answer: "Sabit bir sınır yok. Birleştirme tarayıcınızda gerçekleştiğinden, pratik sınır bir sunucu kotası değil cihazınızın belleğidir." },
+      { question: "Kaç PDF birleştirebileceğime dair bir sınır var mı?", answer: "Tek seferde en fazla 50 PDF birleştirebilirsiniz. İşlem tarayıcınızda yapılır, bu yüzden çok büyük dosyalar cihazınızın belleğine bağlıdır." },
       { question: "Birleştirmeden önce sayfaların sırasını değiştirebilir miyim?", answer: "Evet. Dosyalarınızı ekledikten sonra, birleştirmeden önce son belgenin izlemesini istediğiniz sıraya göre sürükleyin." },
       { question: "Dosyalarım TAMPDF'in sunucularına yükleniyor mu?", answer: "Hayır. PDF Birleştir, dosyaları istemci tarafı teknolojisi kullanarak tamamen tarayıcınızda işler, dolayısıyla belgeleriniz cihazınızdan hiç ayrılmaz." },
       { question: "Birleştirme PDF'lerimin kalitesini etkiler mi?", answer: "Hayır. Sayfalar yeniden sıkıştırılmadan olduğu gibi birleştirilir, dolayısıyla metin, görseller ve biçimlendirme orijinallerdeki gibi tam olarak kalır." },
@@ -71,8 +71,8 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Hangi görsel formatları destekleniyor?", answer: "JPG, PNG ve WebP görselleri hem giriş hem çıkış olarak desteklenir." },
-      { question: "Aynı anda birden fazla görsel sıkıştırabilir miyim?", answer: "Evet. İstediğiniz kadar görsel ekleyin; her biri sıkıştırılıp indirmek için tek bir .zip'te toplanır veya ayrı ayrı indirilir." },
-      { question: "Kalite kaybetmeden bir görseli ne kadar küçültebilirim?", answer: "Varsayılan kalite ayarı genellikle dosya boyutunu görünür bir fark olmadan %60-80 oranında küçültür. Farklı bir denge için kalite kaydırıcısını ayarlayabilirsiniz." },
+      { question: "Aynı anda birden fazla görsel sıkıştırabilir miyim?", answer: "Evet. En fazla 50 görsel ekleyin; tek tek sıkıştırılıp birlikte .zip olarak indirilir. Tek görsel doğrudan indirilir." },
+      { question: "Kalite kaybetmeden bir görseli ne kadar küçültebilirim?", answer: "Fotoğrafa göre değişir. Düşük, Orta (önerilen) veya Yüksek seçin: güçlü seviyeler daha küçük dosya verir. Orta seviyede fotoğraflar çoğu zaman fark edilmeden epey küçülür." },
       { question: "Fotoğraflarım bir sunucuya yükleniyor mu?", answer: "Hayır. Sıkıştırma, canvas API kullanılarak tarayıcınızda yerel olarak çalışır, dolayısıyla görselleriniz hiçbir yere gönderilmez." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
       "Ekran görüntülerini, diyagramları veya dışa aktarılan grafikleri paylaşılabilir bir PDF'e dönüştürmek için harikadır. Dönüştürme tamamen tarayıcınızda gerçekleşir, dolayısıyla görselleriniz asla yüklenmez. Şeffaf alanlar beyaz bir arka plana yerleştirilir.",
     ],
     faq: [
-      { question: "Birkaç PNG'yi tek bir PDF'de birleştirebilir miyim?", answer: "Evet. İstediğiniz kadar PNG görseli ekleyin, her biri düzenlediğiniz sırayla sonuçtaki PDF'de bir sayfa olur." },
+      { question: "Birkaç PNG'yi tek bir PDF'de birleştirebilir miyim?", answer: "Evet. En fazla 50 PNG görseli ekleyin; her biri belirlediğiniz sırayla PDF'in bir sayfası olur." },
       { question: "Hangi sayfa boyutu kullanılıyor?", answer: "Her sayfa, kaynak görselinin piksel boyutlarıyla eşleşir, dolayısıyla görseller kırpılmaz veya gerilmez." },
       { question: "Görselin şeffaf kısımlarına ne olur?", answer: "Şeffaflık, sayfanın her PDF görüntüleyicisinde aynı görünmesi için beyaz bir arka plana düzleştirilir." },
       { question: "Görsellerim bir sunucuya yükleniyor mu?", answer: "Hayır. Dönüştürme tamamen tarayıcınızda gerçekleşir ve görselleriniz cihazınızda kalır." },
@@ -356,7 +356,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Boyutlandırma görselimi bulanıklaştırır mı?", answer: "Bir görseli küçültmek onu net tutar. Orijinal boyutunun ötesinde büyütmek ayrıntı ekleyemez, bu nedenle büyük artışlar yumuşak görünebilir." },
-      { question: "Aynı anda birden fazla görseli boyutlandırabilir miyim?", answer: "Evet. 20'ye kadar görsel ekleyin; en-boy oranı kilitliyken, her biri belirlediğiniz genişlikte kendi oranlarını korur." },
+      { question: "Aynı anda birden fazla görseli boyutlandırabilir miyim?", answer: "Evet. 50'ye kadar görsel ekleyin; en-boy oranı kilitliyken, her biri belirlediğiniz genişlikte kendi oranlarını korur." },
       { question: "Boyutlandırılan görsel hangi formatta olur?", answer: "Orijinaliyle aynı — JPG JPG kalır, PNG PNG kalır ve tarayıcınızın desteklediği yerlerde WEBP WEBP kalır." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Boyutlandırma tarayıcınızda yerel olarak gerçekleşir." },
     ],
@@ -386,7 +386,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Çevirme ile döndürme arasındaki fark nedir?", answer: "Döndürme bir görseli 90° adımlarla döndürür. Çevirme onu bir aynaya bakar gibi aynalar." },
-      { question: "Aynı anda birden fazla görseli çevirebilir miyim?", answer: "Evet. 20'ye kadar görsel ekleyin, hepsi aynı şekilde çevrilir, ardından bir .zip olarak birlikte indirilir." },
+      { question: "Aynı anda birden fazla görseli çevirebilir miyim?", answer: "Evet. 50'ye kadar görsel ekleyin, hepsi aynı şekilde çevrilir, ardından bir .zip olarak birlikte indirilir." },
       { question: "Çevirme kaliteyi azaltır mı?", answer: "Fark edilir bir kayıp yok — PNG kayıpsız kalır, JPG ve WEBP yüksek kalitede kaydedilir." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Çevirme tarayıcınızda yerel olarak gerçekleşir." },
     ],
@@ -402,7 +402,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "PNG neden JPG'ye dönüştürülür?", answer: "JPG dosyaları fotoğraflar için genellikle PNG'lerden çok daha küçüktür ve e-postadan çevrimiçi formlara kadar hemen her yerde kabul edilir." },
       { question: "Şeffaf arka planlara ne olur?", answer: "JPG'de şeffaflık yoktur, bu yüzden şeffaf alanlar beyazla doldurulur." },
-      { question: "Aynı anda çok sayıda PNG dönüştürebilir miyim?", answer: "Evet. 30'a kadar görsel ekleyin; birlikte dönüştürülüp bir .zip olarak indirilirler." },
+      { question: "Aynı anda çok sayıda PNG dönüştürebilir miyim?", answer: "Evet. 50'a kadar görsel ekleyin; birlikte dönüştürülüp bir .zip olarak indirilirler." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Dönüştürme tarayıcınızda yerel olarak gerçekleşir." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "JPG'yi PNG'ye dönüştürmek kaliteyi artırır mı?", answer: "Hayır — JPG'de zaten kaybedilen ayrıntı geri getirilemez. Ancak PNG, yeniden düzenleyip kaydettiğinizde daha fazla kayıp olmasını önler." },
       { question: "PNG neden JPG'den daha büyük?", answer: "PNG her pikseli kayıplı sıkıştırma olmadan saklar, bu yüzden fotoğraflar genellikle büyür. Bu, kayıpsız kalite için yapılan bir değiş tokuştur." },
-      { question: "Aynı anda birkaç JPG dönüştürebilir miyim?", answer: "Evet. 30'a kadar görsel ekleyin ve bir .zip olarak indirin." },
+      { question: "Aynı anda birkaç JPG dönüştürebilir miyim?", answer: "Evet. 50'a kadar görsel ekleyin ve bir .zip olarak indirin." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Dönüştürme tarayıcınızda yerel olarak gerçekleşir." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP neden JPG'ye dönüştürülür?", answer: "Bazı eski uygulamalar, düzenleyiciler ve yükleme formları WEBP'yi kabul etmez. JPG neredeyse her yerde çalışır." },
       { question: "Kalite kaybeder miyim?", answer: "Varsayılan kalitede fark görmek zordur. En net sonuç için kalite kaydırıcısını artırın." },
-      { question: "Aynı anda birkaç WEBP görseli dönüştürebilir miyim?", answer: "Evet. 30'a kadar görsel ekleyin ve bir .zip olarak indirin." },
+      { question: "Aynı anda birkaç WEBP görseli dönüştürebilir miyim?", answer: "Evet. 50'a kadar görsel ekleyin ve bir .zip olarak indirin." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Dönüştürme tarayıcınızda yerel olarak gerçekleşir." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP JPG'den küçük mü?", answer: "Genellikle evet — WEBP, benzer kalitede genellikle önemli miktarda yer tasarrufu sağlar, bu da sayfaların daha hızlı yüklenmesine yardımcı olur." },
       { question: "Tüm tarayıcılar WEBP'yi destekliyor mu?", answer: "Tüm modern tarayıcılar WEBP'yi görüntüleyebilir. Burada WEBP dosyaları oluşturmak, Chrome, Edge veya Firefox'un güncel bir sürümünü gerektirir." },
-      { question: "Aynı anda birkaç JPG dönüştürebilir miyim?", answer: "Evet. 30'a kadar görsel ekleyin ve bir .zip olarak indirin." },
+      { question: "Aynı anda birkaç JPG dönüştürebilir miyim?", answer: "Evet. 50'a kadar görsel ekleyin ve bir .zip olarak indirin." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Dönüştürme tarayıcınızda yerel olarak gerçekleşir." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Şeffaflık korunuyor mu?", answer: "Evet. PNG şeffaflığı destekler, dolayısıyla WEBP görselinizdeki şeffaf alanlar şeffaf kalır." },
       { question: "WEBP neden PNG'ye dönüştürülür?", answer: "PNG her düzenleyicide ve tasarım aracında açılır ve yeniden düzenleyip kaydettiğinizde kalite kaybetmez." },
-      { question: "Aynı anda birkaç WEBP dosyası dönüştürebilir miyim?", answer: "Evet. 30'a kadar görsel ekleyin ve bir .zip olarak indirin." },
+      { question: "Aynı anda birkaç WEBP dosyası dönüştürebilir miyim?", answer: "Evet. 50'a kadar görsel ekleyin ve bir .zip olarak indirin." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Dönüştürme tarayıcınızda yerel olarak gerçekleşir." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsTr: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP şeffaflığı korur mu?", answer: "Evet. WEBP şeffaflığı destekler, dolayısıyla şeffaf PNG alanları şeffaf kalır." },
       { question: "Görsellerim ne kadar küçülecek?", answer: "Değişkenlik gösterir, ancak WEBP dosyaları genellikle aynı görselin PNG olarak kaydedilmiş halinden önemli ölçüde daha küçüktür." },
-      { question: "Aynı anda birkaç PNG dönüştürebilir miyim?", answer: "Evet. 30'a kadar görsel ekleyin ve bir .zip olarak indirin." },
+      { question: "Aynı anda birkaç PNG dönüştürebilir miyim?", answer: "Evet. 50'a kadar görsel ekleyin ve bir .zip olarak indirin." },
       { question: "Görsellerim yükleniyor mu?", answer: "Hayır. Dönüştürme tarayıcınızda yerel olarak gerçekleşir." },
     ],
   },

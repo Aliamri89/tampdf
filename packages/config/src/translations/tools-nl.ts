@@ -40,7 +40,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
       "Alles gebeurt lokaal in je browser, dus je bestanden worden nooit naar een server geüpload. Dat betekent dat het zelfs werkt met gevoelige contracten, rapporten of persoonlijke documenten.",
     ],
     faq: [
-      { question: "Is er een limiet aan het aantal PDF's dat ik kan samenvoegen?", answer: "Geen vaste limiet. Omdat het samenvoegen in je browser gebeurt, is de praktische limiet het geheugen van je apparaat in plaats van een serverquotum." },
+      { question: "Is er een limiet aan het aantal PDF's dat ik kan samenvoegen?", answer: "Je kunt tot 50 pdf's tegelijk samenvoegen. Dat gebeurt in je browser, dus bij heel grote bestanden hangt het af van het geheugen van je apparaat." },
       { question: "Kan ik de volgorde van pagina's wijzigen voor het samenvoegen?", answer: "Ja. Nadat je je bestanden hebt toegevoegd, sleep je ze naar de volgorde die je wilt voor het einddocument, voordat je ze samenvoegt." },
       { question: "Worden mijn bestanden geüpload naar de servers van TAMPDF?", answer: "Nee. PDF samenvoegen verwerkt bestanden volledig in je browser met client-side technologie, dus je documenten verlaten je apparaat nooit." },
       { question: "Beïnvloedt samenvoegen de kwaliteit van mijn PDF's?", answer: "Nee. Pagina's worden ongewijzigd gecombineerd, zonder hercompressie, dus tekst, afbeeldingen en opmaak blijven precies zoals in de originelen." },
@@ -71,8 +71,8 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Welke afbeeldingsformaten worden ondersteund?", answer: "JPG-, PNG- en WebP-afbeeldingen worden zowel als invoer als uitvoer ondersteund." },
-      { question: "Kan ik meerdere afbeeldingen tegelijk comprimeren?", answer: "Ja. Voeg zoveel afbeeldingen toe als je wilt en elk wordt gecomprimeerd en gebundeld in één .zip om te downloaden, of individueel gedownload." },
-      { question: "Hoeveel kan ik een afbeelding verkleinen zonder kwaliteitsverlies?", answer: "De standaardkwaliteitsinstelling verkleint de bestandsgrootte meestal met 60-80% zonder zichtbaar verschil. Je kunt de kwaliteitsschuif aanpassen voor een andere afweging." },
+      { question: "Kan ik meerdere afbeeldingen tegelijk comprimeren?", answer: "Ja. Voeg tot 50 afbeeldingen toe; ze worden een voor een gecomprimeerd en samen als .zip gedownload. Eén afbeelding wordt los gedownload." },
+      { question: "Hoeveel kan ik een afbeelding verkleinen zonder kwaliteitsverlies?", answer: "Dat hangt van de foto af. Kies Laag, Gemiddeld (aanbevolen) of Hoog: hogere niveaus geven kleinere bestanden. Op Gemiddeld krimpen foto's vaak flink met nauwelijks zichtbaar verschil." },
       { question: "Worden mijn foto's naar een server geüpload?", answer: "Nee. Compressie gebeurt lokaal in je browser via de canvas-API, dus je afbeeldingen worden nooit ergens naartoe gestuurd." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
       "Geweldig om screenshots, diagrammen of geëxporteerde grafieken om te zetten in een deelbare PDF. De omzetting gebeurt volledig in je browser, dus je afbeeldingen worden nooit geüpload. Transparante gebieden worden op een witte achtergrond geplaatst.",
     ],
     faq: [
-      { question: "Kan ik meerdere PNG's combineren tot één PDF?", answer: "Ja. Voeg zoveel PNG-afbeeldingen toe als je wilt en elk wordt een pagina in de resulterende PDF, in de volgorde waarin je ze rangschikt." },
+      { question: "Kan ik meerdere PNG's combineren tot één PDF?", answer: "Ja. Voeg tot 50 PNG-afbeeldingen toe; elke afbeelding wordt een pagina in de pdf, in jouw volgorde." },
       { question: "Welke paginagrootte wordt gebruikt?", answer: "Elke pagina komt overeen met de pixelafmetingen van de bronafbeelding, dus afbeeldingen worden niet bijgesneden of uitgerekt." },
       { question: "Wat gebeurt er met transparante delen van de afbeelding?", answer: "Transparantie wordt afgevlakt op een witte achtergrond zodat de pagina er in elke PDF-viewer hetzelfde uitziet." },
       { question: "Worden mijn afbeeldingen naar een server geüpload?", answer: "Nee. De omzetting gebeurt volledig in je browser en je afbeeldingen blijven op je apparaat." },
@@ -356,7 +356,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Wordt mijn afbeelding wazig door het formaat te wijzigen?", answer: "Een afbeelding verkleinen houdt hem scherp. Vergroten voorbij het oorspronkelijke formaat kan geen detail toevoegen, dus grote vergrotingen kunnen zacht lijken." },
-      { question: "Kan ik het formaat van meerdere afbeeldingen tegelijk wijzigen?", answer: "Ja. Voeg tot 20 afbeeldingen toe; met vergrendelde beeldverhouding behoudt elke afbeelding zijn eigen proporties bij de breedte die je instelt." },
+      { question: "Kan ik het formaat van meerdere afbeeldingen tegelijk wijzigen?", answer: "Ja. Voeg tot 50 afbeeldingen toe; met vergrendelde beeldverhouding behoudt elke afbeelding zijn eigen proporties bij de breedte die je instelt." },
       { question: "Welk formaat krijgt de aangepaste afbeelding?", answer: "Hetzelfde als het origineel — JPG blijft JPG, PNG blijft PNG, en WEBP blijft WEBP waar je browser het ondersteunt." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. Formaat wijzigen gebeurt lokaal in je browser." },
     ],
@@ -386,7 +386,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Wat is het verschil tussen spiegelen en draaien?", answer: "Draaien draait een afbeelding in stappen van 90°. Spiegelen weerspiegelt het, zoals kijken in een spiegel." },
-      { question: "Kan ik meerdere afbeeldingen tegelijk spiegelen?", answer: "Ja. Voeg tot 20 afbeeldingen toe en ze worden allemaal op dezelfde manier gespiegeld, daarna samen gedownload als een .zip." },
+      { question: "Kan ik meerdere afbeeldingen tegelijk spiegelen?", answer: "Ja. Voeg tot 50 afbeeldingen toe en ze worden allemaal op dezelfde manier gespiegeld, daarna samen gedownload als een .zip." },
       { question: "Vermindert spiegelen de kwaliteit?", answer: "Geen merkbaar verlies — PNG blijft verliesvrij, en JPG en WEBP worden in hoge kwaliteit opgeslagen." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. Spiegelen gebeurt lokaal in je browser." },
     ],
@@ -402,7 +402,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Waarom PNG naar JPG omzetten?", answer: "JPG-bestanden zijn doorgaans veel kleiner dan PNG's voor foto's en worden vrijwel overal geaccepteerd, van e-mail tot online formulieren." },
       { question: "Wat gebeurt er met transparante achtergronden?", answer: "JPG heeft geen transparantie, dus transparante gebieden worden gevuld met wit." },
-      { question: "Kan ik veel PNG's tegelijk converteren?", answer: "Ja. Voeg tot 30 afbeeldingen toe; ze worden samen geconverteerd en gedownload als een .zip." },
+      { question: "Kan ik veel PNG's tegelijk converteren?", answer: "Ja. Voeg tot 50 afbeeldingen toe; ze worden samen geconverteerd en gedownload als een .zip." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. De omzetting gebeurt lokaal in je browser." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Verbetert het omzetten van JPG naar PNG de kwaliteit?", answer: "Nee — detail dat al verloren is gegaan in de JPG kan niet worden hersteld. Maar PNG voorkomt verder verlies wanneer je opnieuw bewerkt en opslaat." },
       { question: "Waarom is de PNG groter dan de JPG?", answer: "PNG slaat elke pixel op zonder verlieslossy compressie, dus foto's worden meestal groter. Dat is de afweging voor verliesvrije kwaliteit." },
-      { question: "Kan ik meerdere JPG's tegelijk converteren?", answer: "Ja. Voeg tot 30 afbeeldingen toe en download ze als een .zip." },
+      { question: "Kan ik meerdere JPG's tegelijk converteren?", answer: "Ja. Voeg tot 50 afbeeldingen toe en download ze als een .zip." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. De omzetting gebeurt lokaal in je browser." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Waarom WEBP naar JPG omzetten?", answer: "Sommige oudere apps, editors en uploadformulieren accepteren geen WEBP. JPG werkt bijna overal." },
       { question: "Verlies ik kwaliteit?", answer: "Bij de standaardkwaliteit is het verschil moeilijk te zien. Verhoog de kwaliteitsschuif voor het scherpste resultaat." },
-      { question: "Kan ik meerdere WEBP-afbeeldingen tegelijk converteren?", answer: "Ja. Voeg tot 30 afbeeldingen toe en download ze als een .zip." },
+      { question: "Kan ik meerdere WEBP-afbeeldingen tegelijk converteren?", answer: "Ja. Voeg tot 50 afbeeldingen toe en download ze als een .zip." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. De omzetting gebeurt lokaal in je browser." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Is WEBP kleiner dan JPG?", answer: "Meestal wel — WEBP bespaart vaak aanzienlijk veel ruimte bij vergelijkbare kwaliteit, wat pagina's sneller laat laden." },
       { question: "Ondersteunen alle browsers WEBP?", answer: "Alle moderne browsers kunnen WEBP weergeven. Het maken van WEBP-bestanden hier vereist een recente versie van Chrome, Edge of Firefox." },
-      { question: "Kan ik meerdere JPG's tegelijk converteren?", answer: "Ja. Voeg tot 30 afbeeldingen toe en download ze als een .zip." },
+      { question: "Kan ik meerdere JPG's tegelijk converteren?", answer: "Ja. Voeg tot 50 afbeeldingen toe en download ze als een .zip." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. De omzetting gebeurt lokaal in je browser." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Blijft de transparantie behouden?", answer: "Ja. PNG ondersteunt transparantie, dus transparante gebieden in je WEBP-afbeelding blijven transparant." },
       { question: "Waarom WEBP naar PNG omzetten?", answer: "PNG opent in elke editor en ontwerptool en verliest geen kwaliteit wanneer je hem opnieuw bewerkt en opslaat." },
-      { question: "Kan ik meerdere WEBP-bestanden tegelijk converteren?", answer: "Ja. Voeg tot 30 afbeeldingen toe en download ze als een .zip." },
+      { question: "Kan ik meerdere WEBP-bestanden tegelijk converteren?", answer: "Ja. Voeg tot 50 afbeeldingen toe en download ze als een .zip." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. De omzetting gebeurt lokaal in je browser." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsNl: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Behoudt WEBP de transparantie?", answer: "Ja. WEBP ondersteunt transparantie, dus transparante PNG-gebieden blijven transparant." },
       { question: "Hoeveel kleiner worden mijn afbeeldingen?", answer: "Dat varieert, maar WEBP-bestanden zijn vaak aanzienlijk kleiner dan dezelfde afbeelding opgeslagen als PNG." },
-      { question: "Kan ik meerdere PNG's tegelijk converteren?", answer: "Ja. Voeg tot 30 afbeeldingen toe en download ze als een .zip." },
+      { question: "Kan ik meerdere PNG's tegelijk converteren?", answer: "Ja. Voeg tot 50 afbeeldingen toe en download ze als een .zip." },
       { question: "Worden mijn afbeeldingen geüpload?", answer: "Nee. De omzetting gebeurt lokaal in je browser." },
     ],
   },

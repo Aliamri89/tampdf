@@ -40,7 +40,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
       "Mọi thứ diễn ra cục bộ trong trình duyệt của bạn, vì vậy các tệp của bạn không bao giờ được tải lên máy chủ. Điều đó có nghĩa là nó hoạt động ngay cả với các hợp đồng, báo cáo hoặc tài liệu cá nhân nhạy cảm.",
     ],
     faq: [
-      { question: "Có giới hạn về số lượng PDF tôi có thể gộp không?", answer: "Không có giới hạn cố định. Vì việc gộp diễn ra trong trình duyệt của bạn, giới hạn thực tế là bộ nhớ thiết bị của bạn chứ không phải hạn ngạch máy chủ." },
+      { question: "Có giới hạn về số lượng PDF tôi có thể gộp không?", answer: "Bạn có thể gộp tối đa 50 tệp PDF mỗi lần. Việc gộp diễn ra trong trình duyệt, nên tệp rất lớn phụ thuộc vào bộ nhớ thiết bị." },
       { question: "Tôi có thể thay đổi thứ tự các trang trước khi gộp không?", answer: "Có. Sau khi thêm tệp của bạn, hãy kéo chúng theo thứ tự bạn muốn tài liệu cuối cùng có trước khi gộp." },
       { question: "Tệp của tôi có được tải lên máy chủ của TAMPDF không?", answer: "Không. Gộp PDF xử lý tệp hoàn toàn trong trình duyệt của bạn bằng công nghệ phía máy khách, vì vậy tài liệu của bạn không bao giờ rời khỏi thiết bị." },
       { question: "Việc gộp có ảnh hưởng đến chất lượng PDF của tôi không?", answer: "Không. Các trang được kết hợp nguyên vẹn, không nén lại, vì vậy văn bản, hình ảnh và định dạng vẫn giữ nguyên như bản gốc." },
@@ -71,8 +71,8 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Những định dạng ảnh nào được hỗ trợ?", answer: "Ảnh JPG, PNG và WebP được hỗ trợ cả đầu vào và đầu ra." },
-      { question: "Tôi có thể nén nhiều ảnh cùng lúc không?", answer: "Có. Thêm bao nhiêu ảnh tùy thích và mỗi ảnh sẽ được nén và đóng gói thành một .zip duy nhất để tải xuống, hoặc tải xuống riêng lẻ." },
-      { question: "Tôi có thể giảm dung lượng ảnh đến mức nào mà không mất chất lượng?", answer: "Cài đặt chất lượng mặc định thường giảm 60-80% dung lượng file mà không có sự khác biệt rõ rệt. Bạn có thể điều chỉnh thanh trượt chất lượng để có sự cân bằng khác." },
+      { question: "Tôi có thể nén nhiều ảnh cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh; ảnh được nén lần lượt và tải về cùng nhau dưới dạng .zip. Một ảnh duy nhất được tải riêng." },
+      { question: "Tôi có thể giảm dung lượng ảnh đến mức nào mà không mất chất lượng?", answer: "Tùy vào bức ảnh. Chọn mức Thấp, Trung bình (khuyên dùng) hoặc Cao: mức càng mạnh tệp càng nhỏ. Ở mức Trung bình, ảnh thường giảm nhiều mà gần như không thấy khác biệt." },
       { question: "Ảnh của tôi có được tải lên máy chủ không?", answer: "Không. Việc nén chạy cục bộ trong trình duyệt của bạn bằng canvas API, vì vậy ảnh của bạn không bao giờ được gửi đi đâu cả." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
       "Rất tốt để biến ảnh chụp màn hình, sơ đồ hoặc đồ họa xuất ra thành PDF dễ chia sẻ. Việc chuyển đổi diễn ra hoàn toàn trong trình duyệt của bạn, vì vậy ảnh của bạn không bao giờ được tải lên. Các vùng trong suốt được đặt trên nền trắng.",
     ],
     faq: [
-      { question: "Tôi có thể gộp nhiều PNG thành một PDF không?", answer: "Có. Thêm bao nhiêu ảnh PNG tùy thích và mỗi ảnh sẽ trở thành một trang trong PDF kết quả, theo thứ tự bạn sắp xếp." },
+      { question: "Tôi có thể gộp nhiều PNG thành một PDF không?", answer: "Có. Thêm tối đa 50 ảnh PNG, mỗi ảnh thành một trang PDF theo thứ tự bạn sắp xếp." },
       { question: "Kích thước trang nào được sử dụng?", answer: "Mỗi trang khớp với kích thước pixel của ảnh gốc, vì vậy ảnh không bị cắt xén hoặc kéo giãn." },
       { question: "Điều gì xảy ra với các phần trong suốt của ảnh?", answer: "Độ trong suốt được làm phẳng trên nền trắng để trang trông giống nhau trong mọi trình xem PDF." },
       { question: "Ảnh của tôi có được tải lên máy chủ không?", answer: "Không. Việc chuyển đổi diễn ra hoàn toàn trong trình duyệt của bạn và ảnh của bạn vẫn ở trên thiết bị." },
@@ -356,7 +356,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Đổi kích thước có làm ảnh của tôi bị mờ không?", answer: "Thu nhỏ ảnh giữ cho nó sắc nét. Phóng to vượt quá kích thước gốc không thể thêm chi tiết, vì vậy việc tăng kích thước lớn có thể trông mờ." },
-      { question: "Tôi có thể đổi kích thước nhiều ảnh cùng lúc không?", answer: "Có. Thêm tối đa 20 ảnh; với tỷ lệ khung hình bị khóa, mỗi ảnh giữ tỷ lệ riêng theo chiều rộng bạn đặt." },
+      { question: "Tôi có thể đổi kích thước nhiều ảnh cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh; với tỷ lệ khung hình bị khóa, mỗi ảnh giữ tỷ lệ riêng theo chiều rộng bạn đặt." },
       { question: "Ảnh đã đổi kích thước sẽ có định dạng gì?", answer: "Giống như bản gốc — JPG vẫn là JPG, PNG vẫn là PNG, và WEBP vẫn là WEBP ở nơi trình duyệt của bạn hỗ trợ." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc đổi kích thước diễn ra cục bộ trong trình duyệt của bạn." },
     ],
@@ -386,7 +386,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Sự khác biệt giữa lật và xoay là gì?", answer: "Xoay quay một ảnh theo từng bước 90°. Lật phản chiếu nó, giống như soi gương." },
-      { question: "Tôi có thể lật nhiều ảnh cùng lúc không?", answer: "Có. Thêm tối đa 20 ảnh và tất cả được lật theo cùng một cách, sau đó tải xuống cùng nhau dưới dạng .zip." },
+      { question: "Tôi có thể lật nhiều ảnh cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh và tất cả được lật theo cùng một cách, sau đó tải xuống cùng nhau dưới dạng .zip." },
       { question: "Lật có làm giảm chất lượng không?", answer: "Không có sự mất mát đáng kể — PNG vẫn không mất dữ liệu, và JPG cùng WEBP được lưu với chất lượng cao." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc lật diễn ra cục bộ trong trình duyệt của bạn." },
     ],
@@ -402,7 +402,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Tại sao nên chuyển PNG sang JPG?", answer: "Đối với ảnh chụp, các tệp JPG thường nhỏ hơn nhiều so với PNG và được chấp nhận ở hầu hết mọi nơi, từ email đến các biểu mẫu trực tuyến." },
       { question: "Điều gì xảy ra với nền trong suốt?", answer: "JPG không có tính năng trong suốt, vì vậy các vùng trong suốt sẽ được lấp đầy bằng màu trắng." },
-      { question: "Tôi có thể chuyển đổi nhiều PNG cùng lúc không?", answer: "Có. Thêm tối đa 30 ảnh; chúng được chuyển đổi cùng nhau và tải xuống dưới dạng .zip." },
+      { question: "Tôi có thể chuyển đổi nhiều PNG cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh; chúng được chuyển đổi cùng nhau và tải xuống dưới dạng .zip." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc chuyển đổi diễn ra cục bộ trong trình duyệt của bạn." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Chuyển JPG sang PNG có cải thiện chất lượng không?", answer: "Không — chi tiết đã mất trong JPG không thể khôi phục. Nhưng PNG ngăn chặn mất mát thêm khi bạn chỉnh sửa và lưu lại." },
       { question: "Tại sao PNG lớn hơn JPG?", answer: "PNG lưu trữ từng pixel mà không nén mất dữ liệu, vì vậy ảnh chụp thường trở nên lớn hơn. Đó là sự đánh đổi cho chất lượng không mất dữ liệu." },
-      { question: "Tôi có thể chuyển đổi nhiều JPG cùng lúc không?", answer: "Có. Thêm tối đa 30 ảnh và tải xuống dưới dạng .zip." },
+      { question: "Tôi có thể chuyển đổi nhiều JPG cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh và tải xuống dưới dạng .zip." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc chuyển đổi diễn ra cục bộ trong trình duyệt của bạn." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Tại sao nên chuyển WEBP sang JPG?", answer: "Một số ứng dụng, trình chỉnh sửa và biểu mẫu tải lên cũ hơn không chấp nhận WEBP. JPG hoạt động ở hầu hết mọi nơi." },
       { question: "Tôi có bị mất chất lượng không?", answer: "Ở chất lượng mặc định, sự khác biệt rất khó nhận thấy. Tăng thanh trượt chất lượng để có kết quả sắc nét nhất." },
-      { question: "Tôi có thể chuyển đổi nhiều ảnh WEBP cùng lúc không?", answer: "Có. Thêm tối đa 30 ảnh và tải xuống dưới dạng .zip." },
+      { question: "Tôi có thể chuyển đổi nhiều ảnh WEBP cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh và tải xuống dưới dạng .zip." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc chuyển đổi diễn ra cục bộ trong trình duyệt của bạn." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP có nhỏ hơn JPG không?", answer: "Thường là có — WEBP thường tiết kiệm không gian đáng kể với chất lượng tương tự, giúp trang tải nhanh hơn." },
       { question: "Tất cả trình duyệt có hỗ trợ WEBP không?", answer: "Tất cả các trình duyệt hiện đại đều có thể hiển thị WEBP. Tạo tệp WEBP ở đây cần phiên bản Chrome, Edge hoặc Firefox gần đây." },
-      { question: "Tôi có thể chuyển đổi nhiều JPG cùng lúc không?", answer: "Có. Thêm tối đa 30 ảnh và tải xuống dưới dạng .zip." },
+      { question: "Tôi có thể chuyển đổi nhiều JPG cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh và tải xuống dưới dạng .zip." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc chuyển đổi diễn ra cục bộ trong trình duyệt của bạn." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Độ trong suốt có được giữ lại không?", answer: "Có. PNG hỗ trợ trong suốt, vì vậy các vùng trong suốt trong ảnh WEBP của bạn vẫn giữ nguyên trong suốt." },
       { question: "Tại sao nên chuyển WEBP sang PNG?", answer: "PNG mở được trong mọi trình chỉnh sửa và công cụ thiết kế, và không mất chất lượng khi bạn chỉnh sửa và lưu lại." },
-      { question: "Tôi có thể chuyển đổi nhiều tệp WEBP cùng lúc không?", answer: "Có. Thêm tối đa 30 ảnh và tải xuống dưới dạng .zip." },
+      { question: "Tôi có thể chuyển đổi nhiều tệp WEBP cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh và tải xuống dưới dạng .zip." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc chuyển đổi diễn ra cục bộ trong trình duyệt của bạn." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsVi: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP có giữ độ trong suốt không?", answer: "Có. WEBP hỗ trợ trong suốt, vì vậy các vùng PNG trong suốt vẫn giữ nguyên trong suốt." },
       { question: "Ảnh của tôi sẽ nhỏ đi bao nhiêu?", answer: "Tùy thuộc vào từng ảnh, nhưng các tệp WEBP thường nhỏ hơn đáng kể so với cùng một ảnh được lưu dưới dạng PNG." },
-      { question: "Tôi có thể chuyển đổi nhiều PNG cùng lúc không?", answer: "Có. Thêm tối đa 30 ảnh và tải xuống dưới dạng .zip." },
+      { question: "Tôi có thể chuyển đổi nhiều PNG cùng lúc không?", answer: "Có. Thêm tối đa 50 ảnh và tải xuống dưới dạng .zip." },
       { question: "Ảnh của tôi có được tải lên không?", answer: "Không. Việc chuyển đổi diễn ra cục bộ trong trình duyệt của bạn." },
     ],
   },

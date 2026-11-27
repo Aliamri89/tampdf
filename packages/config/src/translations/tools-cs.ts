@@ -40,7 +40,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
       "Vše běží lokálně ve vašem prohlížeči, takže soubory se nikdy nenahrávají na server. To znamená, že to funguje i s citlivými smlouvami, zprávami nebo osobními dokumenty.",
     ],
     faq: [
-      { question: "Existuje limit počtu PDF souborů, které mohu sloučit?", answer: "Neexistuje žádný pevný limit. Protože slučování probíhá ve vašem prohlížeči, praktickým omezením je paměť zařízení, nikoli limit serveru." },
+      { question: "Existuje limit počtu PDF souborů, které mohu sloučit?", answer: "Najednou můžete sloučit až 50 souborů PDF. Slučování probíhá v prohlížeči, takže u velmi velkých souborů záleží na paměti vašeho zařízení." },
       { question: "Mohu před sloučením změnit pořadí stránek?", answer: "Ano. Po přidání souborů je přetáhněte do pořadí, které chcete pro konečný dokument, a poté sloučte." },
       { question: "Nahrávají se moje soubory na servery TAMPDF?", answer: "Ne. Sloučit PDF zpracovává soubory zcela ve vašem prohlížeči pomocí technologie na straně klienta, takže dokumenty nikdy neopustí vaše zařízení." },
       { question: "Ovlivní sloučení kvalitu mých PDF souborů?", answer: "Ne. Stránky se spojují beze změny, bez rekomprese, takže text, obrázky a formátování zůstávají přesně jako v originálech." },
@@ -71,8 +71,8 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Jaké formáty obrázků jsou podporovány?", answer: "Obrázky JPG, PNG a WebP jsou podporovány jak jako vstup, tak jako výstup." },
-      { question: "Mohu komprimovat více obrázků najednou?", answer: "Ano. Přidejte tolik obrázků, kolik chcete, a každý se zkomprimuje a zabalí do jednoho souboru .zip ke stažení nebo se stáhne jednotlivě." },
-      { question: "O kolik mohu zmenšit obrázek bez ztráty kvality?", answer: "Výchozí nastavení kvality obvykle sníží velikost souboru o 60-80% bez znatelného rozdílu. Můžete upravit posuvník kvality pro jiný kompromis." },
+      { question: "Mohu komprimovat více obrázků najednou?", answer: "Ano. Přidejte až 50 obrázků; zkomprimují se jeden po druhém a stáhnou společně jako .zip. Jediný obrázek se stáhne samostatně." },
+      { question: "O kolik mohu zmenšit obrázek bez ztráty kvality?", answer: "Záleží na fotce. Vyberte nízkou, střední (doporučenou) nebo vysokou úroveň: vyšší úrovně dávají menší soubory. Na střední úrovni se fotky často výrazně zmenší s minimálním viditelným rozdílem." },
       { question: "Nahrávají se moje fotografie na server?", answer: "Ne. Komprese běží lokálně ve vašem prohlížeči pomocí API canvas, takže obrázky se nikam neodesílají." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
       "Skvělé pro přeměnu snímků obrazovky, diagramů nebo exportované grafiky na PDF, které lze sdílet. Převod probíhá zcela ve vašem prohlížeči, takže obrázky se nikdy nenahrávají. Průhledné oblasti se umístí na bílé pozadí.",
     ],
     faq: [
-      { question: "Mohu spojit více souborů PNG do jednoho PDF?", answer: "Ano. Přidejte libovolný počet obrázků PNG a každý se stane stránkou ve výsledném PDF, v pořadí, ve kterém je uspořádáte." },
+      { question: "Mohu spojit více souborů PNG do jednoho PDF?", answer: "Ano. Přidejte až 50 obrázků PNG a každý se stane stránkou výsledného PDF v pořadí, které určíte." },
       { question: "Jaká velikost stránky se použije?", answer: "Každá stránka odpovídá rozměrům zdrojového obrázku v pixelech, takže se obrázky neořezávají ani nenatahují." },
       { question: "Co se stane s průhlednými částmi obrázku?", answer: "Průhlednost se sloučí do bílého pozadí, aby stránka vypadala stejně ve všech prohlížečích PDF." },
       { question: "Nahrávají se moje obrázky na server?", answer: "Ne. Převod probíhá zcela ve vašem prohlížeči a obrázky zůstávají na vašem zařízení." },
@@ -356,7 +356,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Rozmaže se můj obrázek při změně velikosti?", answer: "Zmenšení obrázku zachovává jeho ostrost. Zvětšení nad původní velikost nemůže přidat detaily, takže velká zvětšení mohou vypadat rozmazaně." },
-      { question: "Mohu změnit velikost více obrázků najednou?", answer: "Ano. Přidejte až 20 obrázků; se zamčeným poměrem stran si každý zachová své vlastní proporce při šířce, kterou nastavíte." },
+      { question: "Mohu změnit velikost více obrázků najednou?", answer: "Ano. Přidejte až 50 obrázků; se zamčeným poměrem stran si každý zachová své vlastní proporce při šířce, kterou nastavíte." },
       { question: "V jakém formátu bude obrázek se změněnou velikostí?", answer: "Stejný jako originál — JPG zůstane JPG, PNG zůstane PNG a WEBP zůstane WEBP tam, kde to váš prohlížeč podporuje." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Změna velikosti probíhá lokálně ve vašem prohlížeči." },
     ],
@@ -386,7 +386,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Jaký je rozdíl mezi převrácením a otočením?", answer: "Otočení otočí obrázek po krocích 90°. Převrácení jej zrcadlí, jako byste se dívali do zrcadla." },
-      { question: "Mohu převrátit více obrázků najednou?", answer: "Ano. Přidejte až 20 obrázků a všechny se převrátí stejným způsobem a poté se stáhnou společně jako .zip." },
+      { question: "Mohu převrátit více obrázků najednou?", answer: "Ano. Přidejte až 50 obrázků a všechny se převrátí stejným způsobem a poté se stáhnou společně jako .zip." },
       { question: "Sníží převrácení kvalitu?", answer: "Žádná znatelná ztráta kvality — PNG zůstává bezztrátový a JPG a WEBP se ukládají ve vysoké kvalitě." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Převrácení probíhá lokálně ve vašem prohlížeči." },
     ],
@@ -402,7 +402,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Proč převádět PNG na JPG?", answer: "Soubory JPG jsou pro fotografie obvykle mnohem menší než PNG a jsou přijímány téměř všude, od e-mailů po online formuláře." },
       { question: "Co se stane s průhledným pozadím?", answer: "JPG nemá průhlednost, takže průhledné oblasti se vyplní bílou barvou." },
-      { question: "Mohu převést více souborů PNG najednou?", answer: "Ano. Přidejte až 30 obrázků; převedou se společně a stáhnou jako .zip." },
+      { question: "Mohu převést více souborů PNG najednou?", answer: "Ano. Přidejte až 50 obrázků; převedou se společně a stáhnou jako .zip." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Převod probíhá lokálně ve vašem prohlížeči." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Zlepší převod JPG na PNG kvalitu?", answer: "Ne — detaily již ztracené v JPG nelze obnovit. Ale PNG zabraňuje dalším ztrátám při dalších úpravách a ukládání." },
       { question: "Proč je PNG větší než JPG?", answer: "PNG ukládá každý pixel bez ztrátové komprese, takže fotografie jsou obvykle větší. Je to kompromis pro bezztrátovou kvalitu." },
-      { question: "Mohu převést více souborů JPG najednou?", answer: "Ano. Přidejte až 30 obrázků a stáhněte je jako .zip." },
+      { question: "Mohu převést více souborů JPG najednou?", answer: "Ano. Přidejte až 50 obrázků a stáhněte je jako .zip." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Převod probíhá lokálně ve vašem prohlížeči." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Proč převádět WEBP na JPG?", answer: "Některé starší aplikace, editory a nahrávací formuláře nepřijímají WEBP. JPG funguje téměř všude." },
       { question: "Ztratím kvalitu?", answer: "Při výchozí kvalitě je rozdíl těžko postřehnutelný. Pro nejostřejší výsledek zvyšte posuvník kvality." },
-      { question: "Mohu převést více obrázků WEBP najednou?", answer: "Ano. Přidejte až 30 obrázků a stáhněte je jako .zip." },
+      { question: "Mohu převést více obrázků WEBP najednou?", answer: "Ano. Přidejte až 50 obrázků a stáhněte je jako .zip." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Převod probíhá lokálně ve vašem prohlížeči." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Je WEBP menší než JPG?", answer: "Obvykle ano — WEBP často ušetří značné množství místa při podobné kvalitě, což pomáhá webovým stránkám rychleji se načítat." },
       { question: "Podporují WEBP všechny prohlížeče?", answer: "Všechny moderní prohlížeče umí zobrazit WEBP. Vytváření souborů WEBP zde vyžaduje novější verzi prohlížeče Chrome, Edge nebo Firefox." },
-      { question: "Mohu převést více souborů JPG najednou?", answer: "Ano. Přidejte až 30 obrázků a stáhněte je jako .zip." },
+      { question: "Mohu převést více souborů JPG najednou?", answer: "Ano. Přidejte až 50 obrázků a stáhněte je jako .zip." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Převod probíhá lokálně ve vašem prohlížeči." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Zachová se průhlednost?", answer: "Ano. PNG podporuje průhlednost, takže průhledné oblasti ve vašem obrázku WEBP zůstávají průhledné." },
       { question: "Proč převádět WEBP na PNG?", answer: "PNG se otevírá v každém editoru a nástroji pro návrh a neztrácí kvalitu při dalších úpravách a ukládání." },
-      { question: "Mohu převést více souborů WEBP najednou?", answer: "Ano. Přidejte až 30 obrázků a stáhněte je jako .zip." },
+      { question: "Mohu převést více souborů WEBP najednou?", answer: "Ano. Přidejte až 50 obrázků a stáhněte je jako .zip." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Převod probíhá lokálně ve vašem prohlížeči." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsCs: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Zachová WEBP průhlednost?", answer: "Ano. WEBP podporuje průhlednost, takže průhledné oblasti ve vašem PNG zůstávají průhledné." },
       { question: "O kolik se zmenší moje obrázky?", answer: "To se liší, ale soubory WEBP jsou často výrazně menší než stejný obrázek uložený jako PNG." },
-      { question: "Mohu převést více souborů PNG najednou?", answer: "Ano. Přidejte až 30 obrázků a stáhněte je jako .zip." },
+      { question: "Mohu převést více souborů PNG najednou?", answer: "Ano. Přidejte až 50 obrázků a stáhněte je jako .zip." },
       { question: "Nahrávají se moje obrázky?", answer: "Ne. Převod probíhá lokálně ve vašem prohlížeči." },
     ],
   },

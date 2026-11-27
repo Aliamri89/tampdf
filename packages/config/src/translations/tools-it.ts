@@ -40,7 +40,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
       "Tutto funziona localmente nel tuo browser, quindi i tuoi file non vengono mai caricati su un server. Questo significa che funziona anche con contratti, report o documenti personali sensibili.",
     ],
     faq: [
-      { question: "C'è un limite al numero di PDF che posso unire?", answer: "Nessun limite fisso. Poiché l'unione avviene nel tuo browser, il limite pratico è la memoria del tuo dispositivo, non una quota del server." },
+      { question: "C'è un limite al numero di PDF che posso unire?", answer: "Puoi unire fino a 50 PDF alla volta. L'unione avviene nel browser, quindi i file molto grandi dipendono dalla memoria del dispositivo." },
       { question: "Posso cambiare l'ordine delle pagine prima di unire?", answer: "Sì. Dopo aver aggiunto i tuoi file, trascinali nell'ordine che vuoi che segua il documento finale prima di unirli." },
       { question: "I miei file vengono caricati sui server di TAMPDF?", answer: "No. Unisci PDF elabora i file interamente nel tuo browser con tecnologia lato client, quindi i tuoi documenti non lasciano mai il tuo dispositivo." },
       { question: "L'unione influirà sulla qualità dei miei PDF?", answer: "No. Le pagine vengono combinate così come sono, senza ricompressione, quindi testo, immagini e formattazione restano esattamente come negli originali." },
@@ -71,8 +71,8 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Quali formati di immagine sono supportati?", answer: "Le immagini JPG, PNG e WebP sono supportate sia in input che in output." },
-      { question: "Posso comprimere più immagini alla volta?", answer: "Sì. Aggiungi tutte le immagini che vuoi e verranno ciascuna compressa e raggruppata in un unico .zip da scaricare, o scaricate individualmente." },
-      { question: "Di quanto posso ridurre un'immagine senza perdere qualità?", answer: "L'impostazione di qualità predefinita di solito riduce la dimensione del file del 60-80% senza differenza visibile. Puoi regolare il cursore della qualità per un compromesso diverso." },
+      { question: "Posso comprimere più immagini alla volta?", answer: "Sì. Aggiungi fino a 50 immagini; vengono compresse una alla volta e scaricate insieme in un .zip. Un'immagine singola si scarica da sola." },
+      { question: "Di quanto posso ridurre un'immagine senza perdere qualità?", answer: "Dipende dalla foto. Scegli Basso, Medio (consigliato) o Alto: i livelli più forti producono file più piccoli. Con Medio le foto spesso si riducono molto con differenze quasi invisibili." },
       { question: "Le mie foto vengono caricate su un server?", answer: "No. La compressione avviene localmente nel tuo browser usando l'API canvas, quindi le tue immagini non vengono mai inviate da nessuna parte." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
       "Ottimo per trasformare screenshot, diagrammi o grafica esportata in un PDF facile da condividere. La conversione avviene interamente nel tuo browser, quindi le tue immagini non vengono mai caricate. Le aree trasparenti vengono poste su uno sfondo bianco.",
     ],
     faq: [
-      { question: "Posso combinare più PNG in un unico PDF?", answer: "Sì. Aggiungi tutte le immagini PNG che vuoi e ciascuna diventerà una pagina nel PDF risultante, nell'ordine in cui le organizzi." },
+      { question: "Posso combinare più PNG in un unico PDF?", answer: "Sì. Aggiungi fino a 50 immagini PNG e ognuna diventa una pagina del PDF, nell'ordine che scegli." },
       { question: "Che formato di pagina viene usato?", answer: "Ogni pagina corrisponde alle dimensioni in pixel dell'immagine di origine, così le immagini non vengono ritagliate o allungate." },
       { question: "Cosa succede alle parti trasparenti dell'immagine?", answer: "La trasparenza viene appiattita su uno sfondo bianco così la pagina appare uguale in tutti i visualizzatori PDF." },
       { question: "Le mie immagini vengono caricate su un server?", answer: "No. La conversione avviene interamente nel tuo browser e le tue immagini restano sul tuo dispositivo." },
@@ -356,7 +356,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Il ridimensionamento renderà sfocata la mia immagine?", answer: "Rimpicciolire un'immagine la mantiene nitida. Ingrandirla oltre la dimensione originale non può aggiungere dettaglio, quindi grandi aumenti possono apparire sfocati." },
-      { question: "Posso ridimensionare più immagini alla volta?", answer: "Sì. Aggiungi fino a 20 immagini; con le proporzioni bloccate, ciascuna mantiene le proprie proporzioni alla larghezza che imposti." },
+      { question: "Posso ridimensionare più immagini alla volta?", answer: "Sì. Aggiungi fino a 50 immagini; con le proporzioni bloccate, ciascuna mantiene le proprie proporzioni alla larghezza che imposti." },
       { question: "Che formato avrà l'immagine ridimensionata?", answer: "Lo stesso dell'originale — JPG resta JPG, PNG resta PNG, e WEBP resta WEBP dove il tuo browser lo supporta." },
       { question: "Le mie immagini vengono caricate?", answer: "No. Il ridimensionamento avviene localmente nel tuo browser." },
     ],
@@ -386,7 +386,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Qual è la differenza tra capovolgere e ruotare?", answer: "Ruotare gira un'immagine a passi di 90°. Capovolgere la specchia, come guardarsi in uno specchio." },
-      { question: "Posso capovolgere più immagini alla volta?", answer: "Sì. Aggiungi fino a 20 immagini e vengono tutte capovolte allo stesso modo, poi scaricate insieme come .zip." },
+      { question: "Posso capovolgere più immagini alla volta?", answer: "Sì. Aggiungi fino a 50 immagini e vengono tutte capovolte allo stesso modo, poi scaricate insieme come .zip." },
       { question: "Il capovolgimento riduce la qualità?", answer: "Nessuna perdita evidente — PNG resta senza perdita, e JPG e WEBP vengono salvati con alta qualità." },
       { question: "Le mie immagini vengono caricate?", answer: "No. Il capovolgimento avviene localmente nel tuo browser." },
     ],
@@ -402,7 +402,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Perché convertire PNG in JPG?", answer: "I file JPG sono tipicamente molto più piccoli dei PNG per le foto e sono accettati quasi ovunque, dall'email ai moduli online." },
       { question: "Cosa succede agli sfondi trasparenti?", answer: "JPG non ha trasparenza, quindi le aree trasparenti vengono riempite di bianco." },
-      { question: "Posso convertire molti PNG alla volta?", answer: "Sì. Aggiungi fino a 30 immagini; vengono convertite insieme e scaricate come .zip." },
+      { question: "Posso convertire molti PNG alla volta?", answer: "Sì. Aggiungi fino a 50 immagini; vengono convertite insieme e scaricate come .zip." },
       { question: "Le mie immagini vengono caricate?", answer: "No. La conversione avviene localmente nel tuo browser." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Convertire JPG in PNG migliorerà la qualità?", answer: "No — il dettaglio già perso nel JPG non può essere ripristinato. Ma PNG previene ulteriori perdite quando modifichi e salvi di nuovo." },
       { question: "Perché il PNG è più grande del JPG?", answer: "PNG memorizza ogni pixel senza compressione con perdita, quindi le foto di solito diventano più grandi. È il compromesso per la qualità senza perdita." },
-      { question: "Posso convertire più JPG alla volta?", answer: "Sì. Aggiungi fino a 30 immagini e scaricale come .zip." },
+      { question: "Posso convertire più JPG alla volta?", answer: "Sì. Aggiungi fino a 50 immagini e scaricale come .zip." },
       { question: "Le mie immagini vengono caricate?", answer: "No. La conversione avviene localmente nel tuo browser." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Perché convertire WEBP in JPG?", answer: "Alcune app, editor e moduli di caricamento più vecchi non accettano WEBP. JPG funziona quasi ovunque." },
       { question: "Perderò qualità?", answer: "Con la qualità predefinita la differenza è difficile da notare. Aumenta il cursore della qualità per il risultato più nitido." },
-      { question: "Posso convertire più immagini WEBP alla volta?", answer: "Sì. Aggiungi fino a 30 immagini e scaricale come .zip." },
+      { question: "Posso convertire più immagini WEBP alla volta?", answer: "Sì. Aggiungi fino a 50 immagini e scaricale come .zip." },
       { question: "Le mie immagini vengono caricate?", answer: "No. La conversione avviene localmente nel tuo browser." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP è più piccolo di JPG?", answer: "Solitamente sì — WEBP spesso risparmia una quantità significativa di spazio con qualità simile, il che aiuta le pagine a caricarsi più velocemente." },
       { question: "Tutti i browser supportano WEBP?", answer: "Tutti i browser moderni possono visualizzare WEBP. Creare file WEBP qui richiede una versione recente di Chrome, Edge o Firefox." },
-      { question: "Posso convertire più JPG alla volta?", answer: "Sì. Aggiungi fino a 30 immagini e scaricale come .zip." },
+      { question: "Posso convertire più JPG alla volta?", answer: "Sì. Aggiungi fino a 50 immagini e scaricale come .zip." },
       { question: "Le mie immagini vengono caricate?", answer: "No. La conversione avviene localmente nel tuo browser." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "La trasparenza viene mantenuta?", answer: "Sì. PNG supporta la trasparenza, quindi le aree trasparenti nella tua immagine WEBP restano trasparenti." },
       { question: "Perché convertire WEBP in PNG?", answer: "PNG si apre in ogni editor e strumento di design e non perderà qualità quando lo modifichi e lo salvi di nuovo." },
-      { question: "Posso convertire più file WEBP alla volta?", answer: "Sì. Aggiungi fino a 30 immagini e scaricale come .zip." },
+      { question: "Posso convertire più file WEBP alla volta?", answer: "Sì. Aggiungi fino a 50 immagini e scaricale come .zip." },
       { question: "Le mie immagini vengono caricate?", answer: "No. La conversione avviene localmente nel tuo browser." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsIt: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "WEBP mantiene la trasparenza?", answer: "Sì. WEBP supporta la trasparenza, quindi le aree trasparenti del PNG restano trasparenti." },
       { question: "Di quanto si ridurranno le mie immagini?", answer: "Varia, ma i file WEBP sono spesso significativamente più piccoli della stessa immagine salvata come PNG." },
-      { question: "Posso convertire più PNG alla volta?", answer: "Sì. Aggiungi fino a 30 immagini e scaricale come .zip." },
+      { question: "Posso convertire più PNG alla volta?", answer: "Sì. Aggiungi fino a 50 immagini e scaricale come .zip." },
       { question: "Le mie immagini vengono caricate?", answer: "No. La conversione avviene localmente nel tuo browser." },
     ],
   },

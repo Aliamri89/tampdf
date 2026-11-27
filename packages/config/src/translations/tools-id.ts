@@ -40,7 +40,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
       "Semuanya berjalan secara lokal di browser Anda, sehingga file Anda tidak pernah diunggah ke server. Ini berarti bekerja bahkan dengan kontrak, laporan, atau dokumen pribadi yang sensitif.",
     ],
     faq: [
-      { question: "Apakah ada batas jumlah PDF yang bisa saya gabungkan?", answer: "Tidak ada batas tetap. Karena penggabungan terjadi di browser Anda, batas praktisnya adalah memori perangkat Anda, bukan kuota server." },
+      { question: "Apakah ada batas jumlah PDF yang bisa saya gabungkan?", answer: "Anda bisa menggabungkan hingga 50 PDF sekaligus. Penggabungan terjadi di browser, jadi file yang sangat besar bergantung pada memori perangkat Anda." },
       { question: "Bisakah saya mengubah urutan halaman sebelum menggabungkan?", answer: "Bisa. Setelah menambahkan file Anda, seret ke urutan yang Anda inginkan untuk dokumen akhir sebelum menggabungkannya." },
       { question: "Apakah file saya diunggah ke server TAMPDF?", answer: "Tidak. Gabung PDF memproses file sepenuhnya di browser Anda menggunakan teknologi sisi klien, sehingga dokumen Anda tidak pernah meninggalkan perangkat Anda." },
       { question: "Apakah penggabungan memengaruhi kualitas PDF saya?", answer: "Tidak. Halaman digabungkan apa adanya tanpa kompresi ulang, sehingga teks, gambar, dan format tetap persis seperti aslinya." },
@@ -71,8 +71,8 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Format gambar apa yang didukung?", answer: "Gambar JPG, PNG, dan WebP didukung baik sebagai input maupun output." },
-      { question: "Bisakah saya mengompres beberapa gambar sekaligus?", answer: "Bisa. Tambahkan sebanyak apa pun gambar yang Anda inginkan dan masing-masing akan dikompres serta digabungkan dalam satu .zip untuk diunduh, atau diunduh satu per satu." },
-      { question: "Seberapa banyak saya bisa memperkecil gambar tanpa kehilangan kualitas?", answer: "Pengaturan kualitas default biasanya mengurangi ukuran file sebesar 60-80% tanpa perbedaan yang terlihat. Anda dapat menyesuaikan penggeser kualitas untuk keseimbangan berbeda." },
+      { question: "Bisakah saya mengompres beberapa gambar sekaligus?", answer: "Ya. Tambahkan hingga 50 gambar; gambar dikompres satu per satu dan diunduh bersama sebagai .zip. Satu gambar diunduh langsung." },
+      { question: "Seberapa banyak saya bisa memperkecil gambar tanpa kehilangan kualitas?", answer: "Tergantung fotonya. Pilih Rendah, Sedang (disarankan), atau Tinggi: tingkat yang lebih kuat menghasilkan file lebih kecil. Pada Sedang, foto sering menyusut banyak dengan perbedaan yang hampir tak terlihat." },
       { question: "Apakah foto saya diunggah ke server?", answer: "Tidak. Kompresi berjalan secara lokal di browser Anda menggunakan canvas API, sehingga gambar Anda tidak pernah dikirim ke mana pun." },
     ],
   },
@@ -190,7 +190,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
       "Bagus untuk mengubah tangkapan layar, diagram, atau grafik yang diekspor menjadi PDF yang mudah dibagikan. Konversi terjadi sepenuhnya di browser Anda, sehingga gambar Anda tidak pernah diunggah. Area transparan ditempatkan pada latar belakang putih.",
     ],
     faq: [
-      { question: "Bisakah saya menggabungkan beberapa PNG menjadi satu PDF?", answer: "Bisa. Tambahkan sebanyak apa pun gambar PNG dan masing-masing akan menjadi halaman dalam PDF hasil, sesuai urutan Anda mengaturnya." },
+      { question: "Bisakah saya menggabungkan beberapa PNG menjadi satu PDF?", answer: "Ya. Tambahkan hingga 50 gambar PNG dan masing-masing menjadi satu halaman PDF sesuai urutan yang Anda atur." },
       { question: "Ukuran halaman apa yang digunakan?", answer: "Setiap halaman sesuai dengan dimensi piksel gambar sumbernya, sehingga gambar tidak terpotong atau meregang." },
       { question: "Apa yang terjadi pada bagian transparan gambar?", answer: "Transparansi diratakan ke latar belakang putih sehingga halaman terlihat sama di setiap penampil PDF." },
       { question: "Apakah gambar saya diunggah ke server?", answer: "Tidak. Konversi terjadi sepenuhnya di browser Anda dan gambar Anda tetap berada di perangkat Anda." },
@@ -356,7 +356,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Apakah mengubah ukuran akan membuat gambar saya buram?", answer: "Memperkecil gambar akan menjaganya tetap tajam. Memperbesar melebihi ukuran aslinya tidak dapat menambah detail, sehingga peningkatan besar bisa terlihat lembut." },
-      { question: "Bisakah saya mengubah ukuran beberapa gambar sekaligus?", answer: "Bisa. Tambahkan hingga 20 gambar; dengan rasio aspek terkunci, masing-masing mempertahankan proporsinya sendiri pada lebar yang Anda atur." },
+      { question: "Bisakah saya mengubah ukuran beberapa gambar sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar; dengan rasio aspek terkunci, masing-masing mempertahankan proporsinya sendiri pada lebar yang Anda atur." },
       { question: "Format apa yang akan dimiliki gambar yang diubah ukurannya?", answer: "Sama seperti aslinya — JPG tetap JPG, PNG tetap PNG, dan WEBP tetap WEBP di mana browser Anda mendukungnya." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Perubahan ukuran terjadi secara lokal di browser Anda." },
     ],
@@ -386,7 +386,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     ],
     faq: [
       { question: "Apa perbedaan antara membalik dan memutar?", answer: "Memutar memutar gambar dalam langkah 90°. Membalik mencerminkannya, seperti melihat ke cermin." },
-      { question: "Bisakah saya membalik beberapa gambar sekaligus?", answer: "Bisa. Tambahkan hingga 20 gambar dan semuanya dibalik dengan cara yang sama, lalu diunduh bersama sebagai .zip." },
+      { question: "Bisakah saya membalik beberapa gambar sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar dan semuanya dibalik dengan cara yang sama, lalu diunduh bersama sebagai .zip." },
       { question: "Apakah membalik mengurangi kualitas?", answer: "Tidak ada kehilangan yang terlihat — PNG tetap tanpa kehilangan, dan JPG serta WEBP disimpan dengan kualitas tinggi." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Pembalikan terjadi secara lokal di browser Anda." },
     ],
@@ -402,7 +402,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Mengapa mengonversi PNG ke JPG?", answer: "File JPG biasanya jauh lebih kecil dari PNG untuk foto dan diterima hampir di mana saja, dari email hingga formulir online." },
       { question: "Apa yang terjadi pada latar belakang transparan?", answer: "JPG tidak memiliki transparansi, sehingga area transparan diisi dengan putih." },
-      { question: "Bisakah saya mengonversi banyak PNG sekaligus?", answer: "Bisa. Tambahkan hingga 30 gambar; semuanya dikonversi bersama dan diunduh sebagai .zip." },
+      { question: "Bisakah saya mengonversi banyak PNG sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar; semuanya dikonversi bersama dan diunduh sebagai .zip." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Konversi terjadi secara lokal di browser Anda." },
     ],
   },
@@ -417,7 +417,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Apakah mengonversi JPG ke PNG akan meningkatkan kualitas?", answer: "Tidak — detail yang sudah hilang di JPG tidak dapat dipulihkan. Namun PNG mencegah kehilangan lebih lanjut saat Anda mengedit dan menyimpan lagi." },
       { question: "Mengapa PNG lebih besar dari JPG?", answer: "PNG menyimpan setiap piksel tanpa kompresi lossy, sehingga foto biasanya menjadi lebih besar. Itulah kompromi untuk kualitas tanpa kehilangan." },
-      { question: "Bisakah saya mengonversi beberapa JPG sekaligus?", answer: "Bisa. Tambahkan hingga 30 gambar dan unduh sebagai .zip." },
+      { question: "Bisakah saya mengonversi beberapa JPG sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar dan unduh sebagai .zip." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Konversi terjadi secara lokal di browser Anda." },
     ],
   },
@@ -432,7 +432,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Mengapa mengonversi WEBP ke JPG?", answer: "Beberapa aplikasi, editor, dan formulir unggah lama tidak menerima WEBP. JPG bekerja hampir di mana saja." },
       { question: "Apakah saya akan kehilangan kualitas?", answer: "Pada kualitas default, perbedaannya sulit dilihat. Tingkatkan penggeser kualitas untuk hasil paling tajam." },
-      { question: "Bisakah saya mengonversi beberapa gambar WEBP sekaligus?", answer: "Bisa. Tambahkan hingga 30 gambar dan unduh sebagai .zip." },
+      { question: "Bisakah saya mengonversi beberapa gambar WEBP sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar dan unduh sebagai .zip." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Konversi terjadi secara lokal di browser Anda." },
     ],
   },
@@ -447,7 +447,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Apakah WEBP lebih kecil dari JPG?", answer: "Biasanya ya — WEBP sering menghemat ruang yang signifikan dengan kualitas serupa, yang membantu halaman dimuat lebih cepat." },
       { question: "Apakah semua browser mendukung WEBP?", answer: "Semua browser modern dapat menampilkan WEBP. Membuat file WEBP di sini memerlukan versi terbaru Chrome, Edge, atau Firefox." },
-      { question: "Bisakah saya mengonversi beberapa JPG sekaligus?", answer: "Bisa. Tambahkan hingga 30 gambar dan unduh sebagai .zip." },
+      { question: "Bisakah saya mengonversi beberapa JPG sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar dan unduh sebagai .zip." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Konversi terjadi secara lokal di browser Anda." },
     ],
   },
@@ -462,7 +462,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Apakah transparansi dipertahankan?", answer: "Ya. PNG mendukung transparansi, sehingga area transparan dalam gambar WEBP Anda tetap transparan." },
       { question: "Mengapa mengonversi WEBP ke PNG?", answer: "PNG terbuka di setiap editor dan alat desain serta tidak akan kehilangan kualitas saat Anda mengedit dan menyimpannya lagi." },
-      { question: "Bisakah saya mengonversi beberapa file WEBP sekaligus?", answer: "Bisa. Tambahkan hingga 30 gambar dan unduh sebagai .zip." },
+      { question: "Bisakah saya mengonversi beberapa file WEBP sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar dan unduh sebagai .zip." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Konversi terjadi secara lokal di browser Anda." },
     ],
   },
@@ -477,7 +477,7 @@ export const toolsId: Record<string, ToolTranslationOverride> = {
     faq: [
       { question: "Apakah WEBP mempertahankan transparansi?", answer: "Ya. WEBP mendukung transparansi, sehingga area PNG yang transparan tetap transparan." },
       { question: "Seberapa kecil gambar saya akan menjadi?", answer: "Bervariasi, tetapi file WEBP sering kali jauh lebih kecil dari gambar yang sama yang disimpan sebagai PNG." },
-      { question: "Bisakah saya mengonversi beberapa PNG sekaligus?", answer: "Bisa. Tambahkan hingga 30 gambar dan unduh sebagai .zip." },
+      { question: "Bisakah saya mengonversi beberapa PNG sekaligus?", answer: "Bisa. Tambahkan hingga 50 gambar dan unduh sebagai .zip." },
       { question: "Apakah gambar saya diunggah?", answer: "Tidak. Konversi terjadi secara lokal di browser Anda." },
     ],
   },
