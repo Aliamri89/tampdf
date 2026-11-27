@@ -165,6 +165,15 @@ export default async function ToolPage({
           </div>
         </Container>
 
+        {/* About the tool: below "How to use", so the tool itself stays at the top. */}
+        <Container maxWidth="3xl" className="pb-14">
+          <div className="space-y-4 rounded-xl border border-border bg-surface p-6 text-base leading-relaxed text-foreground/75 sm:p-8 sm:text-lg">
+            {tool.longDescription.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+        </Container>
+
         {relatedTools.length > 0 && (
           <Container className="pb-20">
             <h2 className="text-xl font-bold">{dict.tool.relatedHeading}</h2>

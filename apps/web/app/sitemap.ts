@@ -5,7 +5,6 @@ import { getPayloadClient } from "@/lib/payload-client";
 const STATIC_PAGE_PATHS = [
   "/about",
   "/contact",
-  "/blog",
   "/faq",
   "/privacy-policy",
   "/terms-of-service",
@@ -13,6 +12,14 @@ const STATIC_PAGE_PATHS = [
 ];
 
 type LanguageAlternates = (path: string) => Record<string, string>;
+
+/** The blog (list and articles) is written in English and Arabic only. */
+const ARTICLE_LOCALES = ["en", "ar"] as const;
+const articleAlternates: LanguageAlternates = (path) => ({
+  en: `${siteConfig.url}/en${path}`,
+  ar: `${siteConfig.url}/ar${path}`,
+  "x-default": `${siteConfig.url}/en${path}`,
+});
 
 // Like `[locale]/layout.tsx`, this route is prerendered at build time (SSG)
 // and would otherwise stay frozen with whatever posts existed at the last
@@ -52,9 +59,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
-  const postEntries = await getPublishedPostEntries(languageAlternates);
+  const blogEntries: MetadataRoute.Sitemap = ARTICLE_LOCALES.map((locale) => ({
+    url: `${siteConfig.url}/${locale}/blog`,
+    changeFrequency: "weekly" as const,
+    priority: 0.5,
+    alternates: { languages: articleAlternates("/blog") },
+  }));
 
-  return [...homeEntries, ...toolEntries, ...staticPageEntries, ...postEntries];
+  const postEntries = await getPublishedPostEntries();
+
+  return [...homeEntries, ...toolEntries, ...staticPageEntries, ...blogEntries, ...postEntries];
 }
 
 /**
@@ -69,9 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
  * locale-agnostic query covers every post once; the locale loop below only
  * varies the URL/hreflang, not which posts get fetched.
  */
-async function getPublishedPostEntries(
-  languageAlternates: LanguageAlternates,
-): Promise<MetadataRoute.Sitemap> {
+async function getPublishedPostEntries(): Promise<MetadataRoute.Sitemap> {
   try {
     const payload = await getPayloadClient();
     const { docs: posts } = await payload.find({
@@ -81,7 +93,7 @@ async function getPublishedPostEntries(
       limit: 0,
     });
 
-    return locales.flatMap((locale) =>
+    return ARTICLE_LOCALES.flatMap((locale) =>
       posts.map((post) => {
         const path = `/blog/${post.slug}`;
         return {
@@ -89,7 +101,7 @@ async function getPublishedPostEntries(
           lastModified: post.updatedAt,
           changeFrequency: "monthly" as const,
           priority: 0.6,
-          alternates: { languages: languageAlternates(path) },
+          alternates: { languages: articleAlternates(path) },
         };
       }),
     );

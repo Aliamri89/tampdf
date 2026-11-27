@@ -14,13 +14,24 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const dict = getDictionary(isValidLocale(rawLocale) ? rawLocale : "en");
-  return buildStaticPageMetadata(
+  const locale = isValidLocale(rawLocale) ? rawLocale : "en";
+  const dict = getDictionary(locale);
+  const metadata = buildStaticPageMetadata(
     rawLocale,
     "/blog",
     dict.staticPages.blog.title,
     dict.staticPages.blog.intro,
   );
+  // The article list is only real content in English and Arabic (see the article page).
+  const articleLocale = toArticleLocale(locale);
+  return {
+    ...metadata,
+    robots: locale === articleLocale ? undefined : { index: false, follow: true },
+    alternates: {
+      canonical: `/${articleLocale}/blog`,
+      languages: { en: "/en/blog", ar: "/ar/blog", "x-default": "/en/blog" },
+    },
+  };
 }
 
 export default async function BlogPage({

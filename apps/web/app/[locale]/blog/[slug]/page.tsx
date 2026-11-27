@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { cache } from "react";
 import { ChevronRight } from "lucide-react";
-import { getLocalizedSiteConfig, isValidLocale, locales, toArticleLocale } from "@tampdf/config";
+import { getLocalizedSiteConfig, isValidLocale, toArticleLocale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { ArticleCta } from "@/components/article/article-cta";
@@ -95,10 +95,14 @@ export async function generateMetadata({
   return {
     title,
     description,
+    // Articles are written in English and Arabic only; the other languages
+    // show the English text, so they are kept out of search results.
+    robots: uiLocale === articleLocale ? undefined : { index: false, follow: true },
     alternates: {
       canonical: `/${articleLocale}${path}`,
       languages: {
-        ...Object.fromEntries(locales.map((l) => [l, `/${l}${path}`])),
+        en: `/en${path}`,
+        ar: `/ar${path}`,
         "x-default": `/en${path}`,
       },
     },
