@@ -28,11 +28,12 @@ export const ko: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "프리랜서와 전문가를 위한 최고의 PDF 선택",
-      title: "지금 PDF 압축하기",
+      title: "브라우저에서 바로 쓰는 무료 PDF·이미지 도구",
       dropLabel: "PDF 파일을 여기에 끌어다 놓으세요",
       uploadButton: "업로드",
     },
     moreTools: "더 많은 도구",
+    quickStart: "빠른 시작 · PDF 압축",
     groups: {
       all: "전체",
       toPdf: "PDF로 변환",
@@ -53,6 +54,7 @@ export const ko: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "모든 권리 보유.",
+    developer: "개발: Ali Alamri",
     privacyNote: "파일은 브라우저에서 안전하게 처리되며 저희 서버에 저장되지 않습니다.",
     moreCount: "+{count}개 더보기",
     company: "회사",

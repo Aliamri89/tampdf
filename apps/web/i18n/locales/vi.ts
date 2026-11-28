@@ -28,11 +28,12 @@ export const vi: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Lựa chọn tốt nhất cho tệp PDF dành cho freelancer và chuyên gia",
-      title: "Nén PDF ngay",
+      title: "Công cụ PDF và ảnh miễn phí ngay trên trình duyệt",
       dropLabel: "Kéo và thả tệp PDF vào đây",
       uploadButton: "Tải lên",
     },
     moreTools: "Thêm công cụ",
+    quickStart: "Bắt đầu nhanh · Nén PDF",
     groups: {
       all: "Tất cả",
       toPdf: "Chuyển sang PDF",
@@ -53,6 +54,7 @@ export const vi: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Đã đăng ký bản quyền.",
+    developer: "Phát triển bởi Ali Alamri",
     privacyNote: "Tệp được xử lý an toàn ngay trong trình duyệt và không được lưu trữ tại hệ thống của chúng tôi.",
     moreCount: "+{count} nữa",
     company: "Công ty",

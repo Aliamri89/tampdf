@@ -28,11 +28,12 @@ export const da: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Det bedste valg til PDF-filer for freelancere og professionelle",
-      title: "Komprimer PDF nu",
+      title: "Gratis PDF- og billedværktøjer i din browser",
       dropLabel: "Træk og slip en PDF-fil her",
       uploadButton: "Upload",
     },
     moreTools: "Flere værktøjer",
+    quickStart: "Hurtig start · Komprimer PDF",
     groups: {
       all: "Alle",
       toPdf: "Konverter til PDF",
@@ -53,6 +54,7 @@ export const da: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Alle rettigheder forbeholdes.",
+    developer: "Udviklet af Ali Alamri",
     privacyNote: "Filer behandles sikkert i browseren og gemmes aldrig hos os.",
     moreCount: "+{count} mere",
     company: "Virksomhed",

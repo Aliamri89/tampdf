@@ -157,6 +157,7 @@ export async function Footer({ locale }: { locale: Locale }) {
               &copy; {new Date().getFullYear()} {siteName}. {dict.footer.rights}
             </p>
             <p>{dict.footer.privacyNote}</p>
+            <p>{dict.footer.developer}</p>
           </div>
           <LanguageMenu locale={locale} placement="top" />
         </div>

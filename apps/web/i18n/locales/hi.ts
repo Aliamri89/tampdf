@@ -28,11 +28,12 @@ export const hi: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "फ्रीलांसरों और प्रोफेशनल्स के लिए PDF का सबसे अच्छा विकल्प",
-      title: "अभी PDF कम्प्रेस करें",
+      title: "आपके ब्राउज़र में मुफ़्त PDF और इमेज टूल",
       dropLabel: "PDF फ़ाइल यहाँ खींचकर छोड़ें",
       uploadButton: "अपलोड",
     },
     moreTools: "और टूल",
+    quickStart: "तुरंत शुरू करें · PDF कंप्रेस करें",
     groups: {
       all: "सभी",
       toPdf: "PDF में बदलें",
@@ -53,6 +54,7 @@ export const hi: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "सर्वाधिकार सुरक्षित।",
+    developer: "Ali Alamri द्वारा विकसित",
     privacyNote: "फ़ाइलें ब्राउज़र के भीतर सुरक्षित रूप से प्रोसेस की जाती हैं और हमारे पास स्टोर नहीं की जातीं।",
     moreCount: "+{count} और",
     company: "कंपनी",

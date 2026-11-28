@@ -28,11 +28,12 @@ export const id: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Pilihan terbaik untuk file PDF bagi freelancer dan profesional",
-      title: "Kompres PDF Sekarang",
+      title: "Alat PDF dan gambar gratis di browser Anda",
       dropLabel: "Seret dan lepas file PDF di sini",
       uploadButton: "Unggah",
     },
     moreTools: "Alat lainnya",
+    quickStart: "Mulai cepat · Kompres PDF",
     groups: {
       all: "Semua",
       toPdf: "Ubah ke PDF",
@@ -53,6 +54,7 @@ export const id: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Semua hak dilindungi.",
+    developer: "Dikembangkan oleh Ali Alamri",
     privacyNote: "File diproses dengan aman di dalam browser dan tidak disimpan di server kami.",
     moreCount: "+{count} lainnya",
     company: "Perusahaan",

@@ -28,11 +28,12 @@ export const el: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Η καλύτερη επιλογή για αρχεία PDF για ελεύθερους επαγγελματίες και επαγγελματίες",
-      title: "Συμπίεσε PDF τώρα",
+      title: "Δωρεάν εργαλεία PDF και εικόνων στον περιηγητή σας",
       dropLabel: "Σύρετε και αφήστε εδώ ένα αρχείο PDF",
       uploadButton: "Μεταφόρτωση",
     },
     moreTools: "Περισσότερα εργαλεία",
+    quickStart: "Γρήγορη έναρξη · Συμπίεση PDF",
     groups: {
       all: "Όλα",
       toPdf: "Μετατροπή σε PDF",
@@ -53,6 +54,7 @@ export const el: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Με επιφύλαξη παντός δικαιώματος.",
+    developer: "Αναπτύχθηκε από τον Ali Alamri",
     privacyNote: "Τα αρχεία επεξεργάζονται με ασφάλεια μέσα στο πρόγραμμα περιήγησης και δεν αποθηκεύονται από εμάς.",
     moreCount: "+{count} ακόμα",
     company: "Εταιρεία",

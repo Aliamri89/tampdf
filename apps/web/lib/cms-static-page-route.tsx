@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { isValidLocale, type Locale } from "@tampdf/config";
 import { notFound } from "next/navigation";
 import { LinkifiedText } from "@/components/linkified-text";
+import { PageLinks } from "@/components/page-links";
 import { StaticPage } from "@/components/static-page";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -80,7 +81,7 @@ export function createStaticCmsPage(
         <section key={section.heading}>
           <h2 className={SECTION_HEADING_CLASS}>{section.heading}</h2>
           <p className="mt-2">
-            <LinkifiedText text={section.text} />
+            <LinkifiedText text={section.text} locale={locale} />
           </p>
         </section>
       );
@@ -90,6 +91,7 @@ export function createStaticCmsPage(
           {sections.slice(0, -1).map(renderSection)}
           {appendix}
           {sections.slice(-1).map(renderSection)}
+          <PageLinks locale={locale} current={path} />
         </StaticPage>
       );
     }
@@ -102,6 +104,7 @@ export function createStaticCmsPage(
             <p key={paragraph}>{paragraph}</p>
           ))}
           {appendix}
+          <PageLinks locale={locale} current={path} />
         </StaticPage>
       );
     }
@@ -122,6 +125,7 @@ export function createStaticCmsPage(
         {splitAt < html.length && (
           <div className={proseClassName} dangerouslySetInnerHTML={{ __html: html.slice(splitAt) }} />
         )}
+        <PageLinks locale={locale} current={path} />
       </StaticPage>
     );
   }

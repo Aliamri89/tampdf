@@ -28,11 +28,12 @@ export const th: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "ตัวเลือกที่ดีที่สุดสำหรับไฟล์ PDF สำหรับฟรีแลนซ์และมืออาชีพ",
-      title: "บีบอัด PDF ตอนนี้",
+      title: "เครื่องมือ PDF และรูปภาพฟรีในเบราว์เซอร์ของคุณ",
       dropLabel: "ลากและวางไฟล์ PDF ที่นี่",
       uploadButton: "อัปโหลด",
     },
     moreTools: "เครื่องมืออื่น ๆ",
+    quickStart: "เริ่มอย่างรวดเร็ว · บีบอัด PDF",
     groups: {
       all: "ทั้งหมด",
       toPdf: "แปลงเป็น PDF",
@@ -53,6 +54,7 @@ export const th: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "สงวนลิขสิทธิ์",
+    developer: "พัฒนาโดย Ali Alamri",
     privacyNote: "ไฟล์ได้รับการประมวลผลอย่างปลอดภัยภายในเบราว์เซอร์และไม่ถูกจัดเก็บไว้กับเรา",
     moreCount: "อีก {count} รายการ",
     company: "บริษัท",

@@ -28,11 +28,12 @@ export const nl: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "De beste keuze voor PDF-bestanden voor freelancers en professionals",
-      title: "PDF nu comprimeren",
+      title: "Gratis PDF- en afbeeldingstools in je browser",
       dropLabel: "Sleep een PDF-bestand hierheen",
       uploadButton: "Uploaden",
     },
     moreTools: "Meer tools",
+    quickStart: "Snel starten · PDF comprimeren",
     groups: {
       all: "Alles",
       toPdf: "Converteren naar PDF",
@@ -53,6 +54,7 @@ export const nl: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Alle rechten voorbehouden.",
+    developer: "Ontwikkeld door Ali Alamri",
     privacyNote: "Bestanden worden veilig in de browser verwerkt en nooit door ons opgeslagen.",
     moreCount: "+{count} meer",
     company: "Bedrijf",

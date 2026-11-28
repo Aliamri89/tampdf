@@ -37,7 +37,7 @@ const en = {
   home: {
     hero: {
       badge: "The best choice for managing PDF files for freelancers and professionals",
-      title: "Compress PDF Now",
+      title: "Free PDF and Image Tools in Your Browser",
       dropLabel: "Drag & drop a PDF file here",
       uploadButton: "Upload",
     },
@@ -63,9 +63,53 @@ const en = {
       fast: "Fast",
       secure: "Secure",
     },
+    quickStart: "Quick start · Compress PDF",
+    why: {
+      heading: "Why people use TAMPDF",
+      items: [
+        {
+          title: "Your files never leave your device",
+          text: "Every tool runs inside your browser. Your documents are not uploaded to us, not stored and not shared, which matters when you are working with an ID, a contract or medical results.",
+        },
+        {
+          title: "Free, with no account",
+          text: "No sign-up, no subscription and no watermark on your result. Open a tool, do the job and close the tab.",
+        },
+        {
+          title: "Nothing to install",
+          text: "Works on a phone, a tablet and a computer, in any modern browser. No software, no extensions and no updates to worry about.",
+        },
+        {
+          title: "Fast, even with big files",
+          text: "Because there is no upload and no waiting in a queue, most jobs finish in a few seconds on your own device.",
+        },
+      ],
+    },
+    how: {
+      heading: "How it works",
+      steps: [
+        { title: "Pick a tool", text: "Choose what you need from the list above, from compressing a PDF to converting an image." },
+        { title: "Add your files", text: "Drag them onto the page or pick them from your device. Nothing is sent anywhere." },
+        { title: "Download the result", text: "Check the preview, then save the finished file. Several files arrive together in a ZIP." },
+      ],
+    },
+    latest: {
+      heading: "From the blog",
+      subtitle: "Practical guides for everyday file problems.",
+      cta: "Read all articles",
+    },
+    faq: {
+      heading: "Common questions",
+      cta: "See all questions",
+    },
+    about: {
+      heading: "A complete toolkit for PDFs and images",
+      text: "TAMPDF brings together the file tasks most people need during a normal week: making a PDF small enough for an upload form, joining several documents into one, taking a page out, turning photos into a PDF, and converting between image formats. Every tool is free, works in your browser and keeps your files on your own device.",
+    },
   },
   footer: {
     rights: "All rights reserved.",
+    developer: "Developed by Ali Alamri",
     privacyNote: "Files are processed securely in the browser and are never stored by us.",
     moreCount: "+{count} more",
     company: "Company",
@@ -130,11 +174,11 @@ const en = {
         },
         {
           heading: "Cookies and similar technologies",
-          text: "Analytics and advertising services may set cookies or use local storage. Our Cookie Policy lists them and explains how to control them, and you can change your choice at any time with “Cookie settings” in the footer."
+          text: "Analytics and advertising services may set cookies or use local storage. Our [Cookie Policy](/cookie-policy) lists them and explains how to control them, and you can change your choice at any time with “Cookie settings” in the footer."
         },
         {
           heading: "Your rights",
-          text: "Where laws such as the GDPR, UK GDPR or CCPA apply, you may ask to access, correct or delete personal data we hold about you, object to or restrict its processing, withdraw consent at any time, and complain to your local data-protection authority. Use the Contact page to make a request."
+          text: "Where laws such as the GDPR, UK GDPR or CCPA apply, you may ask to access, correct or delete personal data we hold about you, object to or restrict its processing, withdraw consent at any time, and complain to your local data-protection authority. Use the [Contact page](/contact) to make a request."
         },
         {
           heading: "Data retention",
@@ -158,7 +202,7 @@ const en = {
         },
         {
           heading: "Contact",
-          text: "Questions about this policy? Please use the Contact page."
+          text: "Questions about this policy? Please use the [Contact page](/contact)."
         }
       ]
     },
@@ -231,7 +275,7 @@ const en = {
         },
         {
           heading: "Changes and contact",
-          text: "We may update this policy; the date above shows the latest version. Questions? Use the Contact page."
+          text: "We may update this policy; the date above shows the latest version. Questions? Use the [Contact page](/contact)."
         }
       ]
     },
@@ -779,7 +823,7 @@ const ar: typeof en = {
   home: {
     hero: {
       badge: "الخيار الأفضل لإدارة ملفات PDF للمستقلين والمحترفين",
-      title: "اضغط PDF الآن",
+      title: "أدوات PDF والصور مجانًا داخل متصفحك",
       dropLabel: "اسحب وأفلت ملف PDF هنا",
       uploadButton: "تحميل",
     },
@@ -805,9 +849,53 @@ const ar: typeof en = {
       fast: "سريع",
       secure: "آمن",
     },
+    quickStart: "ابدأ سريعًا · ضغط PDF",
+    why: {
+      heading: "لماذا يستخدم الناس TAMPDF",
+      items: [
+        {
+          title: "ملفاتك لا تغادر جهازك",
+          text: "كل أداة تعمل داخل متصفحك، فلا تُرفع مستنداتك إلينا ولا تُخزَّن ولا تُشارَك. وهذا يهم فعلًا حين تتعامل مع هوية أو عقد أو نتائج طبية.",
+        },
+        {
+          title: "مجاني وبلا حساب",
+          text: "بلا تسجيل ولا اشتراك ولا علامة مائية على النتيجة. افتح الأداة، وأنجز عملك، ثم أغلق الصفحة.",
+        },
+        {
+          title: "بلا تثبيت أي برنامج",
+          text: "يعمل على الجوال والجهاز اللوحي والحاسوب في أي متصفح حديث. لا برامج ولا إضافات ولا تحديثات تشغل بالك.",
+        },
+        {
+          title: "سريع حتى مع الملفات الكبيرة",
+          text: "لا يوجد رفع ولا انتظار في طابور، لذلك تنتهي أغلب العمليات خلال ثوانٍ على جهازك أنت.",
+        },
+      ],
+    },
+    how: {
+      heading: "كيف يعمل الموقع",
+      steps: [
+        { title: "اختر الأداة", text: "حدد ما تحتاجه من القائمة أعلاه، من ضغط ملف PDF إلى تحويل صورة." },
+        { title: "أضف ملفاتك", text: "اسحبها إلى الصفحة أو اخترها من جهازك، ولا يُرسل شيء إلى أي مكان." },
+        { title: "نزّل النتيجة", text: "راجع المعاينة ثم احفظ الملف النهائي. والملفات المتعددة تصلك معًا في ملف ZIP." },
+      ],
+    },
+    latest: {
+      heading: "من المدونة",
+      subtitle: "أدلة عملية لمشاكل الملفات اليومية.",
+      cta: "تصفح كل المقالات",
+    },
+    faq: {
+      heading: "أسئلة شائعة",
+      cta: "شاهد كل الأسئلة",
+    },
+    about: {
+      heading: "مجموعة متكاملة لأدوات PDF والصور",
+      text: "يجمع TAMPDF مهام الملفات التي يحتاجها أغلب الناس في أسبوع عادي: تصغير ملف PDF ليناسب نموذج رفع، ودمج عدة مستندات في ملف واحد، وإخراج صفحة منه، وتحويل الصور إلى PDF، والتحويل بين صيغ الصور. كل أداة مجانية، وتعمل داخل متصفحك، وتُبقي ملفاتك على جهازك.",
+    },
   },
   footer: {
     rights: "جميع الحقوق محفوظة.",
+    developer: "تطوير علي العمري",
     privacyNote: "تتم معالجة الملفات بأمان داخل المتصفح ولا يتم تخزينها لدينا",
     moreCount: "+{count} أخرى",
     company: "عن الموقع",
@@ -870,11 +958,11 @@ const ar: typeof en = {
         },
         {
           heading: "ملفات تعريف الارتباط والتقنيات المشابهة",
-          text: "قد تضع خدمات التحليلات والإعلانات كوكيز أو تستخدم التخزين المحلي. تسردها سياسة الكوكيز وتشرح كيفية التحكم بها، ويمكنك تغيير اختيارك في أي وقت عبر «إعدادات الكوكيز» في أسفل الصفحة."
+          text: "قد تضع خدمات التحليلات والإعلانات كوكيز أو تستخدم التخزين المحلي. تسردها [سياسة الكوكيز](/cookie-policy) وتشرح كيفية التحكم بها، ويمكنك تغيير اختيارك في أي وقت عبر «إعدادات الكوكيز» في أسفل الصفحة."
         },
         {
           heading: "حقوقك",
-          text: "حيثما تنطبق قوانين مثل GDPR أو GDPR البريطاني أو CCPA، يحق لك طلب الاطلاع على بياناتك الشخصية لدينا أو تصحيحها أو حذفها، والاعتراض على معالجتها أو تقييدها، وسحب موافقتك في أي وقت، وتقديم شكوى إلى جهة حماية البيانات في بلدك. استخدم صفحة «اتصل بنا» لتقديم طلبك."
+          text: "حيثما تنطبق قوانين مثل GDPR أو GDPR البريطاني أو CCPA، يحق لك طلب الاطلاع على بياناتك الشخصية لدينا أو تصحيحها أو حذفها، والاعتراض على معالجتها أو تقييدها، وسحب موافقتك في أي وقت، وتقديم شكوى إلى جهة حماية البيانات في بلدك. استخدم [صفحة اتصل بنا](/contact) لتقديم طلبك."
         },
         {
           heading: "مدة الاحتفاظ",
@@ -898,7 +986,7 @@ const ar: typeof en = {
         },
         {
           heading: "التواصل",
-          text: "لأي استفسار عن هذه السياسة استخدم صفحة «اتصل بنا»."
+          text: "لأي استفسار عن هذه السياسة استخدم [صفحة اتصل بنا](/contact)."
         }
       ]
     },
@@ -971,7 +1059,7 @@ const ar: typeof en = {
         },
         {
           heading: "التغييرات والتواصل",
-          text: "قد نحدّث هذه السياسة، ويُظهر التاريخ أعلاه أحدث نسخة. لأي استفسار استخدم صفحة «اتصل بنا»."
+          text: "قد نحدّث هذه السياسة، ويُظهر التاريخ أعلاه أحدث نسخة. لأي استفسار استخدم [صفحة اتصل بنا](/contact)."
         }
       ]
     },

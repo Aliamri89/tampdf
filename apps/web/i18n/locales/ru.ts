@@ -28,11 +28,12 @@ export const ru: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Лучший выбор для PDF-файлов для фрилансеров и профессионалов",
-      title: "Сожмите PDF сейчас",
+      title: "Бесплатные инструменты для PDF и изображений в браузере",
       dropLabel: "Перетащите сюда PDF-файл",
       uploadButton: "Загрузить",
     },
     moreTools: "Другие инструменты",
+    quickStart: "Быстрый старт · Сжать PDF",
     groups: {
       all: "Все",
       toPdf: "Конвертировать в PDF",
@@ -53,6 +54,7 @@ export const ru: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Все права защищены.",
+    developer: "Разработчик — Ali Alamri",
     privacyNote: "Файлы безопасно обрабатываются в браузере и не хранятся у нас.",
     moreCount: "ещё +{count}",
     company: "Компания",

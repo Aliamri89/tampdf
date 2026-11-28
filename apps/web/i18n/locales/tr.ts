@@ -28,11 +28,12 @@ export const tr: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Serbest çalışanlar ve profesyoneller için en iyi PDF seçimi",
-      title: "PDF'yi şimdi sıkıştır",
+      title: "Tarayıcınızda ücretsiz PDF ve görsel araçları",
       dropLabel: "PDF dosyasını buraya sürükleyip bırakın",
       uploadButton: "Yükle",
     },
     moreTools: "Daha fazla araç",
+    quickStart: "Hızlı başlangıç · PDF sıkıştır",
     groups: {
       all: "Tümü",
       toPdf: "PDF'ye dönüştür",
@@ -53,6 +54,7 @@ export const tr: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Tüm hakları saklıdır.",
+    developer: "Ali Alamri tarafından geliştirildi",
     privacyNote: "Dosyalar tarayıcıda güvenle işlenir ve bizde saklanmaz.",
     moreCount: "+{count} daha",
     company: "Şirket",

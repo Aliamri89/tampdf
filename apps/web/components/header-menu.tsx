@@ -7,11 +7,18 @@ import { Icon } from "@/components/icon";
 import { useDictionary } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
 
+const PAGES = [
+  { href: "/blog", key: "blog" },
+  { href: "/faq", key: "faq" },
+  { href: "/about", key: "aboutUs" },
+  { href: "/contact", key: "contactUs" },
+] as const;
+
 export interface MenuGroup {
   id: string;
   name: string;
   icon: string;
-  tools: { slug: string; name: string }[];
+  tools: { slug: string; name: string; icon: string }[];
 }
 
 /**
@@ -23,7 +30,9 @@ export interface MenuGroup {
  * tools, image tools), each expanding to that category's real tools.
  */
 export function HeaderMenu({ locale, groups }: { locale: string; groups: MenuGroup[] }) {
-  const dict = useDictionary().header.menu;
+  const full = useDictionary();
+  const dict = full.header.menu;
+  const footer = full.footer;
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -136,6 +145,20 @@ export function HeaderMenu({ locale, groups }: { locale: string; groups: MenuGro
               </div>
             );
           })}
+
+          {/* The site's own pages, so they are reachable from the menu and not only the footer. */}
+          <div className="mt-1 border-t border-border pt-1">
+            {PAGES.map((page) => (
+              <Link
+                key={page.href}
+                href={`/${locale}${page.href}`}
+                onClick={() => setOpen(false)}
+                className="block whitespace-nowrap rounded-lg px-3 py-2 text-[15px] font-medium text-foreground/80 transition-colors hover:bg-surface-muted hover:text-foreground"
+              >
+                {footer[page.key]}
+              </Link>
+            ))}
+          </div>
         </nav>
       </div>
     </div>

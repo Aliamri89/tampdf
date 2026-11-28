@@ -28,11 +28,12 @@ export const ja: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "フリーランスやプロのための最適なPDFツール",
-      title: "今すぐPDFを圧縮",
+      title: "ブラウザで使える無料のPDF・画像ツール",
       dropLabel: "PDFファイルをここにドラッグ＆ドロップ",
       uploadButton: "アップロード",
     },
     moreTools: "その他のツール",
+    quickStart: "クイックスタート · PDFを圧縮",
     groups: {
       all: "すべて",
       toPdf: "PDFに変換",
@@ -53,6 +54,7 @@ export const ja: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "全著作権所有。",
+    developer: "開発：Ali Alamri",
     privacyNote: "ファイルはブラウザ内で安全に処理され、当社に保存されることはありません。",
     moreCount: "他 {count} 件",
     company: "会社情報",

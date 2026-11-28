@@ -28,11 +28,12 @@ export const fi: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Paras valinta PDF-tiedostoille freelancereille ja ammattilaisille",
-      title: "Pakkaa PDF nyt",
+      title: "Ilmaiset PDF- ja kuvatyökalut selaimessasi",
       dropLabel: "Vedä ja pudota PDF-tiedosto tähän",
       uploadButton: "Lataa",
     },
     moreTools: "Lisää työkaluja",
+    quickStart: "Pikakäynnistys · Pakkaa PDF",
     groups: {
       all: "Kaikki",
       toPdf: "Muunna PDF:ksi",
@@ -53,6 +54,7 @@ export const fi: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Kaikki oikeudet pidätetään.",
+    developer: "Kehittäjä Ali Alamri",
     privacyNote: "Tiedostot käsitellään turvallisesti selaimessa, eikä niitä tallenneta meille.",
     moreCount: "+{count} lisää",
     company: "Yritys",

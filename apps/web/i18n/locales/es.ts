@@ -28,11 +28,12 @@ export const es: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "La mejor opción en PDF para autónomos y profesionales",
-      title: "Comprime PDF ahora",
+      title: "Herramientas gratuitas de PDF e imágenes en tu navegador",
       dropLabel: "Arrastra y suelta un archivo PDF aquí",
       uploadButton: "Subir",
     },
     moreTools: "Más herramientas",
+    quickStart: "Inicio rápido · Comprimir PDF",
     groups: {
       all: "Todas",
       toPdf: "Convertir a PDF",
@@ -53,6 +54,7 @@ export const es: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Todos los derechos reservados.",
+    developer: "Desarrollado por Ali Alamri",
     privacyNote: "Los archivos se procesan de forma segura en el navegador y nunca los almacenamos.",
     moreCount: "+{count} más",
     company: "Empresa",

@@ -28,11 +28,12 @@ export const cs: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "Nejlepší volba pro soubory PDF pro freelancery a profesionály",
-      title: "Komprimovat PDF hned",
+      title: "Bezplatné nástroje pro PDF a obrázky v prohlížeči",
       dropLabel: "Přetáhněte sem soubor PDF",
       uploadButton: "Nahrát",
     },
     moreTools: "Další nástroje",
+    quickStart: "Rychlý start · Komprimovat PDF",
     groups: {
       all: "Vše",
       toPdf: "Převést do PDF",
@@ -53,6 +54,7 @@ export const cs: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "Všechna práva vyhrazena.",
+    developer: "Vyvinul Ali Alamri",
     privacyNote: "Soubory se bezpečně zpracovávají v prohlížeči a neukládáme je.",
     moreCount: "+{count} dalších",
     company: "Společnost",

@@ -7,8 +7,10 @@ import { HeaderMenu, type MenuGroup } from "@/components/header-menu";
 import { HeaderNav } from "@/components/header-nav";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { getDictionary } from "@/i18n/get-dictionary";
 
 export function Header({ locale }: { locale: Locale }) {
+  const dict = getDictionary(locale);
   const groups: MenuGroup[] = getLocalizedCategories(locale).map((category) => ({
     id: category.id,
     name: category.name,
@@ -16,6 +18,7 @@ export function Header({ locale }: { locale: Locale }) {
     tools: getLocalizedToolsByCategory(category.id, locale).map((tool) => ({
       slug: tool.slug,
       name: tool.name,
+      icon: tool.icon,
     })),
   }));
 
@@ -24,7 +27,7 @@ export function Header({ locale }: { locale: Locale }) {
       <div className="flex h-[4.5rem] w-full items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-6">
           <Logo locale={locale} />
-          <HeaderNav locale={locale} groups={groups} />
+          <HeaderNav locale={locale} groups={groups} blogLabel={dict.footer.blog} />
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />

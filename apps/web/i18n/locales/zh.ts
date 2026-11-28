@@ -28,11 +28,12 @@ export const zh: DeepPartial<Dictionary> = {
   home: {
     hero: {
       badge: "为自由职业者和专业人士打造的最佳 PDF 工具",
-      title: "立即压缩 PDF",
+      title: "浏览器中的免费 PDF 和图片工具",
       dropLabel: "将 PDF 文件拖放到此处",
       uploadButton: "上传",
     },
     moreTools: "更多工具",
+    quickStart: "快速开始 · 压缩 PDF",
     groups: {
       all: "全部",
       toPdf: "转换为 PDF",
@@ -53,6 +54,7 @@ export const zh: DeepPartial<Dictionary> = {
   },
   footer: {
     rights: "版权所有。",
+    developer: "开发者：Ali Alamri",
     privacyNote: "文件在浏览器中安全处理，且不会存储在我们这里。",
     moreCount: "还有 {count} 个",
     company: "公司",
